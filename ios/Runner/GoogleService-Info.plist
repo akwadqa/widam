@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>227142787549-380p8o1cutnojqqhe2kagffnkguef1o1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.227142787549-380p8o1cutnojqqhe2kagffnkguef1o1</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBGMNpAhMOfDcxS10KgXBw-QSn5zmyG5WQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>227142787549</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>net.ays.PROD489402</string>
+	<key>PROJECT_ID</key>
+	<string>widam-home-delivery</string>
+	<key>STORAGE_BUCKET</key>
+	<string>widam-home-delivery.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:227142787549:ios:66a6e1e5de71bdd08f5634</string>
+</dict>
+</plist>

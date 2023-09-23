@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "227142787549",
+    "project_id": "widam-home-delivery",
+    "storage_bucket": "widam-home-delivery.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227142787549:android:fdc46575b308e1478f5634",
+        "android_client_info": {
+          "package_name": "net.ays.PROD489402"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227142787549-4bsfet3jtp9ueipfrpg8tf8a42vsmg7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9LFvxQObhrvDgIYWCAA0uR68fz7rLqdA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227142787549-4bsfet3jtp9ueipfrpg8tf8a42vsmg7k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "227142787549-380p8o1cutnojqqhe2kagffnkguef1o1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "net.ays.PROD489402"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

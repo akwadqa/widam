@@ -1,0 +1,63 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widam/generated/l10n.dart';
+import '../../../common_widgets/fade_circle_loading_indicator.dart';
+import '../../../common_widgets/banner/app_banner_dialog.dart';
+import '../../../common_widgets/banner/app_banner.dart';
+import '../../../common_widgets/app_pagination_widget.dart';
+import '../application/item_group_items_controller.dart';
+import 'item_card/item_card.dart';
+
+class ItemGroupItemsGrid extends ConsumerWidget {
+  const ItemGroupItemsGrid({Key? key, this.childAspectRatio = 0.49})
+      : super(key: key);
+  final double childAspectRatio;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(itemGroupItemsControllerProvider, (previous, next) {
+      if (next is AsyncData &&
+          next.asData?.value is ItemGroupItemsLoaded &&
+          (next.asData?.value as ItemGroupItemsLoaded).paginationError !=
+              null) {
+        final paginationError =
+            (next.asData?.value as ItemGroupItemsLoaded).paginationError!;
+        showAppBannerDialog(context, paginationError.error.toString(),
+            paginationError.stackTrace);
+      }
+    });
+    final state = ref.watch(itemGroupItemsControllerProvider);
+    if (state is AsyncLoading) {
+      return const FadeCircleLoadingIndicator();
+    } else if (state is AsyncError) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: AppBanner(
+            message: state.error.toString(), stackTrace: state.stackTrace),
+      );
+    }
+    if ((state.asData?.value as ItemGroupItemsLoaded).items.isEmpty) {
+      return Center(child: Text(S.of(context).noProductsMatchingYourSelection));
+    }
+    final items = (state.asData?.value as ItemGroupItemsLoaded).items;
+    return AppPaginationWidget(
+      onLoading: ref.read(itemGroupItemsControllerProvider.notifier).onLoading,
+      enableLoadingOnScrollStart: true,
+      enablePullDown: true,
+      onRefresh: ref.read(itemGroupItemsControllerProvider.notifier).onRefresh,
+      child: GridView.builder(
+        itemCount: items.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: childAspectRatio,
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
+        ),
+        padding: const EdgeInsetsDirectional.only(
+            start: 8.0, bottom: 8.0, end: 10.0),
+        itemBuilder: (context, index) {
+          return ItemCard(item: items[index]);
+        },
+      ),
+    );
+  }
+}

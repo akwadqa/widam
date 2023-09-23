@@ -1,0 +1,36 @@
+abstract class EndPoints {
+  static const String googleMapsAutoComplete = '/place/autocomplete/json';
+  static const String layouts = '.layout.layouts';
+  static const String blocks = '.block.blocks';
+  static const String itemGroups = '.item_group.item_groups';
+  static const String login = '.login.send_otp';
+  static const String verifyOtp = '.login.verify_otp';
+  static const String register = '.register.register';
+  static const String validateCoordinates = '.api.validate_coordinates';
+  static const String itemDetails = '.website_item.website_items';
+  static const String addSubscription = '.subscription.subscriptions';
+  static const String validateQid = '.validate.validate_qid';
+  static const String cart = '.quotation.quotation_id';
+  static const String utilities = '.utility.utilities';
+  static const String users = '.user.users';
+  static const String companyProfile = '.company_profile.details';
+  static const String geofence = '.geofence.geofences';
+  static const String addresses = '.address.addresses';
+  static const String cities = '.city.cities';
+  static const String paymentMethods = '.payment_method.payment_methods';
+  static const String coupons = '.coupon_code.coupon_codes';
+  static const String checkoutPlaceOrder = '.checkout.place_order';
+  static const String salesOrders = '.sales_order.sales_orders';
+  static const String reOrder = '.reorder.reorder';
+  static const String sendFcmToken = '/fcm_frappe.api.device_token';
+  static const String getSubscriptions = '.subscription.get_subscriptions';
+  static const String tags = '.tag.tags';
+  static const String recommendations = '.hooks_retail.get_recommendations';
+  static const String processingOrder = '.processing_order.processing_orders';
+  static const String customerReview = '.customer_review.customer_reviews';
+  static const String walletTransaction =
+      '.wallet_transaction.wallet_transactions';
+  static const String loyaltyPointsLog = '.loyalty_program.points_log';
+  static const String loyaltyProgram = '.loyalty_program.get_loyalty_program';
+  static const String redeemPoints = '.loyalty_program.redeem_loyalty_points';
+}

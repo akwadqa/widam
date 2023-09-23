@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20.949" height="19.994" viewBox="0 0 20.949 19.994">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Path_8913" data-name="Path 8913" d="M10.489,0a.665.665,0,0,0-.517.42L7.5,5.109a2.622,2.622,0,0,1-1.684,1.21L.59,7.173c-.63.1-.779.561-.333,1.017l3.7,3.8a2.63,2.63,0,0,1,.632,1.977L3.779,19.2c-.1.632.292.915.865.634L9.4,17.489a2.626,2.626,0,0,1,2.075.01L16.2,19.883c.569.285.96,0,.87-.628l-.76-5.241a2.628,2.628,0,0,1,.651-1.97l3.727-3.766c.448-.451.3-.91-.325-1.019l-5.222-.9a2.625,2.625,0,0,1-1.674-1.227L11.041.424A.662.662,0,0,0,10.524,0Z" transform="translate(0)" fill="none"/>
+    </clipPath>
+    <radialGradient id="radial-gradient" cx="0.175" cy="1.004" r="1.086" gradientTransform="matrix(0.946, 0, 0, -1, 0, 1.983)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ffc200"/>
+      <stop offset="0.355" stop-color="#ffc200"/>
+      <stop offset="0.509" stop-color="#ffbc06"/>
+      <stop offset="0.729" stop-color="#ffae19"/>
+      <stop offset="0.988" stop-color="#ff9638"/>
+      <stop offset="1" stop-color="#ff953a"/>
+    </radialGradient>
+    <clipPath id="clip-path-2">
+      <path id="Path_8915" data-name="Path 8915" d="M6.063,17.273a2.331,2.331,0,0,1,.944.2l4.731,2.384c.569.285.96,0,.87-.628l-.76-5.241a2.628,2.628,0,0,1,.651-1.97l3.727-3.766c.448-.451.3-.91-.325-1.019l-5.222-.9A2.625,2.625,0,0,1,9.006,5.108L6.579.4A.578.578,0,0,0,6.063.034Z" transform="translate(-6.063 -0.034)" fill="none"/>
+    </clipPath>
+    <radialGradient id="radial-gradient-2" cx="-0.657" cy="1.004" r="1.09" gradientTransform="matrix(1.895, 0, 0, -1, 0.888, 1.983)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#dbdbdb"/>
+      <stop offset="0.355" stop-color="#dbdbdb"/>
+      <stop offset="0.549" stop-color="#d4d4d4"/>
+      <stop offset="0.82" stop-color="#c2c2c2"/>
+      <stop offset="0.995" stop-color="#b3b3b3"/>
+      <stop offset="1" stop-color="#b3b3b3"/>
+    </radialGradient>
+  </defs>
+  <g id="Group_6503" data-name="Group 6503" transform="translate(0 0)">
+    <g id="Group_6502" data-name="Group 6502" clip-path="url(#clip-path)">
+      <rect id="Rectangle_4260" data-name="Rectangle 4260" width="21.326" height="20.168" transform="translate(-0.189 0.001)" fill="url(#radial-gradient)"/>
+    </g>
+  </g>
+  <g id="Group_6512" data-name="Group 6512" transform="translate(10.423)">
+    <g id="Group_6511" data-name="Group 6511" clip-path="url(#clip-path-2)">
+      <rect id="Rectangle_4264" data-name="Rectangle 4264" width="10.611" height="20.109" transform="translate(0 0.001)" fill="url(#radial-gradient-2)"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="25" viewBox="0 0 24 25">
+    <defs>
+        <clipPath id="clip-path">
+            <rect id="Rectangle_3038" data-name="Rectangle 3038" width="24" height="24" transform="translate(176 721)" fill="#bc4040"/>
+        </clipPath>
+    </defs>
+    <g id="Group_4397" data-name="Group 4397" transform="translate(-248 -1278)">
+        <circle id="Ellipse_124" data-name="Ellipse 124" cx="12" cy="12" r="12" transform="translate(248 1279)" fill="#2bb9ed"/>
+        <g id="Mask_Group_20" data-name="Mask Group 20" transform="translate(72 557)" clip-path="url(#clip-path)">
+            <g id="shopping-cart" transform="translate(174.856 719.605)">
+                <path id="Path_7166" data-name="Path 7166" d="M2.233,2.233H4.175A2.065,2.065,0,0,1,6.229,4.465L5.3,15.583a3.121,3.121,0,0,0,3.114,3.382H20.305a3.211,3.211,0,0,0,3.137-2.913l.6-8.372a3.1,3.1,0,0,0-3.137-3.36H6.5" fill="none" stroke="#232323" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.3"/>
+                <path id="Path_7167" data-name="Path 7167" d="M18.14,24.558a1.4,1.4,0,1,0-1.4-1.4A1.4,1.4,0,0,0,18.14,24.558Z" fill="none" stroke="#232323" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.3"/>
+                <path id="Path_7168" data-name="Path 7168" d="M9.209,24.558a1.4,1.4,0,1,0-1.4-1.4A1.4,1.4,0,0,0,9.209,24.558Z" fill="none" stroke="#232323" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.3"/>
+                <path id="Path_7169" data-name="Path 7169" d="M10.047,8.93h13.4" fill="none" stroke="#232323" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.3"/>
+            </g>
+        </g>
+    </g>
+</svg>

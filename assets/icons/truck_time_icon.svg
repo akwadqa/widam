@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18.001" height="18.048" viewBox="0 0 18.001 18.048">
+    <g id="truck-time" transform="translate(-0.5 -0.453)">
+        <g id="Group_215" data-name="Group 215" transform="translate(1 1.001)">
+            <path id="Path_150" data-name="Path 150" d="M12.525,2v8.1a1.624,1.624,0,0,1-1.619,1.619H2V6.55A3.156,3.156,0,0,0,4.5,7.667a3.112,3.112,0,0,0,2.1-.858A2.741,2.741,0,0,0,7.23,6.04a3.153,3.153,0,0,0,.437-1.684A3.225,3.225,0,0,0,6.566,2h5.958Z" transform="translate(-1.19 -1.192)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <path id="Path_151" data-name="Path 151" d="M18.192,12.286v2.429a2.425,2.425,0,0,1-2.429,2.429h-.81a1.619,1.619,0,0,0-3.238,0H8.477a1.619,1.619,0,0,0-3.238,0h-.81A2.425,2.425,0,0,1,2,14.715V12.286h8.905a1.624,1.624,0,0,0,1.619-1.619V5h1.49a1.632,1.632,0,0,1,1.409.818l1.384,2.421H15.763a.812.812,0,0,0-.81.81v2.429a.812.812,0,0,0,.81.81Z" transform="translate(-1.19 -1.763)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <path id="Path_152" data-name="Path 152" d="M7.619,21.238A1.619,1.619,0,1,0,6,19.619,1.619,1.619,0,0,0,7.619,21.238Z" transform="translate(-1.952 -4.238)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <path id="Path_153" data-name="Path 153" d="M15.619,21.238A1.619,1.619,0,1,0,14,19.619,1.619,1.619,0,0,0,15.619,21.238Z" transform="translate(-3.475 -4.238)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <path id="Path_154" data-name="Path 154" d="M21.238,11.429v1.619H18.81a.812.812,0,0,1-.81-.81V9.81A.812.812,0,0,1,18.81,9h1.044Z" transform="translate(-4.237 -2.525)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <path id="Path_155" data-name="Path 155" d="M7.477,4.239A3.237,3.237,0,1,1,5.64,1.32,3.225,3.225,0,0,1,7.477,4.239Z" transform="translate(-1 -1.001)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+            <path id="Path_156" data-name="Path 156" d="M5.012,3.75V4.964L4,5.572" transform="translate(-1.571 -1.525)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        </g>
+    </g>
+</svg>
