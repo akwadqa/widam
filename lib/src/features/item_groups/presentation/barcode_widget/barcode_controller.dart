@@ -3,7 +3,7 @@ import 'package:widam/src/features/items/application/item_group_items_controller
 
 part 'barcode_controller.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class BarcodeController extends _$BarcodeController {
   @override
   String? build() {

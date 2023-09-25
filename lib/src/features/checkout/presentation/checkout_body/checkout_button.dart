@@ -256,7 +256,7 @@ class _CheckoutButtonState extends ConsumerState<CheckoutButton> {
   String get _defaultGooglePayConfigurations => '''{
   "provider": "google_pay",
   "data": {
-    "environment": "TEST",
+    "environment": "PRODUCTION",
     "apiVersion": 2,
     "apiVersionMinor": 0,
     "allowedPaymentMethods": [{

@@ -43,9 +43,9 @@ class ItemGroupItemsController extends _$ItemGroupItemsController {
 
   String? get _selectedFilter => ref.watch(selectedFilterControllerProvider);
 
-  String? get _sortBy => _setSortValues(_selectedFilter)['sortBy'];
+  String? get _sortBy => _setSortValues(_selectedFilter)?['sortBy'];
 
-  String? get _sortOrder => _setSortValues(_selectedFilter)['sortOrder'];
+  String? get _sortOrder => _setSortValues(_selectedFilter)?['sortOrder'];
 
   String? get _barcode => ref.watch(barcodeControllerProvider);
 
@@ -111,8 +111,7 @@ class ItemGroupItemsController extends _$ItemGroupItemsController {
         pagination: appResponse.pagination!,
         paginationError: null,
       ));
-      if (appResponse.data.isGroup == 1 &&
-          _itemGroupId != null) {
+      if (appResponse.data.isGroup == 1 && _itemGroupId != null) {
         ref
             .read(subItemGroupsControllerProvider.notifier)
             .set(appResponse.data.subCategories);
@@ -127,7 +126,7 @@ class ItemGroupItemsController extends _$ItemGroupItemsController {
     return true;
   }
 
-  Map<String, String> _setSortValues(String? sortValue) {
+  Map<String, String>? _setSortValues(String? sortValue) {
     final sortValuesMap = {
       S.current.priceHighToLow: {
         'sortBy': 'website_item_price',
@@ -140,8 +139,7 @@ class ItemGroupItemsController extends _$ItemGroupItemsController {
       S.current.nameZtoA: {'sortBy': 'website_item_name', 'sortOrder': 'desc'},
     };
 
-    final sortValues = sortValuesMap[sortValue] ??
-        {'sortBy': 'website_item_name', 'sortOrder': 'asc'};
+    final sortValues = sortValuesMap[sortValue];
     return sortValues;
   }
 }
