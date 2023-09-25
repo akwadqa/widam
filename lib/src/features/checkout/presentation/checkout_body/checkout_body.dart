@@ -80,70 +80,75 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
     final cartAsync = ref.watch(cartControllerProvider);
     return cartAsync.when(
         data: (cart) {
-          return Stack(
-            children: [
-              Positioned.fill(
-                child: SingleChildScrollView(
-                  controller: ref.watch(checkoutScrollControllerProvider),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _UpdatableCartContentContainer(
-                          paymentMethodFocusNode: widget.focusNodes?.first,
-                          cart: cart!,
-                          titlesTextStyle: _textStyle()),
-                      const SizedBox(height: 20.0),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(S.of(context).orderSummary,
-                                style: _textStyle()),
-                            const SizedBox(height: 8.0),
-                            OrderSummaryContainer(cart: cart),
-                            const SizedBox(height: 20.0),
-                            Text(S.of(context).reviewYourOrder,
-                                style: _textStyle()),
-                            const SizedBox(height: 8.0),
-                            if (cart.cartContent is CartContent) ...[
-                              if ((cart.cartContent as CartContent)
-                                      .normalDelivery !=
-                                  null) ...[
-                                DeliveryContainer(
-                                    focusNode: widget.focusNodes?.last,
-                                    currency: cart.currency,
-                                    deliveryType:
-                                        (cart.cartContent as CartContent)
-                                            .normalDelivery!),
-                                const SizedBox(height: 15.0),
-                              ],
-                              if ((cart.cartContent as CartContent)
-                                      .expressDelivery !=
-                                  null) ...[
-                                DeliveryContainer(
-                                    currency: cart.currency,
-                                    deliveryType:
-                                        (cart.cartContent as CartContent)
-                                            .expressDelivery!),
-                                const SizedBox(height: 15.0),
+          return ProviderScope(
+            overrides: [
+              updateCartProvider.overrideWith(() => UpdateCart()),
+            ],
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: SingleChildScrollView(
+                    controller: ref.watch(checkoutScrollControllerProvider),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _UpdatableCartContentContainer(
+                            paymentMethodFocusNode: widget.focusNodes?.first,
+                            cart: cart!,
+                            titlesTextStyle: _textStyle()),
+                        const SizedBox(height: 20.0),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(S.of(context).orderSummary,
+                                  style: _textStyle()),
+                              const SizedBox(height: 8.0),
+                              OrderSummaryContainer(cart: cart),
+                              const SizedBox(height: 20.0),
+                              Text(S.of(context).reviewYourOrder,
+                                  style: _textStyle()),
+                              const SizedBox(height: 8.0),
+                              if (cart.cartContent is CartContent) ...[
+                                if ((cart.cartContent as CartContent)
+                                        .normalDelivery !=
+                                    null) ...[
+                                  DeliveryContainer(
+                                      focusNode: widget.focusNodes?.last,
+                                      currency: cart.currency,
+                                      deliveryType:
+                                          (cart.cartContent as CartContent)
+                                              .normalDelivery!),
+                                  const SizedBox(height: 15.0),
+                                ],
+                                if ((cart.cartContent as CartContent)
+                                        .expressDelivery !=
+                                    null) ...[
+                                  DeliveryContainer(
+                                      currency: cart.currency,
+                                      deliveryType:
+                                          (cart.cartContent as CartContent)
+                                              .expressDelivery!),
+                                  const SizedBox(height: 15.0),
+                                ],
                               ],
                             ],
-                          ],
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 150.0),
-                    ],
+                        const SizedBox(height: 150.0),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: TotalContainer(
-                      button: CheckoutButton(cart: cart), cart: cart))
-            ],
+                Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: TotalContainer(
+                        button: CheckoutButton(cart: cart), cart: cart))
+              ],
+            ),
           );
         },
         error: (error, st) =>
@@ -266,7 +271,7 @@ class _UpdatableCartContent extends ConsumerWidget {
                 ],
               ),
               const SizedBox(height: 5.0),
-                AddressCard(address: cart.shippingAddressDetails!),
+              AddressCard(address: cart.shippingAddressDetails!),
               const SizedBox(height: 20.0),
               Focus(
                 focusNode: paymentMethodFocusNode,
