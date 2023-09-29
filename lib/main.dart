@@ -54,7 +54,7 @@ IosDeviceInfo iosDeviceInfo(IosDeviceInfoRef ref) => throw UnimplementedError();
 bool? hasCentralizedNotch(HasCentralizedNotchRef ref) {
   if (Platform.isIOS) {
     final deviceModel = ref.watch(iosDeviceInfoProvider).utsname.machine;
-    return deviceModel == 'iPhone15,2' || deviceModel == 'iPhone15,3';
+    return deviceModel == 'iPhone15,2' || deviceModel == 'iPhone15,3' || deviceModel == 'iPhone16,2' || deviceModel == 'iPhone16,3';
   }
   return null;
 }

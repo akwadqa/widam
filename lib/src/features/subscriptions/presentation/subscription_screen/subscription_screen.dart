@@ -39,14 +39,16 @@ class SubscriptionScreen extends ConsumerWidget {
           SizedBox(
             height: 140,
             child: EasyStepper(
-              lineType: LineType.normal,
-              lineLength: MediaQuery.of(context).size.width / 4.5,
+              lineStyle: LineStyle(
+                lineType: LineType.normal,
+                lineLength: MediaQuery.of(context).size.width / 4.5,
+                unreachedLineColor: AppColors.brightGray,
+                lineThickness: 4,
+              ),
               activeStep: stepIndex,
-              unreachedLineColor: AppColors.brightGray,
               showLoadingAnimation: false,
               showStepBorder: false,
               finishedStepBackgroundColor: Colors.transparent,
-              lineThickness: 4,
               steps: List.generate(
                 titles.length,
                 (index) => EasyStep(
