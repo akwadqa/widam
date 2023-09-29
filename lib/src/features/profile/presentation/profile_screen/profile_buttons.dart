@@ -19,6 +19,7 @@ class ProfileButtons extends ConsumerWidget {
         padding: const EdgeInsets.only(top: 8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _Button(
                 image: Assets.icons.folderIcon.svg(color: AppColors.darkBlue),
@@ -27,13 +28,17 @@ class ProfileButtons extends ConsumerWidget {
                     context.pushRoute(const ActiveSubscriptionsScreen())),
             _Button(
                 image: Assets.icons.pastOrdersIcon.svg(),
-                text: S.of(context).pastOrders,
+                text: S.of(context).orders,
                 onTap: () =>
                     context.pushRoute(SalesOrdersScreen()).then((value) {
                       if (value == true) {
                         context.tabsRouter.setActiveIndex(3);
                       }
                     })),
+            _Button(
+                image: Assets.icons.folderIcon.svg(color: AppColors.darkBlue),
+                text: S.of(context).subscribe,
+                onTap: () => context.pushRoute(const SubscriptionScreen())),
             _Button(
                 image: Assets.icons.couponsIcon.svg(),
                 text: S.of(context).yourCoupons,

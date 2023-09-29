@@ -20,7 +20,6 @@ import '../../../../common_widgets/forward_submit_button.dart';
 import '../../../../utils/utils.dart';
 import '../../../addresses/domain/address/address.dart';
 import '../../../addresses/presentation/addresses/addresses_selector/addresses_selector.dart';
-import '../../../recommendations/presentation/recommendations/recommendations.dart';
 import '../../../recommendations/presentation/similar_items/similar_items.dart';
 import '../../domain/cart/cart_content.dart';
 import 'custom_delivery_container.dart';

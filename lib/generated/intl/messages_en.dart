@@ -298,6 +298,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "orderTotal": MessageLookupByLibrary.simpleMessage("Order Total"),
         "orderedSuccessfully":
             MessageLookupByLibrary.simpleMessage("Ordered Successfully"),
+        "orders": MessageLookupByLibrary.simpleMessage("Orders"),
         "ordersUpdates": MessageLookupByLibrary.simpleMessage("Orders Updates"),
         "otpHeaderDes": MessageLookupByLibrary.simpleMessage(
             "We\'ve sent you a code. Please enter the received code to proceed."),

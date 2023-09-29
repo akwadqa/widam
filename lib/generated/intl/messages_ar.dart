@@ -293,6 +293,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "orderTotal": MessageLookupByLibrary.simpleMessage("مجموع الطلب"),
         "orderedSuccessfully":
             MessageLookupByLibrary.simpleMessage("تم الطلب بنجاح"),
+        "orders": MessageLookupByLibrary.simpleMessage("الطلبات"),
         "ordersUpdates":
             MessageLookupByLibrary.simpleMessage("إشعارات الطلبات"),
         "otpHeaderDes": MessageLookupByLibrary.simpleMessage(

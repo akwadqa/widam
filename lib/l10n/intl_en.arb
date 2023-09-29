@@ -326,5 +326,6 @@
   "autoOrder" : "Auto-Order",
   "itIsEmptyHere" : "It is empty here :(",
   "noLoyaltyProgramDesc" : "No loyalty program are available now. Please check back later or contact our customer support to activate your membership.",
-  "ok" : "Ok"
+  "ok" : "Ok",
+  "orders" : "Orders"
 }

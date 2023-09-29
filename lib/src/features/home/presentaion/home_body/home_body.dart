@@ -11,7 +11,6 @@ import 'package:widam/src/features/sales_orders/presentaion/pending_order_card/p
 import '../../../../utils/utils.dart';
 import '../../../cart/presentation/cart_item_added_dialog/cart_item_added_dialog.dart';
 import '../../../layouts/presentation/blocks_list.dart';
-import 'buttons_row.dart';
 
 class HomeBody extends ConsumerWidget {
   const HomeBody({Key? key}) : super(key: key);
@@ -51,12 +50,6 @@ class HomeBody extends ConsumerWidget {
       onRefresh: () async => ref.invalidate(layoutProvider(LayoutType.home)),
       child: CustomScrollView(
         slivers: [
-          const SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              child: ButtonsRow(),
-            ),
-          ),
           if (ref
                   .watch(processingOrderProvider)
                   .asData
@@ -65,7 +58,7 @@ class HomeBody extends ConsumerWidget {
               true)
             const SliverToBoxAdapter(
                 child: Padding(
-              padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+              padding: EdgeInsets.all(10),
               child: PendingOrderCard(),
             )),
           const BlocksList(layoutType: LayoutType.home),
