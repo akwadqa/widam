@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -41,9 +43,8 @@ Dio dio(DioRef ref) {
         languageCode: languageCode,
         onUnauthorized: ref.read(userDataProvider.notifier).removeUserData),
   });
-  if (kDebugMode) {
-    dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
-  }
+  dio.interceptors.add(
+      LogInterceptor(requestBody: true, responseBody: true));
 
   return dio;
 }

@@ -33,7 +33,7 @@ class SimiliarItems extends ConsumerWidget {
                   const SizedBox(height: 16.0),
                   Container(
                     color: Colors.white,
-                    height: 150.0,
+                    height: 130.0,
                     child: RecommendationItemsList(
                         items: similarItemsResponse
                             .recommendationResponse.websiteItems,
