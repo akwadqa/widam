@@ -34,7 +34,7 @@ class OrderSummaryContainer extends StatelessWidget {
                 children: [
                   Text(S.of(context).cartTotal),
                   const SizedBox(height: 10.0),
-                  Text(S.of(context).shippingFee),
+                  Text(S.of(context).deliveryFee),
                   const SizedBox(height: 10.0),
                   Text(S.of(context).discount),
                 ],

@@ -188,7 +188,7 @@ class __BodyState extends State<_Body> {
                       Text(
                           timeSlots[index].timeslotOverload == 1
                               ? S.of(context).fullyBooked
-                              : '${S.of(context).deliveryFees} ${widget.deliveryCharges}',
+                              : '${S.of(context).deliveryFee}: ${widget.deliveryCharges}',
                           style: TextStyle(
                               color: _selectedTimeSlot.timeSlotId ==
                                       timeSlots[index].timeSlotId

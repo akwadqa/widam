@@ -5,7 +5,7 @@ import 'package:widam/src/features/items/application/item_group_items_controller
 
 part 'selected_item_group_controller.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class SelectedItemGroupController extends _$SelectedItemGroupController {
   @override
   String build() {

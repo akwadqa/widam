@@ -48,5 +48,51 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-    </application>
+       <!-- Launcher Activity to handle incoming Branch intents -->
+       <activity
+           android:name=".LauncherActivity"
+           android:launchMode="singleTask"
+           android:label="${applicationName}"
+           android:theme="@style/LaunchTheme"
+           android:exported="true">
+
+           <intent-filter>
+               <action android:name="android.intent.action.MAIN" />
+               <category android:name="android.intent.category.LAUNCHER" />
+           </intent-filter>
+
+           <!-- Branch URI Scheme -->
+           <intent-filter>
+               <!-- If utilizing $deeplink_path please explicitly declare your hosts, or utilize a wildcard(*) -->
+               <data android:scheme="widam" android:host="open" />
+               <action android:name="android.intent.action.VIEW" />
+               <category android:name="android.intent.category.DEFAULT" />
+               <category android:name="android.intent.category.BROWSABLE" />
+           </intent-filter>
+
+           <!-- Branch App Links - Live App -->
+           <intent-filter android:autoVerify="true">
+               <action android:name="android.intent.action.VIEW" />
+               <category android:name="android.intent.category.DEFAULT" />
+               <category android:name="android.intent.category.BROWSABLE" />
+               <data android:scheme="https" android:host="srwoi.app.link" />
+               <!-- example-alternate domain is required for App Links when the Journeys/Web SDK and Deepviews are used inside your website.  -->
+               <data android:scheme="https" android:host="srwoi-alternate.app.link" />
+           </intent-filter>
+           <!-- Branch App Links - Test App -->
+           <intent-filter android:autoVerify="true">
+               <action android:name="android.intent.action.VIEW" />
+               <category android:name="android.intent.category.DEFAULT" />
+               <category android:name="android.intent.category.BROWSABLE" />
+               <data android:scheme="https" android:host="srwoi.test-app.link" />
+               <!-- example-alternate domain is required for App Links when the Journeys/Web SDK and Deepviews are used inside your website.  -->
+               <data android:scheme="https" android:host="srwoi-alternate.test-app.link" />
+           </intent-filter>
+       </activity>
+
+       <!-- Branch init -->
+       <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_oDfEdP5xmgGnjxmXprHDzpbhBsmiOFV2" />
+       <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_krnqbV8zkcKpdDb6iFQAAepfyrplUC1n" />
+       <meta-data android:name="io.branch.sdk.TestMode" android:value="true" />
+   </application>
 </manifest>

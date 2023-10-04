@@ -144,11 +144,12 @@ class _NonEmptyCartState extends State<_NonEmptyCart> {
                     CustomDeliveryContainer(
                         focusNode: widget.focusNodes?.first,
                         deliveryType: normalDelivery,
-                        currency: widget.cart.currency),
+                        currency: widget.cart.currency, total: widget.cart.total.toString()),
                   const SizedBox(height: 20.0),
                   if (expressDelivery != null)
                     CustomDeliveryContainer(
                         deliveryType: expressDelivery,
+                        total: widget.cart.total.toString(),
                         timeSlotWidget: Row(
                           children: [
                             Assets.icons.truckTimeIcon.svg(),
@@ -174,6 +175,7 @@ class _NonEmptyCartState extends State<_NonEmptyCart> {
             left: 0,
             right: 0,
             child: TotalContainer(
+              orderTotal: widget.cart.total.toString(),
                 button: Consumer(
                   builder: (context, ref, child) {
                     ref.listen(updateCartProvider, (previous, next) {

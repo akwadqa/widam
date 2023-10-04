@@ -8,9 +8,10 @@ import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 
 class TotalContainer extends StatelessWidget {
-  const TotalContainer({super.key, required this.cart, required this.button});
+  const TotalContainer({super.key, required this.cart, required this.button, required this.orderTotal});
   final Cart cart;
   final Widget button;
+  final String orderTotal;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,7 +32,7 @@ class TotalContainer extends StatelessWidget {
           children: [
             _CountText(count: cart.totalQty.toInt().toString()),
             _TotalText(
-                total: cart.grandTotal.toString(), currency: cart.currency)
+                total: orderTotal, currency: cart.currency)
           ],
         ),
         const SizedBox(height: 16),

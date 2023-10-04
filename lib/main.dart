@@ -6,6 +6,7 @@ import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -69,12 +70,12 @@ Future<void> main() async {
       importance: Importance.high,
     ),
   );
-  final sharedPreferences = await SharedPreferences.getInstance();
+  final sharedPreferences = await SharedPreferences.getInstance();  
   bool canVibrate = await Vibrate.canVibrate;
   final userId = sharedPreferences.getString(Keys.userId);
   if (userId != null) {
     FCMConfig.instance.messaging.onTokenRefresh.listen((deviceToken) {
-      DeviceTokenController().sendFCMToken(deviceToken, userId);
+      DeviceTokenController().sendFCMToken(deviceToken, userId);  
     });
   }
   IosDeviceInfo? iosInfo;
@@ -90,6 +91,8 @@ Future<void> main() async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
+
+  FlutterBranchSdk.validateSDKIntegration();
   runApp(ProviderScope(overrides: [
     sharedPreferencesProvider.overrideWith((ref) => sharedPreferences),
     canVibrateProvider.overrideWith((ref) => canVibrate),

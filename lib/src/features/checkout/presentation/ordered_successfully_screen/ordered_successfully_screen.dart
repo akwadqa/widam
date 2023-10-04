@@ -116,7 +116,7 @@ class OrderedSuccessfullyScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(S.of(context).shippingFee),
+                              Text(S.of(context).deliveryFee),
                               Text(order.deliveryCharges.toString())
                             ],
                           ),

@@ -139,7 +139,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("عنوان التسليم"),
         "deliveryCharges": MessageLookupByLibrary.simpleMessage("رسوم التوصيل"),
         "deliveryCost": MessageLookupByLibrary.simpleMessage("تكاليف التوصيل"),
-        "deliveryFees": MessageLookupByLibrary.simpleMessage("رسوم التوصيل:"),
+        "deliveryFee": MessageLookupByLibrary.simpleMessage("رسوم الشحن"),
         "deliverySlot": MessageLookupByLibrary.simpleMessage("وقت التسليم"),
         "deliverySpeed": MessageLookupByLibrary.simpleMessage("سرعة التوصيل"),
         "description": MessageLookupByLibrary.simpleMessage("الوصف"),
@@ -406,7 +406,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "setYourSchedule": MessageLookupByLibrary.simpleMessage("حدد جدولك"),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "shipTo": MessageLookupByLibrary.simpleMessage("الشحن إلى"),
-        "shippingFee": MessageLookupByLibrary.simpleMessage("رسوم الشحن"),
         "shouldBeNumber":
             MessageLookupByLibrary.simpleMessage("يجب أن يكون رقماً"),
         "signOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),

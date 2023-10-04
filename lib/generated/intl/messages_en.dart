@@ -145,7 +145,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "deliveryCharges":
             MessageLookupByLibrary.simpleMessage("Delivery Charges"),
         "deliveryCost": MessageLookupByLibrary.simpleMessage("Delivery Cost"),
-        "deliveryFees": MessageLookupByLibrary.simpleMessage("Delivery Fees:"),
+        "deliveryFee": MessageLookupByLibrary.simpleMessage("Delivery Fee"),
         "deliverySlot": MessageLookupByLibrary.simpleMessage("Delivery Slot"),
         "deliverySpeed": MessageLookupByLibrary.simpleMessage("Delivery Speed"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
@@ -414,7 +414,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Set Your\nSchedule"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "shipTo": MessageLookupByLibrary.simpleMessage("Ship To"),
-        "shippingFee": MessageLookupByLibrary.simpleMessage("Shipping Fee"),
         "shouldBeNumber":
             MessageLookupByLibrary.simpleMessage("Should be number"),
         "signOut": MessageLookupByLibrary.simpleMessage("Sign Out"),

@@ -1670,16 +1670,6 @@ class S {
     );
   }
 
-  /// `Delivery Fees:`
-  String get deliveryFees {
-    return Intl.message(
-      'Delivery Fees:',
-      name: 'deliveryFees',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Fully Booked`
   String get fullyBooked {
     return Intl.message(
@@ -2070,11 +2060,11 @@ class S {
     );
   }
 
-  /// `Shipping Fee`
-  String get shippingFee {
+  /// `Delivery Fee`
+  String get deliveryFee {
     return Intl.message(
-      'Shipping Fee',
-      name: 'shippingFee',
+      'Delivery Fee',
+      name: 'deliveryFee',
       desc: '',
       args: [],
     );
