@@ -131,12 +131,15 @@ void navigateToItemDetails(
     String? itemType,
     int? isMubadara,
     String? mubadaraId,
-    int? hasProductOptions, String? attributionToken}) {
+    int? hasProductOptions,
+    String? attributionToken}) {
   if (itemType == 'V' || isMubadara == 1 || hasProductOptions == 1) {
     context
         .pushRoute(ItemDetailsScreen(itemId: itemId, mubadaraId: mubadaraId));
   } else {
-    ref.read(itemDetailsSheetControllerProvider.notifier).getDetails(itemId: itemId, attributionToken: attributionToken);
+    ref
+        .read(itemDetailsSheetControllerProvider.notifier)
+        .getDetails(itemId: itemId, attributionToken: attributionToken);
   }
 }
 
@@ -148,10 +151,16 @@ void listenItemDetailsSheet(WidgetRef ref, BuildContext context) {
       final ItemDetails item = next.asData!.value!.itemDetails;
       if (previous is AsyncLoading) {
         context.popRoute().then((value) {
-          _showItemDetailsSheet(item: item, context: context, attributionToken: next.asData!.value!.attributionToken);
+          _showItemDetailsSheet(
+              item: item,
+              context: context,
+              attributionToken: next.asData!.value!.attributionToken);
         });
       } else {
-        _showItemDetailsSheet(item: item, context: context, attributionToken: next.asData!.value!.attributionToken);
+        _showItemDetailsSheet(
+            item: item,
+            context: context,
+            attributionToken: next.asData!.value!.attributionToken);
       }
     } else if (next is AsyncLoading) {
       showDialog(
@@ -161,7 +170,10 @@ void listenItemDetailsSheet(WidgetRef ref, BuildContext context) {
   });
 }
 
-void _showItemDetailsSheet({required ItemDetails item, required BuildContext context, String? attributionToken}) {
+void _showItemDetailsSheet(
+    {required ItemDetails item,
+    required BuildContext context,
+    String? attributionToken}) {
   showAdaptiveModalBottomSheet(
       animationCurve: Curves.easeOutQuart,
       barrierColor: Colors.black38,
@@ -169,7 +181,10 @@ void _showItemDetailsSheet({required ItemDetails item, required BuildContext con
         return SizedBox(
           height: MediaQuery.of(context).size.height * 0.7,
           child: Material(
-              child: ItemDetailsContent(itemDetails: item, isLoading: false, attributionToken: attributionToken)),
+              child: ItemDetailsContent(
+                  itemDetails: item,
+                  isLoading: false,
+                  attributionToken: attributionToken)),
         );
       },
       context: context);
@@ -196,4 +211,15 @@ double getBottomPadding(BuildContext context) {
   return MediaQuery.paddingOf(context).bottom > 20 && Platform.isAndroid
       ? MediaQuery.paddingOf(context).bottom
       : 0;
+}
+
+Future<void> pushItemGroupScreen(
+    {required BuildContext context,
+    bool autoFocus = false,
+    required String itemGroupId}) async {
+  final int? index = await context.pushRoute(
+      ItemGroupScreen(autoFocus: autoFocus, itemGroupId: itemGroupId)) as int?;
+  if (index != null) {
+    context.tabsRouter.setActiveIndex(index);
+  }
 }

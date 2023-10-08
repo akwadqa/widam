@@ -31,7 +31,7 @@ class BannerView extends ConsumerWidget {
       navigateToItemDetails(
           context: context, ref: ref, itemId: banner.bannerLink);
     } else {
-      context.pushRoute(ItemGroupScreen(itemGroupId: banner.bannerLink));
+      pushItemGroupScreen(context: context, itemGroupId: banner.bannerLink);
     }
   }
 }

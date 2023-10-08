@@ -67,8 +67,8 @@ class _LocationPickerState extends State<LocationPicker> {
                     target: _initialPosition,
                     zoom: 12.0,
                   ),
-                  onTap: _onTap,
                   myLocationButtonEnabled: false,
+                  onCameraMove: (position) => _setMarker(position.target),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -108,13 +108,16 @@ class _LocationPickerState extends State<LocationPicker> {
     );
   }
 
-  void _onTap(LatLng latLng) async {
-    _setMarker(latLng);
-  }
-
   void _goToCurrentLocation() async {
     final LatLng? myLocation = await _getMyLocation();
     if (myLocation != null) {
+      GoogleMapController controller = await _controller.future;
+      controller.animateCamera(
+        CameraUpdate.newLatLngZoom(
+          myLocation,
+          14,
+        ),
+      );
       _setMarker(myLocation);
     }
   }
@@ -174,13 +177,5 @@ class _LocationPickerState extends State<LocationPicker> {
       _markers.clear();
       _markers.add(marker);
     });
-
-    GoogleMapController controller = await _controller.future;
-    controller.animateCamera(
-      CameraUpdate.newLatLngZoom(
-        latLng,
-        14,
-      ),
-    );
   }
 }

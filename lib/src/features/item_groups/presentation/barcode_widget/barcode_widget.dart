@@ -7,6 +7,7 @@ import 'package:widam/generated/l10n.dart';
 import 'package:widam/src/constants/strings.dart';
 import 'package:widam/src/features/item_groups/presentation/barcode_widget/barcode_controller.dart';
 import 'package:widam/src/routing/app_router.gr.dart';
+import 'package:widam/src/utils/utils.dart';
 
 class BarcodeWidget extends ConsumerWidget {
   const BarcodeWidget({super.key});
@@ -20,7 +21,7 @@ class BarcodeWidget extends ConsumerWidget {
             .then((barcodeScanRes) {
           if (barcodeScanRes != '-1') {
             ref.read(barcodeControllerProvider.notifier).set(barcodeScanRes);
-            context.pushRoute(ItemGroupScreen(itemGroupId: Strings.allItemGroup));
+            pushItemGroupScreen(context: context, itemGroupId: Strings.allItemGroup);
           }
         });
       },

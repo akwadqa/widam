@@ -2120,16 +2120,6 @@ class S {
     );
   }
 
-  /// `Delivery Cost`
-  String get deliveryCost {
-    return Intl.message(
-      'Delivery Cost',
-      name: 'deliveryCost',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Place Order`
   String get placeOrder {
     return Intl.message(

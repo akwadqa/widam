@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/constants/strings.dart';
 import 'package:widam/src/features/item_groups/presentation/barcode_widget/barcode_widget.dart';
+import 'package:widam/src/utils/utils.dart';
 import '../../../../../main.dart';
 import '../../../../common_widgets/search_field.dart';
 import '../../../../routing/app_router.gr.dart' as router;
@@ -70,7 +71,7 @@ class _SearchWidget extends ConsumerWidget implements PreferredSizeWidget {
           child: SearchField(
             height: 35,
             readOnly: true,
-            onTap: () => context.pushRoute(router.ItemGroupScreen(autoFocus: true, itemGroupId: Strings.allItemGroup)),
+            onTap: () => pushItemGroupScreen(context: context, autoFocus: true, itemGroupId: Strings.allItemGroup),
             suffixIcon: const BarcodeWidget(),
             fillColor: Colors.white,
             hintText: S.of(context).searchForAnyProduct,

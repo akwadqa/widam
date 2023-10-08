@@ -32,6 +32,8 @@ class RecommendationItemsList extends StatelessWidget {
                       height: 70,
                       width: 70),
                 ),
+                if (items[index].websiteItemShortName != null)
+                  Text(items[index].websiteItemShortName!),
                 itemIdLoading == items[index].websiteItemId
                     ? const FadeCircleLoadingIndicator()
                     : IconButton(

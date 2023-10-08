@@ -144,7 +144,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Delivery Address"),
         "deliveryCharges":
             MessageLookupByLibrary.simpleMessage("Delivery Charges"),
-        "deliveryCost": MessageLookupByLibrary.simpleMessage("Delivery Cost"),
         "deliveryFee": MessageLookupByLibrary.simpleMessage("Delivery Fee"),
         "deliverySlot": MessageLookupByLibrary.simpleMessage("Delivery Slot"),
         "deliverySpeed": MessageLookupByLibrary.simpleMessage("Delivery Speed"),

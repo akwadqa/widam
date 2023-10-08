@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/features/item_groups/presentation/item_group_screen/params_controller.dart';
+import 'package:widam/src/utils/utils.dart';
 
 import '../../../../routing/app_router.gr.dart';
 import '../../../layouts/domain/basic_item_group/basic_item_group.dart';
@@ -22,7 +23,9 @@ class HorizontalListItemGroups extends ConsumerWidget {
               ref
                   .read(paramsControllerProvider.notifier)
                   .set(itemGroups[index].parameters);
-              context.pushRoute(ItemGroupScreen(itemGroupId: itemGroups[index].itemGroupId));
+                  pushItemGroupScreen(
+                      context: context,
+                      itemGroupId: itemGroups[index].itemGroupId);
             },
             child: Container(
               height: 150,

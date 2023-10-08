@@ -1,4 +1,5 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,6 +9,7 @@ import 'package:widam/src/features/item_groups/presentation/item_group_screen/pa
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/filters_drop_down/filters_drop_down_button_form_field.dart';
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_list/selected_item_group_controller.dart';
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_search_field/item_groups_search_field.dart';
+import 'package:widam/src/features/main/presentation/main_screen/app_bottom_navigation_bar.dart';
 import '../../../../../main.dart';
 import '../../../../common_widgets/address_and_delivery_widget.dart';
 import '../../../../utils/utils.dart';
@@ -17,7 +19,9 @@ import '../item_groups_body/sub_item_groups_list/sub_item_groups_list.dart';
 
 @RoutePage()
 class ItemGroupScreen extends ConsumerStatefulWidget {
-  const ItemGroupScreen({Key? key, this.autoFocus = false, required this.itemGroupId}) : super(key: key);
+  const ItemGroupScreen(
+      {Key? key, this.autoFocus = false, required this.itemGroupId})
+      : super(key: key);
   final bool autoFocus;
   final String itemGroupId;
 
@@ -26,16 +30,17 @@ class ItemGroupScreen extends ConsumerStatefulWidget {
 }
 
 class _ItemGroupScreenState extends ConsumerState<ItemGroupScreen> {
-
-@override
+  @override
   void initState() {
     Future(() {
-      ref.read(selectedItemGroupControllerProvider.notifier).onCategorySelected(widget.itemGroupId);
+      ref
+          .read(selectedItemGroupControllerProvider.notifier)
+          .onCategorySelected(widget.itemGroupId);
     });
     super.initState();
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
     final hasCentralizedNotch = ref.watch(hasCentralizedNotchProvider);
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -58,6 +63,14 @@ class _ItemGroupScreenState extends ConsumerState<ItemGroupScreen> {
             ], child: _ItemGroupsBody(autoFocus: widget.autoFocus)),
           ),
         ],
+      ),
+      bottomNavigationBar: AppBottomNavigationBar(
+        currentIndex: 1,
+        onTap: (index) {
+          if (index != 1) {
+            context.popRoute(index);
+          }
+        },
       ),
     );
   }

@@ -11,6 +11,7 @@ class Item with _$Item {
   factory Item({
     required String websiteItemId,
     required String websiteItemName,
+    required String? websiteItemShortName,
     required String websiteItemType,
     required num maxQty,
     required num minQty,

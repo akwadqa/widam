@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/common_widgets/app_close_header.dart';
 import 'package:widam/src/features/item_groups/presentation/item_group_screen/params_controller.dart';
 import 'package:widam/src/features/layouts/domain/basic_item_group/basic_item_group.dart';
+import 'package:widam/src/utils/utils.dart';
 
 import '../../../../../generated/l10n.dart';
 import '../../../../routing/app_router.gr.dart';
@@ -43,8 +44,9 @@ class _Content extends ConsumerWidget {
               ref
                   .read(paramsControllerProvider.notifier)
                   .set(itemGroups[index].parameters);
-              context.pushRoute(
-                  ItemGroupScreen(itemGroupId: itemGroups[index].itemGroupId));
+                  pushItemGroupScreen(
+                      context: context,
+                      itemGroupId: itemGroups[index].itemGroupId);
             },
             child: ItemGroupGridItem(
                 itemGroup: itemGroups[index],

@@ -33,7 +33,7 @@ class RecentlyViewd extends ConsumerWidget {
                   const SizedBox(height: 16.0),
                   Container(
                     color: Colors.white,
-                    height: 130.0,
+                    height: 150.0,
                     child: RecommendationItemsList(
                         items: recentlyViewdResponse
                             .recommendationResponse.websiteItems,

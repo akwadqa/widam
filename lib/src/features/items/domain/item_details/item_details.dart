@@ -27,6 +27,7 @@ class ItemDetails with _$ItemDetails {
     required List<AttributeVariant>? websiteItemAttributes,
     required List<AttributeVariant>? attributeVariants,
     required String websiteItemName,
+    required String? websiteItemShortName,
     required String description,
     required String shortDescription,
     required String webLongDescription,

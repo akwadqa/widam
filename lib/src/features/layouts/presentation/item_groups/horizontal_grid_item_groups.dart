@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/features/item_groups/presentation/item_group_screen/params_controller.dart';
+import 'package:widam/src/utils/utils.dart';
 import '../../../../common_widgets/app_cached_network_image.dart';
 import '../../../../routing/app_router.gr.dart';
 import '../../../../theme/app_colors.dart';
@@ -31,7 +32,9 @@ class HorizontalGridItemGroups extends ConsumerWidget {
               ref
                   .read(paramsControllerProvider.notifier)
                   .set(itemGroups[index].parameters);
-              context.pushRoute(ItemGroupScreen(itemGroupId: itemGroups[index].itemGroupId));
+                  pushItemGroupScreen(
+                      context: context,
+                      itemGroupId: itemGroups[index].itemGroupId);
             },
             child: Column(
               children: [

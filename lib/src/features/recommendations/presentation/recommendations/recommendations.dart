@@ -34,6 +34,7 @@ class Recommendations extends ConsumerWidget {
                           .map((e) => Item(
                               websiteItemId: e.websiteItemId,
                               websiteItemName: e.websiteItemName,
+                              websiteItemShortName: e.websiteItemShortName,
                               websiteItemType: e.websiteItemType,
                               maxQty: e.maxQty,
                               minQty: e.minQty,

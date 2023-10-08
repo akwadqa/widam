@@ -138,7 +138,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "deliveryAddress":
             MessageLookupByLibrary.simpleMessage("عنوان التسليم"),
         "deliveryCharges": MessageLookupByLibrary.simpleMessage("رسوم التوصيل"),
-        "deliveryCost": MessageLookupByLibrary.simpleMessage("تكاليف التوصيل"),
         "deliveryFee": MessageLookupByLibrary.simpleMessage("رسوم الشحن"),
         "deliverySlot": MessageLookupByLibrary.simpleMessage("وقت التسليم"),
         "deliverySpeed": MessageLookupByLibrary.simpleMessage("سرعة التوصيل"),

@@ -38,8 +38,9 @@ class GridItemGroups extends ConsumerWidget {
                   ref
                       .read(paramsControllerProvider.notifier)
                       .set(subList[index].parameters);
-                  context.pushRoute(
-                      ItemGroupScreen(itemGroupId: subList[index].itemGroupId));
+                  pushItemGroupScreen(
+                      context: context,
+                      itemGroupId: subList[index].itemGroupId);
                 }
               },
               child: ItemGroupGridItem(

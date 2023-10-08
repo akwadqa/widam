@@ -31,7 +31,9 @@ class _ItemDetailsScreenState extends ConsumerState<ItemDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+      SystemUiOverlay.bottom
+    ]);
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,
