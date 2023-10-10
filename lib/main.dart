@@ -91,8 +91,8 @@ Future<void> main() async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
-
-  FlutterBranchSdk.validateSDKIntegration();
+  //!Branch SDK
+  // FlutterBranchSdk.validateSDKIntegration();
   runApp(ProviderScope(overrides: [
     sharedPreferencesProvider.overrideWith((ref) => sharedPreferences),
     canVibrateProvider.overrideWith((ref) => canVibrate),

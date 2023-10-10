@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:auto_route/annotations.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_ui_database/firebase_ui_database.dart';
@@ -41,10 +43,10 @@ class _RealTimeMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final usersQuery = FirebaseDatabase.instance.ref(
+    final ref = FirebaseDatabase.instance.ref(
         'users/${salesOrder.address.customerId}/orders/${salesOrder.salesOrderId}');
     return FirebaseDatabaseQueryBuilder(
-      query: usersQuery,
+      query: ref,
       builder: (context, snapshot, _) {
         if (snapshot.hasError) {
           return AppBanner(
@@ -59,10 +61,19 @@ class _RealTimeMap extends StatelessWidget {
                 double.parse(salesOrder.deliveryTrip!.driverAddress.longitude));
           } else {
             driverLocation = LatLng(
-                double.parse(snapshot.docs.last.value.toString()),
-                double.parse(snapshot.docs.first.value.toString()));
+                double.parse(snapshot.docs
+                    .where((element) => element.key == 'lat')
+                    .first
+                    .value
+                    .toString()),
+                double.parse(snapshot.docs
+                    .where((element) => element.key == 'long')
+                    .first
+                    .value
+                    .toString()));
           }
           return _Map(
+              ref: ref,
               customerLocation: LatLng(
                   double.parse(salesOrder.address.latitude),
                   double.parse(salesOrder.address.longitude)),
@@ -75,9 +86,13 @@ class _RealTimeMap extends StatelessWidget {
 }
 
 class _Map extends StatefulWidget {
-  const _Map({required this.customerLocation, required this.driverLocation});
+  const _Map(
+      {required this.customerLocation,
+      required this.driverLocation,
+      required this.ref});
   final LatLng customerLocation;
   final LatLng driverLocation;
+  final DatabaseReference ref;
 
   @override
   State<_Map> createState() => _MapState();
@@ -122,9 +137,18 @@ class _MapState extends State<_Map> {
   }
 
   @override
+  void initState() {
+    widget.ref.onValue.listen((_) {
+      Future(() {
+        _setMarkers;
+        _getDirections();
+      });
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    _setMarkers;
-    _getDirections();
     return GoogleMap(
       initialCameraPosition: CameraPosition(
         target: widget.customerLocation,
