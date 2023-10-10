@@ -37,7 +37,7 @@ class RecommendationsRespository {
             response.data, (json) => RecommendationResponse.fromJson(json));
 
     if (recommendationResponse.error == 1) {
-      throw Exception(recommendationResponse.message);
+      throw AppException(recommendationResponse.message);
     }
     return recommendationResponse.data;
   }

@@ -25,7 +25,7 @@ class AppDataRepository {
     final AppResponse<AppData> appDataResponse =
         AppResponse.fromJson(response.data, (json) => AppData.fromJson(json));
     if (appDataResponse.error == 1) {
-      throw Exception(appDataResponse.message);
+      throw AppException(appDataResponse.message);
     }
     return appDataResponse.data;
   }

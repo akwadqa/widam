@@ -32,7 +32,7 @@ class LoyaltyPointsRepository {
             (json as List).map((e) => LoyaltyPointsLog.fromJson(e)).toList());
 
     if (appResponse.error == 1) {
-      throw Exception(appResponse.message);
+      throw AppException(appResponse.message);
     }
 
     return appResponse;
@@ -45,7 +45,7 @@ class LoyaltyPointsRepository {
             (json) => json is List ? null : LoyaltyProgram.fromJson(json));
 
     if (loyaltyProgramResponse.error == 1) {
-      throw Exception(loyaltyProgramResponse.message);
+      throw AppException(loyaltyProgramResponse.message);
     }
     return loyaltyProgramResponse.data;
   }
@@ -56,7 +56,7 @@ class LoyaltyPointsRepository {
         AppResponse.fromJson(response.data, (json) => json.toString());
 
     if (redeemPointsResponse.error == 1) {
-      throw Exception(redeemPointsResponse.message);
+      throw AppException(redeemPointsResponse.message);
     }
     return redeemPointsResponse.data;
   }

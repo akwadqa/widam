@@ -30,7 +30,7 @@ class SalesOrdersRepository {
         response.data, (json) => OrdersResponse.fromJson(json));
 
     if (appResponse.error == 1) {
-      throw Exception(appResponse.message);
+      throw AppException(appResponse.message);
     }
 
     return appResponse;
@@ -46,7 +46,7 @@ class SalesOrdersRepository {
         response.data, (json) => OrdersResponse.fromJson(json));
 
     if (appResponse.error == 1) {
-      throw Exception(appResponse.message);
+      throw AppException(appResponse.message);
     }
     return appResponse.data;
   }
@@ -59,7 +59,7 @@ class SalesOrdersRepository {
     final AppResponse<Cart> cartResponse =
         AppResponse.fromJson(response.data, (json) => Cart.fromJson(json));
     if (cartResponse.error == 1) {
-      throw Exception(cartResponse.message);
+      throw AppException(cartResponse.message);
     }
     return cartResponse.data;
   }
@@ -70,7 +70,7 @@ class SalesOrdersRepository {
         AppResponse.fromJson(
             response.data, (json) => ProcessingOrder.fromJson(json));
     if (processingOrderResponse.error == 1) {
-      throw Exception(processingOrderResponse.message);
+      throw AppException(processingOrderResponse.message);
     }
     return processingOrderResponse.data;
   }

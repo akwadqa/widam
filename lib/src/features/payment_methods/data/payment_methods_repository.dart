@@ -25,7 +25,7 @@ class PaymentMethodRepository {
           .toList();
     });
     if (appResponse.error == 1) {
-      throw Exception(appResponse.message);
+      throw AppException(appResponse.message);
     }
     return appResponse.data;
   }

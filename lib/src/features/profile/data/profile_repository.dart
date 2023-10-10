@@ -22,7 +22,7 @@ class ProfileRepository {
     AppResponse<UserDetails> profileResponse = AppResponse.fromJson(
         response.data, (json) => UserDetails.fromJson(json));
     if (profileResponse.error == 1) {
-      throw Exception(profileResponse.message);
+      throw AppException(profileResponse.message);
     }
     return profileResponse.data;
   }
@@ -32,7 +32,7 @@ class ProfileRepository {
     AppResponse<CompanyProfile> companyProfileResponse = AppResponse.fromJson(
         response.data, (json) => CompanyProfile.fromJson(json));
     if (companyProfileResponse.error == 1) {
-      throw Exception(companyProfileResponse.message);
+      throw AppException(companyProfileResponse.message);
     }
     return companyProfileResponse.data;
   }

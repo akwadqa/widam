@@ -29,7 +29,7 @@ class ValidateCoordinatesRepository {
     AppResponse<Location> locationResponse = AppResponse<Location>.fromJson(
         response.data, (json) => Location.fromJson(json));
     if (locationResponse.error == 1) {
-      throw Exception(locationResponse.message);
+      throw AppException(locationResponse.message);
     }
     return locationResponse.data;
   }

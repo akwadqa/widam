@@ -36,7 +36,7 @@ class GoogleMapsRepository {
         queryParameters: queryParameters);
     final status = response.data['status'];
     if (status != 'OK') {
-      throw Exception(status);
+      throw AppException(status);
     }
     final predictions = response.data['predictions'] as List<dynamic>;
     final places =

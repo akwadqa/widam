@@ -27,7 +27,7 @@ class CouponsRepository {
     });
 
     if (couponsResponse.error == 1) {
-      throw Exception(couponsResponse.message);
+      throw AppException(couponsResponse.message);
     }
 
     return couponsResponse.data;

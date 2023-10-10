@@ -23,7 +23,7 @@ class AuthRepository {
     final loginResponse = AppResponse<LoginResponse>.fromJson(
         response.data, (json) => LoginResponse.fromJson(json));
     if (loginResponse.error == 1) {
-      throw Exception(loginResponse.message);
+      throw AppException(loginResponse.message);
     }
     return loginResponse.data;
   }
@@ -35,7 +35,7 @@ class AuthRepository {
     final validationOtpResponse = AppResponse<ValidationOtpResponse>.fromJson(
         response.data, (json) => ValidationOtpResponse.fromJson(json));
     if (validationOtpResponse.error == 1) {
-      throw Exception(validationOtpResponse.message);
+      throw AppException(validationOtpResponse.message);
     }
     return validationOtpResponse.data;
   }

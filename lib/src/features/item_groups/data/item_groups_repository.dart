@@ -27,7 +27,7 @@ class ItemGroupsRepository {
       String? parameters}) async {
     return await _lock.synchronized(() async {
       final queryParameters = {
-        if(itemGroupId != null) 'item_group_id': itemGroupId,
+        if (itemGroupId != null) 'item_group_id': itemGroupId,
         'page_no': page,
         if (sortBy != null) 'sort_by': sortBy,
         if (sortOrder != null) 'sort_order': sortOrder,
@@ -46,7 +46,7 @@ class ItemGroupsRepository {
           AppResponse<ItemGroupDetails>.fromJson(
               response.data, (json) => ItemGroupDetails.fromJson(json));
       if (itemGroupResponse.error == 1) {
-        throw Exception(itemGroupResponse.message);
+        throw AppException(itemGroupResponse.message);
       }
       return itemGroupResponse;
     });

@@ -43,8 +43,7 @@ Dio dio(DioRef ref) {
         languageCode: languageCode,
         onUnauthorized: ref.read(userDataProvider.notifier).removeUserData),
   });
-  dio.interceptors.add(
-      LogInterceptor(requestBody: true, responseBody: true));
+  dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
 
   return dio;
 }
@@ -242,4 +241,15 @@ class BadResponseException extends ApiException {
   BadResponseException(super.requestOptions, [super.message]);
   @override
   String get defaultErrorString => S.current.freiendlyErrorMessage;
+}
+
+class AppException implements Exception {
+  final dynamic message;
+
+  AppException([this.message]);
+
+  @override
+  String toString() {
+    return message == null ? '' : message.toString();
+  }
 }

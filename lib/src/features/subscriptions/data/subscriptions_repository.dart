@@ -26,7 +26,7 @@ class SubscriptionsRepository {
         AppResponse<ItemGroupDetails>.fromJson(
             response.data, (json) => ItemGroupDetails.fromJson(json));
     if (itemGroupsResponse.error == 1) {
-      throw Exception(itemGroupsResponse.message);
+      throw AppException(itemGroupsResponse.message);
     }
     return itemGroupsResponse;
   }
@@ -44,7 +44,7 @@ class SubscriptionsRepository {
         AppResponse<ItemGroupDetails>.fromJson(
             response.data, (json) => ItemGroupDetails.fromJson(json));
     if (itemGroupResponse.error == 1) {
-      throw Exception(itemGroupResponse.message);
+      throw AppException(itemGroupResponse.message);
     }
     return itemGroupResponse;
   }
@@ -56,7 +56,7 @@ class SubscriptionsRepository {
     AppResponse subscriptionResponse =
         AppResponse.fromJson(response.data, (json) => json);
     if (subscriptionResponse.error == 1) {
-      throw Exception(subscriptionResponse.message);
+      throw AppException(subscriptionResponse.message);
     }
     return subscriptionResponse;
   }
@@ -71,7 +71,7 @@ class SubscriptionsRepository {
                     (subscription) => Subscription.fromJson(subscription))
                 .toList());
     if (subscriptionsResponse.error == 1) {
-      throw Exception(subscriptionsResponse.message);
+      throw AppException(subscriptionsResponse.message);
     }
     return subscriptionsResponse.data;
   }

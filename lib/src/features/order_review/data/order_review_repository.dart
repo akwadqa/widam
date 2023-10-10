@@ -24,7 +24,7 @@ class OrderReviewRepository {
     final reviewResponse = AppResponse<OrderReview>.fromJson(
         response.data, (data) => OrderReview.fromJson(data));
     if (reviewResponse.error == 1) {
-      throw Exception(reviewResponse.message);
+      throw AppException(reviewResponse.message);
     }
     return reviewResponse.data;
   }

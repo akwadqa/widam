@@ -18,12 +18,14 @@ class ItemDetailsRepository {
   const ItemDetailsRepository(this._networkService);
 
   Future<ItemDetails> getItemDetails(
-      {required String itemId, String? mubadaraId, String? attributionToken}) async {
+      {required String itemId,
+      String? mubadaraId,
+      String? attributionToken}) async {
     final Map<String, dynamic> queryParameters = {
       'website_item_id': itemId,
       'get_attribute_variants': 1,
       if (mubadaraId != null) 'get_mubadara_details': mubadaraId,
-      if(attributionToken != null) 'attribution_token' : attributionToken
+      if (attributionToken != null) 'attribution_token': attributionToken
     };
 
     final response = await _networkService.get(EndPoints.itemDetails,
@@ -32,7 +34,7 @@ class ItemDetailsRepository {
         AppResponse<ItemDetails>.fromJson(
             response.data, (json) => ItemDetails.fromJson(json));
     if (itemDetailsResponse.error == 1) {
-      throw Exception(itemDetailsResponse.message);
+      throw AppException(itemDetailsResponse.message);
     }
     return itemDetailsResponse.data;
   }
@@ -52,7 +54,7 @@ class ItemDetailsRepository {
     AppResponse<bool> validateQidResponse = AppResponse<bool>.fromJson(
         response.data, (json) => json['permitted'] == 1);
     if (validateQidResponse.error == 1) {
-      throw Exception(validateQidResponse.message);
+      throw AppException(validateQidResponse.message);
     }
     return validateQidResponse.data;
   }

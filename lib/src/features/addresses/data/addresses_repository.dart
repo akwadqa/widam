@@ -25,7 +25,7 @@ class AddressesRepository {
         (json) =>
             json.map<Address>((address) => Address.fromJson(address)).toList());
     if (appResponse.error == 1) {
-      throw Exception(appResponse.message);
+      throw AppException(appResponse.message);
     }
     return appResponse.data;
   }
@@ -39,7 +39,7 @@ class AddressesRepository {
         (json) =>
             json['cities'].map<City>((city) => City.fromJson(city)).toList());
     if (appResponse.error == 1) {
-      throw Exception(appResponse.message);
+      throw AppException(appResponse.message);
     }
     return appResponse.data;
   }
@@ -64,7 +64,7 @@ class AddressesRepository {
     final AppResponse<Address> appResponse =
         AppResponse.fromJson(response.data, (json) => Address.fromJson(json));
     if (appResponse.error == 1) {
-      throw Exception(appResponse.message);
+      throw AppException(appResponse.message);
     }
     return appResponse.data;
   }
@@ -76,7 +76,7 @@ class AddressesRepository {
     final AppResponse<String> appResponse =
         AppResponse.fromJson(response.data, (json) => json);
     if (appResponse.error == 1) {
-      throw Exception(appResponse.message);
+      throw AppException(appResponse.message);
     }
     return appResponse.data;
   }

@@ -21,7 +21,7 @@ class TagsRepository {
     final tagsResponse = AppResponse<List<Tag>>.fromJson(response.data,
         (json) => json.map<Tag>((tag) => Tag.fromJson(tag)).toList());
     if (tagsResponse.error == 1) {
-      throw Exception(tagsResponse.message);
+      throw AppException(tagsResponse.message);
     }
     return tagsResponse.data;
   }

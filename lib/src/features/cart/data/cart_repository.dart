@@ -46,7 +46,12 @@ class CartRepository {
       final FormData formData = FormData.fromMap({
         if (itemId != null)
           'website_items': jsonEncode([
-            {'website_item_id': itemId, 'quantity': quantity, if(attributionToken != null) 'attribution_token' : attributionToken}
+            {
+              'website_item_id': itemId,
+              'quantity': quantity,
+              if (attributionToken != null)
+                'attribution_token': attributionToken
+            }
           ]),
         if (qid != null) 'qid_field_placeholder': qid,
         if (file != null)
@@ -68,7 +73,6 @@ class CartRepository {
               .toList()),
         if (useWalletBalance != null) 'use_wallet_balance': useWalletBalance,
       });
-      print(formData.fields);
       final response = await _networkService.put(EndPoints.cart, formData);
       return _handleResponse(response);
     });
@@ -97,7 +101,7 @@ class CartRepository {
                 ? null
                 : Cart.fromJson(json));
     if (cartResponse.error == 1) {
-      throw Exception(cartResponse.message);
+      throw AppException(cartResponse.message);
     }
     return cartResponse.data;
   }

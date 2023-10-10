@@ -33,7 +33,7 @@ class CheckoutRepository {
           AppResponse<Payment>.fromJson(data, (json) => Payment.fromJson(json));
     }
     if (appResponse.error == 1) {
-      throw Exception(appResponse.message);
+      throw AppException(appResponse.message);
     }
     return appResponse.data;
   }

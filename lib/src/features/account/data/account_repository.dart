@@ -39,7 +39,7 @@ class AccountRepository {
                       '${json['profile_details']['first_name']} ${json['profile_details']['last_name']}'
                 ));
     if (appResponse.error == 1) {
-      throw Exception(appResponse.message);
+      throw AppException(appResponse.message);
     }
     return appResponse.data;
   }
@@ -58,7 +58,7 @@ class AccountRepository {
     final appResponse = AppResponse<UserDetails>.fromJson(
         response.data, (json) => UserDetails.fromJson(json));
     if (appResponse.error == 1) {
-      throw Exception(appResponse.message);
+      throw AppException(appResponse.message);
     }
     return appResponse.data;
   }

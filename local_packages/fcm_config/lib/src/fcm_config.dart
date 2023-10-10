@@ -118,10 +118,10 @@ class FCMConfig extends FCMConfigInterface {
     );
 
     await messaging.setForegroundNotificationPresentationOptions(
-        alert: alert,
-        badge: badge,
-        sound: sound,
-      );
+      alert: alert,
+      badge: badge,
+      sound: sound,
+    );
 
     if (onBackgroundMessage != null) {
       FirebaseMessaging.onBackgroundMessage(onBackgroundMessage);

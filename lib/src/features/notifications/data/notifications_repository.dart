@@ -33,7 +33,7 @@ class NotificationsRepository {
         AppResponse.fromJson(response.data, (json) => null);
 
     if (appResponse.error == 1) {
-      throw Exception(appResponse.message);
+      throw AppException(appResponse.message);
     }
   }
 }

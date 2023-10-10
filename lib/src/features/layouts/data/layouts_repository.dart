@@ -31,7 +31,7 @@ class LayoutsRepository {
     AppResponse<Layout> layoutResponse =
         AppResponse.fromJson(response.data, (json) => Layout.fromJson(json));
     if (layoutResponse.error == 1) {
-      throw Exception(layoutResponse.message);
+      throw AppException(layoutResponse.message);
     }
     return layoutResponse.data;
   }
@@ -50,7 +50,7 @@ class LayoutsRepository {
                 (json) =>
                     (json as List).map((e) => Item.fromJson(e)).toList()));
     if (blockResponse.error == 1) {
-      throw Exception(blockResponse.message);
+      throw AppException(blockResponse.message);
     }
     return blockResponse.data;
   }
