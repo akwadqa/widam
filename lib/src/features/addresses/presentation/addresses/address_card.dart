@@ -60,7 +60,7 @@ class AddressCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  '${address.buildingNo}, ${address.area.areaName}, ${address.streetNo}, ${address.city.cityName}, ${address.country.countryName}',
+                  '${address.buildingNo}, ${address.streetNo}, ${address.country.countryName}',
                   style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,

@@ -7,7 +7,8 @@ class ItemsHorizontalList extends StatelessWidget {
   const ItemsHorizontalList(
       {Key? key,
       required this.items,
-      this.padding = const EdgeInsets.symmetric(horizontal: 10), this.attributionToken})
+      this.padding = const EdgeInsets.symmetric(horizontal: 10),
+      this.attributionToken})
       : super(key: key);
   final List<Item> items;
   final String? attributionToken;
@@ -19,8 +20,10 @@ class ItemsHorizontalList extends StatelessWidget {
       child: ListView.separated(
         itemBuilder: (BuildContext context, int index) {
           return items[index].isMubadara == 1
-              ? MubadaraItem(item: items[index], attributionToken: attributionToken)
-              : ItemCard(item: items[index], attributionToken: attributionToken);
+              ? MubadaraItem(
+                  item: items[index], attributionToken: attributionToken)
+              : ItemCard(
+                  item: items[index], attributionToken: attributionToken);
         },
         itemCount: items.length,
         scrollDirection: Axis.horizontal,

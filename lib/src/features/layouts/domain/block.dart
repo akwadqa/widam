@@ -1,18 +1,18 @@
 class Block<T> {
-  Block({
-    required this.blockId,
-    required this.blockType,
-    required this.title,
-    required this.background,
-    required this.icon,
-    required this.viewType,
-    required this.itemGroupBackground,
-    required this.data,
-    required this.isDynamic,
-    required this.fillingToShow,
-    required this.showTitle,
-    required this.attributionToken
-  });
+  Block(
+      {required this.blockId,
+      required this.blockType,
+      required this.title,
+      required this.background,
+      required this.icon,
+      required this.viewType,
+      required this.itemGroupBackground,
+      required this.data,
+      required this.isDynamic,
+      required this.fillingToShow,
+      required this.showTitle,
+      required this.showTitleBlock,
+      required this.attributionToken});
 
   final String blockId;
   final String blockType;
@@ -25,11 +25,13 @@ class Block<T> {
   final int isDynamic;
   final String? fillingToShow;
   final int showTitle;
+  final int showTitleBlock;
   final String? attributionToken;
 
   factory Block.fromJson(Map<String, dynamic> json, Function(dynamic) create) {
     return Block(
       showTitle: json['show_title'],
+      showTitleBlock: json['show_title_block'],
       blockId: json['block_id'],
       blockType: json['block_type'],
       title: json['title'],

@@ -8,16 +8,20 @@ part 'item_details_sheet_controller.g.dart';
 @Riverpod(keepAlive: true)
 class ItemDetailsSheetController extends _$ItemDetailsSheetController {
   @override
-  FutureOr<({ItemDetails itemDetails, String? attributionToken})?> build() => null;
+  FutureOr<({ItemDetails itemDetails, String? attributionToken})?> build() =>
+      null;
 
-  Future<void> getDetails({required String itemId, String? attributionToken}) async {
+  Future<void> getDetails(
+      {required String itemId, String? attributionToken}) async {
     state = const AsyncLoading();
-    
-    try{
-      final itemDetails = await ref.watch(itemDetailsServiceProvider).getItemDetails(itemId: itemId, attributionToken: attributionToken);
-      state = AsyncData((itemDetails: itemDetails, attributionToken: attributionToken));
-    }
-    catch(error, stackTrace){
+
+    try {
+      final itemDetails = await ref
+          .watch(itemDetailsServiceProvider)
+          .getItemDetails(itemId: itemId, attributionToken: attributionToken);
+      state = AsyncData(
+          (itemDetails: itemDetails, attributionToken: attributionToken));
+    } catch (error, stackTrace) {
       state = AsyncError(error, stackTrace);
     }
   }

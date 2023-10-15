@@ -3319,6 +3319,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Describe your address`
+  String get describeYourAddress {
+    return Intl.message(
+      'Describe your address',
+      name: 'describeYourAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `example: behind woqod station`
+  String get addressHint {
+    return Intl.message(
+      'example: behind woqod station',
+      name: 'addressHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Minimum order amount`
+  String get minimumOrderAmount {
+    return Intl.message(
+      'Minimum order amount',
+      name: 'minimumOrderAmount',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -8,6 +8,7 @@ import 'package:widam/src/features/item_groups/presentation/barcode_widget/barco
 import 'package:widam/src/features/item_groups/presentation/item_group_screen/params_controller.dart';
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/filters_drop_down/filters_drop_down_button_form_field.dart';
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_list/selected_item_group_controller.dart';
+import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_search_field/item_groups_search_controller.dart';
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_search_field/item_groups_search_field.dart';
 import 'package:widam/src/features/main/presentation/main_screen/app_bottom_navigation_bar.dart';
 import '../../../../../main.dart';

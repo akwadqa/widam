@@ -26,7 +26,6 @@ import '../../../../../common_widgets/submit_button.dart';
 import '../../../../../constants/strings.dart';
 import '../../maps/location_picker/location_picker.dart';
 import 'address_labels.dart';
-import 'city_details.dart';
 
 @RoutePage()
 class AddEditAddressScreen extends ConsumerStatefulWidget {
@@ -51,11 +50,13 @@ class AddEditAddressScreen extends ConsumerStatefulWidget {
 class _AddEditAddressScreenState extends ConsumerState<AddEditAddressScreen> {
   final _formKey = GlobalKey<FormState>();
   final _scrollController = ScrollController();
-  final _keys = List.generate(8, (_) => GlobalKey<FormFieldState>());
+  final _keys = List.generate(7, (_) => GlobalKey<FormFieldState>());
 
   String? _addressTitle;
+  String? _zoneNumber;
   String? _streetNo;
   String? _buildingNo;
+  String? _addressDescription;
   bool? _isDefault;
   String? _fullname;
   String? _mobile;
@@ -67,9 +68,6 @@ class _AddEditAddressScreenState extends ConsumerState<AddEditAddressScreen> {
       ref
           .read(coordinatesControllerProvider.notifier)
           .setCoordinates((lat: widget.latitude, long: widget.longitude));
-      ref.read(selectedCityProvider.notifier).state = widget.address?.city;
-      ref.read(selectedZoneProvider.notifier).state = widget.address?.zone;
-      ref.read(selectedAreaProvider.notifier).state = widget.address?.area;
     });
     super.initState();
   }
@@ -162,10 +160,28 @@ class _AddEditAddressScreenState extends ConsumerState<AddEditAddressScreen> {
                       const SizedBox(height: 30.0),
                       Text(S.of(context).addressDetails, style: textStyle),
                       const SizedBox(height: 20.0),
-                      CityDetails(geofenceId: widget.geofenceId, keys: _keys),
+                      TextFormField(
+                        key: _keys[1],
+                        initialValue: widget.address?.zone,
+                        decoration: InputDecoration(
+                            hintText: S.of(context).zoneNumberHint,
+                            labelText: S.of(context).zoneNumber,
+                            suffixIcon: const AsteriskIcon()),
+                        validator: qValidator([
+                          IsRequired(S.of(context).required),
+                          IsNumber(S.of(context).shouldBeNumber),
+                        ]),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          ArabicNumberInputFormatter(),
+                        ],
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                        onSaved: (value) => _zoneNumber = value,
+                      ),
                       const SizedBox(height: 20.0),
                       TextFormField(
-                        key: _keys[4],
+                        key: _keys[2],
                         initialValue: widget.address?.streetNo,
                         decoration: InputDecoration(
                             hintText: S.of(context).streetNoHint,
@@ -185,7 +201,7 @@ class _AddEditAddressScreenState extends ConsumerState<AddEditAddressScreen> {
                       ),
                       const SizedBox(height: 20.0),
                       TextFormField(
-                        key: _keys[5],
+                        key: _keys[3],
                         initialValue: widget.address?.buildingNo,
                         decoration: InputDecoration(
                             hintText: S.of(context).buildingNoHint,
@@ -200,8 +216,20 @@ class _AddEditAddressScreenState extends ConsumerState<AddEditAddressScreen> {
                           ArabicNumberInputFormatter(),
                         ],
                         keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.done,
+                        textInputAction: TextInputAction.next,
                         onSaved: (value) => _buildingNo = value,
+                      ),
+                      const SizedBox(height: 20.0),
+                      TextFormField(
+                        key: _keys[4],
+                        // initialValue: widget.address?.address,
+                        decoration: InputDecoration(
+                            hintText: S.of(context).addressHint,
+                            labelText: S.of(context).describeYourAddress),
+                        keyboardType: TextInputType.streetAddress,
+                        textInputAction: TextInputAction.done,
+                        maxLines: 3,
+                        onSaved: (value) => _addressDescription = value,
                       ),
                       if (widget.address != null &&
                           ref
@@ -230,7 +258,7 @@ class _AddEditAddressScreenState extends ConsumerState<AddEditAddressScreen> {
                       Text(S.of(context).reciverInformation, style: textStyle),
                       const SizedBox(height: 20.0),
                       TextFormField(
-                        key: _keys[6],
+                        key: _keys[5],
                         initialValue: widget.address?.fullName ??
                             ref.read(userDataProvider)?.fullName,
                         textCapitalization: TextCapitalization.words,
@@ -249,7 +277,7 @@ class _AddEditAddressScreenState extends ConsumerState<AddEditAddressScreen> {
                       Directionality(
                         textDirection: TextDirection.ltr,
                         child: TextFormField(
-                          key: _keys[7],
+                          key: _keys[6],
                           initialValue:
                               widget.address?.phone.replaceAll('974', ''),
                           decoration: InputDecoration(
@@ -339,9 +367,7 @@ class _AddEditAddressScreenState extends ConsumerState<AddEditAddressScreen> {
       _formKey.currentState!.save();
       Address address = Address(
           addressType: _addressType!,
-          area: ref.read(selectedAreaProvider)!,
           buildingNo: _buildingNo!,
-          city: ref.read(selectedCityProvider)!,
           customerFullname: '',
           latitude: ref.read(coordinatesControllerProvider)!.lat,
           longitude: ref.read(coordinatesControllerProvider)!.long,
@@ -352,7 +378,8 @@ class _AddEditAddressScreenState extends ConsumerState<AddEditAddressScreen> {
                   : 0
               : null,
           streetNo: _streetNo!,
-          zone: ref.read(selectedZoneProvider)!,
+          landmark: _addressDescription,
+          zone: _zoneNumber!,
           country: Country(countryName: 'Qatar', countryId: 'Qatar'),
           addressId: update ? widget.address!.addressId : '',
           addressTitle: _addressTitle!,

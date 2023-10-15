@@ -13,11 +13,15 @@ class ItemDetailsController extends _$ItemDetailsController {
       ref.watch(itemDetailsServiceProvider);
 
   Future<void> getItemDetails(
-      {required String itemId, String? mubadaraId, String? attributionToken}) async {
+      {required String itemId,
+      String? mubadaraId,
+      String? attributionToken}) async {
     try {
       state = const AsyncLoading();
       final itemDetails = await _itemDetailsService.getItemDetails(
-          itemId: itemId, mubadaraId: mubadaraId, attributionToken: attributionToken);
+          itemId: itemId,
+          mubadaraId: mubadaraId,
+          attributionToken: attributionToken);
       state = AsyncData(ItemDetailsData(itemDetails));
     } catch (error, stackTrace) {
       state = AsyncError(error, stackTrace);

@@ -9,10 +9,6 @@ class GoToTabController extends _$GoToTabController {
     return Initial();
   }
 
-  void goToCart() {
-    state = GoToCart();
-  }
-
   void goToHome() {
     state = GoToHome();
   }
@@ -25,8 +21,6 @@ class GoToTabController extends _$GoToTabController {
 sealed class GoToTabState {}
 
 class Initial extends GoToTabState {}
-
-class GoToCart extends GoToTabState {}
 
 class GoToHome extends GoToTabState {}
 

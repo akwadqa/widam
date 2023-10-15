@@ -43,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addToCart": MessageLookupByLibrary.simpleMessage("أضف إلى السلة"),
         "addressDetails":
             MessageLookupByLibrary.simpleMessage("تفاصيل العنوان (عنواني)"),
+        "addressHint":
+            MessageLookupByLibrary.simpleMessage("مثال: خلف محطة وقود"),
         "addressLabel": MessageLookupByLibrary.simpleMessage("تصنيف العنوان"),
         "addressTitle": MessageLookupByLibrary.simpleMessage("اسم العنوان"),
         "addressTitleHint":
@@ -141,6 +143,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "deliveryFee": MessageLookupByLibrary.simpleMessage("رسوم الشحن"),
         "deliverySlot": MessageLookupByLibrary.simpleMessage("وقت التسليم"),
         "deliverySpeed": MessageLookupByLibrary.simpleMessage("سرعة التوصيل"),
+        "describeYourAddress":
+            MessageLookupByLibrary.simpleMessage("صف عنوانك"),
         "description": MessageLookupByLibrary.simpleMessage("الوصف"),
         "discount": MessageLookupByLibrary.simpleMessage("خصم"),
         "dontReceiveTheCode":
@@ -230,6 +234,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "makeThisDefault":
             MessageLookupByLibrary.simpleMessage("جعل هذا الافتراضي"),
         "minimum": MessageLookupByLibrary.simpleMessage("الحد الأدنى"),
+        "minimumOrderAmount":
+            MessageLookupByLibrary.simpleMessage("الحد الأدنى للطلب"),
         "missOrMs": MessageLookupByLibrary.simpleMessage("الآنسة"),
         "mobileNo": MessageLookupByLibrary.simpleMessage("رقم الجوال"),
         "monthly": MessageLookupByLibrary.simpleMessage("شهرياً"),

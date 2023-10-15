@@ -11,19 +11,18 @@ part 'sales_order.g.dart';
 
 @freezed
 class SalesOrder with _$SalesOrder {
-  factory SalesOrder({
-    required String salesOrderId,
-    required String salesOrderDate,
-    required DeliveryDate deliveryDate,
-    required String time,
-    required String status,
-    required double grandTotal,
-    required String currency,
-    required List<DeliveryCharge> deliveryCharges,
-    required List<Item> items,
-    required Address address,
-    required DeliveryTrip? deliveryTrip
-  }) = _SalesOrder;
+  factory SalesOrder(
+      {required String salesOrderId,
+      required String salesOrderDate,
+      required DeliveryDate deliveryDate,
+      required String time,
+      required String status,
+      required double grandTotal,
+      required String currency,
+      required List<DeliveryCharge> deliveryCharges,
+      required List<Item> items,
+      required Address address,
+      required DeliveryTrip? deliveryTrip}) = _SalesOrder;
 
   factory SalesOrder.fromJson(Map<String, dynamic> json) =>
       _$SalesOrderFromJson(json);

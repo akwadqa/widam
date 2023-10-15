@@ -19,6 +19,13 @@ class _SearchFieldState extends ConsumerState<ItemGroupsSearchField> {
   final TextEditingController _controller = TextEditingController();
 
   @override
+  void initState() {
+    Future(
+        () => ref.read(itemGroupsSearchControllerProvider.notifier).set(null));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final searchQuery = ref.watch(itemGroupsSearchControllerProvider);
     return SearchField(

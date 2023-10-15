@@ -72,7 +72,8 @@ class _DatesList extends ConsumerWidget {
                 dates: dates,
                 initialDate: initialDate,
                 initialTimeSlot: initialTimeSlot,
-                deliveryCharges: deliveryMethod.deliveryCharges.toString(),
+                deliveryCharges:
+                    deliveryMethod.deliveryCharges.toStringAsFixed(2),
               );
       },
       error: (error, stack) =>
@@ -172,6 +173,7 @@ class __BodyState extends State<_Body> {
             return Consumer(
               builder: (context, ref, child) {
                 return FilterChip(
+                  padding: EdgeInsets.zero,
                   label: SizedBox(
                     width: double.infinity,
                     child: Column(children: [

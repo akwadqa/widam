@@ -13,18 +13,20 @@ class ItemGroupGridItem extends StatelessWidget {
     required this.itemGroup,
     required this.isAllCategory,
     required this.backgroundColor,
+    required this.showTitleBlock,
   });
 
   final BasicItemGroup? itemGroup;
   final bool isAllCategory;
   final String backgroundColor;
+  final bool showTitleBlock;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
-          flex: 3,
+          flex: 7,
           child: Stack(
             children: [
               ClipRRect(
@@ -46,12 +48,16 @@ class ItemGroupGridItem extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 8),
-        Expanded(
-            child: ItemGroupTitle(
-                title: isAllCategory
-                    ? S.of(context).viewAllCategories
-                    : itemGroup!.itemGroupName))
+        if (showTitleBlock)
+          Expanded(
+              flex: 4,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: ItemGroupTitle(
+                    title: isAllCategory
+                        ? S.of(context).viewAllCategories
+                        : itemGroup!.itemGroupName),
+              ))
       ],
     );
   }

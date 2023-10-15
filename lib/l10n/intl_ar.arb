@@ -325,5 +325,8 @@
   "itIsEmptyHere" : "المكان فارغ هنا :(",
   "noLoyaltyProgramDesc" : "لست عضواً في اي برنامج. يرجى المحاولة في وقت آخر. يمكنك التواصل مع خدمة العملاء لتفعيل اشتراكك.",
   "ok" : "حسناً",
-  "orders" : "الطلبات"
+  "orders" : "الطلبات",
+  "describeYourAddress" : "صف عنوانك",
+  "addressHint" : "مثال: خلف محطة وقود",
+  "minimumOrderAmount" : "الحد الأدنى للطلب"
 }

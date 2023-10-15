@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:onboarding_overlay/onboarding_overlay.dart';
 import 'package:widam/main.dart';
+import 'package:widam/src/common_widgets/app_step_progress_indicator.dart';
 import 'package:widam/src/common_widgets/banner/app_banner_dialog.dart';
 import 'package:widam/src/features/cart/application/cart_service.dart';
 import 'package:widam/src/features/cart/domain/cart/cart.dart';
@@ -11,6 +12,7 @@ import 'package:widam/src/features/cart/presentation/cart_banner/cart_banner.dar
 import 'package:widam/src/features/cart/presentation/cart_body/unavailable_items.dart';
 import 'package:widam/src/features/on_boarding/presentation/cart_on_boarding/cart_on_boarding.dart';
 import 'package:widam/src/features/recommendations/presentation/recently_viewd/recently_viewd.dart';
+import 'package:widam/src/theme/app_colors.dart';
 import '../../../../common_widgets/total_container.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/l10n.dart';
@@ -144,12 +146,13 @@ class _NonEmptyCartState extends State<_NonEmptyCart> {
                     CustomDeliveryContainer(
                         focusNode: widget.focusNodes?.first,
                         deliveryType: normalDelivery,
-                        currency: widget.cart.currency, total: widget.cart.total.toString()),
+                        currency: widget.cart.currency,
+                        total: widget.cart.total),
                   const SizedBox(height: 20.0),
                   if (expressDelivery != null)
                     CustomDeliveryContainer(
                         deliveryType: expressDelivery,
-                        total: widget.cart.total.toString(),
+                        total: widget.cart.total,
                         timeSlotWidget: Row(
                           children: [
                             Assets.icons.truckTimeIcon.svg(),
@@ -166,7 +169,7 @@ class _NonEmptyCartState extends State<_NonEmptyCart> {
               const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
               SliverToBoxAdapter(
                   child: RecentlyViewd(quotationId: widget.cart.quotationId)),
-              const SliverToBoxAdapter(child: SizedBox(height: 150.0)),
+              const SliverToBoxAdapter(child: SizedBox(height: 180.0)),
             ],
           ),
         ),
@@ -175,7 +178,7 @@ class _NonEmptyCartState extends State<_NonEmptyCart> {
             left: 0,
             right: 0,
             child: TotalContainer(
-              orderTotal: widget.cart.total.toString(),
+                orderTotal: widget.cart.total,
                 button: Consumer(
                   builder: (context, ref, child) {
                     ref.listen(updateCartProvider, (previous, next) {
@@ -184,45 +187,80 @@ class _NonEmptyCartState extends State<_NonEmptyCart> {
                             context, next.error.toString(), next.stackTrace);
                       }
                     });
-                    return Focus(
-                      focusNode: widget.focusNodes?.last,
-                      child: ForwardSubmitButton(
-                          onPressed: () {
-                            if (ref.read(canVibrateProvider)) {
-                              Vibrate.feedback(FeedbackType.light);
-                            }
-                            if ((widget.cart.cartContent as CartContent)
-                                .normalDelivery!
-                                .websiteItems
-                                .any((element) => element.inStock == 0)) {
-                              showAdaptiveModalBottomSheet(
-                                  context: context,
-                                  builder: (context) {
-                                    return const UnavailableItems();
-                                  });
-                            } else if (widget.cart.shippingAddressDetails ==
-                                null) {
-                              showAdaptiveModalBottomSheet<Address?>(
-                                context: context,
-                                builder: (context) => const AddressesSelector(),
-                              ).then((address) {
-                                if (address != null) {
-                                  ref
-                                      .read(updateCartProvider.notifier)
-                                      .updateCart(
-                                          shippingAddressId: address.addressId)
-                                      .then((value) {
-                                    if (value) {
-                                      context.pushRoute(const CheckoutScreen());
-                                    }
-                                  });
-                                }
-                              });
-                            } else {
-                              context.pushRoute(const CheckoutScreen());
-                            }
-                          },
-                          title: S.of(context).proceedToCheckout),
+                    final orderTotal = widget.cart.orderTotal;
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (orderTotal.remainderAmount > 0) ...[
+                          AppStepProgressIndicator(
+                            size: 4,
+                            totalSteps: orderTotal.minimumOrderAmount.toInt(),
+                            currentStep: orderTotal.remainderAmount > 0
+                                ? (orderTotal.minimumOrderAmount -
+                                        orderTotal.remainderAmount)
+                                    .toInt()
+                                : orderTotal.minimumOrderAmount.toInt(),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                              '${S.of(context).minimumOrderAmount} ${widget.cart.orderTotal.minimumOrderAmount} ${S.of(context).qar}',
+                              style: const TextStyle(
+                                  fontSize: 12,
+                                  color: AppColors.red,
+                                  fontWeight: FontWeight.w500)),
+                          const SizedBox(height: 16),
+                        ],
+                        Focus(
+                          focusNode: widget.focusNodes?.last,
+                          child: ForwardSubmitButton(
+                              onPressed: orderTotal.remainderAmount > 0
+                                  ? null
+                                  : () {
+                                      if (ref.read(canVibrateProvider)) {
+                                        Vibrate.feedback(FeedbackType.light);
+                                      }
+                                      if ((widget.cart.cartContent
+                                              as CartContent)
+                                          .normalDelivery!
+                                          .websiteItems
+                                          .any((element) =>
+                                              element.inStock == 0)) {
+                                        showAdaptiveModalBottomSheet(
+                                            context: context,
+                                            builder: (context) {
+                                              return const UnavailableItems();
+                                            });
+                                      } else if (widget
+                                              .cart.shippingAddressDetails ==
+                                          null) {
+                                        showAdaptiveModalBottomSheet<Address?>(
+                                          context: context,
+                                          builder: (context) =>
+                                              const AddressesSelector(),
+                                        ).then((address) {
+                                          if (address != null) {
+                                            ref
+                                                .read(
+                                                    updateCartProvider.notifier)
+                                                .updateCart(
+                                                    shippingAddressId:
+                                                        address.addressId)
+                                                .then((value) {
+                                              if (value) {
+                                                context.pushRoute(
+                                                    const CheckoutScreen());
+                                              }
+                                            });
+                                          }
+                                        });
+                                      } else {
+                                        context
+                                            .pushRoute(const CheckoutScreen());
+                                      }
+                                    },
+                              title: S.of(context).proceedToCheckout),
+                        ),
+                      ],
                     );
                   },
                 ),

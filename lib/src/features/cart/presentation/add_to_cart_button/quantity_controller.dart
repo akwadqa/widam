@@ -32,7 +32,10 @@ class QuantityController extends _$QuantityController {
     _debouncer.call(() {
       ref
           .read(updateCartProvider.notifier)
-          .updateCart(itemId: itemId, quantity: state, attributionToken: attributionToken)
+          .updateCart(
+              itemId: itemId,
+              quantity: state,
+              attributionToken: attributionToken)
           .then((result) {
         if (!result) {
           ref.invalidate(quantityControllerProvider(itemId, minQuantity));

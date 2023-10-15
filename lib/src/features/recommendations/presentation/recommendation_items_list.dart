@@ -20,33 +20,44 @@ class RecommendationItemsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
         itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () => onAddToCart(items[index].websiteItemId, 1),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: AppCachedNetworkImage(
+          return SizedBox(
+            width: 90,
+            child: InkWell(
+              onTap: () => onAddToCart(items[index].websiteItemId, 1),
+              child: Column(
+                children: [
+                  AppCachedNetworkImage(
                       imageUrl: items[index].additionalImages.first.image,
-                      fit: BoxFit.fitHeight,
+                      fit: BoxFit.fitWidth,
                       height: 70,
                       width: 70),
-                ),
-                if (items[index].websiteItemShortName != null)
-                  Text(items[index].websiteItemShortName!),
-                itemIdLoading == items[index].websiteItemId
-                    ? const FadeCircleLoadingIndicator()
-                    : IconButton(
-                        onPressed: () =>
-                            onAddToCart(items[index].websiteItemId, 1),
-                        icon: Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.secondary,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: const Icon(Icons.add, color: Colors.white),
-                        ))
-              ],
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          items[index].websiteItemShortName ?? '',
+                          style: const TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.w600),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                  itemIdLoading == items[index].websiteItemId
+                      ? const FadeCircleLoadingIndicator()
+                      : IconButton(
+                          onPressed: () =>
+                              onAddToCart(items[index].websiteItemId, 1),
+                          icon: Container(
+                            decoration: BoxDecoration(
+                              color: AppColors.secondary,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Icon(Icons.add, color: Colors.white),
+                          ))
+                ],
+              ),
             ),
           );
         },

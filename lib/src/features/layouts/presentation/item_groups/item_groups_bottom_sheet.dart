@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/common_widgets/app_close_header.dart';
@@ -7,7 +6,6 @@ import 'package:widam/src/features/layouts/domain/basic_item_group/basic_item_gr
 import 'package:widam/src/utils/utils.dart';
 
 import '../../../../../generated/l10n.dart';
-import '../../../../routing/app_router.gr.dart';
 import 'item_group_grid_item.dart';
 
 class ItemGroupsBottomSheet extends StatelessWidget {
@@ -44,11 +42,11 @@ class _Content extends ConsumerWidget {
               ref
                   .read(paramsControllerProvider.notifier)
                   .set(itemGroups[index].parameters);
-                  pushItemGroupScreen(
-                      context: context,
-                      itemGroupId: itemGroups[index].itemGroupId);
+              pushItemGroupScreen(
+                  context: context, itemGroupId: itemGroups[index].itemGroupId);
             },
             child: ItemGroupGridItem(
+                showTitleBlock: true,
                 itemGroup: itemGroups[index],
                 isAllCategory: false,
                 backgroundColor: backgroundColor),

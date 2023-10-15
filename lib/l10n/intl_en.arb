@@ -325,5 +325,8 @@
   "itIsEmptyHere" : "It is empty here :(",
   "noLoyaltyProgramDesc" : "No loyalty program are available now. Please check back later or contact our customer support to activate your membership.",
   "ok" : "Ok",
-  "orders" : "Orders"
+  "orders" : "Orders",
+  "describeYourAddress" : "Describe your address",
+  "addressHint" : "example: behind woqod station",
+  "minimumOrderAmount" : "Minimum order amount"
 }

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:widam/src/features/cart/domain/cart/order_total/order_total.dart';
 import 'package:widam/src/features/payment_methods/domain/payment_methods_data/saved_card.dart';
 import '../../../addresses/domain/address/address.dart';
 import '../../../payment_methods/domain/payment_methods_data/payment_method.dart';
@@ -28,6 +29,7 @@ class Cart with _$Cart {
     required double? totalDiscountAmount,
     required String currency,
     required List<DeliveryCharge> deliveryCharges,
+    required OrderTotal orderTotal,
     @_CartContentConverter() required dynamic cartContent,
   }) = _Cart;
 

@@ -16,7 +16,7 @@ class CustomDeliveryContainer extends StatelessWidget {
   final String currency;
   final Widget? timeSlotWidget;
   final FocusNode? focusNode;
-  final String total;
+  final double total;
   @override
   Widget build(BuildContext context) {
     return ItemsContainer(
@@ -32,7 +32,7 @@ class CustomDeliveryContainer extends StatelessWidget {
             children: deliveryType.websiteItems
                 .map((e) => CartItem(itemDetails: e))
                 .toList()),
-        subTotal: '$total $currency',
+        subTotal: '${total.toStringAsFixed(2)} $currency',
         itemsCount: deliveryType.websiteItems.length.toString());
   }
 }

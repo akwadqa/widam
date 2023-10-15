@@ -3,7 +3,7 @@ import 'package:widam/src/features/items/application/item_group_items_controller
 
 part 'item_groups_search_controller.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ItemGroupsSearchController extends _$ItemGroupsSearchController {
   @override
   String? build() {

@@ -18,7 +18,8 @@ class DynamicItemsView extends ConsumerWidget {
     return block.when(
         data: (block) => fillingToShow == 'Deals of the Day'
             ? DealsGrid(items: block.data)
-            : ItemsHorizontalList(items: block.data, attributionToken: block.attributionToken),
+            : ItemsHorizontalList(
+                items: block.data, attributionToken: block.attributionToken),
         error: (error, stackTrace) =>
             EmptyWidget(message: error.toString(), stackTrace: stackTrace),
         loading: () => const EmptyWidget());

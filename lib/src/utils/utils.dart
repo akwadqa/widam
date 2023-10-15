@@ -33,18 +33,15 @@ class ArabicNumberInputFormatter extends TextInputFormatter {
   }
 }
 
-bool isInvalidLocation(ValidateCoordinatesState state, List<Marker> markers) {
+bool isInvalidLocation(ValidateCoordinatesState state, LatLng position) {
   final bool isLoaded = state is ValidateCoordinatesLoaded;
-  final bool isMarkersNotEmpty = markers.isNotEmpty;
   final bool isInvalid = isLoaded && (state.location.isValid == false);
-  final double currentLatitude =
-      isMarkersNotEmpty ? markers.first.position.latitude : 0.0;
-  final double currentLongitude =
-      isMarkersNotEmpty ? markers.first.position.longitude : 0.0;
+  final double currentLatitude = position.latitude;
+  final double currentLongitude = position.longitude;
   final bool isFirstMarker = isLoaded &&
       double.tryParse(state.location.latitude ?? '') == currentLatitude &&
       double.tryParse(state.location.longitude ?? '') == currentLongitude;
-  final bool isDisabled = isMarkersNotEmpty && isInvalid && isFirstMarker;
+  final bool isDisabled = isInvalid && isFirstMarker;
   return isDisabled;
 }
 

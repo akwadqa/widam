@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:widam/src/theme/app_colors.dart';
 import 'package:widam/src/utils/utils.dart';
 import 'current_location_button.dart';
 
@@ -32,14 +33,13 @@ class LocationPicker extends StatefulWidget {
 class _LocationPickerState extends State<LocationPicker> {
   final Completer<GoogleMapController> _controller = Completer();
 
-  final List<Marker> _markers = [];
-
-  late LatLng _initialPosition;
+  late LatLng _currentPosition;
 
   @override
   void initState() {
-    _initialPosition =
+    _currentPosition =
         LatLng(widget.latitude ?? 25.286106, widget.longitude ?? 51.534817);
+
     _goToCurrentLocation();
     super.initState();
   }
@@ -62,19 +62,23 @@ class _LocationPickerState extends State<LocationPicker> {
                   onMapCreated: (GoogleMapController controller) {
                     _controller.complete(controller);
                   },
-                  markers: Set<Marker>.of(_markers),
                   initialCameraPosition: CameraPosition(
-                    target: _initialPosition,
+                    target: _currentPosition,
                     zoom: 12.0,
                   ),
                   myLocationButtonEnabled: false,
-                  onCameraMove: (position) => _setMarker(position.target),
+                  onCameraMove: (position) {
+                    setState(() {
+                      _currentPosition = position.target;
+                    });
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      ValidateCoordinatesBanner(markers: _markers),
+                      ValidateCoordinatesBanner(
+                          currentPosition: _currentPosition),
                       const LocationPermissionCheckerBanner(),
                       LocationAutoComplete(onSelected: _goToPlace)
                     ],
@@ -97,9 +101,13 @@ class _LocationPickerState extends State<LocationPicker> {
                           ],
                         ),
                         const SizedBox(height: 8),
-                        ConfirmLocationButton(markers: _markers)
+                        ConfirmLocationButton(currentPosition: _currentPosition)
                       ],
                     )),
+                const Center(
+                  child: Icon(Icons.location_on_rounded,
+                      color: AppColors.red, size: 40),
+                )
               ],
             ),
           ),
@@ -118,7 +126,7 @@ class _LocationPickerState extends State<LocationPicker> {
           14,
         ),
       );
-      _setMarker(myLocation);
+      _currentPosition = myLocation;
     }
   }
 
@@ -161,21 +169,12 @@ class _LocationPickerState extends State<LocationPicker> {
 
     final Location location = locations.first;
 
-    _setMarker(LatLng(location.latitude, location.longitude));
-  }
-
-  void _setMarker(LatLng latLng) async {
-    Marker marker = Marker(
-      markerId: const MarkerId('searched_location'),
-      position: latLng,
-      infoWindow: InfoWindow(
-        title: latLng.toString(),
+    GoogleMapController controller = await _controller.future;
+    controller.animateCamera(
+      CameraUpdate.newLatLngZoom(
+        LatLng(location.latitude, location.longitude),
+        14,
       ),
     );
-
-    setState(() {
-      _markers.clear();
-      _markers.add(marker);
-    });
   }
 }

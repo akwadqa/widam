@@ -7,7 +7,8 @@ import '../../../items/domain/item/item.dart';
 import '../../../items/presentation/item_card/item_add_to_cart_button.dart';
 
 class MubadaraItem extends StatelessWidget {
-  const MubadaraItem({Key? key, required this.item, this.width = 280, this.attributionToken})
+  const MubadaraItem(
+      {Key? key, required this.item, this.width = 280, this.attributionToken})
       : super(key: key);
 
   final Item item;
@@ -52,7 +53,8 @@ class MubadaraItem extends StatelessWidget {
                               color: AppColors.raisinBlack)),
                     ],
                   ),
-                  ItemAddToCartButton(item: item, attributionToken: attributionToken)
+                  ItemAddToCartButton(
+                      item: item, attributionToken: attributionToken)
                 ],
               ),
             )

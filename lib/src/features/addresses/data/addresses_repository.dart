@@ -30,20 +30,6 @@ class AddressesRepository {
     return appResponse.data;
   }
 
-  Future<List<City>> getCities(String geofenceId) async {
-    final queryParams = {'geofence_id': geofenceId};
-    final response = await _networkService.get(EndPoints.cities,
-        queryParameters: queryParams);
-    final AppResponse<List<City>> appResponse = AppResponse.fromJson(
-        response.data,
-        (json) =>
-            json['cities'].map<City>((city) => City.fromJson(city)).toList());
-    if (appResponse.error == 1) {
-      throw AppException(appResponse.message);
-    }
-    return appResponse.data;
-  }
-
   Future<Address> addAddress(Address address) async {
     AddressConverter addressConverter = const AddressConverter();
     final FormData formData =
@@ -80,9 +66,4 @@ class AddressesRepository {
     }
     return appResponse.data;
   }
-}
-
-@riverpod
-Future<List<City>> cities(CitiesRef ref, String geofenceId) {
-  return ref.watch(addressesRepositoryProvider).getCities(geofenceId);
 }

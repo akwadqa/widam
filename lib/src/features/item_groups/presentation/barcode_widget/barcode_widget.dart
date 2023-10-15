@@ -21,7 +21,8 @@ class BarcodeWidget extends ConsumerWidget {
             .then((barcodeScanRes) {
           if (barcodeScanRes != '-1') {
             ref.read(barcodeControllerProvider.notifier).set(barcodeScanRes);
-            pushItemGroupScreen(context: context, itemGroupId: Strings.allItemGroup);
+            pushItemGroupScreen(
+                context: context, itemGroupId: Strings.allItemGroup);
           }
         });
       },

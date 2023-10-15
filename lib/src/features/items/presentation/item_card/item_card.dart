@@ -17,7 +17,8 @@ class ItemCard extends StatelessWidget {
       {Key? key,
       required this.item,
       this.width = 180,
-      this.isFrequencyItem = false, this.attributionToken})
+      this.isFrequencyItem = false,
+      this.attributionToken})
       : super(key: key);
   final Item item;
   final double width;
@@ -97,7 +98,8 @@ class ItemCard extends StatelessWidget {
                   const SizedBox(height: 5),
                   ItemUnit(stockUom: item.stockUom),
                   const SizedBox(height: 2),
-                  ItemAddToCartButton(item: item, attributionToken: attributionToken)
+                  ItemAddToCartButton(
+                      item: item, attributionToken: attributionToken)
                 ],
               ),
             )

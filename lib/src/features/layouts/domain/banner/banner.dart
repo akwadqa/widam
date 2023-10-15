@@ -8,7 +8,7 @@ part 'banner.g.dart';
 class Banner with _$Banner implements BlockData {
   const factory Banner({
     required String bannerType,
-    required String bannerLink,
+    required String? bannerLink,
     required String bannerImage,
   }) = _Banner;
 

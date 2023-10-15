@@ -14,9 +14,7 @@ class CartOnBoadring extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isFirstCartOpen = ref.watch(isFirstCartOpenControllerProvider);
-    return isFirstCartOpen
-        ? _CartOnBoardingBody(child: child)
-        : child();
+    return isFirstCartOpen ? _CartOnBoardingBody(child: child) : child();
   }
 }
 

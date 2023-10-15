@@ -42,7 +42,8 @@ class UpdateCart extends _$UpdateCart {
           paymentToken: paymentToken,
           deliveryDate: deliveryDate,
           productOptions: productOptions,
-          useWalletBalance: useWalletBalance, attributionToken: attributionToken);
+          useWalletBalance: useWalletBalance,
+          attributionToken: attributionToken);
       ref.read(cartControllerProvider.notifier).updateCart(cart);
       state = const AsyncData(null);
       return true;

@@ -1,19 +1,21 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/features/item_groups/presentation/item_group_screen/params_controller.dart';
 import 'package:widam/src/features/layouts/presentation/item_groups/item_groups_bottom_sheet.dart';
 import 'package:widam/src/utils/utils.dart';
-import '../../../../routing/app_router.gr.dart';
 import '../../../layouts/domain/basic_item_group/basic_item_group.dart';
 import 'item_group_grid_item.dart';
 
 class GridItemGroups extends ConsumerWidget {
   const GridItemGroups(
-      {Key? key, required this.itemGroups, required this.backgroundColor})
+      {Key? key,
+      required this.itemGroups,
+      required this.backgroundColor,
+      required this.showTitleBlock})
       : super(key: key);
   final List<BasicItemGroup> itemGroups;
   final String backgroundColor;
+  final bool showTitleBlock;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,6 +46,7 @@ class GridItemGroups extends ConsumerWidget {
                 }
               },
               child: ItemGroupGridItem(
+                  showTitleBlock: showTitleBlock,
                   backgroundColor: backgroundColor,
                   itemGroup: isAllCategory ? null : subList[index],
                   isAllCategory: isAllCategory),
@@ -52,11 +55,11 @@ class GridItemGroups extends ConsumerWidget {
         );
       },
       padding: EdgeInsets.zero,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 4,
         crossAxisSpacing: 8,
-        mainAxisSpacing: 20,
-        childAspectRatio: 0.9 / 1.4,
+        mainAxisSpacing: 8,
+        childAspectRatio: showTitleBlock ? 0.9 / 1.4 : 1,
       ),
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),

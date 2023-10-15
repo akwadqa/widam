@@ -55,7 +55,8 @@ class CartItem extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${itemDetails.price.discountedPrice} ',
+                          text:
+                              '${itemDetails.price.discountedPrice.toStringAsFixed(2)} ',
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,

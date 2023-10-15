@@ -9,16 +9,20 @@ class ItemGroupsView extends StatelessWidget {
       {Key? key,
       required this.itemGroups,
       required this.viewType,
-      required this.backgroundColor})
+      required this.backgroundColor,
+      required this.showTitleBlock})
       : super(key: key);
   final List<BasicItemGroup> itemGroups;
   final String viewType;
   final String? backgroundColor;
+  final bool showTitleBlock;
   @override
   Widget build(BuildContext context) {
     if (viewType == 'Square') {
       return GridItemGroups(
-          itemGroups: itemGroups, backgroundColor: backgroundColor!);
+          itemGroups: itemGroups,
+          backgroundColor: backgroundColor!,
+          showTitleBlock: showTitleBlock);
     }
     if (viewType == 'Circle') {
       return HorizontalGridItemGroups(

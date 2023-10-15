@@ -13,6 +13,7 @@ class ItemView extends StatelessWidget {
       return DynamicItemsView(
           blockId: block.blockId, fillingToShow: block.fillingToShow);
     }
-    return ItemsHorizontalList(items: block.data, attributionToken: block.attributionToken);
+    return ItemsHorizontalList(
+        items: block.data, attributionToken: block.attributionToken);
   }
 }

@@ -7,14 +7,14 @@ import 'validate_coordinates_notifier.dart';
 import '../../../../../utils/utils.dart';
 
 class ValidateCoordinatesBanner extends ConsumerWidget {
-  const ValidateCoordinatesBanner({super.key, required this.markers});
+  const ValidateCoordinatesBanner({super.key, required this.currentPosition});
 
-  final List<Marker> markers;
+  final LatLng currentPosition;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(validateCoordinatesProvider);
-    if (isInvalidLocation(state, markers)) {
+    if (isInvalidLocation(state, currentPosition)) {
       return Column(
         children: [
           AppBanner(

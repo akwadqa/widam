@@ -89,7 +89,7 @@ class _CheckoutOnBoardingBodyState
     ], child: widget.child(focusNodes: focusNodes));
   }
 
-   @override
+  @override
   void dispose() {
     for (var focusNode in focusNodes) {
       focusNode.dispose();

@@ -70,12 +70,12 @@ Future<void> main() async {
       importance: Importance.high,
     ),
   );
-  final sharedPreferences = await SharedPreferences.getInstance();  
+  final sharedPreferences = await SharedPreferences.getInstance();
   bool canVibrate = await Vibrate.canVibrate;
   final userId = sharedPreferences.getString(Keys.userId);
   if (userId != null) {
     FCMConfig.instance.messaging.onTokenRefresh.listen((deviceToken) {
-      DeviceTokenController().sendFCMToken(deviceToken, userId);  
+      DeviceTokenController().sendFCMToken(deviceToken, userId);
     });
   }
   IosDeviceInfo? iosInfo;

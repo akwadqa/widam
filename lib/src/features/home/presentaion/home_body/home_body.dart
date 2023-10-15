@@ -24,9 +24,6 @@ class HomeBody extends ConsumerWidget {
       switch (next) {
         case Initial():
           break;
-        case GoToCart():
-          context.tabsRouter.setActiveIndex(3);
-          break;
         case GoToHome():
           context.tabsRouter.setActiveIndex(0);
           break;

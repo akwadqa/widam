@@ -15,19 +15,28 @@ class ItemDetailsService {
     String? mubadaraId,
     String? attributionToken,
   }) async {
-    final itemDetails = await _getItemDetails(itemId: itemId, mubadaraId: mubadaraId, attributionToken: attributionToken);
+    final itemDetails = await _getItemDetails(
+        itemId: itemId,
+        mubadaraId: mubadaraId,
+        attributionToken: attributionToken);
     return itemDetails;
   }
 
-  Future<ItemDetails> _getItemDetails({required String itemId,
-      String? mubadaraId, String? attributionToken}) async {
+  Future<ItemDetails> _getItemDetails(
+      {required String itemId,
+      String? mubadaraId,
+      String? attributionToken}) async {
     final repository = _itemDetailsRepository;
-    return repository.getItemDetails(itemId: itemId, mubadaraId: mubadaraId, attributionToken: attributionToken);
+    return repository.getItemDetails(
+        itemId: itemId,
+        mubadaraId: mubadaraId,
+        attributionToken: attributionToken);
   }
 
-  Future<ItemDetails> onVariantsChange({required String itemId,
-      String? mubadaraId}) async {
-    final itemDetails = await _getItemDetails(itemId: itemId, mubadaraId: mubadaraId);
+  Future<ItemDetails> onVariantsChange(
+      {required String itemId, String? mubadaraId}) async {
+    final itemDetails =
+        await _getItemDetails(itemId: itemId, mubadaraId: mubadaraId);
     return itemDetails;
   }
 }

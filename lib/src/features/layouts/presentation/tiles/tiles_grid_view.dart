@@ -29,9 +29,8 @@ class TilesGridView extends ConsumerWidget {
                 ref
                     .read(paramsControllerProvider.notifier)
                     .set(tiles[index].parameters);
-                    pushItemGroupScreen(
-                      context: context,
-                      itemGroupId: tiles[index].tileLink);
+                pushItemGroupScreen(
+                    context: context, itemGroupId: tiles[index].tileLink);
               }
             },
             borderRadius: BorderRadius.circular(5),

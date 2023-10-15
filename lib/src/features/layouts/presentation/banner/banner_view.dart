@@ -27,11 +27,14 @@ class BannerView extends ConsumerWidget {
   }
 
   void _onBannerTap(BuildContext context, b.Banner banner, WidgetRef ref) {
+    if (banner.bannerType == 'Banner') {
+      return;
+    }
     if (banner.bannerType == 'Website Item') {
       navigateToItemDetails(
-          context: context, ref: ref, itemId: banner.bannerLink);
+          context: context, ref: ref, itemId: banner.bannerLink!);
     } else {
-      pushItemGroupScreen(context: context, itemGroupId: banner.bannerLink);
+      pushItemGroupScreen(context: context, itemGroupId: banner.bannerLink!);
     }
   }
 }

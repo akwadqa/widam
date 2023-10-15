@@ -32,9 +32,8 @@ class HorizontalGridItemGroups extends ConsumerWidget {
               ref
                   .read(paramsControllerProvider.notifier)
                   .set(itemGroups[index].parameters);
-                  pushItemGroupScreen(
-                      context: context,
-                      itemGroupId: itemGroups[index].itemGroupId);
+              pushItemGroupScreen(
+                  context: context, itemGroupId: itemGroups[index].itemGroupId);
             },
             child: Column(
               children: [

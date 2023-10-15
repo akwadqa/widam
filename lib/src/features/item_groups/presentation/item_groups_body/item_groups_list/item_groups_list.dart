@@ -28,19 +28,20 @@ class ItemGroupList extends StatelessWidget {
   }
 }
 
-
 class _ItemGroup extends ConsumerWidget {
   const _ItemGroup({Key? key, required this.itemGroup, this.focusNode})
       : super(key: key);
   final ItemGroup itemGroup;
   final FocusNode? focusNode;
-  
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedId = ref.watch(selectedItemGroupControllerProvider);
     final isSelected = selectedId == itemGroup.itemGroupId;
     return InkWell(
-      onTap: () => ref.read(selectedItemGroupControllerProvider.notifier).onCategorySelected(itemGroup.itemGroupId),
+      onTap: () => ref
+          .read(selectedItemGroupControllerProvider.notifier)
+          .onCategorySelected(itemGroup.itemGroupId),
       child: Focus(
         focusNode: focusNode,
         child: Stack(

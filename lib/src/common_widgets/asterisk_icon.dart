@@ -5,7 +5,6 @@ class AsteriskIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return 
-      const Text('*', style: TextStyle(color: Colors.red, fontSize: 20));
+    return const Text('*', style: TextStyle(color: Colors.red, fontSize: 20));
   }
 }

@@ -48,11 +48,13 @@ class OrderSummaryContainer extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text('${cart.total} ${cart.currency}'),
+                  Text('${cart.total.toStringAsFixed(2)} ${cart.currency}'),
                   const SizedBox(height: 10.0),
-                  Text('${cart.totalCharges} ${cart.currency}'),
+                  Text(
+                      '${cart.totalCharges.toStringAsFixed(2)} ${cart.currency}'),
                   const SizedBox(height: 10.0),
-                  Text('${cart.totalDiscountAmount} ${cart.currency}'),
+                  Text(
+                      '${cart.totalDiscountAmount?.toStringAsFixed(2)} ${cart.currency}'),
                 ],
               ),
             )
@@ -67,7 +69,7 @@ class OrderSummaryContainer extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: AppColors.darkGray,
                   fontSize: 15)),
-          Text('${cart.grandTotal} ${cart.currency}',
+          Text('${cart.grandTotal.toStringAsFixed(2)} ${cart.currency}',
               style: const TextStyle(
                   fontSize: 13.0,
                   color: Colors.black,

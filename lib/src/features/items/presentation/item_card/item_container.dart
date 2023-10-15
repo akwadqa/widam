@@ -11,7 +11,8 @@ class ItemContainer extends ConsumerWidget {
       required this.width,
       required this.child,
       required this.item,
-      this.customBoxShadow, this.attributionToken})
+      this.customBoxShadow,
+      this.attributionToken})
       : super(key: key);
 
   final double width;
@@ -46,7 +47,8 @@ class ItemContainer extends ConsumerWidget {
                     itemType: item.websiteItemType,
                     isMubadara: item.isMubadara,
                     mubadaraId: item.mubadaraId,
-                    hasProductOptions: item.hasProductOptions, attributionToken: attributionToken),
+                    hasProductOptions: item.hasProductOptions,
+                    attributionToken: attributionToken),
             borderRadius: _borderRadius,
             child: child),
       ),

@@ -47,8 +47,9 @@ class _FiltersDropdownButtonFormFieldState
                   return AppDropDownBottomSheet<String>(
                     title: (item) => item,
                     items: filters,
-                    onTap: (item) =>
-                        ref.read(selectedFilterControllerProvider.notifier).set(item),
+                    onTap: (item) => ref
+                        .read(selectedFilterControllerProvider.notifier)
+                        .set(item),
                   );
                 });
           },

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:auto_route/annotations.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_ui_database/firebase_ui_database.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:widam/src/common_widgets/app_close_button.dart';
 import 'package:widam/src/common_widgets/banner/app_banner.dart';
 import 'package:widam/src/common_widgets/fade_circle_loading_indicator.dart';
 import 'package:widam/src/constants/keys.dart';
+import 'package:widam/src/constants/strings.dart';
 import 'package:widam/src/features/sales_orders/domain/sales_order/sales_order.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
@@ -36,52 +38,89 @@ class TrackMapScreen extends StatelessWidget {
   }
 }
 
-class _RealTimeMap extends StatelessWidget {
+class _RealTimeMap extends StatefulWidget {
   const _RealTimeMap({required this.salesOrder});
 
   final SalesOrder salesOrder;
 
   @override
+  State<_RealTimeMap> createState() => _RealTimeMapState();
+}
+
+class _RealTimeMapState extends State<_RealTimeMap> {
+  DatabaseReference? _query;
+
+  @override
+  void initState() {
+    FirebaseAuth.instance
+        .signInWithEmailAndPassword(
+            email: Strings.firebaseUserEmail,
+            password: Strings.firebaseUserPassword)
+        .then((value) {
+      final uid = value.user?.uid;
+      if (uid != null) {
+        setState(() {
+        _query = FirebaseDatabase.instance.ref(
+            'users/$uid/users/${widget.salesOrder.address.customerId}/orders/${widget.salesOrder.salesOrderId}');
+      });
+      }
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final ref = FirebaseDatabase.instance.ref(
-        'users/${salesOrder.address.customerId}/orders/${salesOrder.salesOrderId}');
-    return FirebaseDatabaseQueryBuilder(
-      query: ref,
-      builder: (context, snapshot, _) {
-        if (snapshot.hasError) {
-          return AppBanner(
-              message: snapshot.error.toString(),
-              stackTrace: snapshot.stackTrace);
-        }
-        if (snapshot.hasData) {
-          LatLng driverLocation;
-          if (snapshot.docs.isEmpty) {
-            driverLocation = LatLng(
-                double.parse(salesOrder.deliveryTrip!.driverAddress.latitude),
-                double.parse(salesOrder.deliveryTrip!.driverAddress.longitude));
-          } else {
-            driverLocation = LatLng(
-                double.parse(snapshot.docs
-                    .where((element) => element.key == 'lat')
-                    .first
-                    .value
-                    .toString()),
-                double.parse(snapshot.docs
-                    .where((element) => element.key == 'long')
-                    .first
-                    .value
-                    .toString()));
+    LatLng driverLocation = LatLng(
+        double.parse(widget.salesOrder.deliveryTrip!.driverAddress.latitude),
+        double.parse(widget.salesOrder.deliveryTrip!.driverAddress.longitude));
+    if (_query == null) {
+      return _Map(
+          query: _query,
+          customerLocation: LatLng(
+              double.parse(widget.salesOrder.address.latitude),
+              double.parse(widget.salesOrder.address.longitude)),
+          driverLocation: driverLocation);
+    } else {
+      return FirebaseDatabaseQueryBuilder(
+        query: _query!,
+        builder: (context, snapshot, _) {
+          if (snapshot.hasError) {
+            return AppBanner(
+                message: snapshot.error.toString(),
+                stackTrace: snapshot.stackTrace);
           }
-          return _Map(
-              ref: ref,
-              customerLocation: LatLng(
-                  double.parse(salesOrder.address.latitude),
-                  double.parse(salesOrder.address.longitude)),
-              driverLocation: driverLocation);
-        }
-        return const FadeCircleLoadingIndicator();
-      },
-    );
+          if (snapshot.hasData) {
+            LatLng driverLocation;
+            if (snapshot.docs.isEmpty) {
+              driverLocation = LatLng(
+                  double.parse(
+                      widget.salesOrder.deliveryTrip!.driverAddress.latitude),
+                  double.parse(
+                      widget.salesOrder.deliveryTrip!.driverAddress.longitude));
+            } else {
+              driverLocation = LatLng(
+                  double.parse(snapshot.docs
+                      .where((element) => element.key == 'lat')
+                      .first
+                      .value
+                      .toString()),
+                  double.parse(snapshot.docs
+                      .where((element) => element.key == 'long')
+                      .first
+                      .value
+                      .toString()));
+            }
+            return _Map(
+                query: _query,
+                customerLocation: LatLng(
+                    double.parse(widget.salesOrder.address.latitude),
+                    double.parse(widget.salesOrder.address.longitude)),
+                driverLocation: driverLocation);
+          }
+          return const FadeCircleLoadingIndicator();
+        },
+      );
+    }
   }
 }
 
@@ -89,10 +128,10 @@ class _Map extends StatefulWidget {
   const _Map(
       {required this.customerLocation,
       required this.driverLocation,
-      required this.ref});
+      required this.query});
   final LatLng customerLocation;
   final LatLng driverLocation;
-  final DatabaseReference ref;
+  final DatabaseReference? query;
 
   @override
   State<_Map> createState() => _MapState();
@@ -138,12 +177,14 @@ class _MapState extends State<_Map> {
 
   @override
   void initState() {
-    widget.ref.onValue.listen((_) {
-      Future(() {
-        _setMarkers;
-        _getDirections();
+    if (widget.query != null) {
+      widget.query!.onValue.listen((_) {
+        Future(() {
+          _setMarkers;
+          _getDirections();
+        });
       });
-    });
+    }
     super.initState();
   }
 

@@ -11,7 +11,9 @@ import '../../../cart/presentation/add_to_cart_button/add_to_cart_button.dart';
 import 'circle_button.dart';
 
 class ItemAddToCartButton extends StatelessWidget {
-  const ItemAddToCartButton({Key? key, required this.item, this.attributionToken}) : super(key: key);
+  const ItemAddToCartButton(
+      {Key? key, required this.item, this.attributionToken})
+      : super(key: key);
   final Item item;
   final String? attributionToken;
   @override

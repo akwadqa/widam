@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
+import 'package:widam/src/common_widgets/app_step_progress_indicator.dart';
 import 'package:widam/src/features/loyalty_points/domain/loyalty_program/loyalty_program.dart';
 import 'package:widam/src/routing/app_router.gr.dart';
 
@@ -37,16 +38,11 @@ class PointsProgressCard extends StatelessWidget {
                   fontWeight: FontWeight.w600)),
           const SizedBox(height: 8),
           if (loyaltyProgram.nextTier != null) ...[
-            StepProgressIndicator(
+            AppStepProgressIndicator(
               totalSteps:
                   loyaltyProgram.nextTier!.minimumTotalToQualify.toInt(),
               currentStep:
                   loyaltyProgram.activeTier.minimumTotalToQualify.toInt(),
-              size: 8,
-              padding: 0,
-              selectedColor: AppColors.vividCerulean,
-              unselectedColor: AppColors.pattensBlue,
-              roundedEdges: const Radius.circular(4),
             ),
             const SizedBox(height: 8),
             Consumer(

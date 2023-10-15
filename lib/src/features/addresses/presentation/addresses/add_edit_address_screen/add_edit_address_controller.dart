@@ -16,7 +16,9 @@ class AddEditAddressController extends _$AddEditAddressController {
     state = await AsyncValue.guard(
         () => ref.watch(addressesRepositoryProvider).addAddress(address));
     if (state is AsyncData) {
-      ref.read(addressesListControllerProvider.notifier).addAddress(state.asData!.value!);
+      ref
+          .read(addressesListControllerProvider.notifier)
+          .addAddress(state.asData!.value!);
     }
   }
 

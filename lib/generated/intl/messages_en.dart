@@ -44,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addToCart": MessageLookupByLibrary.simpleMessage("Add to Cart"),
         "addressDetails":
             MessageLookupByLibrary.simpleMessage("Address Details (Inwani)"),
+        "addressHint": MessageLookupByLibrary.simpleMessage(
+            "example: behind woqod station"),
         "addressLabel": MessageLookupByLibrary.simpleMessage("Address Label"),
         "addressTitle": MessageLookupByLibrary.simpleMessage("Address Title"),
         "addressTitleHint":
@@ -147,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "deliveryFee": MessageLookupByLibrary.simpleMessage("Delivery Fee"),
         "deliverySlot": MessageLookupByLibrary.simpleMessage("Delivery Slot"),
         "deliverySpeed": MessageLookupByLibrary.simpleMessage("Delivery Speed"),
+        "describeYourAddress":
+            MessageLookupByLibrary.simpleMessage("Describe your address"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "discount": MessageLookupByLibrary.simpleMessage("Discount"),
         "dontReceiveTheCode":
@@ -237,6 +241,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "makeThisDefault":
             MessageLookupByLibrary.simpleMessage("Make This Default"),
         "minimum": MessageLookupByLibrary.simpleMessage("Minimum"),
+        "minimumOrderAmount":
+            MessageLookupByLibrary.simpleMessage("Minimum order amount"),
         "missOrMs": MessageLookupByLibrary.simpleMessage("Miss/Ms."),
         "mobileNo": MessageLookupByLibrary.simpleMessage("Mobile No."),
         "monthly": MessageLookupByLibrary.simpleMessage("Monthly"),

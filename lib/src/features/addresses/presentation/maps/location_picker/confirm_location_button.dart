@@ -10,9 +10,9 @@ import '../../../../../utils/utils.dart';
 import '../validate_coordinates_banner/validate_coordinates_notifier.dart';
 
 class ConfirmLocationButton extends ConsumerWidget {
-  const ConfirmLocationButton({super.key, required this.markers});
+  const ConfirmLocationButton({super.key, required this.currentPosition});
 
-  final List<Marker> markers;
+  final LatLng currentPosition;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,24 +21,23 @@ class ConfirmLocationButton extends ConsumerWidget {
         showAppBannerDialog(context, next.error.toString(), next.stackTrace);
       }
       if (next is ValidateCoordinatesLoaded) {
-        if (!isInvalidLocation(next, markers)) {
+        if (!isInvalidLocation(next, currentPosition)) {
           context.popRoute(next.location);
         }
       }
     });
     final state = ref.watch(validateCoordinatesProvider);
-    final currentPosition = markers.isNotEmpty ? markers.first.position : null;
     if (state is ValidateCoordinatesLoading &&
         state.loadingType == LoadingType.confirm) {
       return const FadeCircleLoadingIndicator();
     }
     return SubmitButton(
-      onPressed: isInvalidLocation(state, markers) || markers.isEmpty
+      onPressed: isInvalidLocation(state, currentPosition)
           ? null
           : () => ref
               .read(validateCoordinatesProvider.notifier)
               .validateCoordinates(
-                  latitude: currentPosition!.latitude,
+                  latitude: currentPosition.latitude,
                   longitude: currentPosition.longitude,
                   loadingType: LoadingType.confirm),
       text: S.of(context).confirmLocation,

@@ -71,7 +71,10 @@ class _SearchWidget extends ConsumerWidget implements PreferredSizeWidget {
           child: SearchField(
             height: 35,
             readOnly: true,
-            onTap: () => pushItemGroupScreen(context: context, autoFocus: true, itemGroupId: Strings.allItemGroup),
+            onTap: () => pushItemGroupScreen(
+                context: context,
+                autoFocus: true,
+                itemGroupId: Strings.allItemGroup),
             suffixIcon: const BarcodeWidget(),
             fillColor: Colors.white,
             hintText: S.of(context).searchForAnyProduct,

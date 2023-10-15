@@ -52,7 +52,7 @@ class BlockItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 16),
+          const SizedBox(height: 4),
           Align(
               alignment: AlignmentDirectional.centerStart, child: buildTitle()),
           Padding(
@@ -61,7 +61,7 @@ class BlockItem extends StatelessWidget {
                 : const EdgeInsets.symmetric(horizontal: 10),
             child: BlockDataItem(block: block),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 4),
         ],
       ),
     );

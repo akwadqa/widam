@@ -23,7 +23,10 @@ import '../item_details_controller.dart';
 
 class AddToCartWidget extends StatelessWidget {
   const AddToCartWidget(
-      {Key? key, required this.itemId, required this.optionsFromKey, this.attributionToken})
+      {Key? key,
+      required this.itemId,
+      required this.optionsFromKey,
+      this.attributionToken})
       : super(key: key);
   final String itemId;
   final GlobalKey<FormState> optionsFromKey;
@@ -83,10 +86,14 @@ class AddToCartWidget extends StatelessWidget {
                               final savedOptions = productOptions.isNotEmpty
                                   ? productOptions
                                   : null;
-                              _addToCart(ref: ref, savedOptions: savedOptions, attributionToken: attributionToken);
+                              _addToCart(
+                                  ref: ref,
+                                  savedOptions: savedOptions,
+                                  attributionToken: attributionToken);
                             }
                           } else {
-                            _addToCart(ref: ref, attributionToken: attributionToken);
+                            _addToCart(
+                                ref: ref, attributionToken: attributionToken);
                           }
                         },
             );
@@ -94,9 +101,11 @@ class AddToCartWidget extends StatelessWidget {
         ));
   }
 
-  void _addToCart({required WidgetRef ref,
+  void _addToCart(
+      {required WidgetRef ref,
       List<({int isPriceModifier, String productOptionId, int radioOptionId})>?
-          savedOptions, String? attributionToken}) {
+          savedOptions,
+      String? attributionToken}) {
     final mubadaraFormKey = ref.read(mubadaraFormKeyProvider);
     if (mubadaraFormKey.currentState != null) {
       if (mubadaraFormKey.currentState!.validate() == false) {
@@ -104,7 +113,7 @@ class AddToCartWidget extends StatelessWidget {
       } else {
         ref.read(mubadaraFormKeyProvider).currentState!.save();
         ref.read(updateCartProvider.notifier).updateCart(
-          attributionToken: attributionToken,
+              attributionToken: attributionToken,
               itemId: itemId,
               quantity: ref.read(quantityProvider),
               qid: ref.read(qidNumberProvider).isEmpty
@@ -116,11 +125,10 @@ class AddToCartWidget extends StatelessWidget {
       }
     } else {
       ref.read(updateCartProvider.notifier).updateCart(
-            itemId: itemId,
-            quantity: ref.read(quantityProvider),
-            productOptions: savedOptions,
-            attributionToken: attributionToken
-          );
+          itemId: itemId,
+          quantity: ref.read(quantityProvider),
+          productOptions: savedOptions,
+          attributionToken: attributionToken);
     }
     ref.invalidate(recentlyViewdControllerProvider);
     ref.invalidate(similarItemsControllerProvider);

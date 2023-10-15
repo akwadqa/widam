@@ -14,6 +14,7 @@ class BlockDataItem extends StatelessWidget {
     return switch (block.blockType) {
       'Banner' => BannerView(banners: block.data),
       'Item Group' => ItemGroupsView(
+          showTitleBlock: block.showTitleBlock == 1,
           itemGroups: block.data,
           viewType: block.viewType!,
           backgroundColor: block.itemGroupBackground),

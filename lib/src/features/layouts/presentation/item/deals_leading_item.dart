@@ -12,7 +12,8 @@ import '../../../items/presentation/item_card/stock_banner.dart';
 import 'discount_banner.dart';
 
 class DealsLeadingItem extends StatelessWidget {
-  const DealsLeadingItem({Key? key, required this.item, this.attributionToken}) : super(key: key);
+  const DealsLeadingItem({Key? key, required this.item, this.attributionToken})
+      : super(key: key);
   final Item item;
   final String? attributionToken;
   @override
@@ -44,7 +45,8 @@ class DealsLeadingItem extends StatelessWidget {
 
 class _DealsRow extends StatelessWidget {
   const _DealsRow({
-    required this.item, this.attributionToken,
+    required this.item,
+    this.attributionToken,
   });
 
   final Item item;
@@ -78,7 +80,8 @@ class _DealsRow extends StatelessWidget {
                     const ExpressWidget(),
                     const SizedBox(height: 6),
                   ],
-                  ItemAddToCartButton(item: item, attributionToken: attributionToken)
+                  ItemAddToCartButton(
+                      item: item, attributionToken: attributionToken)
                 ],
               ),
             )),

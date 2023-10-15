@@ -146,8 +146,9 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
                     left: 0,
                     right: 0,
                     child: TotalContainer(
-                      orderTotal: cart.grandTotal.toString(),
-                        button: CheckoutButton(cart: cart), cart: cart))
+                        orderTotal: cart.grandTotal,
+                        button: CheckoutButton(cart: cart),
+                        cart: cart))
               ],
             ),
           );

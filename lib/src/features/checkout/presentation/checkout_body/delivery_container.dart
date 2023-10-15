@@ -112,7 +112,7 @@ class DeliveryContainer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(S.of(context).deliveryFee, style: _titleTextStyle()),
-            Text('${deliveryType.deliveryCharges} $currency',
+            Text('${deliveryType.deliveryCharges.toStringAsFixed(2)} $currency',
                 style: const TextStyle(
                     fontSize: 13.0,
                     color: Colors.black,

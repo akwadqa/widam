@@ -8,7 +8,8 @@ import 'item_details_controller.dart';
 
 @RoutePage()
 class ItemDetailsScreen extends ConsumerStatefulWidget {
-  const ItemDetailsScreen({Key? key, required this.itemId, this.mubadaraId, this.attributionToken})
+  const ItemDetailsScreen(
+      {Key? key, required this.itemId, this.mubadaraId, this.attributionToken})
       : super(key: key);
   final String itemId;
   final String? mubadaraId;
@@ -31,9 +32,8 @@ class _ItemDetailsScreenState extends ConsumerState<ItemDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
-      SystemUiOverlay.bottom
-    ]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.bottom]);
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,
