@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../gen/assets.gen.dart';
 import '../../../generated/l10n.dart';
 import '../../theme/app_colors.dart';
 
@@ -46,7 +45,7 @@ class _AppBannerState extends State<AppBanner> {
               ),
             ),
             child: ListTile(
-              leading: widget.leadingIcon ?? Assets.icons.errorIcon.svg(),
+              leading: widget.leadingIcon,
               title: Text(
                 message,
                 style: const TextStyle(

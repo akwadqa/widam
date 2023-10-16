@@ -30,6 +30,7 @@ class ItemCard extends StatelessWidget {
       width: width,
       item: item,
       attributionToken: attributionToken,
+      isFrequencyItem: isFrequencyItem,
       child: Stack(
         children: [
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

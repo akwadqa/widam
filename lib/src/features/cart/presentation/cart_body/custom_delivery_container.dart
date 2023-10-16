@@ -10,24 +10,20 @@ class CustomDeliveryContainer extends StatelessWidget {
       required this.deliveryType,
       required this.currency,
       this.timeSlotWidget,
-      this.focusNode,
       required this.total});
   final DeliveryType deliveryType;
   final String currency;
   final Widget? timeSlotWidget;
-  final FocusNode? focusNode;
   final double total;
   @override
   Widget build(BuildContext context) {
     return ItemsContainer(
         title: deliveryType.deliveryMethodTitle,
-        timeSlotWidget: Focus(
-            focusNode: focusNode,
-            child: timeSlotWidget ??
-                TimeSlotLabel(
-                  formattedDate: deliveryType.deliveryDate.dateFormatted,
-                  formattedTime: deliveryType.timeSlot.timeFormatted,
-                )),
+        timeSlotWidget: timeSlotWidget ??
+            TimeSlotLabel(
+              formattedDate: deliveryType.deliveryDate.dateFormatted,
+              formattedTime: deliveryType.timeSlot.timeFormatted,
+            ),
         content: Column(
             children: deliveryType.websiteItems
                 .map((e) => CartItem(itemDetails: e))

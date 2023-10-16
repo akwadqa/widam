@@ -1,9 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/features/item_groups/presentation/item_group_screen/params_controller.dart';
 import '../../../../common_widgets/app_cached_network_image.dart';
-import '../../../../routing/app_router.gr.dart';
 import '../../../../utils/utils.dart';
 
 import '../../../layouts/domain/tile/tile.dart';
@@ -24,7 +22,11 @@ class TilesGridView extends ConsumerWidget {
             onTap: () {
               if (tiles[index].tileType == 'Website Item') {
                 navigateToItemDetails(
-                    context: context, ref: ref, itemId: tiles[index].tileLink);
+                    context: context,
+                    ref: ref,
+                    itemId: tiles[index].tileLink,
+                    hasProductOptions: tiles[index].hasProductOptions,
+                    itemType: tiles[index].websiteItemType);
               } else {
                 ref
                     .read(paramsControllerProvider.notifier)

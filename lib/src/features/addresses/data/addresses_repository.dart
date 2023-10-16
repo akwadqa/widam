@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../common_models/response/app_response.dart';
 import '../../../constants/end_points.dart';
-import '../domain/address/city.dart';
 import '../../../network/network_service.dart';
 
 import '../domain/address/address.dart';

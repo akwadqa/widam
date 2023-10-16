@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/constants/strings.dart';
@@ -6,7 +5,6 @@ import 'package:widam/src/features/item_groups/presentation/barcode_widget/barco
 import 'package:widam/src/utils/utils.dart';
 import '../../../../../main.dart';
 import '../../../../common_widgets/search_field.dart';
-import '../../../../routing/app_router.gr.dart' as router;
 import '../../../../theme/app_colors.dart';
 
 import '../../../../../gen/assets.gen.dart';

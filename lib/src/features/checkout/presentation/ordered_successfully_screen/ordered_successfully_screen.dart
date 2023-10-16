@@ -45,7 +45,7 @@ class OrderedSuccessfullyScreen extends StatelessWidget {
               children: [
                 _CustomContainer(
                     title: S.of(context).orderAmount,
-                    subtitle: '${order.currency} ${order.grandTotal}'),
+                    subtitle: '${order.currency} ${order.grandTotal.toStringAsFixed(2)}'),
                 const SizedBox(width: 10),
                 _CustomContainer(
                     title: S.of(context).orderNumber, subtitle: order.orderId),
@@ -109,7 +109,7 @@ class OrderedSuccessfullyScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(S.of(context).subTotal),
-                              Text(order.subTotal.toString())
+                              Text(order.subTotal.toStringAsFixed(2))
                             ],
                           ),
                           const SizedBox(height: 8),
@@ -117,7 +117,7 @@ class OrderedSuccessfullyScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(S.of(context).deliveryFee),
-                              Text(order.deliveryCharges.toString())
+                              Text(order.deliveryCharges.toStringAsFixed(2))
                             ],
                           ),
                           const SizedBox(height: 12),
@@ -129,7 +129,7 @@ class OrderedSuccessfullyScreen extends StatelessWidget {
                               children: [
                                 Text(
                                     '${S.of(context).total} ${order.currency}'),
-                                Text(order.grandTotal.toString())
+                                Text(order.grandTotal.toStringAsFixed(2))
                               ],
                             ),
                           )
@@ -206,11 +206,11 @@ class _OrderItem extends StatelessWidget {
               const SizedBox(height: 5),
               Text('${itemDetails.qtyInCart} ${itemDetails.stockUom}'),
               const SizedBox(height: 3),
-              Text(itemDetails.price.discountedPrice.toString())
+              Text(itemDetails.price.discountedPrice.toStringAsFixed(2))
             ],
           ),
         ),
-        Text(itemDetails.price.discountedPrice.toString(),
+        Text(itemDetails.price.discountedPrice.toStringAsFixed(2),
             style: const TextStyle(
                 fontSize: 14, color: Colors.black, fontWeight: FontWeight.w600))
       ],

@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
-import 'package:onboarding_overlay/onboarding_overlay.dart';
 import 'package:widam/main.dart';
 import 'package:widam/src/common_widgets/app_step_progress_indicator.dart';
 import 'package:widam/src/common_widgets/banner/app_banner_dialog.dart';
@@ -10,7 +9,6 @@ import 'package:widam/src/features/cart/application/cart_service.dart';
 import 'package:widam/src/features/cart/domain/cart/cart.dart';
 import 'package:widam/src/features/cart/presentation/cart_banner/cart_banner.dart';
 import 'package:widam/src/features/cart/presentation/cart_body/unavailable_items.dart';
-import 'package:widam/src/features/on_boarding/presentation/cart_on_boarding/cart_on_boarding.dart';
 import 'package:widam/src/features/recommendations/presentation/recently_viewd/recently_viewd.dart';
 import 'package:widam/src/theme/app_colors.dart';
 import '../../../../common_widgets/total_container.dart';
@@ -68,9 +66,7 @@ class AuthenticatedCart extends ConsumerWidget {
               buttonText: S.of(context).returnToShop,
               onPressed: () => context.tabsRouter.setActiveIndex(0));
         }
-        return CartOnBoadring(
-            child: ({List<FocusNode>? focusNodes}) =>
-                _NonEmptyCart(cart: cart, focusNodes: focusNodes));
+        return _NonEmptyCart(cart: cart);
       },
       error: (error, stack) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -82,54 +78,26 @@ class AuthenticatedCart extends ConsumerWidget {
   }
 }
 
-class _NonEmptyCart extends StatefulWidget {
-  const _NonEmptyCart({required this.cart, this.focusNodes});
+class _NonEmptyCart extends StatelessWidget {
+  const _NonEmptyCart({required this.cart});
   final Cart cart;
-  final List<FocusNode>? focusNodes;
-
-  @override
-  State<_NonEmptyCart> createState() => _NonEmptyCartState();
-}
-
-class _NonEmptyCartState extends State<_NonEmptyCart> {
-  @override
-  void initState() {
-    Future<void>.delayed(const Duration(seconds: 3), () {
-      final showOnBoarding =
-          widget.focusNodes != null && context.tabsRouter.activeIndex == 3;
-      if (showOnBoarding) {
-        final OnboardingState? onboarding = Onboarding.of(context);
-        if (onboarding != null) {
-          onboarding.show();
-        }
-      }
-    });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    final expressDelivery = widget.cart.pickup != 1
-        ? widget.cart.cartContent.expressDelivery
+    final expressDelivery = cart.pickup != 1
+        ? cart.cartContent.expressDelivery
         : null;
     final normalDelivery =
-        widget.cart.pickup != 1 ? widget.cart.cartContent.normalDelivery : null;
+        cart.pickup != 1 ? cart.cartContent.normalDelivery : null;
     return Stack(
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: CustomScrollView(
             slivers: [
-              //TODO: Uncomment this when express delivery is implemented
-              // if (cart.split == 0) ...[
-              //   const SliverToBoxAdapter(
-              //     child: ExpressContainer(),
-              //   ),
-              //   const SliverToBoxAdapter(child: SizedBox(height: 16.0)),
-              // ],
               const SliverToBoxAdapter(child: SizedBox(height: 70.0)),
               SliverToBoxAdapter(
-                child: SimiliarItems(quotationId: widget.cart.quotationId),
+                child: SimiliarItems(quotationId: cart.quotationId),
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
               SliverToBoxAdapter(
@@ -137,22 +105,21 @@ class _NonEmptyCartState extends State<_NonEmptyCart> {
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 16.0))),
               const SliverToBoxAdapter(child: SizedBox(height: 12.0)),
-              if (widget.cart.pickup == 1)
-                PickupList(cart: widget.cart)
+              if (cart.pickup == 1)
+                PickupList(cart: cart)
               else
                 SliverList(
                     delegate: SliverChildListDelegate.fixed([
                   if (normalDelivery != null)
                     CustomDeliveryContainer(
-                        focusNode: widget.focusNodes?.first,
                         deliveryType: normalDelivery,
-                        currency: widget.cart.currency,
-                        total: widget.cart.total),
+                        currency: cart.currency,
+                        total: cart.total),
                   const SizedBox(height: 20.0),
                   if (expressDelivery != null)
                     CustomDeliveryContainer(
                         deliveryType: expressDelivery,
-                        total: widget.cart.total,
+                        total: cart.total,
                         timeSlotWidget: Row(
                           children: [
                             Assets.icons.truckTimeIcon.svg(),
@@ -164,11 +131,11 @@ class _NonEmptyCartState extends State<_NonEmptyCart> {
                                     color: Colors.black))
                           ],
                         ),
-                        currency: widget.cart.currency)
+                        currency: cart.currency)
                 ])),
               const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
               SliverToBoxAdapter(
-                  child: RecentlyViewd(quotationId: widget.cart.quotationId)),
+                  child: RecentlyViewd(quotationId: cart.quotationId)),
               const SliverToBoxAdapter(child: SizedBox(height: 180.0)),
             ],
           ),
@@ -178,7 +145,7 @@ class _NonEmptyCartState extends State<_NonEmptyCart> {
             left: 0,
             right: 0,
             child: TotalContainer(
-                orderTotal: widget.cart.total,
+                orderTotal: cart.total,
                 button: Consumer(
                   builder: (context, ref, child) {
                     ref.listen(updateCartProvider, (previous, next) {
@@ -187,7 +154,7 @@ class _NonEmptyCartState extends State<_NonEmptyCart> {
                             context, next.error.toString(), next.stackTrace);
                       }
                     });
-                    final orderTotal = widget.cart.orderTotal;
+                    final orderTotal = cart.orderTotal;
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -203,68 +170,64 @@ class _NonEmptyCartState extends State<_NonEmptyCart> {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                              '${S.of(context).minimumOrderAmount} ${widget.cart.orderTotal.minimumOrderAmount} ${S.of(context).qar}',
+                              '${S.of(context).minimumOrderAmount} ${cart.orderTotal.minimumOrderAmount} ${S.of(context).qar}',
                               style: const TextStyle(
                                   fontSize: 12,
                                   color: AppColors.red,
                                   fontWeight: FontWeight.w500)),
                           const SizedBox(height: 16),
                         ],
-                        Focus(
-                          focusNode: widget.focusNodes?.last,
-                          child: ForwardSubmitButton(
-                              onPressed: orderTotal.remainderAmount > 0
-                                  ? null
-                                  : () {
-                                      if (ref.read(canVibrateProvider)) {
-                                        Vibrate.feedback(FeedbackType.light);
-                                      }
-                                      if ((widget.cart.cartContent
-                                              as CartContent)
-                                          .normalDelivery!
-                                          .websiteItems
-                                          .any((element) =>
-                                              element.inStock == 0)) {
-                                        showAdaptiveModalBottomSheet(
-                                            context: context,
-                                            builder: (context) {
-                                              return const UnavailableItems();
-                                            });
-                                      } else if (widget
-                                              .cart.shippingAddressDetails ==
-                                          null) {
-                                        showAdaptiveModalBottomSheet<Address?>(
+                        ForwardSubmitButton(
+                            onPressed: orderTotal.remainderAmount > 0
+                                ? null
+                                : () {
+                                    if (ref.read(canVibrateProvider)) {
+                                      Vibrate.feedback(FeedbackType.light);
+                                    }
+                                    if ((cart.cartContent
+                                            as CartContent)
+                                        .normalDelivery!
+                                        .websiteItems
+                                        .any((element) =>
+                                            element.inStock == 0)) {
+                                      showAdaptiveModalBottomSheet(
                                           context: context,
-                                          builder: (context) =>
-                                              const AddressesSelector(),
-                                        ).then((address) {
-                                          if (address != null) {
-                                            ref
-                                                .read(
-                                                    updateCartProvider.notifier)
-                                                .updateCart(
-                                                    shippingAddressId:
-                                                        address.addressId)
-                                                .then((value) {
-                                              if (value) {
-                                                context.pushRoute(
-                                                    const CheckoutScreen());
-                                              }
-                                            });
-                                          }
-                                        });
-                                      } else {
-                                        context
-                                            .pushRoute(const CheckoutScreen());
-                                      }
-                                    },
-                              title: S.of(context).proceedToCheckout),
-                        ),
+                                          builder: (context) {
+                                            return const UnavailableItems();
+                                          });
+                                    } else if (cart.shippingAddressDetails ==
+                                        null) {
+                                      showAdaptiveModalBottomSheet<Address?>(
+                                        context: context,
+                                        builder: (context) =>
+                                            const AddressesSelector(),
+                                      ).then((address) {
+                                        if (address != null) {
+                                          ref
+                                              .read(
+                                                  updateCartProvider.notifier)
+                                              .updateCart(
+                                                  shippingAddressId:
+                                                      address.addressId)
+                                              .then((value) {
+                                            if (value) {
+                                              context.pushRoute(
+                                                  const CheckoutScreen());
+                                            }
+                                          });
+                                        }
+                                      });
+                                    } else {
+                                      context
+                                          .pushRoute(const CheckoutScreen());
+                                    }
+                                  },
+                            title: S.of(context).proceedToCheckout),
                       ],
                     );
                   },
                 ),
-                cart: widget.cart))
+                cart: cart))
       ],
     );
   }

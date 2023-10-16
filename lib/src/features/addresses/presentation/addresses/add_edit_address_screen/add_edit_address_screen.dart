@@ -174,6 +174,7 @@ class _AddEditAddressScreenState extends ConsumerState<AddEditAddressScreen> {
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
                           ArabicNumberInputFormatter(),
+                          LengthLimitingTextInputFormatter(2)
                         ],
                         keyboardType: TextInputType.number,
                         textInputAction: TextInputAction.next,

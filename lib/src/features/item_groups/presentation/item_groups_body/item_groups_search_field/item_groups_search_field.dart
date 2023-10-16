@@ -19,30 +19,31 @@ class _SearchFieldState extends ConsumerState<ItemGroupsSearchField> {
   final TextEditingController _controller = TextEditingController();
 
   @override
-  void initState() {
-    Future(
-        () => ref.read(itemGroupsSearchControllerProvider.notifier).set(null));
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final searchQuery = ref.watch(itemGroupsSearchControllerProvider);
-    return SearchField(
-      autofocus: widget.autofocus,
-      controller: _controller,
-      suffixIcon: searchQuery != null && searchQuery.isNotEmpty
-          ? IconButton(
-              onPressed: () {
-                _controller.clear();
-                ref.read(itemGroupsSearchControllerProvider.notifier).set(null);
-                FocusScope.of(context).requestFocus(FocusNode());
-              },
-              icon: const Icon(Icons.clear, color: AppColors.darkGray),
-            )
-          : null,
-      onFieldSubmitted: (value) =>
-          ref.read(itemGroupsSearchControllerProvider.notifier).set(value),
+    return WillPopScope(
+      onWillPop: () async {
+        ref.read(itemGroupsSearchControllerProvider.notifier).set(null);
+        return true;
+      },
+      child: SearchField(
+        autofocus: widget.autofocus,
+        controller: _controller,
+        suffixIcon: searchQuery != null && searchQuery.isNotEmpty
+            ? IconButton(
+                onPressed: () {
+                  _controller.clear();
+                  ref
+                      .read(itemGroupsSearchControllerProvider.notifier)
+                      .set(null);
+                  FocusScope.of(context).requestFocus(FocusNode());
+                },
+                icon: const Icon(Icons.clear, color: AppColors.darkGray),
+              )
+            : null,
+        onFieldSubmitted: (value) =>
+            ref.read(itemGroupsSearchControllerProvider.notifier).set(value),
+      ),
     );
   }
 

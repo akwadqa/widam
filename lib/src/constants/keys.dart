@@ -13,7 +13,5 @@ abstract class Keys {
   static const String orders = 'orders';
   static const String ios = 'ios';
   static const String android = 'android';
-  static const String isFirstCartOpen = 'is_first_cart_open';
-  static const String isFirstCheckoutOpen = 'is_first_checkout_open';
   static const String isFirstItemGroupsOpen = 'is_first_item_groups_open';
 }

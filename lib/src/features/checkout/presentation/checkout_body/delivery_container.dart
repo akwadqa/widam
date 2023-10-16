@@ -15,11 +15,9 @@ class DeliveryContainer extends StatelessWidget {
   const DeliveryContainer(
       {super.key,
       required this.deliveryType,
-      required this.currency,
-      this.focusNode});
+      required this.currency});
   final DeliveryType deliveryType;
   final String currency;
-  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -60,53 +58,50 @@ class DeliveryContainer extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10.0),
-        Focus(
-          focusNode: focusNode,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(S.of(context).deliverySlot, style: _titleTextStyle()),
-              Consumer(
-                builder: (context, ref, child) {
-                  return TextButton(
-                    onPressed: () {
-                      showAdaptiveModalBottomSheet<
-                              ({TimeSlot timeSlot, String deliveryDate})?>(
-                          context: context,
-                          builder: (ctx) {
-                            return TimeSlotsSelector(
-                                deleiveryType: deliveryType.deliveryMethodTitle,
-                                initialDate: deliveryType.deliveryDate.date,
-                                initialTimeSlot: deliveryType.timeSlot);
-                          }).then((value) {
-                        if (value != null) {
-                          ref.read(updateCartProvider.notifier).updateCart(
-                              timeSlot: value.timeSlot.timeSlotId,
-                              deliveryDate: value.deliveryDate);
-                        }
-                      });
-                    },
-                    style: ButtonStyle(
-                        padding: MaterialStateProperty.all(
-                            const EdgeInsets.all(0.0))),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                            '${deliveryType.deliveryDate.dateFormatted.split(', ').last}, ${deliveryType.timeSlot.timeFormatted}',
-                            style: const TextStyle(
-                                fontSize: 13.0,
-                                color: AppColors.londonRain,
-                                fontWeight: FontWeight.w600)),
-                        const Icon(Icons.arrow_drop_down)
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(S.of(context).deliverySlot, style: _titleTextStyle()),
+            Consumer(
+              builder: (context, ref, child) {
+                return TextButton(
+                  onPressed: () {
+                    showAdaptiveModalBottomSheet<
+                            ({TimeSlot timeSlot, String deliveryDate})?>(
+                        context: context,
+                        builder: (ctx) {
+                          return TimeSlotsSelector(
+                              deleiveryType: deliveryType.deliveryMethodTitle,
+                              initialDate: deliveryType.deliveryDate.date,
+                              initialTimeSlot: deliveryType.timeSlot);
+                        }).then((value) {
+                      if (value != null) {
+                        ref.read(updateCartProvider.notifier).updateCart(
+                            timeSlot: value.timeSlot.timeSlotId,
+                            deliveryDate: value.deliveryDate);
+                      }
+                    });
+                  },
+                  style: ButtonStyle(
+                      padding: MaterialStateProperty.all(
+                          const EdgeInsets.all(0.0))),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                          '${deliveryType.deliveryDate.dateFormatted.split(', ').last}, ${deliveryType.timeSlot.timeFormatted}',
+                          style: const TextStyle(
+                              fontSize: 13.0,
+                              color: AppColors.londonRain,
+                              fontWeight: FontWeight.w600)),
+                      const Icon(Icons.arrow_drop_down)
+                    ],
+                  ),
+                );
+              },
+            ),
+          ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

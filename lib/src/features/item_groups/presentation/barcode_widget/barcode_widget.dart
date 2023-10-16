@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,7 +5,6 @@ import 'package:widam/gen/assets.gen.dart';
 import 'package:widam/generated/l10n.dart';
 import 'package:widam/src/constants/strings.dart';
 import 'package:widam/src/features/item_groups/presentation/barcode_widget/barcode_controller.dart';
-import 'package:widam/src/routing/app_router.gr.dart';
 import 'package:widam/src/utils/utils.dart';
 
 class BarcodeWidget extends ConsumerWidget {

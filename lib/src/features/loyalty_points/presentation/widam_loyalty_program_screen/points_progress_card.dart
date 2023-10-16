@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:widam/src/common_widgets/app_step_progress_indicator.dart';
 import 'package:widam/src/features/loyalty_points/domain/loyalty_program/loyalty_program.dart';
 import 'package:widam/src/routing/app_router.gr.dart';

@@ -1,22 +1,34 @@
-import 'dart:math';
-
 import 'package:auto_route/annotations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_ui_database/firebase_ui_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points_plus/flutter_polyline_points_plus.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:widam/gen/assets.gen.dart';
 import 'package:widam/src/common_widgets/app_close_button.dart';
 import 'package:widam/src/common_widgets/banner/app_banner.dart';
 import 'package:widam/src/common_widgets/fade_circle_loading_indicator.dart';
 import 'package:widam/src/constants/keys.dart';
 import 'package:widam/src/constants/strings.dart';
+import 'package:widam/src/features/addresses/domain/address/address.dart';
 import 'package:widam/src/features/sales_orders/domain/sales_order/sales_order.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
 import '../../../../theme/app_colors.dart';
+
+part 'track_map_screen.g.dart';
+
+@Riverpod(keepAlive: true)
+FutureOr<String?> firebaseUid(FirebaseUidRef ref) async {
+  final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+    email: Strings.firebaseUserEmail,
+    password: Strings.firebaseUserPassword,
+  );
+  return userCredential.user?.uid;
+}
 
 @RoutePage()
 class TrackMapScreen extends StatelessWidget {
@@ -38,89 +50,77 @@ class TrackMapScreen extends StatelessWidget {
   }
 }
 
-class _RealTimeMap extends StatefulWidget {
+class _RealTimeMap extends ConsumerWidget {
   const _RealTimeMap({required this.salesOrder});
 
   final SalesOrder salesOrder;
 
-  @override
-  State<_RealTimeMap> createState() => _RealTimeMapState();
-}
-
-class _RealTimeMapState extends State<_RealTimeMap> {
-  DatabaseReference? _query;
-
-  @override
-  void initState() {
-    FirebaseAuth.instance
-        .signInWithEmailAndPassword(
-            email: Strings.firebaseUserEmail,
-            password: Strings.firebaseUserPassword)
-        .then((value) {
-      final uid = value.user?.uid;
-      if (uid != null) {
-        setState(() {
-        _query = FirebaseDatabase.instance.ref(
-            'users/$uid/users/${widget.salesOrder.address.customerId}/orders/${widget.salesOrder.salesOrderId}');
-      });
-      }
-    });
-    super.initState();
+  LatLng _getLatLngFromAddress(Address address) {
+    return LatLng(
+      double.parse(address.latitude),
+      double.parse(address.longitude),
+    );
   }
 
   @override
-  Widget build(BuildContext context) {
-    LatLng driverLocation = LatLng(
-        double.parse(widget.salesOrder.deliveryTrip!.driverAddress.latitude),
-        double.parse(widget.salesOrder.deliveryTrip!.driverAddress.longitude));
-    if (_query == null) {
-      return _Map(
-          query: _query,
-          customerLocation: LatLng(
-              double.parse(widget.salesOrder.address.latitude),
-              double.parse(widget.salesOrder.address.longitude)),
-          driverLocation: driverLocation);
-    } else {
-      return FirebaseDatabaseQueryBuilder(
-        query: _query!,
-        builder: (context, snapshot, _) {
-          if (snapshot.hasError) {
-            return AppBanner(
-                message: snapshot.error.toString(),
-                stackTrace: snapshot.stackTrace);
-          }
-          if (snapshot.hasData) {
-            LatLng driverLocation;
-            if (snapshot.docs.isEmpty) {
-              driverLocation = LatLng(
-                  double.parse(
-                      widget.salesOrder.deliveryTrip!.driverAddress.latitude),
-                  double.parse(
-                      widget.salesOrder.deliveryTrip!.driverAddress.longitude));
-            } else {
-              driverLocation = LatLng(
-                  double.parse(snapshot.docs
-                      .where((element) => element.key == 'lat')
-                      .first
-                      .value
-                      .toString()),
-                  double.parse(snapshot.docs
-                      .where((element) => element.key == 'long')
-                      .first
-                      .value
-                      .toString()));
-            }
-            return _Map(
-                query: _query,
-                customerLocation: LatLng(
-                    double.parse(widget.salesOrder.address.latitude),
-                    double.parse(widget.salesOrder.address.longitude)),
-                driverLocation: driverLocation);
-          }
-          return const FadeCircleLoadingIndicator();
-        },
-      );
-    }
+  Widget build(BuildContext context, WidgetRef ref) {
+    final customerLocation = _getLatLngFromAddress(salesOrder.address);
+    final driverAddress = salesOrder.deliveryTrip!.driverAddress;
+    final driverLocation = _getLatLngFromAddress(driverAddress);
+    final uid = ref.watch(firebaseUidProvider).asData?.value;
+    final query = uid != null
+        ? FirebaseDatabase.instance.ref(
+            'users/$uid/users/${salesOrder.address.customerId}/orders/${salesOrder.salesOrderId}')
+        : null;
+    return query == null
+        ? _Map(
+            query: query,
+            customerLocation: customerLocation,
+            driverLocation: driverLocation,
+          )
+        : _buildRealTimeMap(customerLocation, driverLocation, query);
+  }
+
+  Widget _buildRealTimeMap(LatLng customerLocation, LatLng driverLocation,
+      DatabaseReference? query) {
+    return FirebaseDatabaseQueryBuilder(
+      query: query!,
+      builder: (context, snapshot, _) {
+        if (snapshot.hasError) {
+          return AppBanner(
+            message: snapshot.error.toString(),
+            stackTrace: snapshot.stackTrace,
+          );
+        }
+
+        if (snapshot.hasData) {
+          return _Map(
+            query: query,
+            customerLocation: customerLocation,
+            driverLocation:
+                _getDriverLocationFromSnapshot(snapshot, driverLocation),
+          );
+        }
+
+        return const FadeCircleLoadingIndicator();
+      },
+    );
+  }
+
+  LatLng _getDriverLocationFromSnapshot(
+      FirebaseQueryBuilderSnapshot snapshot, LatLng defaultLocation) {
+    if (snapshot.docs.isEmpty) return defaultLocation;
+
+    return LatLng(
+      double.parse(snapshot.docs
+          .firstWhere((element) => element.key == 'lat')
+          .value
+          .toString()),
+      double.parse(snapshot.docs
+          .firstWhere((element) => element.key == 'long')
+          .value
+          .toString()),
+    );
   }
 }
 

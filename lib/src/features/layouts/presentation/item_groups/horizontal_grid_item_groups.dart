@@ -1,10 +1,8 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/features/item_groups/presentation/item_group_screen/params_controller.dart';
 import 'package:widam/src/utils/utils.dart';
 import '../../../../common_widgets/app_cached_network_image.dart';
-import '../../../../routing/app_router.gr.dart';
 import '../../../../theme/app_colors.dart';
 import '../../../layouts/domain/basic_item_group/basic_item_group.dart';
 import 'item_group_title.dart';

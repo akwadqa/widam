@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widam/src/routing/app_router.gr.dart';
 
 import '../../../../theme/app_colors.dart';
 import '../../../../utils/utils.dart';
@@ -12,7 +14,8 @@ class ItemContainer extends ConsumerWidget {
       required this.child,
       required this.item,
       this.customBoxShadow,
-      this.attributionToken})
+      this.attributionToken,
+      this.isFrequencyItem = false})
       : super(key: key);
 
   final double width;
@@ -20,6 +23,7 @@ class ItemContainer extends ConsumerWidget {
   final Item item;
   final List<BoxShadow>? customBoxShadow;
   final String? attributionToken;
+  final bool isFrequencyItem;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -40,15 +44,22 @@ class ItemContainer extends ConsumerWidget {
         child: InkWell(
             onTap: item.inStock == 0
                 ? null
-                : () => navigateToItemDetails(
-                    context: context,
-                    ref: ref,
-                    itemId: item.websiteItemId,
-                    itemType: item.websiteItemType,
-                    isMubadara: item.isMubadara,
-                    mubadaraId: item.mubadaraId,
-                    hasProductOptions: item.hasProductOptions,
-                    attributionToken: attributionToken),
+                : isFrequencyItem
+                    ? () async {
+                        await context.popRoute();
+                        context.pushRoute(ItemDetailsScreen(
+                            itemId: item.websiteItemId,
+                            mubadaraId: item.mubadaraId));
+                      }
+                    : () => navigateToItemDetails(
+                        context: context,
+                        ref: ref,
+                        itemId: item.websiteItemId,
+                        itemType: item.websiteItemType,
+                        isMubadara: item.isMubadara,
+                        mubadaraId: item.mubadaraId,
+                        hasProductOptions: item.hasProductOptions,
+                        attributionToken: attributionToken),
             borderRadius: _borderRadius,
             child: child),
       ),

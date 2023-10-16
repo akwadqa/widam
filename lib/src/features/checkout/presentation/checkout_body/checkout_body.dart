@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:onboarding_overlay/onboarding_overlay.dart';
 import 'package:widam/src/features/checkout/presentation/checkout_body/checkout_scroll_controller.dart';
 import 'package:widam/src/features/checkout/presentation/checkout_body/saved_card_switch.dart';
 import 'package:widam/src/features/time_slots/domain/geofence_details/time_slot.dart';
@@ -31,8 +30,7 @@ import 'order_summary_container.dart';
 import '../../../payment_methods/presentation/payment_method_selector/payment_method_selector.dart';
 
 class CheckoutBody extends ConsumerStatefulWidget {
-  const CheckoutBody({super.key, this.focusNodes});
-  final List<FocusNode>? focusNodes;
+  const CheckoutBody({super.key});
   @override
   ConsumerState<CheckoutBody> createState() => _CheckoutBodyState();
 }
@@ -61,14 +59,6 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
               timeSlot: value.timeSlot.timeSlotId,
               deliveryDate: value.deliveryDate);
         }
-        if (widget.focusNodes != null) {
-          Future<void>.delayed(const Duration(seconds: 3), () {
-            final OnboardingState? onboarding = Onboarding.of(context);
-            if (onboarding != null) {
-              onboarding.show();
-            }
-          });
-        }
       });
     });
 
@@ -93,7 +83,6 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _UpdatableCartContentContainer(
-                            paymentMethodFocusNode: widget.focusNodes?.first,
                             cart: cart!,
                             titlesTextStyle: _textStyle()),
                         const SizedBox(height: 20.0),
@@ -115,7 +104,6 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
                                         .normalDelivery !=
                                     null) ...[
                                   DeliveryContainer(
-                                      focusNode: widget.focusNodes?.last,
                                       currency: cart.currency,
                                       deliveryType:
                                           (cart.cartContent as CartContent)
@@ -165,11 +153,9 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
 class _UpdatableCartContentContainer extends ConsumerStatefulWidget {
   const _UpdatableCartContentContainer(
       {required this.cart,
-      required this.titlesTextStyle,
-      this.paymentMethodFocusNode});
+      required this.titlesTextStyle});
   final Cart cart;
   final TextStyle titlesTextStyle;
-  final FocusNode? paymentMethodFocusNode;
   @override
   ConsumerState<_UpdatableCartContentContainer> createState() =>
       _UpdatableCartContentContainerState();
@@ -187,7 +173,6 @@ class _UpdatableCartContentContainerState
         key: _key,
         cart: widget.cart,
         titlesTextStyle: widget.titlesTextStyle,
-        paymentMethodFocusNode: widget.paymentMethodFocusNode,
       ),
     );
   }
@@ -197,11 +182,9 @@ class _UpdatableCartContent extends ConsumerWidget {
   const _UpdatableCartContent(
       {super.key,
       required this.cart,
-      required this.titlesTextStyle,
-      this.paymentMethodFocusNode});
+      required this.titlesTextStyle});
   final Cart cart;
   final TextStyle titlesTextStyle;
-  final FocusNode? paymentMethodFocusNode;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(updateCartProvider, (previous, next) {
@@ -275,18 +258,15 @@ class _UpdatableCartContent extends ConsumerWidget {
               const SizedBox(height: 5.0),
               AddressCard(address: cart.shippingAddressDetails!),
               const SizedBox(height: 20.0),
-              Focus(
-                focusNode: paymentMethodFocusNode,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(S.of(context).paymentMethod, style: titlesTextStyle),
-                    if (cart.paymentMethod != null)
-                      ChangeButton(
-                          onPressed: () =>
-                              _showPaymentMethodSelector(context, ref))
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(S.of(context).paymentMethod, style: titlesTextStyle),
+                  if (cart.paymentMethod != null)
+                    ChangeButton(
+                        onPressed: () =>
+                            _showPaymentMethodSelector(context, ref))
+                ],
               ),
               const SizedBox(height: 5.0),
               InkWell(
