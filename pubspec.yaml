@@ -29,15 +29,11 @@ dependencies:
   dio: ^5.3.2
   geolocator: ^10.0.0
   mockito: ^5.4.2
-  cached_network_image:
-    git:
-      url: https://github.com/lucasmiranda5/flutter_cached_network_image.git
-      ref: dart3
-      path: cached_network_image
+  cached_network_image: ^3.3.0
   carousel_slider: ^4.2.1
   dots_indicator: ^3.0.0
   pull_to_refresh: ^2.0.0
-  queen_validators: ^1.0.1
+  queen_validators: ^1.0.1  
   flutter_staggered_grid_view: ^0.7.0
   pinput: ^3.0.0
   timer_count_down: ^2.2.2
@@ -89,10 +85,10 @@ dev_dependencies:
   flutter_launcher_icons: ^0.13.1
 
 flutter_launcher_icons:
-  android: "launcher_icon"
+  android: false
   ios: true
   image_path: "assets/app_icon/app_icon.png"
-  min_sdk_android: 21 
+  remove_alpha_ios: true
 
 flutter_gen:
   integrations:

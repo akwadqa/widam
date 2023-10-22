@@ -156,29 +156,26 @@ packages:
   cached_network_image:
     dependency: "direct main"
     description:
-      path: cached_network_image
-      ref: dart3
-      resolved-ref: ee5f9d2a39f734e2ca8771bc00b03f041943ff30
-      url: "https://github.com/lucasmiranda5/flutter_cached_network_image.git"
-    source: git
-    version: "3.0.0"
+      name: cached_network_image
+      sha256: f98972704692ba679db144261172a8e20feb145636c617af0eb4022132a6797f
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.0"
   cached_network_image_platform_interface:
     dependency: transitive
     description:
-      path: cached_network_image_platform_interface
-      ref: dart3
-      resolved-ref: ee5f9d2a39f734e2ca8771bc00b03f041943ff30
-      url: "https://github.com/lucasmiranda5/flutter_cached_network_image.git"
-    source: git
-    version: "2.1.0"
+      name: cached_network_image_platform_interface
+      sha256: "56aa42a7a01e3c9db8456d9f3f999931f1e05535b5a424271e9a38cabf066613"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   cached_network_image_web:
     dependency: transitive
     description:
-      path: cached_network_image_web
-      ref: dart3
-      resolved-ref: ee5f9d2a39f734e2ca8771bc00b03f041943ff30
-      url: "https://github.com/lucasmiranda5/flutter_cached_network_image.git"
-    source: git
+      name: cached_network_image_web
+      sha256: "759b9a9f8f6ccbb66c185df805fac107f05730b1dab9c64626d1008cca532257"
+      url: "https://pub.dev"
+    source: hosted
     version: "1.1.0"
   carousel_slider:
     dependency: "direct main"
@@ -608,14 +605,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  flutter_blurhash:
-    dependency: transitive
-    description:
-      name: flutter_blurhash
-      sha256: "05001537bd3fac7644fa6558b09ec8c0a3f2eba78c0765f88912882b1331a5c6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.7.0"
   flutter_branch_sdk:
     dependency: "direct main"
     description:
@@ -627,11 +616,10 @@ packages:
   flutter_cache_manager:
     dependency: transitive
     description:
-      path: flutter_cache_manager
-      ref: HEAD
-      resolved-ref: "32b71c1da1689b97434959ac407b03b74d7e405c"
-      url: "https://github.com/Carapacik/flutter_cache_manager.git"
-    source: git
+      name: flutter_cache_manager
+      sha256: "8207f27539deb83732fdda03e259349046a39a4c767269285f449ade355d54ba"
+      url: "https://pub.dev"
+    source: hosted
     version: "3.3.1"
   flutter_cupertino_date_picker_fork:
     dependency: "direct main"
@@ -1244,10 +1232,10 @@ packages:
     dependency: transitive
     description:
       name: octo_image
-      sha256: "107f3ed1330006a3bea63615e81cf637433f5135a52466c7caa0e7152bca9143"
+      sha256: "45b40f99622f11901238e18d48f5f12ea36426d8eced9f4cbf58479c7aa2430d"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.2"
+    version: "2.0.0"
   onboarding_overlay:
     dependency: "direct main"
     description:

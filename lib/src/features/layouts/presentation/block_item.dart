@@ -34,15 +34,12 @@ class BlockItem extends StatelessWidget {
       } else if (block.title == null) {
         return const SizedBox.shrink();
       }
-      final fontSize = block.viewType == 'Square' ? 25.0 : 18.0;
       return Padding(
         padding: titlePadding,
         child: Text(
           block.title!,
-          style: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.w800,
-              color: Colors.black),
+          style: const TextStyle(
+              fontSize: 18.0, fontWeight: FontWeight.w700, color: Colors.black),
         ),
       );
     }
@@ -53,8 +50,7 @@ class BlockItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 4),
-          Align(
-              alignment: AlignmentDirectional.centerStart, child: buildTitle()),
+          Row(children: [buildTitle()]),
           Padding(
             padding: isBannerWithMultipleItems || withoutHorizontalPadding
                 ? EdgeInsets.zero
