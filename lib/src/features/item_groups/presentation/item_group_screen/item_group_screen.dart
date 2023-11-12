@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/features/addresses/presentation/addresses/adaptive_back_button.dart';
-import 'package:widam/src/features/item_groups/presentation/barcode_widget/barcode_controller.dart';
-import 'package:widam/src/features/item_groups/presentation/item_group_screen/params_controller.dart';
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/filters_drop_down/filters_drop_down_button_form_field.dart';
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_list/selected_item_group_controller.dart';
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_search_field/item_groups_search_field.dart';
@@ -121,12 +119,5 @@ class _ItemGroupsBodyState extends ConsumerState<_ItemGroupsBody> {
         ),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    ref.invalidate(barcodeControllerProvider);
-    ref.invalidate(paramsControllerProvider);
-    super.dispose();
   }
 }
