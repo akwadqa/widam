@@ -180,7 +180,8 @@ class _CheckoutButtonState extends ConsumerState<CheckoutButton> {
       PayProvider.apple_pay,
       _paymentItems(context),
     );
-    final type = paymentResult['paymentMethod']['type'];
+    final network = paymentResult['paymentMethod']['network'];
+    final type = network == 'Visa' ? '1' : '2';
     final tokenMap = paymentResult['token'];
     _submitToken(url, tokenMap.toString(), ref, type);
   }

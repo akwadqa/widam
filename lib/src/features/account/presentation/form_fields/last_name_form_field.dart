@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:queen_validators/queen_validators.dart';
+import 'package:widam/src/utils/utils.dart';
 
 import '../../../../../generated/l10n.dart';
 
@@ -15,6 +16,7 @@ class LastNameFormField extends StatelessWidget {
         labelText: S.of(context).lastName,
         hintText: S.of(context).lastNameHint,
       ),
+      inputFormatters: [UserNameInputFormatter()],
       validator: qValidator([IsRequired(S.of(context).required)]),
       textInputAction: TextInputAction.next,
       textCapitalization: TextCapitalization.words,

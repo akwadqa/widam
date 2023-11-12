@@ -84,9 +84,8 @@ class _NonEmptyCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final expressDelivery = cart.pickup != 1
-        ? cart.cartContent.expressDelivery
-        : null;
+    final expressDelivery =
+        cart.pickup != 1 ? cart.cartContent.expressDelivery : null;
     final normalDelivery =
         cart.pickup != 1 ? cart.cartContent.normalDelivery : null;
     return Stack(
@@ -184,8 +183,7 @@ class _NonEmptyCart extends StatelessWidget {
                                     if (ref.read(canVibrateProvider)) {
                                       Vibrate.feedback(FeedbackType.light);
                                     }
-                                    if ((cart.cartContent
-                                            as CartContent)
+                                    if ((cart.cartContent as CartContent)
                                         .normalDelivery!
                                         .websiteItems
                                         .any((element) =>
@@ -204,8 +202,7 @@ class _NonEmptyCart extends StatelessWidget {
                                       ).then((address) {
                                         if (address != null) {
                                           ref
-                                              .read(
-                                                  updateCartProvider.notifier)
+                                              .read(updateCartProvider.notifier)
                                               .updateCart(
                                                   shippingAddressId:
                                                       address.addressId)
@@ -218,8 +215,7 @@ class _NonEmptyCart extends StatelessWidget {
                                         }
                                       });
                                     } else {
-                                      context
-                                          .pushRoute(const CheckoutScreen());
+                                      context.pushRoute(const CheckoutScreen());
                                     }
                                   },
                             title: S.of(context).proceedToCheckout),

@@ -33,6 +33,19 @@ class ArabicNumberInputFormatter extends TextInputFormatter {
   }
 }
 
+class UserNameInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    String trimmedText = newValue.text.trimLeft().replaceAll(RegExp(r'^[. -]+'), '');
+    trimmedText = trimmedText.trimRight().replaceAll(RegExp(r'[. -]+$'), '');
+
+    return TextEditingValue(
+      text: trimmedText,
+      selection: newValue.selection,
+    );
+  }
+}
+
 bool isInvalidLocation(ValidateCoordinatesState state, LatLng position) {
   final bool isLoaded = state is ValidateCoordinatesLoaded;
   final bool isInvalid = isLoaded && (state.location.isValid == false);
