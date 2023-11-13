@@ -3,7 +3,7 @@ description: Browse our products with ease and choose your favorite meat cut and
 
 publish_to: 'none'
 
-version: 20.0.0+1
+version: 20.0.1+1
 
 environment:
   sdk: '>=3.1.2 <4.0.0'
