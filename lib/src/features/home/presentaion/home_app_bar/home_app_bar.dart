@@ -17,7 +17,7 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hasCentralizedNotch = ref.watch(hasCentralizedNotchProvider);
+    final topPadding = ref.watch(topPaddingProvider(context));
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
@@ -34,7 +34,7 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
           start: 16,
           end: 16,
           bottom: 8,
-          top: hasCentralizedNotch == true ? 40 : 30),
+          top: topPadding),
       child: const Column(
         mainAxisSize: MainAxisSize.min,
         children: [

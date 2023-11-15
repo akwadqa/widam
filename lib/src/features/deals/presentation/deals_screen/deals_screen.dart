@@ -15,11 +15,11 @@ class DealsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hasCentralizedNotch = ref.watch(hasCentralizedNotchProvider);
+    final topPadding = ref.watch(topPaddingProvider(context));
     return Scaffold(
         body: Column(
       children: [
-        SizedBox(height: hasCentralizedNotch == true ? 40 : 30),
+        SizedBox(height: topPadding),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.0),
           child: AddressAndDeliveryWidget(),

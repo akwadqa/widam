@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:io';
-
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +14,6 @@ Future<void> main() async {
   await container.read(sharedPreferencesProvider.future);
   await container.read(canVibrateProvider.future);
   await container.read(packageInfoProvider.future);
-  if (Platform.isIOS) {
-    await container.read(iosDeviceInfoProvider.future);
-  }
   await container.read(notificationsServiceProvider).init();
   FlutterError.onError = (errorDetails) {
     FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);

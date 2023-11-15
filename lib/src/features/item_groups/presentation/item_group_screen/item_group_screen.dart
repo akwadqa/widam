@@ -39,7 +39,7 @@ class _ItemGroupScreenState extends ConsumerState<ItemGroupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final hasCentralizedNotch = ref.watch(hasCentralizedNotchProvider);
+    final topPadding = ref.watch(topPaddingProvider(context));
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarBrightness: Brightness.light,
@@ -48,7 +48,7 @@ class _ItemGroupScreenState extends ConsumerState<ItemGroupScreen> {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(height: hasCentralizedNotch == true ? 40 : 30),
+          SizedBox(height: topPadding),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: AddressAndDeliveryWidget(),

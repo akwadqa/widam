@@ -47,7 +47,6 @@ dependencies:
   url_launcher: ^6.1.12
   package_info_plus: ^4.0.2
   webview_flutter: ^4.2.4
-  device_info_plus: ^9.0.2
   pay: ^1.1.2
   fcm_config: 
     path: local_packages/fcm_config
