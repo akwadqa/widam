@@ -1,7 +1,6 @@
-import 'package:fcm_config/fcm_config.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:widam/src/features/notifications/application/notifications_service.dart';
-import '../../../../main.dart';
+import 'package:widam/src/global_providers/global_providers.dart';
 import '../../../constants/keys.dart';
 
 part 'user_data_provider.g.dart';
@@ -13,7 +12,7 @@ class UserData extends _$UserData {
 
   @override
   ({String token, String id, String fullName})? build() {
-    final sharedPreferences = ref.watch(sharedPreferencesProvider);
+    final sharedPreferences = ref.watch(sharedPreferencesProvider).requireValue;
     final token = sharedPreferences.getString(Keys.userAccessToken);
     final id = sharedPreferences.getString(Keys.userId);
     final fullName = sharedPreferences.getString(Keys.userFullName);
@@ -33,21 +32,16 @@ class UserData extends _$UserData {
       required String id,
       required String fullName}) async {
     _notificationsServiceProvider.subscribeFCMTopics();
-    final sharedPreferences = ref.read(sharedPreferencesProvider);
+    final sharedPreferences = ref.read(sharedPreferencesProvider).requireValue;
     sharedPreferences.setString(Keys.userAccessToken, token);
     sharedPreferences.setString(Keys.userId, id);
     sharedPreferences.setString(Keys.userFullName, fullName);
     state = (token: token, id: id, fullName: fullName);
-    final deviceToken = await FCMConfig.instance.messaging.getToken();
-    if (deviceToken != null) {
-      await ref
-          .read(deviceTokenControllerProvider.notifier)
-          .sendFCMToken(deviceToken, id);
-    }
+    ref.read(notificationsServiceProvider).sendDeviceToken(id);
   }
 
   Future<void> removeUserData() async {
-    final sharedPreferences = ref.read(sharedPreferencesProvider);
+    final sharedPreferences = ref.read(sharedPreferencesProvider).requireValue;
     await sharedPreferences.remove(Keys.userAccessToken);
     await sharedPreferences.remove(Keys.userId);
     await sharedPreferences.remove(Keys.userFullName);

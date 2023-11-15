@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
-import 'package:widam/main.dart';
 import 'package:widam/src/features/time_slots/domain/geofence_details/time_slot.dart';
+import 'package:widam/src/global_providers/global_providers.dart';
 import 'package:widam/src/utils/utils.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../common_widgets/banner/app_banner.dart';
@@ -208,7 +208,7 @@ class __BodyState extends State<_Body> {
                       ? null
                       : (value) {
                           if (value) {
-                            if (ref.read(canVibrateProvider)) {
+                            if (ref.read(canVibrateProvider).requireValue) {
                               Vibrate.feedback(FeedbackType.light);
                             }
                             setState(() {

@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
-import 'package:widam/main.dart';
 import 'package:widam/src/features/cart/presentation/add_to_cart_button/quantity_controller.dart';
 import 'package:widam/src/features/recommendations/data/recommendations_repository.dart';
 import 'package:widam/src/features/recommendations/presentation/recently_viewd/recently_viewd_controller.dart';
 import 'package:widam/src/features/recommendations/presentation/similar_items/similar_items_controller.dart';
+import 'package:widam/src/global_providers/global_providers.dart';
 import '../../../../common_widgets/banner/app_banner_dialog.dart';
 import '../../../../common_widgets/fade_circle_loading_indicator.dart';
 import '../../../../theme/app_colors.dart';
@@ -93,7 +93,7 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
   }
 
   Future<void> _deleteItem() async {
-    if (ref.read(canVibrateProvider)) {
+    if (ref.read(canVibrateProvider).requireValue) {
       Vibrate.feedback(FeedbackType.warning);
     }
     final result = await ref
@@ -152,7 +152,7 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
     if (_quantityInCart == widget.minQuantity || widget.row != null) {
       await _deleteItem();
     } else {
-      if (ref.read(canVibrateProvider)) {
+      if (ref.read(canVibrateProvider).requireValue) {
         Vibrate.feedback(FeedbackType.warning);
       }
       ref
@@ -231,7 +231,7 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
   }
 
   Future<void> _handleAddButtonTap() async {
-    if (ref.read(canVibrateProvider)) {
+    if (ref.read(canVibrateProvider).requireValue) {
       Vibrate.feedback(FeedbackType.heavy);
     }
     ref
@@ -241,7 +241,7 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
   }
 
   Future<void> _handleInitialAddButtonTap() async {
-    if (ref.read(canVibrateProvider)) {
+    if (ref.read(canVibrateProvider).requireValue) {
       Vibrate.feedback(FeedbackType.heavy);
     }
     setState(() {

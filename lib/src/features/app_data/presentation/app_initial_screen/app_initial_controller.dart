@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:widam/main.dart';
 import 'package:widam/src/features/layouts/data/layouts_repository.dart';
+import 'package:widam/src/global_providers/global_providers.dart';
 import '../../../addresses/application/geofence_id_controller.dart';
 
 import '../../application/app_data_controller.dart';
@@ -45,7 +45,7 @@ class AppInitialController extends _$AppInitialController {
   }
 
   Future<bool> _isNeedToUpdate(String apiVersion) async {
-    final appVersion = ref.read(packageInfoProvider).version;
+    final appVersion = ref.read(packageInfoProvider).requireValue.version;
 
     if (kDebugMode) {
       print('apiVersion: $apiVersion');

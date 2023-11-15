@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/constants/strings.dart';
 import 'package:widam/src/features/item_groups/presentation/barcode_widget/barcode_widget.dart';
+import 'package:widam/src/global_providers/global_providers.dart';
 import 'package:widam/src/utils/utils.dart';
-import '../../../../../main.dart';
 import '../../../../common_widgets/search_field.dart';
 import '../../../../theme/app_colors.dart';
 

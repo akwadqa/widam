@@ -35,8 +35,10 @@ class ArabicNumberInputFormatter extends TextInputFormatter {
 
 class UserNameInputFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    String trimmedText = newValue.text.trimLeft().replaceAll(RegExp(r'^[. -]+'), '');
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    String trimmedText =
+        newValue.text.trimLeft().replaceAll(RegExp(r'^[. -]+'), '');
     trimmedText = trimmedText.trimRight().replaceAll(RegExp(r'[. -]+$'), '');
 
     return TextEditingValue(
@@ -227,9 +229,12 @@ Future<void> pushItemGroupScreen(
     {required BuildContext context,
     bool autoFocus = false,
     required String itemGroupId}) async {
-  final int? index = await context.pushRoute(
-      ItemGroupScreen(autoFocus: autoFocus, itemGroupId: itemGroupId)) as int?;
-  if (index != null) {
-    context.tabsRouter.setActiveIndex(index);
-  }
+  context
+      .pushRoute(
+          ItemGroupScreen(autoFocus: autoFocus, itemGroupId: itemGroupId))
+      .then((index) {
+    if (index != null) {
+      context.tabsRouter.setActiveIndex(index as int);
+    }
+  });
 }

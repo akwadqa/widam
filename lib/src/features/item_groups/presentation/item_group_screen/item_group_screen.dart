@@ -7,7 +7,7 @@ import 'package:widam/src/features/item_groups/presentation/item_groups_body/fil
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_list/selected_item_group_controller.dart';
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_search_field/item_groups_search_field.dart';
 import 'package:widam/src/features/main/presentation/main_screen/app_bottom_navigation_bar.dart';
-import '../../../../../main.dart';
+import 'package:widam/src/global_providers/global_providers.dart';
 import '../../../../common_widgets/address_and_delivery_widget.dart';
 import '../../../../utils/utils.dart';
 import '../../../items/presentation/item_group_items_grid.dart';

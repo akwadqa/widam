@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:pay/pay.dart';
-import 'package:widam/main.dart';
 import 'package:widam/src/features/cart/application/cart_service.dart';
 import 'package:widam/src/features/checkout/domain/order/order.dart';
 import 'package:widam/src/features/checkout/domain/payment_result/payment_result.dart';
 import 'package:widam/src/features/checkout/presentation/checkout_body/custom_payment_controller.dart';
+import 'package:widam/src/global_providers/global_providers.dart';
 import '../../../../common_widgets/banner/app_banner_dialog.dart';
 import '../../../../common_widgets/fade_circle_loading_indicator.dart';
 import '../../../../common_widgets/submit_button.dart';
@@ -37,15 +37,23 @@ class _CheckoutButtonState extends ConsumerState<CheckoutButton> {
 
   @override
   void initState() {
-    _payClient = Pay({
-      if (Platform.isAndroid)
-        PayProvider.google_pay: PaymentConfiguration.fromJsonString(
-            _defaultGooglePayConfigurations),
-      if (Platform.isIOS)
-        PayProvider.apple_pay:
-            PaymentConfiguration.fromJsonString(_defaultApplePayConfigurations),
-    });
+    _initializePaymentClient();
     super.initState();
+  }
+
+  void _initializePaymentClient() {
+    _payClient = Pay({
+      if (Platform.isAndroid) PayProvider.google_pay: _googlePayConfig(),
+      if (Platform.isIOS) PayProvider.apple_pay: _applePayConfig(),
+    });
+  }
+
+  PaymentConfiguration _applePayConfig() {
+    return PaymentConfiguration.fromJsonString(_defaultApplePayConfigurations);
+  }
+
+  PaymentConfiguration _googlePayConfig() {
+    return PaymentConfiguration.fromJsonString(_defaultGooglePayConfigurations);
   }
 
   @override
@@ -164,7 +172,7 @@ class _CheckoutButtonState extends ConsumerState<CheckoutButton> {
         onPressed: widget.cart.paymentMethod != null &&
                 widget.cart.shippingAddressDetails != null
             ? () {
-                if (ref.read(canVibrateProvider)) {
+                if (ref.read(canVibrateProvider).requireValue) {
                   Vibrate.feedback(FeedbackType.heavy);
                 }
                 ref

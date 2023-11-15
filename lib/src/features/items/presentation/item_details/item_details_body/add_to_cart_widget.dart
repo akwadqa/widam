@@ -2,13 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
-import 'package:widam/main.dart';
 import 'package:widam/src/features/cart/presentation/cart_item_added_dialog/go_to_cart_controller.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/item_details_options/saved_options_provider.dart';
 import 'package:widam/src/features/recommendations/data/recommendations_repository.dart';
 import 'package:widam/src/features/recommendations/presentation/frequently_bought_together/frequently_bought_together_controller.dart';
 import 'package:widam/src/features/recommendations/presentation/recently_viewd/recently_viewd_controller.dart';
 import 'package:widam/src/features/recommendations/presentation/similar_items/similar_items_controller.dart';
+import 'package:widam/src/global_providers/global_providers.dart';
 import 'package:widam/src/utils/utils.dart';
 import '../../../../auth/application/user_data_provider.dart';
 import '../../../../../routing/app_router.gr.dart';
@@ -75,7 +75,7 @@ class AddToCartWidget extends StatelessWidget {
                           state.asData!.value!.isLoading
                       ? null
                       : () {
-                          if (ref.read(canVibrateProvider)) {
+                          if (ref.read(canVibrateProvider).requireValue) {
                             Vibrate.feedback(FeedbackType.heavy);
                           }
                           if (optionsFromKey.currentState != null) {

@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/features/main/presentation/item_details_sheet_controller.dart';
+import 'package:widam/src/global_providers/global_providers.dart';
 
-import '../../../../../main.dart';
 import '../../../../common_widgets/address_and_delivery_widget.dart';
 import '../item_groups_body/item_groups_body.dart';
 

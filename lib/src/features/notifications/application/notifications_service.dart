@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:fcm_config/fcm_config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:widam/firebase_options.dart';
 import 'package:widam/src/constants/keys.dart';
 import 'package:widam/src/features/notifications/presentation/marketing_notifications_controller.dart';
+import 'package:widam/src/global_providers/global_providers.dart';
 import 'package:widam/src/localization/current_language.dart';
 
 import '../data/notifications_repository.dart';
@@ -15,6 +17,37 @@ class NotificationsService {
   final Ref _ref;
 
   NotificationsService(this._ref);
+
+  get sharedPreferences => _ref.read(sharedPreferencesProvider).requireValue;
+
+  Future<void> init() async {
+    await FCMConfig.instance.init(
+      options: DefaultFirebaseOptions.currentPlatform,
+      defaultAndroidChannel: const AndroidNotificationChannel(
+        'high_importance_channel',
+        'Fcm config',
+        importance: Importance.high,
+      ),
+    );
+
+    final userId = sharedPreferences.getString(Keys.userId);
+    if (userId != null) {
+      FCMConfig.instance.messaging.onTokenRefresh.listen((deviceToken) {
+        _ref
+            .read(deviceTokenControllerProvider.notifier)
+            .sendFCMToken(deviceToken, userId);
+      });
+    }
+  }
+
+  void sendDeviceToken(String userId) async {
+    final deviceToken = await FCMConfig.instance.messaging.getToken();
+    if (deviceToken != null) {
+      await _ref
+          .read(deviceTokenControllerProvider.notifier)
+          .sendFCMToken(deviceToken, userId);
+    }
+  }
 
   Future<void> subscribeFCMTopics() async {
     await FCMConfig.instance.messaging

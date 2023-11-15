@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../main.dart';
+import 'package:widam/src/global_providers/global_providers.dart';
 import '../constants/keys.dart';
 part 'current_language.g.dart';
 
@@ -7,13 +7,13 @@ part 'current_language.g.dart';
 class CurrentLanguage extends _$CurrentLanguage {
   @override
   String build() {
-    return ref.watch(sharedPreferencesProvider).getString(Keys.languageCode) ??
+    return ref.watch(sharedPreferencesProvider).requireValue.getString(Keys.languageCode) ??
         'en';
   }
 
   void changeLanguage() {
     final language = state == 'en' ? 'ar' : 'en';
-    ref.read(sharedPreferencesProvider).setString(Keys.languageCode, language);
+    ref.read(sharedPreferencesProvider).requireValue.setString(Keys.languageCode, language);
     state = language;
   }
 }

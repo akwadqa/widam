@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
-import 'package:widam/main.dart';
 import 'package:widam/src/common_widgets/app_step_progress_indicator.dart';
 import 'package:widam/src/common_widgets/banner/app_banner_dialog.dart';
 import 'package:widam/src/features/cart/application/cart_service.dart';
@@ -10,6 +9,7 @@ import 'package:widam/src/features/cart/domain/cart/cart.dart';
 import 'package:widam/src/features/cart/presentation/cart_banner/cart_banner.dart';
 import 'package:widam/src/features/cart/presentation/cart_body/unavailable_items.dart';
 import 'package:widam/src/features/recommendations/presentation/recently_viewd/recently_viewd.dart';
+import 'package:widam/src/global_providers/global_providers.dart';
 import 'package:widam/src/theme/app_colors.dart';
 import '../../../../common_widgets/total_container.dart';
 import '../../../../../gen/assets.gen.dart';
@@ -180,7 +180,7 @@ class _NonEmptyCart extends StatelessWidget {
                             onPressed: orderTotal.remainderAmount > 0
                                 ? null
                                 : () {
-                                    if (ref.read(canVibrateProvider)) {
+                                    if (ref.read(canVibrateProvider).requireValue) {
                                       Vibrate.feedback(FeedbackType.light);
                                     }
                                     if ((cart.cartContent as CartContent)
