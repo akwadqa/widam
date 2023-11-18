@@ -11,6 +11,7 @@ part 'app_theme.g.dart';
 abstract class AppTheme {
   static ThemeData lightTheme(String fontFamily) {
     return ThemeData(
+      useMaterial3: false,
       fontFamily: fontFamily,
       appBarTheme: AppBarTheme(
           backgroundColor: Colors.white,

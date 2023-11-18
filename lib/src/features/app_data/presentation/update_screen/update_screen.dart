@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:store_redirect/store_redirect.dart';
 import 'package:widam/src/common_widgets/banner/app_banner.dart';
 import 'package:widam/src/common_widgets/fade_circle_loading_indicator.dart';
+import 'package:widam/src/constants/strings.dart';
 import 'package:widam/src/features/app_data/application/app_data_controller.dart';
 import 'package:widam/src/features/app_data/presentation/app_initial_screen/app_initial_controller.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
@@ -49,10 +50,11 @@ class UpdateScreen extends ConsumerWidget {
                   const SizedBox(height: 20),
                   ElevatedButton(
                       onPressed: () {
-                        final packageInfo = ref.watch(packageInfoProvider).requireValue;
+                        final packageInfo =
+                            ref.watch(packageInfoProvider).requireValue;
                         final packageName = packageInfo.packageName;
                         StoreRedirect.redirect(
-                            androidAppId: packageName, iOSAppId: packageName);
+                            androidAppId: packageName, iOSAppId: Strings.iOSAppId);
                       },
                       style: const ButtonStyle(
                           minimumSize: MaterialStatePropertyAll(

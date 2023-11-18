@@ -5,12 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/features/notifications/application/notifications_service.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
+import 'package:widam/src/riverpod_observer.dart';
 
 import 'src/app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final container = ProviderContainer();
+  final container = ProviderContainer(
+    observers: [RiverpodObserver()],
+  );
   await container.read(sharedPreferencesProvider.future);
   await container.read(canVibrateProvider.future);
   await container.read(packageInfoProvider.future);
