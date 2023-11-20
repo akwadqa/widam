@@ -9,8 +9,7 @@ import '../../../../theme/app_colors.dart';
 
 class AppBottomNavigationBar extends StatelessWidget {
   const AppBottomNavigationBar(
-      {Key? key, required this.currentIndex, required this.onTap})
-      : super(key: key);
+      {super.key, required this.currentIndex, required this.onTap});
   final int currentIndex;
   final void Function(int)? onTap;
 
@@ -115,13 +114,11 @@ class _CartBudge extends StatelessWidget {
 
 class _NavItem extends StatelessWidget {
   const _NavItem(
-      {Key? key,
-      required this.icon,
+      {required this.icon,
       required this.label,
       required this.selectedIcon,
       required this.isSelected,
-      required this.onPressed})
-      : super(key: key);
+      required this.onPressed});
   final Widget icon;
   final Widget selectedIcon;
   final String label;

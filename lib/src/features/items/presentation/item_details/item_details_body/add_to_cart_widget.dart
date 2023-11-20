@@ -23,11 +23,10 @@ import '../item_details_controller.dart';
 
 class AddToCartWidget extends StatelessWidget {
   const AddToCartWidget(
-      {Key? key,
+      {super.key,
       required this.itemId,
       required this.optionsFromKey,
-      this.attributionToken})
-      : super(key: key);
+      this.attributionToken});
   final String itemId;
   final GlobalKey<FormState> optionsFromKey;
   final String? attributionToken;
@@ -75,7 +74,7 @@ class AddToCartWidget extends StatelessWidget {
                           state.asData!.value!.isLoading
                       ? null
                       : () {
-                          if (ref.read(canVibrateProvider).requireValue) {
+                          if (ref.read(canVibrateProvider)) {
                             Vibrate.feedback(FeedbackType.heavy);
                           }
                           if (optionsFromKey.currentState != null) {

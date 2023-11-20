@@ -26,25 +26,9 @@ class PickupList extends StatelessWidget {
                 title: pickup.timeSlotGroup,
                 timeSlotWidget: Expanded(
                   child: TimeSlotLabel(
-                      formattedDate: pickup.timeSlot.timeSlotId,
-                      formattedTime: pickup.timeSlot.timeFormatted,
-                      onTap: () async {
-                        // final selectedTimeSlotId =
-                        //     await showAdaptiveModalBottomSheet(
-                        //         context: context,
-                        //         builder: (context) {
-                        //           return TimeSlotsSelector(
-                        //               deleiveryType: pickup.timeSlotGroup,
-                        //               //TODO: replace initialDate with pickup.deliveryDate
-                        //               // initialDate: pickup.deliveryDate,
-                        //               initialDate: '2021-09-01',
-                        //               initialTimeSlotId:
-                        //                   pickup.timeSlot.timeSlotId);
-                        //         });
-                        // if (selectedTimeSlotId != null) {
-                        //   //TODO: Handle selectedTimeSlotId
-                        // }
-                      }),
+                    formattedDate: pickup.timeSlot.timeSlotId,
+                    formattedTime: pickup.timeSlot.timeFormatted,
+                  ),
                 ),
                 content: Column(children: [
                   Row(
@@ -73,9 +57,7 @@ class PickupList extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 15),
-                  ...pickup.websiteItems
-                      .map((e) => CartItem(itemDetails: e))
-                      .toList()
+                  ...pickup.websiteItems.map((e) => CartItem(itemDetails: e))
                 ]),
                 subTotal:
                     '${pickup.subTotal} ${pickup.websiteItems.first.price.currency}}',

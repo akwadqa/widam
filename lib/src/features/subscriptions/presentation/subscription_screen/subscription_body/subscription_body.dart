@@ -5,7 +5,7 @@ import 'set_your_schedule/set_your_schedule.dart';
 import 'confirmation/confirmation.dart';
 
 class SubscriptionBody extends StatelessWidget {
-  const SubscriptionBody({Key? key, required this.stepIndex}) : super(key: key);
+  const SubscriptionBody({super.key, required this.stepIndex});
   final int stepIndex;
 
   @override

@@ -85,8 +85,7 @@ class SubscribeButton extends ConsumerWidget {
 }
 
 class _ItemAttributesSelector extends ConsumerStatefulWidget {
-  const _ItemAttributesSelector({Key? key, required this.item})
-      : super(key: key);
+  const _ItemAttributesSelector({required this.item});
 
   final Item item;
 

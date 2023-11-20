@@ -19,7 +19,7 @@ class AppInitialController extends _$AppInitialController {
   Future<AppInitialResult> _initial() async {
     if (ref.watch(geofenceIdAndCoordinatesProvider).geofenceId != null) {
       final startTime = DateTime.now();
-      await ref.read(appDataControllerProvider.notifier).future;
+      await ref.read(appDataControllerProvider.future);
       await ref.read(layoutProvider(LayoutType.home).future);
       final endTime = DateTime.now();
       final difference = endTime.difference(startTime).inMilliseconds;
@@ -45,7 +45,7 @@ class AppInitialController extends _$AppInitialController {
   }
 
   Future<bool> _isNeedToUpdate(String apiVersion) async {
-    final appVersion = ref.read(packageInfoProvider).requireValue.version;
+    final appVersion = ref.read(packageInfoProvider).version;
 
     if (kDebugMode) {
       print('apiVersion: $apiVersion');
@@ -80,7 +80,7 @@ class AppInitialController extends _$AppInitialController {
     ref
         .read(geofenceIdAndCoordinatesProvider.notifier)
         .setGeofenceIdAndCoordinates(geofenceId, latitude, longitude);
-    await ref.read(appDataControllerProvider.notifier).future;
+    await ref.read(appDataControllerProvider.future);
     state = const AsyncData(AppInitialResult.goHome);
   }
 

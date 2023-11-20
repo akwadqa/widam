@@ -81,7 +81,7 @@ class OrderSummaryContainer extends StatelessWidget {
 }
 
 class _DashedDivider extends StatelessWidget {
-  const _DashedDivider({Key? key}) : super(key: key);
+  const _DashedDivider();
 
   @override
   Widget build(BuildContext context) {

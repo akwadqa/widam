@@ -22,8 +22,7 @@ GlobalKey<FormState> mubadaraFormKey(MubadaraFormKeyRef ref) =>
     GlobalKey<FormState>();
 
 class MubadaraFields extends ConsumerWidget {
-  const MubadaraFields({Key? key, required this.mubadaraDetails})
-      : super(key: key);
+  const MubadaraFields({super.key, required this.mubadaraDetails});
   final MubadaraDetails mubadaraDetails;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -49,8 +48,7 @@ class MubadaraFields extends ConsumerWidget {
 final qidNumberProvider = StateProvider.autoDispose<String>((ref) => '');
 
 class QIDTextFormField extends ConsumerStatefulWidget {
-  const QIDTextFormField({Key? key, required this.mubadaraDetails})
-      : super(key: key);
+  const QIDTextFormField({super.key, required this.mubadaraDetails});
 
   final MubadaraDetails mubadaraDetails;
 
@@ -157,12 +155,10 @@ final qidAttachmentProvider = StateProvider.autoDispose<XFile?>((ref) => null);
 
 class _QIDAttachmentFormField extends FormField<XFile?> {
   _QIDAttachmentFormField(
-      {Key? key,
-      required BuildContext context,
+      {required BuildContext context,
       required MubadaraDetails mubadaraDetails,
       required WidgetRef ref})
       : super(
-            key: key,
             validator: (value) {
               if (value == null) {
                 return S.of(context).required;

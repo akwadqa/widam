@@ -9,7 +9,7 @@ class VersionName extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final packageInfo = ref.watch(packageInfoProvider).requireValue;
+    final packageInfo = ref.watch(packageInfoProvider);
     return Text('${S.of(context).version} ${packageInfo.version}');
   }
 }

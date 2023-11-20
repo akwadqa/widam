@@ -11,7 +11,7 @@ import '../../../main/presentation/item_details_sheet_controller.dart';
 
 @RoutePage()
 class DealsScreen extends ConsumerWidget {
-  const DealsScreen({Key? key}) : super(key: key);
+  const DealsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -15,11 +15,10 @@ import 'mubadara_fields.dart';
 
 class ItemDetailsContent extends ConsumerStatefulWidget {
   const ItemDetailsContent(
-      {Key? key,
+      {super.key,
       required this.isLoading,
       required this.itemDetails,
-      this.attributionToken})
-      : super(key: key);
+      this.attributionToken});
   final bool isLoading;
   final ItemDetails itemDetails;
   final String? attributionToken;

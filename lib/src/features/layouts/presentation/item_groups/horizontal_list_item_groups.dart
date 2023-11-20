@@ -7,8 +7,7 @@ import 'package:widam/src/utils/utils.dart';
 import '../../../layouts/domain/basic_item_group/basic_item_group.dart';
 
 class HorizontalListItemGroups extends ConsumerWidget {
-  const HorizontalListItemGroups({Key? key, required this.itemGroups})
-      : super(key: key);
+  const HorizontalListItemGroups({super.key, required this.itemGroups});
   final List<BasicItemGroup> itemGroups;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

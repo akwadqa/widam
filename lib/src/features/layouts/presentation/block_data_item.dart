@@ -7,7 +7,7 @@ import 'item_groups/item_groups_view.dart';
 import 'tiles/tiles_grid_view.dart';
 
 class BlockDataItem extends StatelessWidget {
-  const BlockDataItem({Key? key, required this.block}) : super(key: key);
+  const BlockDataItem({super.key, required this.block});
   final Block block;
   @override
   Widget build(BuildContext context) {

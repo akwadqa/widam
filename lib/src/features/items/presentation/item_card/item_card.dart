@@ -14,12 +14,11 @@ import 'item_unit.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard(
-      {Key? key,
+      {super.key,
       required this.item,
       this.width = 180,
       this.isFrequencyItem = false,
-      this.attributionToken})
-      : super(key: key);
+      this.attributionToken});
   final Item item;
   final double width;
   final bool isFrequencyItem;

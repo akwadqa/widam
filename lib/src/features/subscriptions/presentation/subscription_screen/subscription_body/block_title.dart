@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../theme/app_colors.dart';
 
 class BlockTitle extends StatelessWidget {
-  const BlockTitle({Key? key, required this.title, this.icon})
-      : super(key: key);
+  const BlockTitle({super.key, required this.title, this.icon});
 
   final String title;
   final Widget? icon;

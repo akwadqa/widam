@@ -4,7 +4,7 @@ import '../cart_body/cart_body.dart';
 
 @RoutePage()
 class CartScreen extends StatelessWidget {
-  const CartScreen({Key? key}) : super(key: key);
+  const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

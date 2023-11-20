@@ -9,8 +9,7 @@ import '../application/item_group_items_controller.dart';
 import 'item_card/item_card.dart';
 
 class ItemGroupItemsGrid extends ConsumerWidget {
-  const ItemGroupItemsGrid({Key? key, this.childAspectRatio = 0.49})
-      : super(key: key);
+  const ItemGroupItemsGrid({super.key, this.childAspectRatio = 0.49});
   final double childAspectRatio;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

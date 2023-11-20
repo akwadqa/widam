@@ -6,7 +6,7 @@ import '../theme/app_colors.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField(
-      {Key? key,
+      {super.key,
       this.suffixIcon,
       this.fillColor = AppColors.cultured,
       this.hintText,
@@ -15,8 +15,7 @@ class SearchField extends StatelessWidget {
       this.onFieldSubmitted,
       this.readOnly = false,
       this.onTap,
-      this.autofocus = false})
-      : super(key: key);
+      this.autofocus = false});
   final Widget? suffixIcon;
   final Color fillColor;
   final String? hintText;

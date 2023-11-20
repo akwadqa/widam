@@ -5,7 +5,7 @@ import 'dynamic_items_view.dart';
 import 'items_horizontal_list.dart';
 
 class ItemView extends StatelessWidget {
-  const ItemView({Key? key, required this.block}) : super(key: key);
+  const ItemView({super.key, required this.block});
   final Block block;
   @override
   Widget build(BuildContext context) {

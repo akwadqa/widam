@@ -6,12 +6,11 @@ import 'horizontal_list_item_groups.dart';
 
 class ItemGroupsView extends StatelessWidget {
   const ItemGroupsView(
-      {Key? key,
+      {super.key,
       required this.itemGroups,
       required this.viewType,
       required this.backgroundColor,
-      required this.showTitleBlock})
-      : super(key: key);
+      required this.showTitleBlock});
   final List<BasicItemGroup> itemGroups;
   final String viewType;
   final String? backgroundColor;

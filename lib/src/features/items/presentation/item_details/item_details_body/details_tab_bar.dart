@@ -6,7 +6,7 @@ import '../../../../../theme/app_colors.dart';
 import '../../../../../../generated/l10n.dart';
 
 class DetailsTabBar extends StatelessWidget {
-  const DetailsTabBar({Key? key, required this.itemDetails}) : super(key: key);
+  const DetailsTabBar({super.key, required this.itemDetails});
   final ItemDetails itemDetails;
   @override
   Widget build(BuildContext context) {
@@ -61,8 +61,7 @@ class DetailsTabBar extends StatelessWidget {
 }
 
 class _RowItem extends StatelessWidget {
-  const _RowItem({Key? key, required this.itemSpecification, this.color})
-      : super(key: key);
+  const _RowItem({required this.itemSpecification, this.color});
   final ItemSpecification itemSpecification;
   final Color? color;
   @override

@@ -4,7 +4,7 @@ import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/l10n.dart';
 
 class ExpressWidget extends StatelessWidget {
-  const ExpressWidget({Key? key, this.isBig = false}) : super(key: key);
+  const ExpressWidget({super.key, this.isBig = false});
   final bool isBig;
   @override
   Widget build(BuildContext context) {

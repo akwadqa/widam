@@ -23,13 +23,10 @@ enum Frequency {
 
 class FrequencySelectorFormField extends FormField<Frequency> {
   FrequencySelectorFormField({
-    Key? key,
-    Frequency initialValue = Frequency.Daily,
-    FormFieldSetter<Frequency>? onSaved,
+    super.key,
+    Frequency super.initialValue = Frequency.Daily,
+    super.onSaved,
   }) : super(
-          key: key,
-          initialValue: initialValue,
-          onSaved: onSaved,
           builder: (FormFieldState<Frequency> state) {
             return _FilterSelectionWidget(
               selectedFilter: state.value!,
@@ -44,10 +41,9 @@ class _FilterSelectionWidget extends StatefulWidget {
   final ValueChanged<Frequency> onFilterSelected;
 
   const _FilterSelectionWidget({
-    Key? key,
     required this.selectedFilter,
     required this.onFilterSelected,
-  }) : super(key: key);
+  });
 
   @override
   State<_FilterSelectionWidget> createState() => _FilterSelectionWidgetState();

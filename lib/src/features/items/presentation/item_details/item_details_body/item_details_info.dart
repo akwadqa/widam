@@ -7,8 +7,7 @@ import 'quantity_form_field.dart';
 import '../../../../../theme/app_colors.dart';
 
 class ItemDetailsInfo extends StatelessWidget {
-  const ItemDetailsInfo({Key? key, required this.itemDetails})
-      : super(key: key);
+  const ItemDetailsInfo({super.key, required this.itemDetails});
   final ItemDetails itemDetails;
   @override
   Widget build(BuildContext context) {

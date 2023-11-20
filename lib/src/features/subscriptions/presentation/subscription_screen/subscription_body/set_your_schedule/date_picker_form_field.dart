@@ -11,8 +11,7 @@ enum DateType { start, end }
 
 class DatePickerFormField extends StatefulWidget {
   const DatePickerFormField(
-      {Key? key, this.onSaved, this.dateType = DateType.start})
-      : super(key: key);
+      {super.key, this.onSaved, this.dateType = DateType.start});
 
   final FormFieldSetter<String>? onSaved;
   final DateType dateType;

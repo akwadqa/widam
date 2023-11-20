@@ -4,11 +4,10 @@ import '../../../theme/app_colors.dart';
 
 class TimeSlotContainer extends StatelessWidget {
   const TimeSlotContainer(
-      {Key? key,
+      {super.key,
       required this.formattedDate,
       required this.formattedTime,
-      this.onTap})
-      : super(key: key);
+      this.onTap});
 
   final String formattedDate;
   final String formattedTime;

@@ -19,7 +19,7 @@ import '../../../../utils/utils.dart';
 import '../../../../common_widgets/app_close_button.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({Key? key}) : super(key: key);
+  const OtpScreen({super.key});
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();

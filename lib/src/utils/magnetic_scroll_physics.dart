@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class MagneticScrollPhysics extends ScrollPhysics {
   final double itemSize;
 
-  const MagneticScrollPhysics({required this.itemSize, ScrollPhysics? parent})
-      : super(parent: parent);
+  const MagneticScrollPhysics({required this.itemSize, super.parent});
 
   @override
   MagneticScrollPhysics applyTo(ScrollPhysics? ancestor) {

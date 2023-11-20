@@ -9,7 +9,7 @@ import '../../../../../theme/app_colors.dart';
 import '../../../../../theme/app_theme.dart';
 
 class LocationPermissionCheckerBanner extends StatelessWidget {
-  const LocationPermissionCheckerBanner({Key? key}) : super(key: key);
+  const LocationPermissionCheckerBanner({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,7 @@ import 'app_bottom_navigation_bar.dart';
 
 @RoutePage()
 class MainScreen extends ConsumerWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

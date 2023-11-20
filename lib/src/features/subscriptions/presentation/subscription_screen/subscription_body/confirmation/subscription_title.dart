@@ -19,7 +19,7 @@ final subscriptionTitleProvider = StateProvider.autoDispose<String>((ref) {
 });
 
 class SubscriptionTitle extends ConsumerWidget {
-  const SubscriptionTitle({Key? key}) : super(key: key);
+  const SubscriptionTitle({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -87,9 +87,7 @@ class SubscriptionTitle extends ConsumerWidget {
 }
 
 class _TextWidget extends ConsumerWidget {
-  const _TextWidget({
-    Key? key,
-  }) : super(key: key);
+  const _TextWidget();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

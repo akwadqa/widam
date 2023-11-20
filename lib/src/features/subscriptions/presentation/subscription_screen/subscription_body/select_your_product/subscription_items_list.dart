@@ -9,8 +9,8 @@ import '../../../../../../common_widgets/fade_circle_loading_indicator.dart';
 
 class SubscriptionItemsList extends ConsumerWidget {
   const SubscriptionItemsList({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

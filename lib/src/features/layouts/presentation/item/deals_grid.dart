@@ -5,7 +5,7 @@ import 'deals_item.dart';
 import 'deals_leading_item.dart';
 
 class DealsGrid extends StatelessWidget {
-  const DealsGrid({Key? key, required this.items}) : super(key: key);
+  const DealsGrid({super.key, required this.items});
   final List<Item> items;
   @override
   Widget build(BuildContext context) {

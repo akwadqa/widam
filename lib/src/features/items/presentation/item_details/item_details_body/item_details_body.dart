@@ -7,7 +7,7 @@ import '../item_details_controller.dart';
 import 'item_details_content.dart';
 
 class ItemDetailsBody extends ConsumerWidget {
-  const ItemDetailsBody({Key? key, this.attributionToken}) : super(key: key);
+  const ItemDetailsBody({super.key, this.attributionToken});
   final String? attributionToken;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -172,7 +172,7 @@ class _CheckoutButtonState extends ConsumerState<CheckoutButton> {
         onPressed: widget.cart.paymentMethod != null &&
                 widget.cart.shippingAddressDetails != null
             ? () {
-                if (ref.read(canVibrateProvider).requireValue) {
+                if (ref.read(canVibrateProvider)) {
                   Vibrate.feedback(FeedbackType.heavy);
                 }
                 ref

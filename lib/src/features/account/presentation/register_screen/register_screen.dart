@@ -19,8 +19,7 @@ import '../form_fields/title_radios_form_field.dart';
 
 @RoutePage()
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key, required this.mobileNumber})
-      : super(key: key);
+  const RegisterScreen({super.key, required this.mobileNumber});
 
   final String mobileNumber;
 
@@ -146,11 +145,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 }
 
 class _CheckBoxFormField extends FormField<bool> {
-  _CheckBoxFormField({Key? key, String? Function(bool?)? validator})
+  _CheckBoxFormField({super.validator})
       : super(
-          key: key,
           initialValue: true,
-          validator: validator,
           builder: (FormFieldState<bool> field) {
             return Column(
               children: [

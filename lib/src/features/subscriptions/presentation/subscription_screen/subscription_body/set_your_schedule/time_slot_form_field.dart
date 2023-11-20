@@ -10,16 +10,13 @@ import '../../../../../time_slots/presentation/time_slots_selector/time_slots_se
 
 class TimeSlotsFormField extends FormField<TimeSlot> {
   TimeSlotsFormField(
-      {Key? key,
+      {super.key,
       required BuildContext context,
       required TimeSlot? initialTimeSlot,
-      void Function(TimeSlot?)? onSaved,
-      String? Function(TimeSlot?)? validator})
+      super.onSaved,
+      super.validator})
       : super(
-          key: key,
           initialValue: initialTimeSlot,
-          onSaved: onSaved,
-          validator: validator,
           builder: (FormFieldState<TimeSlot> state) {
             return Consumer(
               builder: (context, ref, child) {

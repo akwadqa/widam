@@ -15,7 +15,7 @@ import '../../../../../generated/l10n.dart';
 import '../../../../theme/app_colors.dart';
 
 class UpdateScreen extends ConsumerWidget {
-  const UpdateScreen({Key? key}) : super(key: key);
+  const UpdateScreen({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appDataAsync = ref.watch(appDataControllerProvider);
@@ -51,10 +51,11 @@ class UpdateScreen extends ConsumerWidget {
                   ElevatedButton(
                       onPressed: () {
                         final packageInfo =
-                            ref.watch(packageInfoProvider).requireValue;
+                            ref.watch(packageInfoProvider);
                         final packageName = packageInfo.packageName;
                         StoreRedirect.redirect(
-                            androidAppId: packageName, iOSAppId: Strings.iOSAppId);
+                            androidAppId: packageName,
+                            iOSAppId: Strings.iOSAppId);
                       },
                       style: const ButtonStyle(
                           minimumSize: MaterialStatePropertyAll(

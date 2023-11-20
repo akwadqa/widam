@@ -35,7 +35,7 @@ final subscriptionInfoProvider = StateProvider.autoDispose((ref) {
 });
 
 class SetYourSchedule extends ConsumerStatefulWidget {
-  const SetYourSchedule({Key? key}) : super(key: key);
+  const SetYourSchedule({super.key});
 
   @override
   ConsumerState<SetYourSchedule> createState() => _SetYourScheduleState();

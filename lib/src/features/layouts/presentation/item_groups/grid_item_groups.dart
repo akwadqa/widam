@@ -8,11 +8,10 @@ import 'item_group_grid_item.dart';
 
 class GridItemGroups extends ConsumerWidget {
   const GridItemGroups(
-      {Key? key,
+      {super.key,
       required this.itemGroups,
       required this.backgroundColor,
-      required this.showTitleBlock})
-      : super(key: key);
+      required this.showTitleBlock});
   final List<BasicItemGroup> itemGroups;
   final String backgroundColor;
   final bool showTitleBlock;

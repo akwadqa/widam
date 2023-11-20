@@ -4,7 +4,7 @@ import '../features/addresses/presentation/maps/address_selector_button/address_
 import '../features/time_slots/presentation/app_time_slot.dart';
 
 class AddressAndDeliveryWidget extends StatelessWidget {
-  const AddressAndDeliveryWidget({Key? key}) : super(key: key);
+  const AddressAndDeliveryWidget({super.key});
   @override
   Widget build(BuildContext context) {
     return const Row(

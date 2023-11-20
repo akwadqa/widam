@@ -9,14 +9,13 @@ import '../../domain/item/item.dart';
 
 class ItemContainer extends ConsumerWidget {
   const ItemContainer(
-      {Key? key,
+      {super.key,
       required this.width,
       required this.child,
       required this.item,
       this.customBoxShadow,
       this.attributionToken,
-      this.isFrequencyItem = false})
-      : super(key: key);
+      this.isFrequencyItem = false});
 
   final double width;
   final Widget child;
@@ -45,11 +44,12 @@ class ItemContainer extends ConsumerWidget {
             onTap: item.inStock == 0
                 ? null
                 : isFrequencyItem
-                    ? () async {
-                        await context.popRoute();
-                        context.pushRoute(ItemDetailsScreen(
-                            itemId: item.websiteItemId,
-                            mubadaraId: item.mubadaraId));
+                    ? () {
+                        context.popRoute().then((value) {
+                          context.pushRoute(ItemDetailsScreen(
+                              itemId: item.websiteItemId,
+                              mubadaraId: item.mubadaraId));
+                        });
                       }
                     : () => navigateToItemDetails(
                         context: context,

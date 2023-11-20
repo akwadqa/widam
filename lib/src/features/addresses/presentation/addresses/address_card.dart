@@ -7,11 +7,10 @@ import '../../../../utils/utils.dart';
 
 class AddressCard extends StatelessWidget {
   const AddressCard(
-      {Key? key,
+      {super.key,
       required this.address,
       this.showEditButton = false,
-      this.onEdit})
-      : super(key: key);
+      this.onEdit});
   final Address address;
   final bool showEditButton;
   final VoidCallback? onEdit;

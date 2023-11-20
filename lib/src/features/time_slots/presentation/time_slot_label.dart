@@ -8,12 +8,11 @@ import '../../../../generated/l10n.dart';
 
 class TimeSlotLabel extends StatelessWidget {
   const TimeSlotLabel(
-      {Key? key,
+      {super.key,
       required this.formattedDate,
       required this.formattedTime,
       this.foregroundColor = Colors.black,
-      this.onTap})
-      : super(key: key);
+      this.onTap});
   final String formattedDate;
   final String formattedTime;
   final VoidCallback? onTap;

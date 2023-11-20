@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DiscountBanner extends StatelessWidget {
-  const DiscountBanner({Key? key, required this.discountText})
-      : super(key: key);
+  const DiscountBanner({super.key, required this.discountText});
   final String discountText;
   @override
   Widget build(BuildContext context) {

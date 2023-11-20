@@ -20,7 +20,7 @@ import '../../../../data/subscriptions_repository.dart';
 import '../../subscription_screen.dart';
 
 class SelectYourProduct extends ConsumerWidget {
-  const SelectYourProduct({Key? key}) : super(key: key);
+  const SelectYourProduct({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -120,7 +120,7 @@ final selectedSubscriptionsItemGroupIdProvider =
     StateProvider.autoDispose<String>((ref) => Strings.allItemGroup);
 
 class _ItemGroup extends ConsumerWidget {
-  const _ItemGroup({Key? key, required this.itemGroup}) : super(key: key);
+  const _ItemGroup({required this.itemGroup});
   final ItemGroup itemGroup;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

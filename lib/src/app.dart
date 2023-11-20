@@ -2,17 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widam/src/features/notifications/application/notifications_service.dart';
 
 import '../generated/l10n.dart';
 import 'localization/current_language.dart';
 import 'routing/app_router_provider.dart';
 import 'theme/app_theme.dart';
 
-class App extends ConsumerWidget {
-  const App({Key? key}) : super(key: key);
+class App extends ConsumerStatefulWidget {
+  const App({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<App> createState() => _AppState();
+}
+
+class _AppState extends ConsumerState<App> {
+  @override
+  void initState() {
+    Future(() {
+      ref.read(notificationsServiceProvider).init();
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final appRouter = ref.watch(appRouterProvider);
     final currentLanguage = ref.watch(currentLanguageProvider);
     SystemChrome.setPreferredOrientations([
@@ -22,7 +36,8 @@ class App extends ConsumerWidget {
     return MaterialApp.router(
       onGenerateTitle: (context) => S.of(context).appTitle,
       debugShowCheckedModeBanner: false,
-      routerConfig: appRouter.config(),
+      routerDelegate: appRouter.delegate(),
+      routeInformationParser: appRouter.defaultRouteParser(),
       theme: ref.watch(themeDataProvider),
       localizationsDelegates: const [
         S.delegate,

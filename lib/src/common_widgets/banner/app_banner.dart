@@ -5,12 +5,11 @@ import '../../theme/app_colors.dart';
 
 class AppBanner extends StatefulWidget {
   const AppBanner(
-      {Key? key,
+      {super.key,
       required this.message,
       this.leadingIcon,
       this.trailing,
-      this.stackTrace})
-      : super(key: key);
+      this.stackTrace});
 
   final String message;
   final StackTrace? stackTrace;

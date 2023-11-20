@@ -5,11 +5,10 @@ import '../theme/app_colors.dart';
 
 class AppCloseButton extends StatelessWidget {
   const AppCloseButton(
-      {Key? key,
+      {super.key,
       this.icon = const Icon(Icons.close, color: AppColors.darkBlue),
       this.width,
-      this.height})
-      : super(key: key);
+      this.height});
   final Widget icon;
   final double? width;
   final double? height;

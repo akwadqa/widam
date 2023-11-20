@@ -7,7 +7,7 @@ import '../../../../utils/utils.dart';
 import '../../../layouts/domain/tile/tile.dart';
 
 class TilesGridView extends ConsumerWidget {
-  const TilesGridView({Key? key, required this.tiles}) : super(key: key);
+  const TilesGridView({super.key, required this.tiles});
   final List<Tile> tiles;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

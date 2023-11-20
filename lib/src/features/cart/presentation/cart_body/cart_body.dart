@@ -29,7 +29,7 @@ import '../../../auth/application/user_data_provider.dart';
 import 'cart_controller.dart';
 
 class CartBody extends ConsumerWidget {
-  const CartBody({Key? key}) : super(key: key);
+  const CartBody({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -180,7 +180,9 @@ class _NonEmptyCart extends StatelessWidget {
                             onPressed: orderTotal.remainderAmount > 0
                                 ? null
                                 : () {
-                                    if (ref.read(canVibrateProvider).requireValue) {
+                                    if (ref
+                                        .read(canVibrateProvider)
+                                        ) {
                                       Vibrate.feedback(FeedbackType.light);
                                     }
                                     if ((cart.cartContent as CartContent)

@@ -12,7 +12,7 @@ class UserData extends _$UserData {
 
   @override
   ({String token, String id, String fullName})? build() {
-    final sharedPreferences = ref.watch(sharedPreferencesProvider).requireValue;
+    final sharedPreferences = ref.watch(sharedPreferencesProvider);
     final token = sharedPreferences.getString(Keys.userAccessToken);
     final id = sharedPreferences.getString(Keys.userId);
     final fullName = sharedPreferences.getString(Keys.userFullName);
@@ -32,7 +32,7 @@ class UserData extends _$UserData {
       required String id,
       required String fullName}) async {
     _notificationsServiceProvider.subscribeFCMTopics();
-    final sharedPreferences = ref.read(sharedPreferencesProvider).requireValue;
+    final sharedPreferences = ref.read(sharedPreferencesProvider);
     sharedPreferences.setString(Keys.userAccessToken, token);
     sharedPreferences.setString(Keys.userId, id);
     sharedPreferences.setString(Keys.userFullName, fullName);
@@ -41,7 +41,7 @@ class UserData extends _$UserData {
   }
 
   Future<void> removeUserData() async {
-    final sharedPreferences = ref.read(sharedPreferencesProvider).requireValue;
+    final sharedPreferences = ref.read(sharedPreferencesProvider);
     await sharedPreferences.remove(Keys.userAccessToken);
     await sharedPreferences.remove(Keys.userId);
     await sharedPreferences.remove(Keys.userFullName);

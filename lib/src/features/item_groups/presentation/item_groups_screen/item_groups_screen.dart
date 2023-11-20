@@ -9,7 +9,7 @@ import '../item_groups_body/item_groups_body.dart';
 
 @RoutePage()
 class ItemGroupsScreen extends ConsumerWidget {
-  const ItemGroupsScreen({Key? key}) : super(key: key);
+  const ItemGroupsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

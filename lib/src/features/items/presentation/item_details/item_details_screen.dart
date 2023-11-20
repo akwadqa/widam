@@ -9,8 +9,10 @@ import 'item_details_controller.dart';
 @RoutePage()
 class ItemDetailsScreen extends ConsumerStatefulWidget {
   const ItemDetailsScreen(
-      {Key? key, required this.itemId, this.mubadaraId, this.attributionToken})
-      : super(key: key);
+      {super.key,
+      required this.itemId,
+      this.mubadaraId,
+      this.attributionToken});
   final String itemId;
   final String? mubadaraId;
   final String? attributionToken;

@@ -65,7 +65,7 @@ class QuantityFormField extends ConsumerWidget {
 }
 
 class _VerticalDivider extends StatelessWidget {
-  const _VerticalDivider({Key? key}) : super(key: key);
+  const _VerticalDivider();
 
   @override
   Widget build(BuildContext context) {

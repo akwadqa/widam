@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 
 class HeaderText extends StatelessWidget {
-  const HeaderText({Key? key, required this.title, required this.subtitle})
-      : super(key: key);
+  const HeaderText({super.key, required this.title, required this.subtitle});
   final String title;
   final String subtitle;
   @override

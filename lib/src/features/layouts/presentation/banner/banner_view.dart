@@ -1,17 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Banner;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../utils/magnetic_scroll_physics.dart';
 import '../../../../utils/utils.dart';
-import '../../../layouts/domain/banner/banner.dart' as b;
 
 import '../../../../common_widgets/app_cached_network_image.dart';
+import '../../domain/banner/banner.dart';
 import 'carousel_dots_indicator.dart';
 
 class BannerView extends ConsumerWidget {
-  const BannerView({Key? key, required this.banners}) : super(key: key);
-  final List<b.Banner> banners;
+  const BannerView({super.key, required this.banners});
+  final List<Banner> banners;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (banners.length == 1) {
@@ -24,7 +24,7 @@ class BannerView extends ConsumerWidget {
         onTap: (index) => _onBannerTap(context, banners[index], ref));
   }
 
-  void _onBannerTap(BuildContext context, b.Banner banner, WidgetRef ref) {
+  void _onBannerTap(BuildContext context, Banner banner, WidgetRef ref) {
     if (banner.bannerType == 'Banner') {
       return;
     }
@@ -38,9 +38,8 @@ class BannerView extends ConsumerWidget {
 }
 
 class _BannerImage extends StatelessWidget {
-  const _BannerImage({Key? key, required this.banner, required this.onTap})
-      : super(key: key);
-  final b.Banner banner;
+  const _BannerImage({required this.banner, required this.onTap});
+  final Banner banner;
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
@@ -60,9 +59,8 @@ class _BannerImage extends StatelessWidget {
 }
 
 class _BannerCarousel extends ConsumerWidget {
-  const _BannerCarousel({Key? key, required this.banners, required this.onTap})
-      : super(key: key);
-  final List<b.Banner> banners;
+  const _BannerCarousel({required this.banners, required this.onTap});
+  final List<Banner> banners;
   final Function(int index) onTap;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

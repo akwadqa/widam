@@ -4,7 +4,7 @@ import '../../../../theme/app_colors.dart';
 import '../../domain/item/item.dart';
 
 class ItemPriceRow extends StatelessWidget {
-  const ItemPriceRow({Key? key, required this.item}) : super(key: key);
+  const ItemPriceRow({super.key, required this.item});
   final Item item;
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import '../../gen/assets.gen.dart';
 import 'app_close_button.dart';
 
 class AppHeader extends StatelessWidget {
-  const AppHeader({Key? key}) : super(key: key);
+  const AppHeader({super.key});
 
   @override
   Widget build(BuildContext context) {

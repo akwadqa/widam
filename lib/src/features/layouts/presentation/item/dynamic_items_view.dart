@@ -8,8 +8,7 @@ import 'items_horizontal_list.dart';
 
 class DynamicItemsView extends ConsumerWidget {
   const DynamicItemsView(
-      {Key? key, required this.blockId, required this.fillingToShow})
-      : super(key: key);
+      {super.key, required this.blockId, required this.fillingToShow});
   final String blockId;
   final String? fillingToShow;
   @override

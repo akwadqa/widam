@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:fcm_config/fcm_config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:widam/firebase_options.dart';
 import 'package:widam/src/constants/keys.dart';
 import 'package:widam/src/features/notifications/presentation/marketing_notifications_controller.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
@@ -18,18 +17,9 @@ class NotificationsService {
 
   NotificationsService(this._ref);
 
-  get sharedPreferences => _ref.read(sharedPreferencesProvider).requireValue;
+  get sharedPreferences => _ref.read(sharedPreferencesProvider);
 
   Future<void> init() async {
-    await FCMConfig.instance.init(
-      options: DefaultFirebaseOptions.currentPlatform,
-      defaultAndroidChannel: const AndroidNotificationChannel(
-        'high_importance_channel',
-        'Fcm config',
-        importance: Importance.high,
-      ),
-    );
-
     final userId = sharedPreferences.getString(Keys.userId);
     if (userId != null) {
       FCMConfig.instance.messaging.onTokenRefresh.listen((deviceToken) {
@@ -75,7 +65,7 @@ class NotificationsService {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 NotificationsService notificationsService(NotificationsServiceRef ref) {
   return NotificationsService(ref);
 }

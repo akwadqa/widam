@@ -8,8 +8,7 @@ import '../../../items/presentation/item_card/item_add_to_cart_button.dart';
 
 class MubadaraItem extends StatelessWidget {
   const MubadaraItem(
-      {Key? key, required this.item, this.width = 280, this.attributionToken})
-      : super(key: key);
+      {super.key, required this.item, this.width = 280, this.attributionToken});
 
   final Item item;
   final double width;

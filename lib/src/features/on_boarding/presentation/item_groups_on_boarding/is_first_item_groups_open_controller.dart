@@ -10,14 +10,14 @@ class IsFirstItemGroupsOpenController
   @override
   bool build() {
     return ref
-            .watch(sharedPreferencesProvider).requireValue
+            .watch(sharedPreferencesProvider)
             .getBool(Keys.isFirstItemGroupsOpen) ??
         true;
   }
 
   void setIsFirstCartOpen() {
     ref
-        .read(sharedPreferencesProvider).requireValue
+        .read(sharedPreferencesProvider)
         .setBool(Keys.isFirstItemGroupsOpen, false);
     state = false;
   }

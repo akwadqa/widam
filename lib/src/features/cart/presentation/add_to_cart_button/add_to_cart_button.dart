@@ -25,14 +25,14 @@ class AddToCartButton extends ConsumerStatefulWidget {
   final String? attributionToken;
 
   const AddToCartButton({
-    Key? key,
+    super.key,
     required this.minQuantity,
     required this.maxQuantity,
     required this.itemId,
     this.row,
     this.inStock,
     this.attributionToken,
-  }) : super(key: key);
+  });
 
   @override
   ConsumerState<AddToCartButton> createState() => _AddToCartButtonState();
@@ -93,7 +93,7 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
   }
 
   Future<void> _deleteItem() async {
-    if (ref.read(canVibrateProvider).requireValue) {
+    if (ref.read(canVibrateProvider)) {
       Vibrate.feedback(FeedbackType.warning);
     }
     final result = await ref
@@ -152,7 +152,7 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
     if (_quantityInCart == widget.minQuantity || widget.row != null) {
       await _deleteItem();
     } else {
-      if (ref.read(canVibrateProvider).requireValue) {
+      if (ref.read(canVibrateProvider)) {
         Vibrate.feedback(FeedbackType.warning);
       }
       ref
@@ -231,7 +231,7 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
   }
 
   Future<void> _handleAddButtonTap() async {
-    if (ref.read(canVibrateProvider).requireValue) {
+    if (ref.read(canVibrateProvider)) {
       Vibrate.feedback(FeedbackType.heavy);
     }
     ref
@@ -241,7 +241,7 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
   }
 
   Future<void> _handleInitialAddButtonTap() async {
-    if (ref.read(canVibrateProvider).requireValue) {
+    if (ref.read(canVibrateProvider)) {
       Vibrate.feedback(FeedbackType.heavy);
     }
     setState(() {

@@ -3,8 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 class EmptyWidget extends StatefulWidget {
-  const EmptyWidget({Key? key, this.message, this.stackTrace})
-      : super(key: key);
+  const EmptyWidget({super.key, this.message, this.stackTrace});
 
   final String? message;
   final StackTrace? stackTrace;

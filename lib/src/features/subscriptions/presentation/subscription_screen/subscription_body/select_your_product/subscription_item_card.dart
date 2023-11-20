@@ -7,7 +7,7 @@ import '../../../../../items/domain/item/item.dart';
 import '../../../../../items/presentation/item_card/item_unit.dart';
 
 class SubscriptionItemCard extends StatelessWidget {
-  const SubscriptionItemCard({Key? key, required this.item}) : super(key: key);
+  const SubscriptionItemCard({super.key, required this.item});
 
   final Item item;
 

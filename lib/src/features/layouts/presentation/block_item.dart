@@ -6,7 +6,7 @@ import '../../../theme/app_colors.dart';
 import 'block_data_item.dart';
 
 class BlockItem extends StatelessWidget {
-  const BlockItem({Key? key, required this.block}) : super(key: key);
+  const BlockItem({super.key, required this.block});
 
   final Block block;
 

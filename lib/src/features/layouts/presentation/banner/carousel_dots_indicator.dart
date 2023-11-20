@@ -6,8 +6,7 @@ import '../../../../theme/app_colors.dart';
 final carouselPageIndexProvider = StateProvider.autoDispose<int>((ref) => 0);
 
 class CarouselDotsIndicator extends ConsumerWidget {
-  const CarouselDotsIndicator({Key? key, required this.dotsCount})
-      : super(key: key);
+  const CarouselDotsIndicator({super.key, required this.dotsCount});
   final int dotsCount;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

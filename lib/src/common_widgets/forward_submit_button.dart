@@ -40,10 +40,10 @@ class ForwardSubmitButton extends StatelessWidget {
 }
 
 class BouncingArrow extends StatefulWidget {
-  const BouncingArrow({Key? key}) : super(key: key);
+  const BouncingArrow({super.key});
 
   @override
-  _BouncingArrowState createState() => _BouncingArrowState();
+  State<BouncingArrow> createState() => _BouncingArrowState();
 }
 
 class _BouncingArrowState extends State<BouncingArrow>

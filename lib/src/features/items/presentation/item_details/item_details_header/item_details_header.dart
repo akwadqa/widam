@@ -13,8 +13,7 @@ import '../../item_card/express_widget.dart';
 import '../../../../tags/presentation/item_tags_list/item_tags_list.dart';
 
 class ItemDetailsHeader extends ConsumerWidget {
-  const ItemDetailsHeader({Key? key, required this.itemDetails})
-      : super(key: key);
+  const ItemDetailsHeader({super.key, required this.itemDetails});
   final ItemDetails itemDetails;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

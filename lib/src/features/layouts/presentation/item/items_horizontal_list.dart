@@ -5,11 +5,10 @@ import 'mubadara_item.dart';
 
 class ItemsHorizontalList extends StatelessWidget {
   const ItemsHorizontalList(
-      {Key? key,
+      {super.key,
       required this.items,
       this.padding = const EdgeInsets.symmetric(horizontal: 10),
-      this.attributionToken})
-      : super(key: key);
+      this.attributionToken});
   final List<Item> items;
   final String? attributionToken;
   final EdgeInsetsGeometry padding;

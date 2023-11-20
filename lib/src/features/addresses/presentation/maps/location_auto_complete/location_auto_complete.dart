@@ -8,8 +8,7 @@ import '../../../data/google_maps_repository.dart';
 import '../../../domain/place/place.dart';
 
 class LocationAutoComplete extends ConsumerStatefulWidget {
-  const LocationAutoComplete({Key? key, required this.onSelected})
-      : super(key: key);
+  const LocationAutoComplete({super.key, required this.onSelected});
   final void Function(Place) onSelected;
   @override
   ConsumerState<LocationAutoComplete> createState() =>

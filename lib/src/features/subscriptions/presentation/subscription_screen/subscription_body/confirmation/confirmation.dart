@@ -16,7 +16,7 @@ import '../../../../../../theme/app_colors.dart';
 import '../set_your_schedule/set_your_schedule.dart';
 
 class Confirmation extends StatelessWidget {
-  const Confirmation({Key? key}) : super(key: key);
+  const Confirmation({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -78,9 +78,7 @@ class Confirmation extends StatelessWidget {
 }
 
 class _SubscriptionSubTitle extends ConsumerWidget {
-  const _SubscriptionSubTitle({
-    Key? key,
-  }) : super(key: key);
+  const _SubscriptionSubTitle();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -127,7 +125,7 @@ class _CustomText extends StatelessWidget {
 }
 
 class _DetailsContainer extends StatelessWidget {
-  const _DetailsContainer({Key? key}) : super(key: key);
+  const _DetailsContainer();
 
   @override
   Widget build(BuildContext context) {

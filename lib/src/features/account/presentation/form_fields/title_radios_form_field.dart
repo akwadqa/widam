@@ -5,14 +5,11 @@ import '../../../../theme/app_colors.dart';
 
 class TitleRadiosFormField extends FormField<String> {
   TitleRadiosFormField(
-      {Key? key,
-      void Function(String?)? onSaved,
-      String? initialValue,
+      {super.key,
+      super.onSaved,
+      super.initialValue,
       required BuildContext context})
       : super(
-          key: key,
-          initialValue: initialValue,
-          onSaved: onSaved,
           builder: (FormFieldState<String> field) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,13 +50,11 @@ class TitleRadiosFormField extends FormField<String> {
 
 class _RadioButton extends StatelessWidget {
   const _RadioButton(
-      {Key? key,
-      required this.value,
+      {required this.value,
       required this.groupValue,
       required this.onChanged,
       required this.label,
-      required this.isSelect})
-      : super(key: key);
+      required this.isSelect});
 
   final String value;
   final String groupValue;

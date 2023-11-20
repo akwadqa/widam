@@ -10,12 +10,11 @@ import 'option_label.dart';
 
 class ItemAttributeVariantsList extends StatelessWidget {
   const ItemAttributeVariantsList(
-      {Key? key,
+      {super.key,
       required this.variants,
       required this.itemId,
       required this.isLoading,
-      required this.onVariantsChange})
-      : super(key: key);
+      required this.onVariantsChange});
   final List<AttributeVariant> variants;
   final String itemId;
   final bool isLoading;
@@ -35,11 +34,9 @@ class ItemAttributeVariantsList extends StatelessWidget {
 
 class _VariantsList extends StatelessWidget {
   const _VariantsList(
-      {Key? key,
-      required this.variants,
+      {required this.variants,
       required this.itemId,
-      required this.onVariantsChange})
-      : super(key: key);
+      required this.onVariantsChange});
 
   final List<AttributeVariant> variants;
   final String itemId;
@@ -87,12 +84,10 @@ class _VariantsList extends StatelessWidget {
 
 class _AttributeValueItem extends ConsumerWidget {
   const _AttributeValueItem(
-      {Key? key,
-      required this.attributeValue,
+      {required this.attributeValue,
       required this.itemId,
       required this.onVariantsChange,
-      required this.withIcon})
-      : super(key: key);
+      required this.withIcon});
 
   final AttributeValue attributeValue;
   final String itemId;

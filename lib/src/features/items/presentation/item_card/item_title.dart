@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../theme/app_colors.dart';
 
 class ItemTitle extends StatelessWidget {
-  const ItemTitle({Key? key, required this.title, this.maxLines})
-      : super(key: key);
+  const ItemTitle({super.key, required this.title, this.maxLines});
   final String title;
   final int? maxLines;
   @override

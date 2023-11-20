@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:widam/src/features/checkout/presentation/checkout_body/checkout_scroll_controller.dart';
 import 'package:widam/src/features/checkout/presentation/checkout_body/saved_card_switch.dart';
 import 'package:widam/src/features/time_slots/domain/geofence_details/time_slot.dart';
 import '../../../../common_widgets/app_cached_network_image.dart';
@@ -78,7 +77,6 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
               children: [
                 Positioned.fill(
                   child: SingleChildScrollView(
-                    controller: ref.watch(checkoutScrollControllerProvider),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

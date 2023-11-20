@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../theme/app_colors.dart';
 
 class ItemUnit extends StatelessWidget {
-  const ItemUnit({Key? key, required this.stockUom}) : super(key: key);
+  const ItemUnit({super.key, required this.stockUom});
   final String stockUom;
   @override
   Widget build(BuildContext context) {

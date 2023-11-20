@@ -11,8 +11,7 @@ import '../../../../../../gen/assets.gen.dart';
 import 'address_selector_button_controller.dart';
 
 class AddressSelector extends ConsumerWidget {
-  const AddressSelector({Key? key, this.foregroundColor = Colors.black})
-      : super(key: key);
+  const AddressSelector({super.key, this.foregroundColor = Colors.black});
   final Color foregroundColor;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

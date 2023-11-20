@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'global_providers.g.dart';
 
 @Riverpod(keepAlive: true)
-Future<SharedPreferences> sharedPreferences(SharedPreferencesRef ref) async =>
-    await SharedPreferences.getInstance();
+SharedPreferences sharedPreferences(SharedPreferencesRef ref) => throw UnimplementedError();
 
 @Riverpod(keepAlive: true)
-Future<bool> canVibrate(CanVibrateRef ref) async => await Vibrate.canVibrate;
+bool canVibrate(CanVibrateRef ref) => throw UnimplementedError();
 
 @Riverpod(keepAlive: true)
-Future<PackageInfo> packageInfo(PackageInfoRef ref) async =>
-    await PackageInfo.fromPlatform();
+PackageInfo packageInfo(PackageInfoRef ref) => throw UnimplementedError();
 
 @riverpod
 double topPadding(TopPaddingRef ref, BuildContext context) {

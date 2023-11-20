@@ -9,8 +9,7 @@ import 'item_group_title.dart';
 
 class HorizontalGridItemGroups extends ConsumerWidget {
   const HorizontalGridItemGroups(
-      {Key? key, required this.itemGroups, required this.backgroundColor})
-      : super(key: key);
+      {super.key, required this.itemGroups, required this.backgroundColor});
   final List<BasicItemGroup> itemGroups;
   final String backgroundColor;
   @override
