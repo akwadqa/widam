@@ -219,7 +219,7 @@ class _CheckoutButtonState extends ConsumerState<CheckoutButton> {
   List<PaymentItem> _paymentItems(BuildContext context) {
     return [
       PaymentItem(
-          label: S.of(context).total,
+          label: 'Widam Food',
           type: PaymentItemType.total,
           amount: widget.cart.grandTotal.toString(),
           status: PaymentItemStatus.final_price)
