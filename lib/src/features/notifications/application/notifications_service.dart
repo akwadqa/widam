@@ -19,7 +19,8 @@ class NotificationsService {
 
   NotificationsService(this._ref);
 
-  SharedPreferences get _sharedPreferences => _ref.read(sharedPreferencesProvider).requireValue;
+  SharedPreferences get _sharedPreferences =>
+      _ref.read(sharedPreferencesProvider).requireValue;
 
   Future<void> init() async {
     await FCMConfig.instance.init(

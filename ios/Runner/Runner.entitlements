@@ -6,9 +6,7 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>srwoi.test-app.link</string>
-		<string>srwoi-alternate.test-app.link</string>
-		<string>srwoi.app.link</string>
+		<string>applinks:shop.widam.com.qa</string>
 	</array>
 	<key>com.apple.developer.in-app-payments</key>
 	<array>

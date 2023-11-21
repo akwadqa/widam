@@ -1,0 +1,9 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "net.ays.PROD489402",
+      "sha256_cert_fingerprints":
+      ["58:F7:E8:87:7F:8B:22:93:F2:48:7F:8C:C9:50:43:67:02:77:4C:CB:BF:13:E4:B5:4E:4B:64:0E:2E:EC:FB:5F"]
+    }
+  }]
