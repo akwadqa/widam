@@ -5,7 +5,7 @@ import 'package:widam/src/features/item_groups/presentation/item_groups_body/fil
 import 'item_groups_search_field/item_groups_search_field.dart';
 
 class FiltersBar extends ConsumerWidget {
-  const FiltersBar({Key? key, this.focusNode}) : super(key: key);
+  const FiltersBar({super.key, this.focusNode});
   final FocusNode? focusNode;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -4,8 +4,7 @@ import '../../../../common_widgets/app_cached_network_image.dart';
 import '../../domain/tag/tag.dart';
 
 class ItemTagsList extends StatelessWidget {
-  const ItemTagsList({Key? key, required this.tags, this.size = 30})
-      : super(key: key);
+  const ItemTagsList({super.key, required this.tags, this.size = 30});
   final List<Tag> tags;
   final double size;
   @override

@@ -13,7 +13,7 @@ import '../../../addresses/presentation/maps/address_selector_button/address_sel
 import '../../../time_slots/presentation/app_time_slot.dart';
 
 class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const HomeAppBar({Key? key}) : super(key: key);
+  const HomeAppBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -57,7 +57,7 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
 }
 
 class _SearchWidget extends ConsumerWidget implements PreferredSizeWidget {
-  const _SearchWidget({Key? key}) : super(key: key);
+  const _SearchWidget();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -9,8 +9,7 @@ import '../../../../../theme/app_colors.dart';
 import '../../../domain/item_group/item_group.dart';
 
 class ItemGroupList extends StatelessWidget {
-  const ItemGroupList({Key? key, required this.itemGroups, this.focusNode})
-      : super(key: key);
+  const ItemGroupList({super.key, required this.itemGroups, this.focusNode});
   final List<ItemGroup> itemGroups;
   final FocusNode? focusNode;
   @override
@@ -29,8 +28,7 @@ class ItemGroupList extends StatelessWidget {
 }
 
 class _ItemGroup extends ConsumerWidget {
-  const _ItemGroup({Key? key, required this.itemGroup, this.focusNode})
-      : super(key: key);
+  const _ItemGroup({required this.itemGroup, this.focusNode});
   final ItemGroup itemGroup;
   final FocusNode? focusNode;
 

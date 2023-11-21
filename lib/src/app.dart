@@ -2,31 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:widam/src/features/notifications/application/notifications_service.dart';
 
 import '../generated/l10n.dart';
 import 'localization/current_language.dart';
 import 'routing/app_router_provider.dart';
 import 'theme/app_theme.dart';
 
-class App extends ConsumerStatefulWidget {
+class App extends ConsumerWidget {
   const App({super.key});
 
   @override
-  ConsumerState<App> createState() => _AppState();
-}
-
-class _AppState extends ConsumerState<App> {
-  @override
-  void initState() {
-    Future(() {
-      ref.read(notificationsServiceProvider).init();
-    });
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final appRouter = ref.watch(appRouterProvider);
     final currentLanguage = ref.watch(currentLanguageProvider);
     SystemChrome.setPreferredOrientations([

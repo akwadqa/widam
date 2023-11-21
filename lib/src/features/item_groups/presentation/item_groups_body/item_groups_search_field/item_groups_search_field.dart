@@ -6,8 +6,7 @@ import '../../../../../common_widgets/search_field.dart';
 import '../../../../../theme/app_colors.dart';
 
 class ItemGroupsSearchField extends ConsumerStatefulWidget {
-  const ItemGroupsSearchField({Key? key, this.autofocus = false})
-      : super(key: key);
+  const ItemGroupsSearchField({super.key, this.autofocus = false});
 
   final bool autofocus;
 

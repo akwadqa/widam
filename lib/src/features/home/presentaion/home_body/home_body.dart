@@ -13,7 +13,7 @@ import '../../../cart/presentation/cart_item_added_dialog/cart_item_added_dialog
 import '../../../layouts/presentation/blocks_list.dart';
 
 class HomeBody extends ConsumerWidget {
-  const HomeBody({Key? key}) : super(key: key);
+  const HomeBody({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

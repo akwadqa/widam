@@ -74,7 +74,7 @@ class AddToCartWidget extends StatelessWidget {
                           state.asData!.value!.isLoading
                       ? null
                       : () {
-                          if (ref.read(canVibrateProvider)) {
+                          if (ref.read(canVibrateProvider).requireValue) {
                             Vibrate.feedback(FeedbackType.heavy);
                           }
                           if (optionsFromKey.currentState != null) {

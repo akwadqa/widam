@@ -51,7 +51,7 @@ class UpdateScreen extends ConsumerWidget {
                   ElevatedButton(
                       onPressed: () {
                         final packageInfo =
-                            ref.watch(packageInfoProvider);
+                            ref.watch(packageInfoProvider).requireValue;
                         final packageName = packageInfo.packageName;
                         StoreRedirect.redirect(
                             androidAppId: packageName,

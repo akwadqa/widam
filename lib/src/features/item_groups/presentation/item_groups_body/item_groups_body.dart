@@ -19,7 +19,7 @@ import '../../domain/item_group/item_group.dart';
 import 'filters_bar.dart';
 
 class ItemGroupsBody extends ConsumerWidget {
-  const ItemGroupsBody({Key? key}) : super(key: key);
+  const ItemGroupsBody({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     listenItemDetailsSheet(ref, context);

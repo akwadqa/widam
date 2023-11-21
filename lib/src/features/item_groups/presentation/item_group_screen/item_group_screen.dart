@@ -17,8 +17,7 @@ import '../item_groups_body/sub_item_groups_list/sub_item_groups_list.dart';
 @RoutePage()
 class ItemGroupScreen extends ConsumerStatefulWidget {
   const ItemGroupScreen(
-      {Key? key, this.autoFocus = false, required this.itemGroupId})
-      : super(key: key);
+      {super.key, this.autoFocus = false, required this.itemGroupId});
   final bool autoFocus;
   final String itemGroupId;
 

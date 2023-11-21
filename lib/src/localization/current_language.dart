@@ -7,13 +7,19 @@ part 'current_language.g.dart';
 class CurrentLanguage extends _$CurrentLanguage {
   @override
   String build() {
-    return ref.watch(sharedPreferencesProvider).getString(Keys.languageCode) ??
+    return ref
+            .watch(sharedPreferencesProvider)
+            .requireValue
+            .getString(Keys.languageCode) ??
         'en';
   }
 
   void changeLanguage() {
     final language = state == 'en' ? 'ar' : 'en';
-    ref.read(sharedPreferencesProvider).setString(Keys.languageCode, language);
+    ref
+        .read(sharedPreferencesProvider)
+        .requireValue
+        .setString(Keys.languageCode, language);
     state = language;
   }
 }

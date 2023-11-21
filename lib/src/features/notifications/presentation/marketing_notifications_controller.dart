@@ -1,5 +1,6 @@
 import 'package:fcm_config/fcm_config.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
 
 import '../../../constants/keys.dart';
@@ -11,17 +12,19 @@ class MarketingNotificationsController
     extends _$MarketingNotificationsController {
   @override
   bool build() {
-    return ref.watch(sharedPreferencesProvider).getBool(Keys.marketing) ?? true;
+    return ref.watch(sharedPreferencesProvider).requireValue.getBool(Keys.marketing) ?? true;
   }
 
+  SharedPreferences get _sharedPreferences => ref.read(sharedPreferencesProvider).requireValue;
+
   Future<void> subscripeMarketingNotifications() async {
-    await ref.read(sharedPreferencesProvider).setBool(Keys.marketing, true);
+    await _sharedPreferences.setBool(Keys.marketing, true);
     await FCMConfig.instance.messaging.subscribeToTopic(Keys.marketing);
     state = true;
   }
 
   Future<void> unsubscripeMarketingNotifications() async {
-    await ref.read(sharedPreferencesProvider).setBool(Keys.marketing, false);
+    await _sharedPreferences.setBool(Keys.marketing, false);
     await FCMConfig.instance.messaging.unsubscribeFromTopic(Keys.marketing);
     state = false;
   }

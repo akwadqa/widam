@@ -208,7 +208,7 @@ class __BodyState extends State<_Body> {
                       ? null
                       : (value) {
                           if (value) {
-                            if (ref.read(canVibrateProvider)) {
+                            if (ref.read(canVibrateProvider).requireValue) {
                               Vibrate.feedback(FeedbackType.light);
                             }
                             setState(() {

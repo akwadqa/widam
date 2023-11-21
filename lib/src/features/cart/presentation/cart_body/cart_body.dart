@@ -182,7 +182,7 @@ class _NonEmptyCart extends StatelessWidget {
                                 : () {
                                     if (ref
                                         .read(canVibrateProvider)
-                                        ) {
+                                        .requireValue) {
                                       Vibrate.feedback(FeedbackType.light);
                                     }
                                     if ((cart.cartContent as CartContent)

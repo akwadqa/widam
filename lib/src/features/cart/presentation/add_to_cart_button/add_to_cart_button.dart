@@ -92,10 +92,10 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
     );
   }
 
+  bool get _canVibrate => ref.read(canVibrateProvider).requireValue;
+
   Future<void> _deleteItem() async {
-    if (ref.read(canVibrateProvider)) {
-      Vibrate.feedback(FeedbackType.warning);
-    }
+    _warningFeedback();
     final result = await ref
         .read(updateCartProvider.notifier)
         .deleteItemFromCart(itemId: widget.itemId, row: widget.row);
@@ -152,13 +152,17 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
     if (_quantityInCart == widget.minQuantity || widget.row != null) {
       await _deleteItem();
     } else {
-      if (ref.read(canVibrateProvider)) {
-        Vibrate.feedback(FeedbackType.warning);
-      }
+      _warningFeedback();
       ref
           .read(quantityControllerProvider(widget.itemId, widget.minQuantity)
               .notifier)
           .decrementQuantity();
+    }
+  }
+
+  void _warningFeedback() {
+    if (_canVibrate) {
+      Vibrate.feedback(FeedbackType.warning);
     }
   }
 
@@ -231,19 +235,21 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
   }
 
   Future<void> _handleAddButtonTap() async {
-    if (ref.read(canVibrateProvider)) {
-      Vibrate.feedback(FeedbackType.heavy);
-    }
+    _heavyFeedback();
     ref
         .read(quantityControllerProvider(widget.itemId, widget.minQuantity)
             .notifier)
         .increamentQuantity();
   }
 
-  Future<void> _handleInitialAddButtonTap() async {
-    if (ref.read(canVibrateProvider)) {
+  void _heavyFeedback() {
+    if (_canVibrate) {
       Vibrate.feedback(FeedbackType.heavy);
     }
+  }
+
+  Future<void> _handleInitialAddButtonTap() async {
+    _heavyFeedback();
     setState(() {
       _isExpanded = true;
     });

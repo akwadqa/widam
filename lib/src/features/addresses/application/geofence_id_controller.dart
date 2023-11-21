@@ -16,7 +16,7 @@ class GeofenceIdAndCoordinates extends _$GeofenceIdAndCoordinates {
   @override
   GeofenceIdAndCoordinatesRow build() {
     final SharedPreferences sharedPreferences =
-        ref.watch(sharedPreferencesProvider);
+        ref.watch(sharedPreferencesProvider).requireValue;
     final geofenceId = sharedPreferences.getString(Keys.geofenceId);
     final latitude = sharedPreferences.getString(Keys.latitude);
     final longitude = sharedPreferences.getString(Keys.longitude);
@@ -28,9 +28,11 @@ class GeofenceIdAndCoordinates extends _$GeofenceIdAndCoordinates {
 
   void setGeofenceIdAndCoordinates(
       String geofenceId, String latitude, String longitude) {
-    ref.read(sharedPreferencesProvider).setString(Keys.geofenceId, geofenceId);
-    ref.read(sharedPreferencesProvider).setString(Keys.latitude, latitude);
-    ref.read(sharedPreferencesProvider).setString(Keys.longitude, longitude);
+    SharedPreferences sharedPreferences =
+        ref.read(sharedPreferencesProvider).requireValue;
+    sharedPreferences.setString(Keys.geofenceId, geofenceId);
+    sharedPreferences.setString(Keys.latitude, latitude);
+    sharedPreferences.setString(Keys.longitude, longitude);
     state = (
       geofenceId: geofenceId,
       coordinates: (latitude: latitude, longitude: longitude)

@@ -45,7 +45,7 @@ class AppInitialController extends _$AppInitialController {
   }
 
   Future<bool> _isNeedToUpdate(String apiVersion) async {
-    final appVersion = ref.read(packageInfoProvider).version;
+    final appVersion = ref.read(packageInfoProvider).requireValue.version;
 
     if (kDebugMode) {
       print('apiVersion: $apiVersion');

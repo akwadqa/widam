@@ -5,8 +5,7 @@ import '../../../../../theme/app_colors.dart';
 
 class SubItemGroupsList extends ConsumerWidget {
   const SubItemGroupsList(
-      {Key? key, this.shrinkWrap = false, this.withoutBottomPadding = false})
-      : super(key: key);
+      {super.key, this.shrinkWrap = false, this.withoutBottomPadding = false});
   final bool shrinkWrap;
   final bool withoutBottomPadding;
   @override

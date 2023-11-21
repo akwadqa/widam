@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:widam/src/features/notifications/application/notifications_service.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
 import '../../../constants/keys.dart';
@@ -10,9 +11,12 @@ class UserData extends _$UserData {
   NotificationsService get _notificationsServiceProvider =>
       ref.read(notificationsServiceProvider);
 
+  SharedPreferences get _sharedPreferences =>
+      ref.read(sharedPreferencesProvider).requireValue;
+
   @override
   ({String token, String id, String fullName})? build() {
-    final sharedPreferences = ref.watch(sharedPreferencesProvider);
+    final sharedPreferences = ref.watch(sharedPreferencesProvider).requireValue;
     final token = sharedPreferences.getString(Keys.userAccessToken);
     final id = sharedPreferences.getString(Keys.userId);
     final fullName = sharedPreferences.getString(Keys.userFullName);
@@ -32,19 +36,17 @@ class UserData extends _$UserData {
       required String id,
       required String fullName}) async {
     _notificationsServiceProvider.subscribeFCMTopics();
-    final sharedPreferences = ref.read(sharedPreferencesProvider);
-    sharedPreferences.setString(Keys.userAccessToken, token);
-    sharedPreferences.setString(Keys.userId, id);
-    sharedPreferences.setString(Keys.userFullName, fullName);
+    _sharedPreferences.setString(Keys.userAccessToken, token);
+    _sharedPreferences.setString(Keys.userId, id);
+    _sharedPreferences.setString(Keys.userFullName, fullName);
     state = (token: token, id: id, fullName: fullName);
     ref.read(notificationsServiceProvider).sendDeviceToken(id);
   }
 
   Future<void> removeUserData() async {
-    final sharedPreferences = ref.read(sharedPreferencesProvider);
-    await sharedPreferences.remove(Keys.userAccessToken);
-    await sharedPreferences.remove(Keys.userId);
-    await sharedPreferences.remove(Keys.userFullName);
+    await _sharedPreferences.remove(Keys.userAccessToken);
+    await _sharedPreferences.remove(Keys.userId);
+    await _sharedPreferences.remove(Keys.userFullName);
     state = null;
     await _notificationsServiceProvider.unsubscribeFCMTopics();
   }
