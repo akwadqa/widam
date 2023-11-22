@@ -1,7 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:status_bar_control/status_bar_control.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/item_details_body.dart';
 
 import 'item_details_controller.dart';
@@ -13,6 +13,7 @@ class ItemDetailsScreen extends ConsumerStatefulWidget {
       required this.itemId,
       this.mubadaraId,
       this.attributionToken});
+
   final String itemId;
   final String? mubadaraId;
   final String? attributionToken;
@@ -29,13 +30,16 @@ class _ItemDetailsScreenState extends ConsumerState<ItemDetailsScreen> {
           .read(itemDetailsControllerProvider.notifier)
           .getItemDetails(itemId: widget.itemId, mubadaraId: widget.mubadaraId);
     });
+    _setHiddenStatusBar(true);
     super.initState();
+  }
+
+  Future<void> _setHiddenStatusBar(bool isHidden) async {
+    await StatusBarControl.setHidden(isHidden);
   }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.bottom]);
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,
@@ -47,7 +51,7 @@ class _ItemDetailsScreenState extends ConsumerState<ItemDetailsScreen> {
 
   @override
   void dispose() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    _setHiddenStatusBar(false);
     super.dispose();
   }
 }

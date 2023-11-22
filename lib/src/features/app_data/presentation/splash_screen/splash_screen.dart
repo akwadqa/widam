@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:status_bar_control/status_bar_control.dart';
 import 'package:widam/gen/assets.gen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -11,8 +11,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
+  void initState() {
+    StatusBarControl.setFullscreen(true);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     return Assets.splash.splash.image(
       fit: BoxFit.fitWidth,
       width: double.infinity,
@@ -22,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void dispose() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    StatusBarControl.setFullscreen(false);
     super.dispose();
   }
 }

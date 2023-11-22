@@ -13,5 +13,6 @@ abstract class Keys {
   static const String orders = 'orders';
   static const String ios = 'ios';
   static const String android = 'android';
+  static const String widamTest = 'widamTest';
   static const String isFirstItemGroupsOpen = 'is_first_item_groups_open';
 }

@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:status_bar_control/status_bar_control.dart';
 import 'package:widam/src/features/addresses/presentation/addresses/adaptive_back_button.dart';
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/filters_drop_down/filters_drop_down_button_form_field.dart';
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_list/selected_item_group_controller.dart';
@@ -33,17 +33,13 @@ class _ItemGroupScreenState extends ConsumerState<ItemGroupScreen> {
           .read(selectedItemGroupControllerProvider.notifier)
           .onCategorySelected(widget.itemGroupId);
     });
+    StatusBarControl.setStyle(StatusBarStyle.DARK_CONTENT);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final topPadding = ref.watch(topPaddingProvider(context));
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarBrightness: Brightness.light,
-      statusBarIconBrightness: Brightness.dark,
-    ));
     return Scaffold(
       body: Column(
         children: [
@@ -69,6 +65,12 @@ class _ItemGroupScreenState extends ConsumerState<ItemGroupScreen> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    StatusBarControl.setStyle(StatusBarStyle.LIGHT_CONTENT);
+    super.dispose();
   }
 }
 
