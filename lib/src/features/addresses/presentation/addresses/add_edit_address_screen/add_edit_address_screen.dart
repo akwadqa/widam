@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +15,7 @@ import '../../../../../common_widgets/fade_circle_loading_indicator.dart';
 import '../../../domain/address/address.dart';
 import '../../../domain/address/country.dart';
 import '../../../domain/geofence.dart';
-import '../../../domain/location/location.dart' as l;
+import '../../../domain/location/location.dart';
 import '../adaptive_back_button.dart';
 import 'add_edit_address_controller.dart';
 import 'coordinates_controller.dart';
@@ -105,12 +104,12 @@ class _AddEditAddressScreenState extends ConsumerState<AddEditAddressScreen> {
                           }
                           return InkWell(
                             onTap: () {
-                              showAdaptiveModalBottomSheet<l.Location?>(
+                              showAdaptiveModalBottomSheet<Location?>(
                                       context: context,
                                       enableDrag: false,
                                       builder: (context) =>
                                           const LocationPicker())
-                                  .then((l.Location? location) {
+                                  .then((Location? location) {
                                 if (location != null) {
                                   ref
                                       .read(coordinatesControllerProvider
