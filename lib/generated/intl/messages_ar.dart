@@ -479,6 +479,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "viewCart": MessageLookupByLibrary.simpleMessage("عرض السلة"),
         "villa": MessageLookupByLibrary.simpleMessage("فيلا"),
         "weekly": MessageLookupByLibrary.simpleMessage("أسبوعياً"),
+        "widam": MessageLookupByLibrary.simpleMessage("ودام"),
         "widamLoyaltyProgram":
             MessageLookupByLibrary.simpleMessage("برنامج ودام للولاء"),
         "widamPoints": MessageLookupByLibrary.simpleMessage("نقاط ودام"),

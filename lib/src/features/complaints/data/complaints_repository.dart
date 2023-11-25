@@ -34,4 +34,23 @@ class ComplaintsRepository {
     }
     return appDataResponse.data;
   }
+
+  Future<AppResponse<List<Complaint>>> getComplaints(int pageNo) async {
+    final response =
+        await _networkService.get(EndPoints.complaints, queryParameters: {
+      'page_no': pageNo,
+    });
+
+    AppResponse<List<Complaint>> appResponse = AppResponse.fromJson(
+        response.data,
+        (json) => json
+            .map<Complaint>((complaint) => Complaint.fromJson(complaint))
+            .toList());
+
+    if (appResponse.error == 1) {
+      throw AppException(appResponse.message);
+    }
+
+    return appResponse;
+  }
 }

@@ -3409,6 +3409,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Widam`
+  String get widam {
+    return Intl.message(
+      'Widam',
+      name: 'widam',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

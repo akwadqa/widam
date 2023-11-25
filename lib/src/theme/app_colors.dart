@@ -49,6 +49,7 @@ abstract class AppColors {
   static const Color candyAppleRed = Color(0xFFFF313B);
   static const Color customBlue = Color(0xFFCEEAFD);
   static const Color lightgrayishBlue = Color(0xFFE7F2F9);
+  static const Color pattensBlue2 = Color(0xFFCCECF6);
 
   static Color hexToColor(String hexColor) {
     hexColor = hexColor.replaceAll("#", "");

@@ -14,6 +14,7 @@ class Complaint with _$Complaint {
     required String description,
     required String? priority,
     required String? resolutionDetails,
+    required String status,
   }) = _Complaint;
 
   factory Complaint.fromJson(Map<String, dynamic> json) =>
