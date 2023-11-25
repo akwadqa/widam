@@ -328,5 +328,11 @@
   "orders" : "Orders",
   "describeYourAddress" : "Describe your address",
   "addressHint" : "example: behind woqod station",
-  "minimumOrderAmount" : "Minimum order amount"
+  "minimumOrderAmount" : "Minimum order amount",
+  "addNewComplaint" : "Add new complaint",
+  "selectComplaintType" : "Select Complaint Type",
+  "technicalIssue" : "Technical Issue",
+  "complaint" : "Complaint",
+  "addComplaint" : "Add Complaint",
+  "writeDiscription" : "Write Discription"
 }

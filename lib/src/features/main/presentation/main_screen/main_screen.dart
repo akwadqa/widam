@@ -38,7 +38,9 @@ class _MainScreenState extends ConsumerState<MainScreen> {
         return AppBottomNavigationBar(
           currentIndex: tabsRouter.activeIndex,
           onTap: (int index) async {
-            await StatusBarControl.setStyle(index == 0 ? StatusBarStyle.LIGHT_CONTENT : StatusBarStyle.DARK_CONTENT);
+            await StatusBarControl.setStyle(index == 0
+                ? StatusBarStyle.LIGHT_CONTENT
+                : StatusBarStyle.DARK_CONTENT);
             tabsRouter.setActiveIndex(index);
           },
         );

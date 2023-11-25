@@ -4,7 +4,10 @@ import 'package:widam/src/theme/app_colors.dart';
 
 class AppStepProgressIndicator extends StatelessWidget {
   const AppStepProgressIndicator(
-      {super.key, required this.totalSteps, required this.currentStep, this.size = 8});
+      {super.key,
+      required this.totalSteps,
+      required this.currentStep,
+      this.size = 8});
   final int totalSteps;
   final int currentStep;
   final double size;

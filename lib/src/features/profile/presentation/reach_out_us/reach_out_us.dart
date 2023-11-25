@@ -1,16 +1,19 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:widam/src/constants/services_urls.dart';
+import 'package:widam/src/features/auth/application/user_data_provider.dart';
+import 'package:widam/src/routing/app_router.gr.dart';
 import '../../data/profile_repository.dart';
 
 import '../../../../../generated/l10n.dart';
 
-class ReachOutUs extends StatelessWidget {
+class ReachOutUs extends ConsumerWidget {
   const ReachOutUs({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
         const SizedBox(height: 8),
@@ -21,12 +24,14 @@ class ReachOutUs extends StatelessWidget {
           trailing: const Icon(Icons.arrow_forward_ios),
           onTap: () => launchUrl(Uri.parse(ServicesUrls.liveChat)),
         ),
-        //TODO: uncomment when complaints is ready
-        // const Divider(),
-        // ListTile(
-        //   title: Text(S.of(context).complaints),
-        //   trailing: const Icon(Icons.arrow_forward_ios),
-        // ),
+        if (ref.watch(userDataProvider) != null) ...[
+          const Divider(),
+          ListTile(
+            title: Text(S.of(context).complaints),
+            trailing: const Icon(Icons.arrow_forward_ios),
+            onTap: () => context.pushRoute(const ComplaintsScreen()),
+          ),
+        ],
         const SizedBox(height: 8),
       ],
     );

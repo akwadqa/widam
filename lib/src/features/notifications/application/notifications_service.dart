@@ -81,7 +81,7 @@ class NotificationsService {
     await FCMConfig.instance.messaging.subscribeToTopic(Keys.orders);
     await FCMConfig.instance.messaging
         .subscribeToTopic(_ref.watch(currentLanguageProvider));
-        //TODO Remove this topic
+    //TODO Remove this topic
     await FCMConfig.instance.messaging.subscribeToTopic(Keys.widamTest);
     subscribeMarketingNotifications();
   }

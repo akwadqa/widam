@@ -38,9 +38,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "addAPaymentMethod":
             MessageLookupByLibrary.simpleMessage("Add A Payment Method"),
         "addAddress": MessageLookupByLibrary.simpleMessage("Add Address"),
+        "addComplaint": MessageLookupByLibrary.simpleMessage("Add Complaint"),
         "addNewAddress":
             MessageLookupByLibrary.simpleMessage("Add new address"),
         "addNewCard": MessageLookupByLibrary.simpleMessage("Add New Card"),
+        "addNewComplaint":
+            MessageLookupByLibrary.simpleMessage("Add new complaint"),
         "addToCart": MessageLookupByLibrary.simpleMessage("Add to Cart"),
         "addressDetails":
             MessageLookupByLibrary.simpleMessage("Address Details (Inwani)"),
@@ -112,6 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "commentsAndFeedback":
             MessageLookupByLibrary.simpleMessage("Comments and Feedback"),
+        "complaint": MessageLookupByLibrary.simpleMessage("Complaint"),
         "complaints": MessageLookupByLibrary.simpleMessage("Complaints"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmLocation":
@@ -403,6 +407,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchForAnyProduct":
             MessageLookupByLibrary.simpleMessage("Search for any product"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
+        "selectComplaintType":
+            MessageLookupByLibrary.simpleMessage("Select Complaint Type"),
         "selectItemGroupDescription": MessageLookupByLibrary.simpleMessage(
             "Select Category to filter your search per category. Change between categories to find the its subcategories and items."),
         "selectOptions": MessageLookupByLibrary.simpleMessage("Select Options"),
@@ -442,6 +448,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscriptionStartsOn":
             MessageLookupByLibrary.simpleMessage("Subscription starts on"),
         "switchLabel": MessageLookupByLibrary.simpleMessage("Switch"),
+        "technicalIssue":
+            MessageLookupByLibrary.simpleMessage("Technical Issue"),
         "termAndConditionsPrefix": MessageLookupByLibrary.simpleMessage(
             "I have read and agree to the"),
         "termsAndConditions":
@@ -486,6 +494,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "widamWallet": MessageLookupByLibrary.simpleMessage("Widam Wallet"),
         "widamWalletDescription": MessageLookupByLibrary.simpleMessage(
             "Simplify your checkout experience with Widam wallet!"),
+        "writeDiscription":
+            MessageLookupByLibrary.simpleMessage("Write Discription"),
         "writeYourCommentHere":
             MessageLookupByLibrary.simpleMessage("Write your comment here..."),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),

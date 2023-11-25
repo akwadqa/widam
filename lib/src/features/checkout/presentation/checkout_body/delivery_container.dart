@@ -13,9 +13,7 @@ import '../../../time_slots/presentation/time_slots_selector/time_slots_selector
 
 class DeliveryContainer extends StatelessWidget {
   const DeliveryContainer(
-      {super.key,
-      required this.deliveryType,
-      required this.currency});
+      {super.key, required this.deliveryType, required this.currency});
   final DeliveryType deliveryType;
   final String currency;
 
@@ -83,8 +81,8 @@ class DeliveryContainer extends StatelessWidget {
                     });
                   },
                   style: ButtonStyle(
-                      padding: MaterialStateProperty.all(
-                          const EdgeInsets.all(0.0))),
+                      padding:
+                          MaterialStateProperty.all(const EdgeInsets.all(0.0))),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.end,
