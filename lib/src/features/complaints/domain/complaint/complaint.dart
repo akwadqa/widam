@@ -12,7 +12,7 @@ class Complaint with _$Complaint {
     required String issueType,
     required String subject,
     required String description,
-    required String priority,
+    required String? priority,
     required String? resolutionDetails,
   }) = _Complaint;
 

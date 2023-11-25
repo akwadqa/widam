@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:widam/generated/l10n.dart';
 import 'package:widam/src/common_widgets/app_adding_button.dart';
 import 'package:widam/src/features/addresses/presentation/addresses/adaptive_back_button.dart';
+import 'package:widam/src/features/complaints/presentation/complaints_screen/complaint_item.dart/complaint_item.dart';
 import 'package:widam/src/routing/app_router.gr.dart';
 
 @RoutePage()
@@ -35,7 +36,13 @@ class AddCompalintButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppAddingButton(
-        onPressed: () => context.pushRoute(const AddComplaintScreen()),
+        onPressed: () {
+          context.pushRoute(const AddComplaintScreen()).then((value) {
+            if (value != null) {
+              // context.read(addressesControllerProvider.notifier).add(value);
+            }
+          });
+        },
         title: S.of(context).addNewComplaint);
   }
 }

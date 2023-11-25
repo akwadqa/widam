@@ -72,7 +72,7 @@ extension ComplaintTypeExtension on ComplaintType {
     }
   }
 
-  String get value {
+  String get name {
     switch (this) {
       case ComplaintType.customerService:
         return 'Customer Service';
