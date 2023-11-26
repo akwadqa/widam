@@ -9,12 +9,15 @@ class ComplaintItem extends StatelessWidget {
   final Complaint complaint;
   @override
   Widget build(BuildContext context) {
+    final complaintDateTime =
+        '${complaint.openingDate}  ${complaint.openingTime}';
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(complaint.issueId,
           style: const TextStyle(
               fontSize: 14.0,
               fontWeight: FontWeight.w600,
               color: Colors.black)),
+      const SizedBox(height: 5),
       Stack(
         clipBehavior: Clip.none,
         children: [
@@ -22,7 +25,7 @@ class ComplaintItem extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(color: AppColors.londonRain)),
+                border: Border.all(color: AppColors.londonRain, width: 0.5)),
             padding: const EdgeInsets.all(8.0),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -34,15 +37,13 @@ class ComplaintItem extends StatelessWidget {
               const SizedBox(height: 10.0),
               _ChatBubble(
                   description: complaint.description,
-                  //TODO: replace this with the real date
-                  date: '03 Mar  2023  08:00 AM',
+                  date: complaintDateTime,
                   type: BubbleType.sendBubble),
               if (complaint.resolutionDetails != null) ...[
                 const SizedBox(height: 15.0),
                 _ChatBubble(
                     description: complaint.resolutionDetails!,
-                    //TODO: replace this with the real date
-                    date: '03 Mar  2023  08:00 AM',
+                    date: complaintDateTime,
                     type: BubbleType.receiverBubble),
               ]
             ]),
