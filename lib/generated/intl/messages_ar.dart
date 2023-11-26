@@ -37,9 +37,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "addAPaymentMethod":
             MessageLookupByLibrary.simpleMessage("إضافة طريقة الدفع"),
         "addAddress": MessageLookupByLibrary.simpleMessage("إضافة عنوان"),
+        "addComplaint": MessageLookupByLibrary.simpleMessage("إضافة شكوى"),
         "addNewAddress":
             MessageLookupByLibrary.simpleMessage("إضافة عنوان جديد"),
         "addNewCard": MessageLookupByLibrary.simpleMessage("إضافة بطاقة جديدة"),
+        "addNewComplaint":
+            MessageLookupByLibrary.simpleMessage("إضافة شكوى جديدة"),
         "addToCart": MessageLookupByLibrary.simpleMessage("أضف إلى السلة"),
         "addressDetails":
             MessageLookupByLibrary.simpleMessage("تفاصيل العنوان (عنواني)"),
@@ -110,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "close": MessageLookupByLibrary.simpleMessage("إغلاق"),
         "commentsAndFeedback":
             MessageLookupByLibrary.simpleMessage("التعليقات والملاحظات"),
+        "complaint": MessageLookupByLibrary.simpleMessage("شكوى"),
         "complaints": MessageLookupByLibrary.simpleMessage("الشكاوى"),
         "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
         "confirmLocation": MessageLookupByLibrary.simpleMessage("تأكيد الموقع"),
@@ -397,6 +401,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchForAnyProduct":
             MessageLookupByLibrary.simpleMessage("بحث عن أي منتج"),
         "select": MessageLookupByLibrary.simpleMessage("تحديد"),
+        "selectComplaintType":
+            MessageLookupByLibrary.simpleMessage("حدد نوع الشكوى"),
         "selectItemGroupDescription": MessageLookupByLibrary.simpleMessage(
             "حدد الفئة لتصفية بحثك حسب الفئة. قم بالتبديل بين الفئات للعثور على فئاتها الفرعية وعناصرها."),
         "selectOptions": MessageLookupByLibrary.simpleMessage("حدد الخيارات"),
@@ -433,6 +439,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscriptionStartsOn":
             MessageLookupByLibrary.simpleMessage("يبدأ الاشتراك في"),
         "switchLabel": MessageLookupByLibrary.simpleMessage("تبديل"),
+        "technicalIssue": MessageLookupByLibrary.simpleMessage("مشكلة تقنية"),
         "termAndConditionsPrefix":
             MessageLookupByLibrary.simpleMessage("لقد قرأت ووافقت على"),
         "termsAndConditions":
@@ -472,12 +479,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "viewCart": MessageLookupByLibrary.simpleMessage("عرض السلة"),
         "villa": MessageLookupByLibrary.simpleMessage("فيلا"),
         "weekly": MessageLookupByLibrary.simpleMessage("أسبوعياً"),
+        "widam": MessageLookupByLibrary.simpleMessage("ودام"),
         "widamLoyaltyProgram":
             MessageLookupByLibrary.simpleMessage("برنامج ودام للولاء"),
         "widamPoints": MessageLookupByLibrary.simpleMessage("نقاط ودام"),
         "widamWallet": MessageLookupByLibrary.simpleMessage("محفظة ودام"),
         "widamWalletDescription": MessageLookupByLibrary.simpleMessage(
             "تبسيط تجربة الدفع الخاصة بك مع محفظة ودام!"),
+        "writeDiscription": MessageLookupByLibrary.simpleMessage("اكتب وصفاً"),
         "writeYourCommentHere":
             MessageLookupByLibrary.simpleMessage("...اكتب تعليقك هنا"),
         "yes": MessageLookupByLibrary.simpleMessage("نعم"),

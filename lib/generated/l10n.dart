@@ -3349,6 +3349,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Add new complaint`
+  String get addNewComplaint {
+    return Intl.message(
+      'Add new complaint',
+      name: 'addNewComplaint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Complaint Type`
+  String get selectComplaintType {
+    return Intl.message(
+      'Select Complaint Type',
+      name: 'selectComplaintType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Technical Issue`
+  String get technicalIssue {
+    return Intl.message(
+      'Technical Issue',
+      name: 'technicalIssue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complaint`
+  String get complaint {
+    return Intl.message(
+      'Complaint',
+      name: 'complaint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Complaint`
+  String get addComplaint {
+    return Intl.message(
+      'Add Complaint',
+      name: 'addComplaint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Write Discription`
+  String get writeDiscription {
+    return Intl.message(
+      'Write Discription',
+      name: 'writeDiscription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Widam`
+  String get widam {
+    return Intl.message(
+      'Widam',
+      name: 'widam',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

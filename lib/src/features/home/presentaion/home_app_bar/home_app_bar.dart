@@ -31,10 +31,7 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
         color: AppColors.primary,
       ),
       padding: EdgeInsetsDirectional.only(
-          start: 16,
-          end: 16,
-          bottom: 8,
-          top: topPadding),
+          start: 16, end: 16, bottom: 8, top: topPadding),
       child: const Column(
         mainAxisSize: MainAxisSize.min,
         children: [

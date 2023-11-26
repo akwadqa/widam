@@ -45,7 +45,8 @@ class OrderedSuccessfullyScreen extends StatelessWidget {
               children: [
                 _CustomContainer(
                     title: S.of(context).orderAmount,
-                    subtitle: '${order.currency} ${order.grandTotal.toStringAsFixed(2)}'),
+                    subtitle:
+                        '${order.currency} ${order.grandTotal.toStringAsFixed(2)}'),
                 const SizedBox(width: 10),
                 _CustomContainer(
                     title: S.of(context).orderNumber, subtitle: order.orderId),

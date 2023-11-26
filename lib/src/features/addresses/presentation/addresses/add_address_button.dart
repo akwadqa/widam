@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:widam/src/common_widgets/app_adding_button.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../routing/app_router.gr.dart';
-import '../../../../theme/app_colors.dart';
 import '../../../../utils/utils.dart';
 import '../../domain/location/location.dart';
 import '../maps/location_picker/location_picker.dart';
@@ -12,7 +12,7 @@ class AddAddressButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return AppAddingButton(
       onPressed: () {
         showAdaptiveModalBottomSheet<Location?>(
                 context: context,
@@ -27,12 +27,7 @@ class AddAddressButton extends StatelessWidget {
           }
         });
       },
-      style: ElevatedButton.styleFrom(
-          fixedSize: Size(MediaQuery.of(context).size.width, 43),
-          backgroundColor: Colors.white,
-          side: const BorderSide(color: AppColors.gray, width: 0.5),
-          foregroundColor: AppColors.londonRain),
-      child: Text('+ ${S.of(context).addNewAddress}'),
+      title: S.of(context).addNewAddress,
     );
   }
 }

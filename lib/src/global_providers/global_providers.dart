@@ -6,13 +6,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'global_providers.g.dart';
 
 @Riverpod(keepAlive: true)
-Future<SharedPreferences> sharedPreferences(SharedPreferencesRef ref) async => await SharedPreferences.getInstance();
+Future<SharedPreferences> sharedPreferences(SharedPreferencesRef ref) async =>
+    await SharedPreferences.getInstance();
 
 @Riverpod(keepAlive: true)
 Future<bool> canVibrate(CanVibrateRef ref) async => await Vibrate.canVibrate;
 
 @Riverpod(keepAlive: true)
-Future<PackageInfo> packageInfo(PackageInfoRef ref) async => await PackageInfo.fromPlatform();
+Future<PackageInfo> packageInfo(PackageInfoRef ref) async =>
+    await PackageInfo.fromPlatform();
 
 @riverpod
 double topPadding(TopPaddingRef ref, BuildContext context) {

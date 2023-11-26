@@ -328,5 +328,12 @@
   "orders" : "الطلبات",
   "describeYourAddress" : "صف عنوانك",
   "addressHint" : "مثال: خلف محطة وقود",
-  "minimumOrderAmount" : "الحد الأدنى للطلب"
+  "minimumOrderAmount" : "الحد الأدنى للطلب",
+  "addNewComplaint" : "إضافة شكوى جديدة",
+  "selectComplaintType" : "حدد نوع الشكوى",
+  "technicalIssue" : "مشكلة تقنية",
+  "complaint" : "شكوى",
+  "addComplaint" : "إضافة شكوى",
+  "writeDiscription" : "اكتب وصفاً",
+  "widam" : "ودام"
 }

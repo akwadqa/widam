@@ -12,10 +12,15 @@ class MarketingNotificationsController
     extends _$MarketingNotificationsController {
   @override
   bool build() {
-    return ref.watch(sharedPreferencesProvider).requireValue.getBool(Keys.marketing) ?? true;
+    return ref
+            .watch(sharedPreferencesProvider)
+            .requireValue
+            .getBool(Keys.marketing) ??
+        true;
   }
 
-  SharedPreferences get _sharedPreferences => ref.read(sharedPreferencesProvider).requireValue;
+  SharedPreferences get _sharedPreferences =>
+      ref.read(sharedPreferencesProvider).requireValue;
 
   Future<void> subscripeMarketingNotifications() async {
     await _sharedPreferences.setBool(Keys.marketing, true);

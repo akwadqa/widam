@@ -39,5 +39,7 @@ class AppRouter extends $AppRouter {
     AutoRoute(page: WidamLoyaltyProgramScreen.page),
     AutoRoute(page: PointsHistoryScreen.page),
     AutoRoute(page: SalesOrderDetailsScreen.page),
+    AutoRoute(page: ComplaintsScreen.page),
+    AutoRoute(page: AddComplaintScreen.page)
   ];
 }

@@ -81,8 +81,7 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _UpdatableCartContentContainer(
-                            cart: cart!,
-                            titlesTextStyle: _textStyle()),
+                            cart: cart!, titlesTextStyle: _textStyle()),
                         const SizedBox(height: 20.0),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -150,8 +149,7 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
 
 class _UpdatableCartContentContainer extends ConsumerStatefulWidget {
   const _UpdatableCartContentContainer(
-      {required this.cart,
-      required this.titlesTextStyle});
+      {required this.cart, required this.titlesTextStyle});
   final Cart cart;
   final TextStyle titlesTextStyle;
   @override
@@ -178,9 +176,7 @@ class _UpdatableCartContentContainerState
 
 class _UpdatableCartContent extends ConsumerWidget {
   const _UpdatableCartContent(
-      {super.key,
-      required this.cart,
-      required this.titlesTextStyle});
+      {super.key, required this.cart, required this.titlesTextStyle});
   final Cart cart;
   final TextStyle titlesTextStyle;
   @override
