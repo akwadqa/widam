@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:widam/src/routing/app_router.gr.dart';
-
 import '../generated/l10n.dart';
 import 'localization/current_language.dart';
 import 'routing/app_router_provider.dart';
@@ -24,18 +22,7 @@ class App extends ConsumerWidget {
     return MaterialApp.router(
       onGenerateTitle: (context) => S.of(context).appTitle,
       debugShowCheckedModeBanner: false,
-      routerDelegate: appRouter.delegate(deepLinkBuilder: (deepLink) {
-        //TODO: Implement path
-        if (deepLink.path.startsWith('/details')) {
-          // continute with the platfrom link
-          return DeepLink(
-              [const MainScreen(), ItemDetailsScreen(itemId: 'WI-00706')]);
-        } else {
-          return DeepLink.defaultPath;
-          // or DeepLink.path('/')
-          // or DeepLink([HomeRoute()])
-        }
-      }),
+      routerDelegate: appRouter.delegate(deepLinkBuilder: (deepLink) => DeepLink.defaultPath),
       routeInformationParser: appRouter.defaultRouteParser(),
       theme: ref.watch(themeDataProvider),
       localizationsDelegates: const [

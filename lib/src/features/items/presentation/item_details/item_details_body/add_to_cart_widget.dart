@@ -21,119 +21,155 @@ import '../../../../../common_widgets/submit_button.dart';
 import '../../../../cart/application/cart_service.dart';
 import '../item_details_controller.dart';
 
+enum FormType { variants, options }
+
 class AddToCartWidget extends StatelessWidget {
-  const AddToCartWidget(
-      {super.key,
-      required this.itemId,
-      required this.optionsFromKey,
-      this.attributionToken});
+  const AddToCartWidget({
+    super.key,
+    required this.itemId,
+    required this.optionsFromKey,
+    this.attributionToken,
+    required this.hasVariants,
+    required this.attributesFormKey,
+    required this.onInvalidForm,
+  });
+
   final String itemId;
   final GlobalKey<FormState> optionsFromKey;
   final String? attributionToken;
+  final GlobalKey<FormState> attributesFormKey;
+  final bool hasVariants;
+  final Function(FormType) onInvalidForm;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.08),
-              offset: const Offset(-2, -2),
-              blurRadius: 16,
-            ),
-          ],
-        ),
-        padding: EdgeInsets.only(
-            top: 20,
-            right: 20,
-            left: 20,
-            bottom: 20 + getBottomPadding(context)),
-        child: Consumer(
-          builder: (context, ref, child) {
-            final state = ref.watch(itemDetailsControllerProvider);
-            final userToken = ref.watch(userDataProvider);
-            ref.listen(updateCartProvider, (previous, next) async {
-              if (next is AsyncError) {
-                showAppBannerDialog(
-                    context, next.error.toString(), next.stackTrace);
-              } else if (next is AsyncData) {
-                context.popRoute();
-                ref.read(goToTabControllerProvider.notifier).showCartDialog();
-              }
-            });
-            final updateCartState = ref.watch(updateCartProvider);
-            if (updateCartState is AsyncLoading) {
-              return const FadeCircleLoadingIndicator();
-            }
-            return SubmitButton(
-              text: S.of(context).addToCart,
-              onPressed: userToken == null
-                  ? () => context.pushRoute(const LoginScreen())
-                  : state is AsyncData &&
-                          state.asData?.value != null &&
-                          state.asData!.value!.isLoading
-                      ? null
-                      : () {
-                          if (ref.read(canVibrateProvider).requireValue) {
-                            Vibrate.feedback(FeedbackType.heavy);
-                          }
-                          if (optionsFromKey.currentState != null) {
-                            if (optionsFromKey.currentState!.validate()) {
-                              optionsFromKey.currentState!.save();
-                              final productOptions =
-                                  ref.read(savedOptionsProvider);
-                              final savedOptions = productOptions.isNotEmpty
-                                  ? productOptions
-                                  : null;
-                              _addToCart(
-                                  ref: ref,
-                                  savedOptions: savedOptions,
-                                  attributionToken: attributionToken);
-                            }
-                          } else {
-                            _addToCart(
-                                ref: ref, attributionToken: attributionToken);
-                          }
-                        },
-            );
-          },
-        ));
+      decoration: _buildBoxDecoration(),
+      padding: _buildPadding(context),
+      child: Consumer(
+        builder: (context, ref, child) => _buildSubmitButton(context, ref),
+      ),
+    );
   }
 
-  void _addToCart(
-      {required WidgetRef ref,
-      List<({int isPriceModifier, String productOptionId, int radioOptionId})>?
-          savedOptions,
-      String? attributionToken}) {
-    final mubadaraFormKey = ref.read(mubadaraFormKeyProvider);
-    if (mubadaraFormKey.currentState != null) {
-      if (mubadaraFormKey.currentState!.validate() == false) {
-        return;
-      } else {
-        ref.read(mubadaraFormKeyProvider).currentState!.save();
-        ref.read(updateCartProvider.notifier).updateCart(
-              attributionToken: attributionToken,
-              itemId: itemId,
-              quantity: ref.read(quantityProvider),
-              qid: ref.read(qidNumberProvider).isEmpty
-                  ? null
-                  : ref.read(qidNumberProvider),
-              file: ref.read(qidAttachmentProvider),
-              productOptions: savedOptions,
-            );
-      }
-    } else {
-      ref.read(updateCartProvider.notifier).updateCart(
-          itemId: itemId,
-          quantity: ref.read(quantityProvider),
-          productOptions: savedOptions,
-          attributionToken: attributionToken);
+  BoxDecoration _buildBoxDecoration() {
+    return BoxDecoration(
+      color: Colors.white,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.08),
+          offset: const Offset(-2, -2),
+          blurRadius: 16,
+        ),
+      ],
+    );
+  }
+
+  EdgeInsets _buildPadding(BuildContext context) {
+    return EdgeInsets.only(
+      top: 20,
+      right: 20,
+      left: 20,
+      bottom: 20 + getBottomPadding(context),
+    );
+  }
+
+  Widget _buildSubmitButton(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(itemDetailsControllerProvider);
+    final updateCartState = ref.watch(updateCartProvider);
+
+    _listenForUpdateCart(ref, context);
+
+    if (updateCartState is AsyncLoading) {
+      return const FadeCircleLoadingIndicator();
     }
+
+    return SubmitButton(
+      text: S.of(context).addToCart,
+      onPressed: _determineButtonAction(state, ref, context),
+    );
+  }
+
+  VoidCallback? _determineButtonAction(AsyncValue state, WidgetRef ref, BuildContext context) {
+    final userToken = ref.watch(userDataProvider);
+    if (userToken == null) {
+      return () => context.pushRoute(const LoginScreen());
+    }
+
+    if (state is AsyncData && state.asData?.value != null && state.asData!.value!.isLoading) {
+      return null;
+    }
+
+    return () => _onSubmitPressed(ref);
+  }
+
+  void _onSubmitPressed(WidgetRef ref) {
+    if (ref.read(canVibrateProvider).requireValue) {
+      Vibrate.feedback(FeedbackType.heavy);
+    }
+
+    if (attributesFormKey.currentState?.validate() ?? true) {
+      _validateOptionsForm(ref);
+    } else {
+      onInvalidForm(FormType.variants);
+    }
+  }
+
+  void _validateOptionsForm(WidgetRef ref) {
+    if (optionsFromKey.currentState?.validate() ?? true) {
+      optionsFromKey.currentState?.save();
+      _processOptionsAndAddToCart(ref);
+    } else {
+      onInvalidForm(FormType.options);
+    }
+  }
+
+  void _processOptionsAndAddToCart(WidgetRef ref) {
+    final productOptions = ref.read(savedOptionsProvider);
+    final savedOptions = productOptions.isNotEmpty ? productOptions : null;
+    _addToCart(ref: ref, savedOptions: savedOptions, attributionToken: attributionToken);
+  }
+
+  void _addToCart({
+    required WidgetRef ref,
+    List<({int isPriceModifier, String productOptionId, int radioOptionId})>? savedOptions,
+    String? attributionToken,
+  }) {
+    final mubadaraFormKey = ref.read(mubadaraFormKeyProvider);
+    if (mubadaraFormKey.currentState != null && !mubadaraFormKey.currentState!.validate()) {
+      return;
+    }
+
+    mubadaraFormKey.currentState?.save();
+
+    ref.read(updateCartProvider.notifier).updateCart(
+      itemId: itemId,
+      quantity: ref.read(quantityProvider),
+      qid: ref.read(qidNumberProvider).isEmpty ? null : ref.read(qidNumberProvider),
+      file: ref.read(qidAttachmentProvider),
+      productOptions: savedOptions,
+      attributionToken: attributionToken,
+    );
+
+    _invalidateRecommendationProviders(ref);
+  }
+
+  void _invalidateRecommendationProviders(WidgetRef ref) {
     ref.invalidate(recentlyViewdControllerProvider);
     ref.invalidate(similarItemsControllerProvider);
     ref.invalidate(recommendationsProvider);
-    ref
-        .read(frequentlyBoughtTogetherControllerProvider.notifier)
-        .getFrequencyBoughtTogether(itemId, ref.read(quantityProvider));
+    ref.read(frequentlyBoughtTogetherControllerProvider.notifier)
+       .getFrequencyBoughtTogether(itemId, ref.read(quantityProvider));
+  }
+
+  void _listenForUpdateCart(WidgetRef ref, BuildContext context) {
+    ref.listen(updateCartProvider, (previous, next) async {
+      if (next is AsyncError) {
+        showAppBannerDialog(context, next.error.toString(), next.stackTrace);
+      } else if (next is AsyncData) {
+        context.popRoute();
+        ref.read(goToTabControllerProvider.notifier).showCartDialog();
+      }
+    });
   }
 }

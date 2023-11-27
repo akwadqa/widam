@@ -109,6 +109,7 @@ class _ItemAttributesSelectorState
   }
 
   final _optionsFormKey = GlobalKey<FormState>();
+  final _attributesFormKey = GlobalKey<FormState>();
   final List<({String productOptionName, int valueId})> _selectedOptions = [];
 
   @override
@@ -132,14 +133,18 @@ class _ItemAttributesSelectorState
                     SingleChildScrollView(
                       child: Column(
                         children: [
-                          ItemAttributeVariantsList(
-                            variants: itemDetails.attributeVariants!,
-                            itemId: itemDetails.websiteItemId,
-                            isLoading: data.isLoading,
-                            onVariantsChange: (itemId) => ref
-                                .read(subscriptionItemDetailsControllerProvider
-                                    .notifier)
-                                .onVariantsChange(itemId),
+                          Form(
+                            key: _attributesFormKey,
+                            child: ItemAttributeVariantsList(
+                              variants: itemDetails.attributeVariants!,
+                              itemId: itemDetails.websiteItemId,
+                              isLoading: data.isLoading,
+                              onVariantsChange: (itemId) => ref
+                                  .read(
+                                      subscriptionItemDetailsControllerProvider
+                                          .notifier)
+                                  .onVariantsChange(itemId),
+                            ),
                           ),
                           if (itemDetails.productOptions.isNotEmpty) ...[
                             const SizedBox(height: 20),
@@ -166,38 +171,42 @@ class _ItemAttributesSelectorState
                           onPressed: data.isLoading
                               ? null
                               : () {
-                                  if (_optionsFormKey.currentState!
+                                  if (_attributesFormKey.currentState!
                                       .validate()) {
-                                    _optionsFormKey.currentState!.save();
-                                    ref
-                                        .read(selectedSubscriptionItemsProvider
-                                            .notifier)
-                                        .state = [
-                                      ...ref.read(
-                                          selectedSubscriptionItemsProvider),
-                                      SubscriptionItem(
-                                          id: widget.item.websiteItemId,
-                                          quantity: 1,
-                                          attributes: itemDetails
-                                              .websiteItemAttributes!
-                                              .map((e) => Attribute(
-                                                  id: e.attributeId,
-                                                  value:
-                                                      e.attributeValue.valueId))
-                                              .toList(),
-                                          productOptions:
-                                              _selectedOptions.isEmpty
-                                                  ? null
-                                                  : _selectedOptions
-                                                      .map((e) => {
-                                                            'product_option_name':
-                                                                e.productOptionName,
-                                                            'product_option_value':
-                                                                e.valueId
-                                                          })
-                                                      .toList())
-                                    ];
-                                    context.popRoute();
+                                    if (_optionsFormKey.currentState!
+                                        .validate()) {
+                                      _optionsFormKey.currentState!.save();
+                                      ref
+                                          .read(
+                                              selectedSubscriptionItemsProvider
+                                                  .notifier)
+                                          .state = [
+                                        ...ref.read(
+                                            selectedSubscriptionItemsProvider),
+                                        SubscriptionItem(
+                                            id: widget.item.websiteItemId,
+                                            quantity: 1,
+                                            attributes: itemDetails
+                                                .websiteItemAttributes!
+                                                .map((e) => Attribute(
+                                                    id: e.attributeId,
+                                                    value: e.attributeValue
+                                                        .valueId))
+                                                .toList(),
+                                            productOptions:
+                                                _selectedOptions.isEmpty
+                                                    ? null
+                                                    : _selectedOptions
+                                                        .map((e) => {
+                                                              'product_option_name':
+                                                                  e.productOptionName,
+                                                              'product_option_value':
+                                                                  e.valueId
+                                                            })
+                                                        .toList())
+                                      ];
+                                      context.popRoute();
+                                    }
                                   }
                                 }),
                     ),

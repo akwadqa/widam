@@ -42,9 +42,7 @@ class ProfileButtons extends ConsumerWidget {
             _Button(
                 image: Assets.icons.couponsIcon.svg(),
                 text: S.of(context).yourCoupons,
-                onTap: () {
-                  //TODO: implement this func
-                }),
+                onTap: () {}),
           ],
         ),
       );

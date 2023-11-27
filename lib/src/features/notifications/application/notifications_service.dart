@@ -81,8 +81,6 @@ class NotificationsService {
     await FCMConfig.instance.messaging.subscribeToTopic(Keys.orders);
     await FCMConfig.instance.messaging
         .subscribeToTopic(_ref.watch(currentLanguageProvider));
-    //TODO Remove this topic
-    await FCMConfig.instance.messaging.subscribeToTopic(Keys.widamTest);
     subscribeMarketingNotifications();
   }
 
@@ -100,8 +98,6 @@ class NotificationsService {
     await FCMConfig.instance.messaging
         .unsubscribeFromTopic(Platform.isIOS ? Keys.ios : Keys.android);
     await FCMConfig.instance.messaging.unsubscribeFromTopic(Keys.orders);
-    //TODO Remove this topic
-    await FCMConfig.instance.messaging.unsubscribeFromTopic(Keys.widamTest);
   }
 }
 

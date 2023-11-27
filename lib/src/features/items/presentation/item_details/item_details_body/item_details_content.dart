@@ -29,21 +29,41 @@ class ItemDetailsContent extends ConsumerStatefulWidget {
 class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
   @override
   void initState() {
+    super.initState();
+    _initQuantity();
+  }
+
+  void _initQuantity() {
     Future(() {
       ref.read(quantityProvider.notifier).state =
           widget.itemDetails.minQty.toInt();
     });
-    super.initState();
   }
 
   final _optionsFormKey = GlobalKey<FormState>();
+  final _attributesFormKey = GlobalKey<FormState>();
+
+  final ScrollController _scrollController = ScrollController();
+  final FocusNode _attributeFocusNode = FocusNode();
+  final FocusNode _optionsFocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _attributeFocusNode.dispose();
+    _optionsFocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final hasVariants = widget.itemDetails.attributeVariants != null &&
+        widget.itemDetails.attributeVariants!.isNotEmpty;
     return Stack(
       fit: StackFit.expand,
       children: [
         SingleChildScrollView(
+          controller: _scrollController,
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             ItemDetailsHeader(itemDetails: widget.itemDetails),
@@ -57,18 +77,23 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
               const SizedBox(height: 10),
               DetailsTabBar(itemDetails: widget.itemDetails),
             ],
-            if (widget.itemDetails.attributeVariants != null &&
-                widget.itemDetails.attributeVariants!.isNotEmpty) ...[
+            if (hasVariants) ...[
               const SizedBox(height: 16),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: ItemAttributeVariantsList(
-                  variants: widget.itemDetails.attributeVariants!,
-                  itemId: widget.itemDetails.websiteItemId,
-                  isLoading: widget.isLoading,
-                  onVariantsChange: (itemId) => ref
-                      .read(itemDetailsControllerProvider.notifier)
-                      .onVariantsChange(itemId),
+                child: Form(
+                  key: _attributesFormKey,
+                  child: Focus(
+                    focusNode: _attributeFocusNode,
+                    child: ItemAttributeVariantsList(
+                      variants: widget.itemDetails.attributeVariants!,
+                      itemId: widget.itemDetails.websiteItemId,
+                      isLoading: widget.isLoading,
+                      onVariantsChange: (itemId) => ref
+                          .read(itemDetailsControllerProvider.notifier)
+                          .onVariantsChange(itemId),
+                    ),
+                  ),
                 ),
               )
             ],
@@ -78,8 +103,11 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Form(
                   key: _optionsFormKey,
-                  child: ItemDetailsOptions(
-                      productOptions: widget.itemDetails.productOptions),
+                  child: Focus(
+                    focusNode: _optionsFocusNode,
+                    child: ItemDetailsOptions(
+                        productOptions: widget.itemDetails.productOptions),
+                  ),
                 ),
               ),
             ],
@@ -102,9 +130,22 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
                 left: 0,
                 right: 0,
                 child: AddToCartWidget(
+                    onInvalidForm: (formType) {
+                      if (formType == FormType.variants) {
+                        _attributeFocusNode.requestFocus();
+                      } else {
+                        _optionsFocusNode.requestFocus();
+                      }
+                      _scrollController.animateTo(
+                          _scrollController.position.maxScrollExtent,
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut);
+                    },
                     attributionToken: widget.attributionToken,
                     itemId: widget.itemDetails.websiteItemId,
-                    optionsFromKey: _optionsFormKey));
+                    optionsFromKey: _optionsFormKey,
+                    hasVariants: hasVariants,
+                    attributesFormKey: _attributesFormKey));
           }
           return const SizedBox.shrink();
         }),
