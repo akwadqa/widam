@@ -78,13 +78,16 @@ class NotificationsService {
   Future<void> subscribeFCMTopics() async {
     await FCMConfig.instance.messaging
         .subscribeToTopic(Platform.isIOS ? Keys.ios : Keys.android);
-    await FCMConfig.instance.messaging.subscribeToTopic(Keys.orders);
     await FCMConfig.instance.messaging
         .subscribeToTopic(_ref.watch(currentLanguageProvider));
-    subscribeMarketingNotifications();
+    _subscribeMarketingNotifications();
   }
 
-  void subscribeMarketingNotifications() {
+  Future<void> subscribeOrdersTopic() async {
+    await FCMConfig.instance.messaging.subscribeToTopic(Keys.orders);
+  }
+
+  void _subscribeMarketingNotifications() {
     final isMarketingSubscribed =
         _ref.read(marketingNotificationsControllerProvider);
     if (isMarketingSubscribed) {
@@ -94,9 +97,7 @@ class NotificationsService {
     }
   }
 
-  Future<void> unsubscribeFCMTopics() async {
-    await FCMConfig.instance.messaging
-        .unsubscribeFromTopic(Platform.isIOS ? Keys.ios : Keys.android);
+  Future<void> unsubscribeOrdersTopic() async {
     await FCMConfig.instance.messaging.unsubscribeFromTopic(Keys.orders);
   }
 }

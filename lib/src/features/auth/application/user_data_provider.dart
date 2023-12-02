@@ -24,9 +24,9 @@ class UserData extends _$UserData {
         ? (token: token, id: id, fullName: fullName)
         : null;
     if (userData != null) {
-      _notificationsServiceProvider.subscribeFCMTopics();
+      _notificationsServiceProvider.subscribeOrdersTopic();
     } else {
-      _notificationsServiceProvider.subscribeMarketingNotifications();
+      _notificationsServiceProvider.subscribeFCMTopics();
     }
     return userData;
   }
@@ -35,7 +35,7 @@ class UserData extends _$UserData {
       {required String token,
       required String id,
       required String fullName}) async {
-    _notificationsServiceProvider.subscribeFCMTopics();
+    _notificationsServiceProvider.subscribeOrdersTopic();
     _sharedPreferences.setString(Keys.userAccessToken, token);
     _sharedPreferences.setString(Keys.userId, id);
     _sharedPreferences.setString(Keys.userFullName, fullName);
@@ -48,6 +48,6 @@ class UserData extends _$UserData {
     await _sharedPreferences.remove(Keys.userId);
     await _sharedPreferences.remove(Keys.userFullName);
     state = null;
-    await _notificationsServiceProvider.unsubscribeFCMTopics();
+    await _notificationsServiceProvider.unsubscribeOrdersTopic();
   }
 }
