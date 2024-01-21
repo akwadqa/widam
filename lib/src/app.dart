@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widam/src/features/user_language/application/current_language.dart';
 import '../generated/l10n.dart';
-import 'localization/current_language.dart';
 import 'routing/app_router_provider.dart';
 import 'theme/app_theme.dart';
 

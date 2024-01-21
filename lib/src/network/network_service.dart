@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:widam/src/features/user_language/application/current_language.dart';
 import '../constants/services_urls.dart';
-import '../localization/current_language.dart';
 
 import '../../generated/l10n.dart';
 import '../features/auth/application/user_data_provider.dart';

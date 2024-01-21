@@ -66,7 +66,9 @@ class AuthenticatedCart extends ConsumerWidget {
               buttonText: S.of(context).returnToShop,
               onPressed: () => context.tabsRouter.setActiveIndex(0));
         }
-        return _NonEmptyCart(cart: cart);
+        return ProviderScope(overrides: [
+          updateCartProvider.overrideWith(() => UpdateCart()),
+        ], child: _NonEmptyCart(cart: cart));
       },
       error: (error, stack) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),

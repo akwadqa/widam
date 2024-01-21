@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:widam/src/features/checkout/presentation/checkout_body/saved_card_value_controller.dart';
+import 'package:widam/src/features/user_language/application/current_language.dart';
 import '../../data/checkout_repository.dart';
-import '../../../../localization/current_language.dart';
 
 import '../../domain/order/order.dart';
 import '../../domain/payment/payment.dart';

@@ -90,13 +90,16 @@ class AddToCartWidget extends StatelessWidget {
     );
   }
 
-  VoidCallback? _determineButtonAction(AsyncValue state, WidgetRef ref, BuildContext context) {
+  VoidCallback? _determineButtonAction(
+      AsyncValue state, WidgetRef ref, BuildContext context) {
     final userToken = ref.watch(userDataProvider);
     if (userToken == null) {
       return () => context.pushRoute(const LoginScreen());
     }
 
-    if (state is AsyncData && state.asData?.value != null && state.asData!.value!.isLoading) {
+    if (state is AsyncData &&
+        state.asData?.value != null &&
+        state.asData!.value!.isLoading) {
       return null;
     }
 
@@ -127,29 +130,36 @@ class AddToCartWidget extends StatelessWidget {
   void _processOptionsAndAddToCart(WidgetRef ref) {
     final productOptions = ref.read(savedOptionsProvider);
     final savedOptions = productOptions.isNotEmpty ? productOptions : null;
-    _addToCart(ref: ref, savedOptions: savedOptions, attributionToken: attributionToken);
+    _addToCart(
+        ref: ref,
+        savedOptions: savedOptions,
+        attributionToken: attributionToken);
   }
 
   void _addToCart({
     required WidgetRef ref,
-    List<({int isPriceModifier, String productOptionId, int radioOptionId})>? savedOptions,
+    List<({int isPriceModifier, String productOptionId, int radioOptionId})>?
+        savedOptions,
     String? attributionToken,
   }) {
     final mubadaraFormKey = ref.read(mubadaraFormKeyProvider);
-    if (mubadaraFormKey.currentState != null && !mubadaraFormKey.currentState!.validate()) {
+    if (mubadaraFormKey.currentState != null &&
+        !mubadaraFormKey.currentState!.validate()) {
       return;
     }
 
     mubadaraFormKey.currentState?.save();
 
     ref.read(updateCartProvider.notifier).updateCart(
-      itemId: itemId,
-      quantity: ref.read(quantityProvider),
-      qid: ref.read(qidNumberProvider).isEmpty ? null : ref.read(qidNumberProvider),
-      file: ref.read(qidAttachmentProvider),
-      productOptions: savedOptions,
-      attributionToken: attributionToken,
-    );
+          itemId: itemId,
+          quantity: ref.read(quantityProvider),
+          qid: ref.read(qidNumberProvider).isEmpty
+              ? null
+              : ref.read(qidNumberProvider),
+          file: ref.read(qidAttachmentProvider),
+          productOptions: savedOptions,
+          attributionToken: attributionToken,
+        );
 
     _invalidateRecommendationProviders(ref);
   }
@@ -158,8 +168,9 @@ class AddToCartWidget extends StatelessWidget {
     ref.invalidate(recentlyViewdControllerProvider);
     ref.invalidate(similarItemsControllerProvider);
     ref.invalidate(recommendationsProvider);
-    ref.read(frequentlyBoughtTogetherControllerProvider.notifier)
-       .getFrequencyBoughtTogether(itemId, ref.read(quantityProvider));
+    ref
+        .read(frequentlyBoughtTogetherControllerProvider.notifier)
+        .getFrequencyBoughtTogether(itemId, ref.read(quantityProvider));
   }
 
   void _listenForUpdateCart(WidgetRef ref, BuildContext context) {

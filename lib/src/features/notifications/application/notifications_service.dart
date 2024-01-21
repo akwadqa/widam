@@ -9,8 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:widam/firebase_options.dart';
 import 'package:widam/src/constants/keys.dart';
 import 'package:widam/src/features/notifications/presentation/marketing_notifications_controller.dart';
+import 'package:widam/src/features/user_language/application/current_language.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
-import 'package:widam/src/localization/current_language.dart';
 import 'package:widam/src/routing/app_router.gr.dart';
 
 import '../data/notifications_repository.dart';

@@ -227,7 +227,7 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
                 ),
               )
             : Icon(
-                widget.row != null ? Icons.cancel : Icons.add,
+                widget.row != null ? Icons.close : Icons.add,
                 color: Colors.white,
               ),
       ),

@@ -55,7 +55,7 @@ class CartRepository {
           ]),
         if (qid != null) 'qid_field_placeholder': qid,
         if (file != null)
-          'file': MultipartFile.fromFile(file.path, filename: file.name),
+          'file': await MultipartFile.fromFile(file.path, filename: file.name),
         if (shippingAddressId != null) 'shipping_address_id': shippingAddressId,
         if (timeSlot != null) 'time_slot': timeSlot,
         if (couponCode != null) 'coupon_code': couponCode,

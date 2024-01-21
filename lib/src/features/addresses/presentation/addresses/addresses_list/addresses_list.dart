@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:widam/src/localization/current_language.dart';
+import 'package:widam/src/features/user_language/application/current_language.dart';
 import '../../../../../../gen/assets.gen.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../common_widgets/banner/app_banner.dart';

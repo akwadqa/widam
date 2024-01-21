@@ -34,4 +34,5 @@ abstract class EndPoints {
   static const String loyaltyProgram = '.loyalty_program.get_loyalty_program';
   static const String redeemPoints = '.loyalty_program.redeem_loyalty_points';
   static const String complaints = '.issue.issues';
+  static const String userLanguage = '.user.user_language';
 }

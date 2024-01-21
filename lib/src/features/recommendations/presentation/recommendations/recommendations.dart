@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/generated/l10n.dart';
 import 'package:widam/src/features/layouts/presentation/item/items_horizontal_list.dart';
-import 'package:widam/src/localization/current_language.dart';
+import 'package:widam/src/features/user_language/application/current_language.dart';
 import 'package:widam/src/theme/app_colors.dart';
 
 import '../../../items/domain/item/item.dart';

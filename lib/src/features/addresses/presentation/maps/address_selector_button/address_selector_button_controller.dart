@@ -1,7 +1,7 @@
 import 'package:geocoding/geocoding.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:widam/src/features/user_language/application/current_language.dart';
 import '../../../domain/geofence.dart';
-import '../../../../../localization/current_language.dart';
 import '../../../application/geofence_id_controller.dart';
 
 import '../../../../app_data/application/app_data_controller.dart';

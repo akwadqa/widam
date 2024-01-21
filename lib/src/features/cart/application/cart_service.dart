@@ -37,6 +37,8 @@ class UpdateCart extends _$UpdateCart {
           shippingAddressId: shippingAddressId,
           timeSlot: timeSlot,
           couponCode: couponCode,
+          qid: qid,
+          file: file,
           paymentMethodId: paymentMethodId,
           paymentTokenId: paymentTokenId,
           paymentToken: paymentToken,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:widam/src/features/user_language/application/current_language.dart';
 
 import '../../gen/fonts.gen.dart';
-import '../localization/current_language.dart';
 import 'app_colors.dart';
 
 part 'app_theme.g.dart';

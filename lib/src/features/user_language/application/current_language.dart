@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:widam/src/constants/keys.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
-import '../constants/keys.dart';
 part 'current_language.g.dart';
 
 @Riverpod(keepAlive: true)
