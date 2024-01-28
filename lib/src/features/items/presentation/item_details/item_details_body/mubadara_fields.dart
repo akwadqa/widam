@@ -75,12 +75,12 @@ class _QIDTextFormFieldState extends ConsumerState<QIDTextFormField> {
             hintText: widget.mubadaraDetails.qidFieldPlaceholder,
             border: _border,
             enabledBorder: _border,
-            suffixIcon: state is ValidateQidLoading
-                ? const FadeCircleLoadingIndicator()
-                : TextButton(
-                    onPressed: _text.isEmpty && _text.length == 11
-                        ? null
-                        : state is ValidateQidLoaded
+            suffixIcon: _text.isEmpty || _text.length != 11
+                ? null
+                : state is ValidateQidLoading
+                    ? const FadeCircleLoadingIndicator()
+                    : TextButton(
+                        onPressed: state is ValidateQidLoaded
                             ? () => ref
                                 .read(validateQidNotifierProvider.notifier)
                                 .discard()
@@ -90,19 +90,22 @@ class _QIDTextFormFieldState extends ConsumerState<QIDTextFormField> {
                                     qid: _text,
                                     mubadaraId:
                                         widget.mubadaraDetails.mubadaraId),
-                    style: TextButton.styleFrom(
-                      foregroundColor: AppColors.darkBlue,
-                      textStyle: const TextStyle(
-                          fontSize: 12.0, fontWeight: FontWeight.bold),
-                    ),
-                    child: Text(state is ValidateQidLoaded
-                        ? S.of(context).cancel
-                        : widget.mubadaraDetails.buttonLabel)),
+                        style: TextButton.styleFrom(
+                          foregroundColor: AppColors.darkBlue,
+                          textStyle: const TextStyle(
+                              fontSize: 12.0, fontWeight: FontWeight.bold),
+                        ),
+                        child: Text(state is ValidateQidLoaded
+                            ? S.of(context).cancel
+                            : widget.mubadaraDetails.buttonLabel)),
           ),
           onChanged: (value) {
             setState(() {
               _text = value;
             });
+            if (state is ValidateQidLoaded) {
+              ref.read(validateQidNotifierProvider.notifier).discard();
+            }
           },
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
@@ -118,6 +121,9 @@ class _QIDTextFormFieldState extends ConsumerState<QIDTextFormField> {
               return S.of(context).mustBeElevenDigits;
             }
             if (state is! ValidateQidLoaded) {
+              return S.of(context).validateButtonMessage;
+            }
+            if (!state.isQidValid) {
               return S.of(context).validateButtonMessage;
             }
             return null;
@@ -136,7 +142,7 @@ class _QIDTextFormFieldState extends ConsumerState<QIDTextFormField> {
               Text(
                   state.isQidValid
                       ? S.of(context).qidValidMessage
-                      : S.of(context).qidInvalidMessage,
+                      : state.message,
                   style: const TextStyle(color: Colors.grey)),
             ],
           )

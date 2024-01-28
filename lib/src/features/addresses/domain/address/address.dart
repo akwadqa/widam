@@ -14,7 +14,7 @@ class Address with _$Address {
       required String addressTitle,
       required String addressType,
       required String streetNo,
-      required String buildingNo,
+      required String? buildingNo,
       required String zone,
       required Country country,
       required String latitude,

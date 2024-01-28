@@ -39,7 +39,7 @@ class ItemDetailsRepository {
     return itemDetailsResponse.data;
   }
 
-  Future<bool> validateQid(
+  Future<({bool isValid, String message})> validateQid(
       {required String qid,
       required String mubadaraId,
       required int quantity}) async {
@@ -56,6 +56,9 @@ class ItemDetailsRepository {
     if (validateQidResponse.error == 1) {
       throw AppException(validateQidResponse.message);
     }
-    return validateQidResponse.data;
+    return (
+      isValid: validateQidResponse.data,
+      message: response.data['message'] as String
+    );
   }
 }

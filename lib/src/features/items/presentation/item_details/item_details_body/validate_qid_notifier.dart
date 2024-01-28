@@ -22,13 +22,13 @@ class ValidateQidNotifier extends StateNotifier<ValidateQidState> {
       {required String qid, required String mubadaraId}) async {
     state = const ValidateQidLoading();
     try {
-      final isQidValid = await _ref
+      final data = await _ref
           .read(itemDetailsRepositoryProvider)
           .validateQid(
               qid: qid,
               mubadaraId: mubadaraId,
               quantity: _ref.read(quantityProvider));
-      state = ValidateQidLoaded(isQidValid);
+      state = ValidateQidLoaded(data.isValid, data.message);
     } catch (error, stackTrace) {
       state = ValidateQidError(error, stackTrace);
     }
@@ -61,5 +61,6 @@ class ValidateQidError extends ValidateQidState {
 
 class ValidateQidLoaded extends ValidateQidState {
   final bool isQidValid;
-  const ValidateQidLoaded(this.isQidValid);
+  final String message;
+  const ValidateQidLoaded(this.isQidValid, this.message);
 }
