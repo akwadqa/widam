@@ -99,6 +99,7 @@ class _QIDTextFormFieldState extends ConsumerState<QIDTextFormField> {
                             ? S.of(context).cancel
                             : widget.mubadaraDetails.buttonLabel)),
           ),
+          onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
           onChanged: (value) {
             setState(() {
               _text = value;
