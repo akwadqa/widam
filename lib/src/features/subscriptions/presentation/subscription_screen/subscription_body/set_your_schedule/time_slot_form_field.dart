@@ -55,7 +55,7 @@ class TimeSlotsFormField extends FormField<TimeSlot> {
                             ({TimeSlot timeSlot, String deliveryDate})?>(
                       context: context,
                       builder: (context) => TimeSlotsSelector(
-                        deleiveryType: 'Normal Delivery',
+                        deleiveryMethodId: 'Normal Delivery',
                         initialDate: appData!.deliveryDate.date,
                         initialTimeSlot: appData.timeSlot,
                       ),

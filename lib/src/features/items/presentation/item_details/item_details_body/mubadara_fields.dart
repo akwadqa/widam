@@ -65,6 +65,9 @@ class _QIDTextFormFieldState extends ConsumerState<QIDTextFormField> {
       if (next is ValidateQidError) {
         showAppBannerDialog(context, next.error.toString(), next.stackTrace);
       }
+      if (next is ValidateQidLoaded && next.isQidValid) {
+        ref.read(mubadaraFormKeyProvider).currentState?.validate();
+      }
     });
     final state = ref.watch(validateQidNotifierProvider);
     return Column(
@@ -75,7 +78,7 @@ class _QIDTextFormFieldState extends ConsumerState<QIDTextFormField> {
             hintText: widget.mubadaraDetails.qidFieldPlaceholder,
             border: _border,
             enabledBorder: _border,
-            suffixIcon: _text.isEmpty || _text.length != 11
+            suffixIcon: _text.isEmpty
                 ? null
                 : state is ValidateQidLoading
                     ? const FadeCircleLoadingIndicator()
@@ -118,13 +121,11 @@ class _QIDTextFormFieldState extends ConsumerState<QIDTextFormField> {
             if (value == null || value.isEmpty) {
               return S.of(context).required;
             }
-            if (value.length < 11 || value.length > 11) {
+            if (value.length != 11) {
               return S.of(context).mustBeElevenDigits;
             }
-            if (state is! ValidateQidLoaded) {
-              return S.of(context).validateButtonMessage;
-            }
-            if (!state.isQidValid) {
+
+            if (state is ValidateQidLoaded && !state.isQidValid) {
               return S.of(context).validateButtonMessage;
             }
             return null;

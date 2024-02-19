@@ -7,7 +7,7 @@ import '../presentation/cart_body/cart_controller.dart';
 
 part 'cart_service.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class UpdateCart extends _$UpdateCart {
   @override
   FutureOr<void> build() {}

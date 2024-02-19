@@ -17,10 +17,10 @@ import '../../domain/geofence_details/date.dart';
 class TimeSlotsSelector extends StatelessWidget {
   const TimeSlotsSelector(
       {super.key,
-      required this.deleiveryType,
+      required this.deleiveryMethodId,
       required this.initialDate,
       required this.initialTimeSlot});
-  final String deleiveryType;
+  final String deleiveryMethodId;
   final String initialDate;
   final TimeSlot initialTimeSlot;
   @override
@@ -38,7 +38,7 @@ class TimeSlotsSelector extends StatelessWidget {
                     color: Colors.black)),
             const SizedBox(height: 25),
             _DatesList(
-                deleviryType: deleiveryType,
+                deleviryMethodId: deleiveryMethodId,
                 initialDate: initialDate,
                 initialTimeSlot: initialTimeSlot),
           ],
@@ -50,10 +50,10 @@ class TimeSlotsSelector extends StatelessWidget {
 
 class _DatesList extends ConsumerWidget {
   const _DatesList(
-      {required this.deleviryType,
+      {required this.deleviryMethodId,
       required this.initialDate,
       required this.initialTimeSlot});
-  final String deleviryType;
+  final String deleviryMethodId;
   final String initialDate;
   final TimeSlot initialTimeSlot;
   @override
@@ -61,7 +61,10 @@ class _DatesList extends ConsumerWidget {
     final geofenceDetailsAsync = ref.watch(geofenceDetailsProvider);
     return geofenceDetailsAsync.when(
       data: (geofenceDetails) {
-        final deliveryMethod = geofenceDetails.deliveryMethods.first;
+        final deliveryMethod = geofenceDetails.deliveryMethods.firstWhere(
+          (element) => deleviryMethodId == element.deliveryMethodId,
+          orElse: () => geofenceDetails.deliveryMethods.first,
+        );
         final List<Date> dates = deliveryMethod.timeSlotGroup.dates;
         return dates.isEmpty
             ? Padding(

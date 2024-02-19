@@ -16,7 +16,6 @@ import '../../../../../common_widgets/fade_circle_loading_indicator.dart';
 import 'mubadara_fields.dart';
 import 'quantity_form_field.dart';
 import '../../../../../../generated/l10n.dart';
-import '../../../../../common_widgets/banner/app_banner_dialog.dart';
 import '../../../../../common_widgets/submit_button.dart';
 import '../../../../cart/application/cart_service.dart';
 import '../item_details_controller.dart';
@@ -175,9 +174,7 @@ class AddToCartWidget extends StatelessWidget {
 
   void _listenForUpdateCart(WidgetRef ref, BuildContext context) {
     ref.listen(updateCartProvider, (previous, next) async {
-      if (next is AsyncError) {
-        showAppBannerDialog(context, next.error.toString(), next.stackTrace);
-      } else if (next is AsyncData) {
+      if (next is AsyncData) {
         context.popRoute();
         ref.read(goToTabControllerProvider.notifier).showCartDialog();
       }

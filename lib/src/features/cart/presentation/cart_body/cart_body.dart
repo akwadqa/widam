@@ -66,9 +66,7 @@ class AuthenticatedCart extends ConsumerWidget {
               buttonText: S.of(context).returnToShop,
               onPressed: () => context.tabsRouter.setActiveIndex(0));
         }
-        return ProviderScope(overrides: [
-          updateCartProvider.overrideWith(() => UpdateCart()),
-        ], child: _NonEmptyCart(cart: cart));
+        return _NonEmptyCart(cart: cart);
       },
       error: (error, stack) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -80,12 +78,17 @@ class AuthenticatedCart extends ConsumerWidget {
   }
 }
 
-class _NonEmptyCart extends StatelessWidget {
+class _NonEmptyCart extends ConsumerWidget {
   const _NonEmptyCart({required this.cart});
   final Cart cart;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(updateCartProvider, (previous, next) {
+      if (next is AsyncError) {
+        showAppBannerDialog(context, next.error.toString(), next.stackTrace);
+      }
+    });
     final expressDelivery =
         cart.pickup != 1 ? cart.cartContent.expressDelivery : null;
     final normalDelivery =
@@ -147,85 +150,71 @@ class _NonEmptyCart extends StatelessWidget {
             right: 0,
             child: TotalContainer(
                 orderTotal: cart.total,
-                button: Consumer(
-                  builder: (context, ref, child) {
-                    ref.listen(updateCartProvider, (previous, next) {
-                      if (next is AsyncError) {
-                        showAppBannerDialog(
-                            context, next.error.toString(), next.stackTrace);
-                      }
-                    });
-                    final orderTotal = cart.orderTotal;
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (orderTotal.remainderAmount > 0) ...[
-                          AppStepProgressIndicator(
-                            size: 4,
-                            totalSteps: orderTotal.minimumOrderAmount.toInt(),
-                            currentStep: orderTotal.remainderAmount > 0
-                                ? (orderTotal.minimumOrderAmount -
-                                        orderTotal.remainderAmount)
-                                    .toInt()
-                                : orderTotal.minimumOrderAmount.toInt(),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                              '${S.of(context).minimumOrderAmount} ${cart.orderTotal.minimumOrderAmount} ${S.of(context).qar}',
-                              style: const TextStyle(
-                                  fontSize: 12,
-                                  color: AppColors.red,
-                                  fontWeight: FontWeight.w500)),
-                          const SizedBox(height: 16),
-                        ],
-                        ForwardSubmitButton(
-                            onPressed: orderTotal.remainderAmount > 0
-                                ? null
-                                : () {
-                                    if (ref
-                                        .read(canVibrateProvider)
-                                        .requireValue) {
-                                      Vibrate.feedback(FeedbackType.light);
-                                    }
-                                    if ((cart.cartContent as CartContent)
-                                        .normalDelivery!
-                                        .websiteItems
-                                        .any((element) =>
-                                            element.inStock == 0)) {
-                                      showAdaptiveModalBottomSheet(
-                                          context: context,
-                                          builder: (context) {
-                                            return const UnavailableItems();
-                                          });
-                                    } else if (cart.shippingAddressDetails ==
-                                        null) {
-                                      showAdaptiveModalBottomSheet<Address?>(
-                                        context: context,
-                                        builder: (context) =>
-                                            const AddressesSelector(),
-                                      ).then((address) {
-                                        if (address != null) {
-                                          ref
-                                              .read(updateCartProvider.notifier)
-                                              .updateCart(
-                                                  shippingAddressId:
-                                                      address.addressId)
-                                              .then((value) {
-                                            if (value) {
-                                              context.pushRoute(
-                                                  const CheckoutScreen());
-                                            }
-                                          });
+                button: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (cart.orderTotal.remainderAmount > 0) ...[
+                      AppStepProgressIndicator(
+                        size: 4,
+                        totalSteps: cart.orderTotal.minimumOrderAmount.toInt(),
+                        currentStep: cart.orderTotal.remainderAmount > 0
+                            ? (cart.orderTotal.minimumOrderAmount -
+                                    cart.orderTotal.remainderAmount)
+                                .toInt()
+                            : cart.orderTotal.minimumOrderAmount.toInt(),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                          '${S.of(context).minimumOrderAmount} ${cart.orderTotal.minimumOrderAmount} ${S.of(context).qar}',
+                          style: const TextStyle(
+                              fontSize: 12,
+                              color: AppColors.red,
+                              fontWeight: FontWeight.w500)),
+                      const SizedBox(height: 16),
+                    ],
+                    ForwardSubmitButton(
+                        onPressed: cart.orderTotal.remainderAmount > 0
+                            ? null
+                            : () {
+                                if (ref.read(canVibrateProvider).requireValue) {
+                                  Vibrate.feedback(FeedbackType.light);
+                                }
+                                if ((cart.cartContent as CartContent)
+                                    .normalDelivery!
+                                    .websiteItems
+                                    .any((element) => element.inStock == 0)) {
+                                  showAdaptiveModalBottomSheet(
+                                      context: context,
+                                      builder: (context) {
+                                        return const UnavailableItems();
+                                      });
+                                } else if (cart.shippingAddressDetails ==
+                                    null) {
+                                  showAdaptiveModalBottomSheet<Address?>(
+                                    context: context,
+                                    builder: (context) =>
+                                        const AddressesSelector(),
+                                  ).then((address) {
+                                    if (address != null) {
+                                      ref
+                                          .read(updateCartProvider.notifier)
+                                          .updateCart(
+                                              shippingAddressId:
+                                                  address.addressId)
+                                          .then((value) {
+                                        if (value) {
+                                          context.pushRoute(
+                                              const CheckoutScreen());
                                         }
                                       });
-                                    } else {
-                                      context.pushRoute(const CheckoutScreen());
                                     }
-                                  },
-                            title: S.of(context).proceedToCheckout),
-                      ],
-                    );
-                  },
+                                  });
+                                } else {
+                                  context.pushRoute(const CheckoutScreen());
+                                }
+                              },
+                        title: S.of(context).proceedToCheckout),
+                  ],
                 ),
                 cart: cart))
       ],

@@ -26,7 +26,11 @@ class SimilarItemsController extends _$SimilarItemsController {
     state = AsyncData(similarItemsData.copyWith(itemIdLoading: itemId));
     final result = await ref
         .read(updateCartProvider.notifier)
-        .updateCart(itemId: itemId, quantity: quantity);
+        .updateCart(itemId: itemId, quantity: quantity)
+        .catchError((error, stackTrace) {
+      state = AsyncData(similarItemsData.copyWith(itemIdLoading: null));
+      return false;
+    });
     if (result) {
       state = AsyncData(similarItemsData.copyWith(
           recommendationResponse: similarItemsData.recommendationResponse

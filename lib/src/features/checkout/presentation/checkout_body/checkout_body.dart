@@ -43,9 +43,9 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
           context: context,
           builder: (ctx) {
             return TimeSlotsSelector(
-                deleiveryType: (cart.cartContent as CartContent)
+                deleiveryMethodId: (cart.cartContent as CartContent)
                     .normalDelivery!
-                    .deliveryMethodTitle,
+                    .deliveryMethodId,
                 initialDate: (cart.cartContent as CartContent)
                     .normalDelivery!
                     .deliveryDate
@@ -219,10 +219,10 @@ class _UpdatableCartContent extends ConsumerWidget {
                                   context: context,
                                   builder: (ctx) {
                                     return TimeSlotsSelector(
-                                        deleiveryType:
+                                        deleiveryMethodId:
                                             (cart.cartContent as CartContent)
                                                 .normalDelivery!
-                                                .deliveryMethodTitle,
+                                                .deliveryMethodId,
                                         initialDate:
                                             (cart.cartContent as CartContent)
                                                 .normalDelivery!

@@ -69,7 +69,8 @@ class DeliveryContainer extends StatelessWidget {
                         context: context,
                         builder: (ctx) {
                           return TimeSlotsSelector(
-                              deleiveryType: deliveryType.deliveryMethodTitle,
+                              deleiveryMethodId:
+                                  deliveryType.deliveryMethodId,
                               initialDate: deliveryType.deliveryDate.date,
                               initialTimeSlot: deliveryType.timeSlot);
                         }).then((value) {

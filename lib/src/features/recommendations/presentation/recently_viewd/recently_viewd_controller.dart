@@ -27,7 +27,11 @@ class RecentlyViewdController extends _$RecentlyViewdController {
     state = AsyncData(recentlyViewdData.copyWith(itemIdLoading: itemId));
     final result = await ref
         .read(updateCartProvider.notifier)
-        .updateCart(itemId: itemId, quantity: quantity);
+        .updateCart(itemId: itemId, quantity: quantity)
+        .catchError((error, stackTrace) {
+      state = AsyncData(recentlyViewdData.copyWith(itemIdLoading: null));
+      return false;
+    });
     if (result) {
       state = AsyncData(recentlyViewdData.copyWith(
           recommendationResponse: recentlyViewdData.recommendationResponse
