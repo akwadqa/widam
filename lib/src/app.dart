@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Banner;
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,7 +22,8 @@ class App extends ConsumerWidget {
     return MaterialApp.router(
       onGenerateTitle: (context) => S.of(context).appTitle,
       debugShowCheckedModeBanner: false,
-      routerDelegate: appRouter.delegate(deepLinkBuilder: (deepLink) => DeepLink.defaultPath),
+      routerDelegate: appRouter.delegate(
+          deepLinkBuilder: (deepLink) => DeepLink.defaultPath),
       routeInformationParser: appRouter.defaultRouteParser(),
       theme: ref.watch(themeDataProvider),
       localizationsDelegates: const [

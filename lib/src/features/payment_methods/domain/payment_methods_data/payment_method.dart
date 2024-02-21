@@ -16,6 +16,7 @@ class PaymentMethod with _$PaymentMethod {
     required String? appleMerchantId,
     required String? postUrl,
     required String? paymentType,
+    required String processor,
     required List<SavedCard>? savedCards,
   }) = _PaymentMethod;
 

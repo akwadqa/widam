@@ -138,7 +138,7 @@ Future<T?> showAdaptiveModalBottomSheet<T>({
 
 void navigateToItemDetails(
     {required BuildContext context,
-    required WidgetRef ref,
+    WidgetRef? ref,
     required String itemId,
     String? itemType,
     int? isMubadara,
@@ -149,7 +149,7 @@ void navigateToItemDetails(
     context
         .pushRoute(ItemDetailsScreen(itemId: itemId, mubadaraId: mubadaraId));
   } else {
-    ref
+    ref!
         .read(itemDetailsSheetControllerProvider.notifier)
         .getDetails(itemId: itemId, attributionToken: attributionToken);
   }

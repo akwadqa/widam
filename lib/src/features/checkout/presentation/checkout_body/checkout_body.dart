@@ -334,6 +334,7 @@ class _UpdatableCartContent extends ConsumerWidget {
     showAdaptiveModalBottomSheet<(bool, String, String?)?>(
             context: context,
             builder: (context) => PaymentMethodSelector(
+              isMubadara: cart.mubadara == 1,
                 selectedPaymentMethodId: cart.paymentMethod?.paymentMethodId,
                 selectedPaymentTokenId: cart.savedCard?.paymentTokenId))
         .then(((bool, String, String?)? paymentData) {

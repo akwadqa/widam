@@ -17,10 +17,12 @@ class PaymentMethodSelector extends StatefulWidget {
   const PaymentMethodSelector(
       {super.key,
       required this.selectedPaymentMethodId,
-      this.selectedPaymentTokenId});
+      this.selectedPaymentTokenId,
+      required this.isMubadara});
 
   final String? selectedPaymentMethodId;
   final String? selectedPaymentTokenId;
+  final bool isMubadara;
 
   @override
   State<PaymentMethodSelector> createState() => _PaymentMethodSelectorState();
@@ -80,6 +82,7 @@ class _PaymentMethodSelectorState extends State<PaymentMethodSelector> {
               },
             ),
             _PaymentMethodsList(
+                isMubadara: widget.isMubadara,
                 isWalletSelected: _isWalletSelected,
                 selectedPaymentMethodId: widget.selectedPaymentMethodId,
                 selectedPaymentTokenId: widget.selectedPaymentTokenId),
@@ -94,24 +97,33 @@ class _PaymentMethodsList extends ConsumerWidget {
   const _PaymentMethodsList(
       {required this.selectedPaymentMethodId,
       this.selectedPaymentTokenId,
-      required this.isWalletSelected});
+      required this.isWalletSelected,
+      required this.isMubadara});
 
   final String? selectedPaymentMethodId;
   final String? selectedPaymentTokenId;
   final bool isWalletSelected;
+  final bool isMubadara;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final paymentMethodsAsync = ref.watch(paymentMethodsProvider);
     return paymentMethodsAsync.when(
         data: (paymentMethodsList) {
-          final paymentMethods = Platform.isAndroid
-              ? paymentMethodsList
-                  .where((element) => element.paymentType != 'Apple Pay')
-                  .toList()
-              : paymentMethodsList
-                  .where((element) => element.paymentType != 'Google Pay')
-                  .toList();
+          List<PaymentMethod> paymentMethods =
+              paymentMethodsList.where((element) {
+            if (Platform.isAndroid) {
+              return element.paymentType != 'Apple Pay';
+            } else {
+              return element.paymentType != 'Google Pay';
+            }
+          }).toList();
+
+          if (isMubadara) {
+            paymentMethods = paymentMethods
+                .where((element) => element.processor != 'Offline')
+                .toList();
+          }
           return ListView.separated(
               shrinkWrap: true,
               itemBuilder: (context, index) {

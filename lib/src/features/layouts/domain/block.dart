@@ -2,6 +2,7 @@ class Block<T> {
   Block(
       {required this.blockId,
       required this.blockType,
+      required this.popups,
       required this.title,
       required this.background,
       required this.icon,
@@ -16,6 +17,7 @@ class Block<T> {
 
   final String blockId;
   final String blockType;
+  final int? popups;
   final String? title;
   final String background;
   final String? icon;
@@ -30,6 +32,7 @@ class Block<T> {
 
   factory Block.fromJson(Map<String, dynamic> json, Function(dynamic) create) {
     return Block(
+      popups: json['popups'],
       showTitle: json['show_title'],
       showTitleBlock: json['show_title_block'],
       blockId: json['block_id'],

@@ -27,12 +27,12 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
-      routes: const [
+      routes: [
         HomeScreen(),
-        ItemGroupsScreen(),
-        DealsScreen(),
-        CartScreen(),
-        ProfileScreen()
+        const ItemGroupsScreen(),
+        const DealsScreen(),
+        const CartScreen(),
+        const ProfileScreen()
       ],
       bottomNavigationBuilder: (context, tabsRouter) {
         return AppBottomNavigationBar(

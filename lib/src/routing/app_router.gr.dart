@@ -26,7 +26,7 @@ import 'package:widam/src/features/auth/presentation/login_screen/login_screen.d
     as _i15;
 import 'package:widam/src/features/cart/presentation/cart_screen/cart_screen.dart'
     as _i6;
-import 'package:widam/src/features/checkout/domain/order/order.dart' as _i35;
+import 'package:widam/src/features/checkout/domain/order/order.dart' as _i37;
 import 'package:widam/src/features/checkout/presentation/checkout_screen/checkout_screen.dart'
     as _i7;
 import 'package:widam/src/features/checkout/presentation/ordered_successfully_screen/ordered_successfully_screen.dart'
@@ -47,6 +47,8 @@ import 'package:widam/src/features/item_groups/presentation/item_groups_screen/i
     as _i14;
 import 'package:widam/src/features/items/presentation/item_details/item_details_screen.dart'
     as _i12;
+import 'package:widam/src/features/layouts/domain/banner/banner.dart' as _i36;
+import 'package:widam/src/features/layouts/domain/block.dart' as _i35;
 import 'package:widam/src/features/loyalty_points/presentation/points_history_screen/points_history_screen.dart'
     as _i20;
 import 'package:widam/src/features/loyalty_points/presentation/widam_loyalty_program_screen/widam_loyalty_program_screen.dart'
@@ -62,7 +64,7 @@ import 'package:widam/src/features/profile/presentation/profile_screen/profile_s
 import 'package:widam/src/features/profile/presentation/terms_conditions_and_privacy_policy_screen.dart'
     as _i26;
 import 'package:widam/src/features/sales_orders/domain/sales_order/sales_order.dart'
-    as _i36;
+    as _i38;
 import 'package:widam/src/features/sales_orders/presentaion/sales_order_details_screen/sales_order_details_screen.dart'
     as _i23;
 import 'package:widam/src/features/sales_orders/presentaion/sales_orders_screen/sales_orders_screen.dart'
@@ -155,9 +157,14 @@ abstract class $AppRouter extends _i31.RootStackRouter {
       );
     },
     HomeScreen.name: (routeData) {
+      final args = routeData.argsAs<HomeScreenArgs>(
+          orElse: () => const HomeScreenArgs());
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i11.HomeScreen(),
+        child: _i11.HomeScreen(
+          key: args.key,
+          bannerBlock: args.bannerBlock,
+        ),
       );
     },
     ItemDetailsScreen.name: (routeData) {
@@ -526,16 +533,40 @@ class EditProfileScreenArgs {
 
 /// generated route for
 /// [_i11.HomeScreen]
-class HomeScreen extends _i31.PageRouteInfo<void> {
-  const HomeScreen({List<_i31.PageRouteInfo>? children})
-      : super(
+class HomeScreen extends _i31.PageRouteInfo<HomeScreenArgs> {
+  HomeScreen({
+    _i32.Key? key,
+    _i35.Block<List<_i36.Banner>>? bannerBlock,
+    List<_i31.PageRouteInfo>? children,
+  }) : super(
           HomeScreen.name,
+          args: HomeScreenArgs(
+            key: key,
+            bannerBlock: bannerBlock,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'HomeScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i31.PageInfo<HomeScreenArgs> page =
+      _i31.PageInfo<HomeScreenArgs>(name);
+}
+
+class HomeScreenArgs {
+  const HomeScreenArgs({
+    this.key,
+    this.bannerBlock,
+  });
+
+  final _i32.Key? key;
+
+  final _i35.Block<List<_i36.Banner>>? bannerBlock;
+
+  @override
+  String toString() {
+    return 'HomeScreenArgs{key: $key, bannerBlock: $bannerBlock}';
+  }
 }
 
 /// generated route for
@@ -691,7 +722,7 @@ class OrderedSuccessfullyScreen
     extends _i31.PageRouteInfo<OrderedSuccessfullyScreenArgs> {
   OrderedSuccessfullyScreen({
     _i32.Key? key,
-    required _i35.Order order,
+    required _i37.Order order,
     String? pun,
     List<_i31.PageRouteInfo>? children,
   }) : super(
@@ -719,7 +750,7 @@ class OrderedSuccessfullyScreenArgs {
 
   final _i32.Key? key;
 
-  final _i35.Order order;
+  final _i37.Order order;
 
   final String? pun;
 
@@ -839,7 +870,7 @@ class SalesOrderDetailsScreen
     extends _i31.PageRouteInfo<SalesOrderDetailsScreenArgs> {
   SalesOrderDetailsScreen({
     _i32.Key? key,
-    required _i36.SalesOrder salesOrder,
+    required _i38.SalesOrder salesOrder,
     required List<String> statuses,
     List<_i31.PageRouteInfo>? children,
   }) : super(
@@ -867,7 +898,7 @@ class SalesOrderDetailsScreenArgs {
 
   final _i32.Key? key;
 
-  final _i36.SalesOrder salesOrder;
+  final _i38.SalesOrder salesOrder;
 
   final List<String> statuses;
 
@@ -973,7 +1004,7 @@ class TermsConditionsAndPrivacyPolicyScreenArgs {
 class TrackMapScreen extends _i31.PageRouteInfo<TrackMapScreenArgs> {
   TrackMapScreen({
     _i32.Key? key,
-    required _i36.SalesOrder salesOrder,
+    required _i38.SalesOrder salesOrder,
     List<_i31.PageRouteInfo>? children,
   }) : super(
           TrackMapScreen.name,
@@ -998,7 +1029,7 @@ class TrackMapScreenArgs {
 
   final _i32.Key? key;
 
-  final _i36.SalesOrder salesOrder;
+  final _i38.SalesOrder salesOrder;
 
   @override
   String toString() {

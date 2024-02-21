@@ -100,10 +100,12 @@ class _NonEmptyCart extends ConsumerWidget {
           child: CustomScrollView(
             slivers: [
               const SliverToBoxAdapter(child: SizedBox(height: 70.0)),
-              SliverToBoxAdapter(
-                child: SimiliarItems(quotationId: cart.quotationId),
-              ),
-              const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
+              if (cart.mubadara != 1) ...[
+                SliverToBoxAdapter(
+                  child: SimiliarItems(quotationId: cart.quotationId),
+                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
+              ],
               SliverToBoxAdapter(
                   child: Text(S.of(context).yourCartDetails,
                       style: const TextStyle(
@@ -137,9 +139,11 @@ class _NonEmptyCart extends ConsumerWidget {
                         ),
                         currency: cart.currency)
                 ])),
-              const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
-              SliverToBoxAdapter(
-                  child: RecentlyViewd(quotationId: cart.quotationId)),
+              if (cart.mubadara != 1) ...[
+                const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
+                SliverToBoxAdapter(
+                    child: RecentlyViewd(quotationId: cart.quotationId)),
+              ],
               const SliverToBoxAdapter(child: SizedBox(height: 180.0)),
             ],
           ),

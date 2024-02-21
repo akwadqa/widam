@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Banner;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../common_widgets/banner/app_banner.dart';
 
@@ -14,11 +14,13 @@ class BlocksList extends ConsumerWidget {
     final layout = ref.watch(layoutProvider(layoutType));
     return layout.when(
         data: (layout) {
+          final blocks =
+              layout.data.where((element) => element.popups != 1).toList();
           return SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
-            final block = layout.data[index];
+            final block = blocks[index];
             return BlockItem(block: block);
-          }, childCount: layout.data.length));
+          }, childCount: blocks.length));
         },
         error: (error, stack) => SliverToBoxAdapter(
                 child: Padding(

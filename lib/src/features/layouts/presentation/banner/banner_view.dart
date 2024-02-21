@@ -32,6 +32,8 @@ class BannerView extends ConsumerWidget {
       navigateToItemDetails(
           context: context,
           ref: ref,
+          mubadaraId: banner.mubadaraId,
+          isMubadara: banner.mubadaraId != null ? 1 : 0,
           itemId: banner.bannerLink!,
           itemType: 'V');
     } else {

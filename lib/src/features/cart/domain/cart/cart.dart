@@ -28,6 +28,7 @@ class Cart with _$Cart {
     required String? couponCode,
     required double? totalDiscountAmount,
     required String currency,
+    required int mubadara,
     required List<DeliveryCharge> deliveryCharges,
     required OrderTotal orderTotal,
     @_CartContentConverter() required dynamic cartContent,

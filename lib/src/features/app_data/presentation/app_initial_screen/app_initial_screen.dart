@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Banner;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/features/app_data/presentation/splash_screen/splash_screen.dart';
+import 'package:widam/src/features/layouts/domain/block.dart';
 import '../../../../utils/utils.dart';
+import '../../../layouts/domain/banner/banner.dart';
 import '../update_screen/update_screen.dart';
 import 'app_initial_controller.dart';
 import '../../../../routing/app_router.gr.dart';
@@ -17,9 +19,14 @@ class AppInitialScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(appInitialControllerProvider, (previous, next) {
       if (next.asData != null) {
-        if (next.asData!.value == AppInitialResult.goHome) {
-          context.replaceRoute(const HomeScreen());
-        } else if (next.asData!.value == AppInitialResult.goLocationSelector) {
+        if (next.asData!.value is GoHome) {
+          context.replaceRoute(HomeScreen());
+        } else if (next.asData!.value is GoHomeWithMubadraBanner) {
+          final Block<List<Banner>> bannerBlock =
+              (next.asData!.value as GoHomeWithMubadraBanner).bannerBlock
+                  as Block<List<Banner>>;
+          context.replaceRoute(HomeScreen(bannerBlock: bannerBlock));
+        } else if (next.asData!.value is GoLocationSelector) {
           showAdaptiveModalBottomSheet<Location?>(
                   context: context,
                   builder: (context) =>
@@ -40,7 +47,7 @@ class AppInitialScreen extends ConsumerWidget {
     });
     final state = ref.watch(appInitialControllerProvider);
     if (ref.watch(appInitialControllerProvider) is AsyncData &&
-        state.asData!.value == AppInitialResult.goUpdate) {
+        state.asData!.value is GoUpdate) {
       return const UpdateScreen();
     }
     return const SplashScreen();

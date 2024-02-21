@@ -4,9 +4,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:widam/src/features/layouts/data/layouts_repository.dart';
+import 'package:widam/src/features/layouts/domain/block.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
 import '../../../addresses/application/geofence_id_controller.dart';
 
+import '../../../layouts/domain/banner/banner.dart';
 import '../../application/app_data_controller.dart';
 
 part 'app_initial_controller.g.dart';
@@ -14,13 +16,13 @@ part 'app_initial_controller.g.dart';
 @riverpod
 class AppInitialController extends _$AppInitialController {
   @override
-  FutureOr<AppInitialResult> build() => _initial();
+  FutureOr<AppInitialResultState> build() => _initial();
 
-  Future<AppInitialResult> _initial() async {
+  Future<AppInitialResultState> _initial() async {
     if (ref.watch(geofenceIdAndCoordinatesProvider).geofenceId != null) {
       final startTime = DateTime.now();
       await ref.read(appDataControllerProvider.future);
-      await ref.read(layoutProvider(LayoutType.home).future);
+      final layout = await ref.read(layoutProvider(LayoutType.home).future);
       final endTime = DateTime.now();
       final difference = endTime.difference(startTime).inMilliseconds;
       if (difference < 2000) {
@@ -28,11 +30,16 @@ class AppInitialController extends _$AppInitialController {
       }
       final apiVersion = _getApiVersion();
       if (apiVersion != null && await _isNeedToUpdate(apiVersion)) {
-        return AppInitialResult.goUpdate;
+        return GoUpdate();
       }
-      return AppInitialResult.goHome;
+      final Block<List<Banner>>? bannerBlock = layout.data
+          .firstWhere((element) => element.popups == 1) as Block<List<Banner>>?;
+      if (bannerBlock != null && bannerBlock.data.isNotEmpty) {
+        return GoHomeWithMubadraBanner(bannerBlock);
+      }
+      return GoHome();
     } else {
-      return AppInitialResult.goLocationSelector;
+      return GoLocationSelector();
     }
   }
 
@@ -81,12 +88,23 @@ class AppInitialController extends _$AppInitialController {
         .read(geofenceIdAndCoordinatesProvider.notifier)
         .setGeofenceIdAndCoordinates(geofenceId, latitude, longitude);
     await ref.read(appDataControllerProvider.future);
-    state = const AsyncData(AppInitialResult.goHome);
+    state = AsyncData(GoHome());
   }
 
   void goHome() {
-    state = const AsyncData(AppInitialResult.goHome);
+    state = AsyncData(GoHome());
   }
 }
 
-enum AppInitialResult { goHome, goLocationSelector, goUpdate }
+sealed class AppInitialResultState {}
+
+class GoHome extends AppInitialResultState {}
+
+class GoLocationSelector extends AppInitialResultState {}
+
+class GoUpdate extends AppInitialResultState {}
+
+class GoHomeWithMubadraBanner extends AppInitialResultState {
+  final Block<List> bannerBlock;
+  GoHomeWithMubadraBanner(this.bannerBlock);
+}

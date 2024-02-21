@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:widam/src/features/cart/presentation/add_to_cart_button/quantity_controller.dart';
-import 'package:widam/src/features/recommendations/data/recommendations_repository.dart';
 import 'package:widam/src/features/recommendations/presentation/recently_viewd/recently_viewd_controller.dart';
 import 'package:widam/src/features/recommendations/presentation/similar_items/similar_items_controller.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
@@ -259,7 +258,6 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
         .addTocart(widget.attributionToken);
     ref.invalidate(recentlyViewdControllerProvider);
     ref.invalidate(similarItemsControllerProvider);
-    ref.invalidate(recommendationsProvider);
   }
 
   void _toggleExpanded() {
