@@ -49,7 +49,9 @@ class CartRepository {
               'website_item_id': itemId,
               'quantity': quantity,
               if (attributionToken != null)
-                'attribution_token': attributionToken
+                'attribution_token': attributionToken,
+              if (isPriceModifier != null)
+                'price_modifier': isPriceModifier ? 1 : 0,
             }
           ]),
         if (qid != null) 'qid_field_placeholder': qid,
@@ -62,7 +64,6 @@ class CartRepository {
         if (paymentTokenId != null) 'payment_token_id': paymentTokenId,
         if (paymentToken != null) 'payment_token': paymentToken,
         if (deliveryDate != null) 'delivery_date': deliveryDate,
-        if (isPriceModifier != null) 'price_modifier': isPriceModifier ? 1 : 0,
         if (useWalletBalance != null) 'use_wallet_balance': useWalletBalance,
       });
       final response = await _networkService.put(EndPoints.cart, formData);

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widam/src/common_widgets/app_filter_chip.dart';
+import 'package:widam/src/features/item_groups/domain/item_group/item_group.dart';
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/sub_item_groups_list/sub_item_groups_controller.dart';
 import '../../../../../theme/app_colors.dart';
 
@@ -24,22 +26,8 @@ class SubItemGroupsList extends ConsumerWidget {
                           subItemGroups[index].itemGroupId;
                   return Padding(
                     padding: const EdgeInsets.only(right: 8),
-                    child: FilterChip(
-                      selected: isSelected,
-                      label: Text(
-                        subItemGroups[index].itemGroupName,
-                      ),
-                      side: isSelected
-                          ? const BorderSide(
-                              color: AppColors.darkBlue, width: 1)
-                          : null,
-                      labelStyle: isSelected
-                          ? const TextStyle(
-                              color: AppColors.darkBlue,
-                              fontWeight: FontWeight.w600)
-                          : null,
-                      padding: const EdgeInsets.only(
-                          bottom: 6, top: 4, left: 4, right: 4),
+                    child: AppFilterChip(
+                      isSelected: isSelected,
                       onSelected: (bool value) {
                         ref
                             .read(
@@ -48,6 +36,7 @@ class SubItemGroupsList extends ConsumerWidget {
                                 ? subItemGroups[index].itemGroupId
                                 : null);
                       },
+                      lable: subItemGroups[index].itemGroupName,
                     ),
                   );
                 },
