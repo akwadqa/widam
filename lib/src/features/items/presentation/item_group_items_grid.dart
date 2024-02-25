@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/generated/l10n.dart';
+import 'package:widam/src/features/items/presentation/items_grid.dart';
 import '../../../common_widgets/fade_circle_loading_indicator.dart';
 import '../../../common_widgets/banner/app_banner_dialog.dart';
 import '../../../common_widgets/banner/app_banner.dart';
 import '../../../common_widgets/app_pagination_widget.dart';
 import '../application/item_group_items_controller.dart';
-import 'item_card/item_card.dart';
 
 class ItemGroupItemsGrid extends ConsumerWidget {
   const ItemGroupItemsGrid({super.key, this.childAspectRatio = 0.49});
@@ -43,20 +43,9 @@ class ItemGroupItemsGrid extends ConsumerWidget {
       enableLoadingOnScrollStart: true,
       enablePullDown: true,
       onRefresh: ref.read(itemGroupItemsControllerProvider.notifier).onRefresh,
-      child: GridView.builder(
-        itemCount: items.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: childAspectRatio,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-        ),
-        padding: const EdgeInsetsDirectional.only(
-            start: 8.0, bottom: 8.0, end: 10.0),
-        itemBuilder: (context, index) {
-          return ItemCard(item: items[index]);
-        },
-      ),
+      child: ItemsGrid(items: items, childAspectRatio: childAspectRatio),
     );
   }
 }
+
+

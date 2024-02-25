@@ -25,7 +25,6 @@ class TilesGridView extends ConsumerWidget {
                     context: context,
                     ref: ref,
                     itemId: tiles[index].tileLink,
-                    hasProductOptions: tiles[index].hasProductOptions,
                     itemType: tiles[index].websiteItemType);
               } else {
                 ref

@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:widam/src/common_widgets/banner/app_banner_dialog.dart';
 import 'package:widam/src/features/cart/presentation/cart_item_added_dialog/go_to_cart_controller.dart';
-import 'package:widam/src/features/items/presentation/item_details/item_details_body/item_details_options/saved_options_provider.dart';
+import 'package:widam/src/features/items/presentation/item_details/item_details_body/slotter_fees_widget/slotter_fees_controller.dart';
 import 'package:widam/src/features/recommendations/presentation/frequently_bought_together/frequently_bought_together_controller.dart';
 import 'package:widam/src/features/recommendations/presentation/recently_viewd/recently_viewd_controller.dart';
 import 'package:widam/src/features/recommendations/presentation/similar_items/similar_items_controller.dart';
@@ -26,7 +26,6 @@ class AddToCartWidget extends StatelessWidget {
   const AddToCartWidget({
     super.key,
     required this.itemId,
-    required this.optionsFromKey,
     this.attributionToken,
     required this.hasVariants,
     required this.attributesFormKey,
@@ -34,7 +33,6 @@ class AddToCartWidget extends StatelessWidget {
   });
 
   final String itemId;
-  final GlobalKey<FormState> optionsFromKey;
   final String? attributionToken;
   final GlobalKey<FormState> attributesFormKey;
   final bool hasVariants;
@@ -111,34 +109,14 @@ class AddToCartWidget extends StatelessWidget {
     }
 
     if (attributesFormKey.currentState?.validate() ?? true) {
-      _validateOptionsForm(ref);
+      _addToCart(ref: ref, attributionToken: attributionToken);
     } else {
       onInvalidForm(FormType.variants);
     }
   }
 
-  void _validateOptionsForm(WidgetRef ref) {
-    if (optionsFromKey.currentState?.validate() ?? true) {
-      optionsFromKey.currentState?.save();
-      _processOptionsAndAddToCart(ref);
-    } else {
-      onInvalidForm(FormType.options);
-    }
-  }
-
-  void _processOptionsAndAddToCart(WidgetRef ref) {
-    final productOptions = ref.read(savedOptionsProvider);
-    final savedOptions = productOptions.isNotEmpty ? productOptions : null;
-    _addToCart(
-        ref: ref,
-        savedOptions: savedOptions,
-        attributionToken: attributionToken);
-  }
-
   void _addToCart({
     required WidgetRef ref,
-    List<({int isPriceModifier, String productOptionId, int radioOptionId})>?
-        savedOptions,
     String? attributionToken,
   }) {
     final mubadaraFormKey = ref.read(mubadaraFormKeyProvider);
@@ -150,15 +128,14 @@ class AddToCartWidget extends StatelessWidget {
     mubadaraFormKey.currentState?.save();
 
     ref.read(updateCartProvider.notifier).updateCart(
-          itemId: itemId,
-          quantity: ref.read(quantityProvider),
-          qid: ref.read(qidNumberProvider).isEmpty
-              ? null
-              : ref.read(qidNumberProvider),
-          file: ref.read(qidAttachmentProvider),
-          productOptions: savedOptions,
-          attributionToken: attributionToken,
-        );
+        itemId: itemId,
+        quantity: ref.read(quantityProvider),
+        qid: ref.read(qidNumberProvider).isEmpty
+            ? null
+            : ref.read(qidNumberProvider),
+        file: ref.read(qidAttachmentProvider),
+        attributionToken: attributionToken,
+        isPriceModifier: ref.read(slotterFeesControllerProvider));
 
     _invalidateRecommendationProviders(ref);
   }

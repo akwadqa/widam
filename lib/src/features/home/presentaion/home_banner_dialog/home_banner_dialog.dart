@@ -1,5 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart' hide Banner;
 import 'package:widam/src/common_widgets/app_cached_network_image.dart';
+import 'package:widam/src/common_widgets/app_close_button.dart';
+import 'package:widam/src/routing/app_router.gr.dart';
 import 'package:widam/src/utils/utils.dart';
 
 import '../../../layouts/domain/banner/banner.dart';
@@ -22,18 +25,27 @@ class HomeBannerDialog extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             InkWell(
-              onTap: () => navigateToItemDetails(
-                  context: context,
-                  itemId: banner.bannerLink!,
-                  mubadaraId: banner.mubadaraId,
-                  isMubadara: 1),
+              onTap: () {
+                context.popRoute().then((_) => banner.bannerType == 'Mubadara'
+                    ? context.pushRoute(
+                        MubadaraItemsScreen(mubadaraId: banner.bannerLink!))
+                    : navigateToItemDetails(
+                        context: context,
+                        itemId: banner.bannerLink!,
+                        mubadaraId: banner.mubadaraId,
+                        isMubadara: 1));
+              },
               child: AppCachedNetworkImage(
                 fit: BoxFit.fitHeight,
                 imageUrl: banner.bannerImage,
               ),
             ),
             const Align(
-                alignment: AlignmentDirectional.topEnd, child: CloseButton())
+                alignment: AlignmentDirectional.topEnd,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: AppCloseButton(),
+                ))
           ],
         ),
       ),

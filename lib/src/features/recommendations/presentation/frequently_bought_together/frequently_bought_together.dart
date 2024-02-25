@@ -36,7 +36,6 @@ class FrequentlyBoughtTogether extends ConsumerWidget {
                   inStock: e.inStock,
                   isMubadara: e.mubadaraDetails != null ? 1 : 0,
                   mubadaraId: e.mubadaraDetails?.mubadaraId,
-                  hasProductOptions: e.productOptions.isNotEmpty ? 1 : 0,
                   websiteItemShortName: e.websiteItemShortName))
               .toList();
           return Container(

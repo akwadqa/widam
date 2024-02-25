@@ -35,4 +35,5 @@ abstract class EndPoints {
   static const String redeemPoints = '.loyalty_program.redeem_loyalty_points';
   static const String complaints = '.issue.issues';
   static const String userLanguage = '.user.user_language';
+  static const String mubadaraItems = '.mubadara_item.mubadara_items';
 }

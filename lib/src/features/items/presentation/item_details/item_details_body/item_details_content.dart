@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:widam/src/features/items/presentation/item_details/item_details_body/item_details_options/item_details_options.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/quantity_form_field.dart';
+import 'package:widam/src/features/items/presentation/item_details/item_details_body/slotter_fees_widget/slotter_fees_widget.dart';
 
 import '../../../domain/item_details/item_details.dart';
 import '../item_attribute_variants_list.dart';
@@ -40,7 +40,6 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
     });
   }
 
-  final _optionsFormKey = GlobalKey<FormState>();
   final _attributesFormKey = GlobalKey<FormState>();
 
   final ScrollController _scrollController = ScrollController();
@@ -97,20 +96,11 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
                 ),
               )
             ],
-            if (widget.itemDetails.productOptions.isNotEmpty) ...[
-              const SizedBox(height: 20),
+            if (widget.itemDetails.isPriceModifier == 1)
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Form(
-                  key: _optionsFormKey,
-                  child: Focus(
-                    focusNode: _optionsFocusNode,
-                    child: ItemDetailsOptions(
-                        productOptions: widget.itemDetails.productOptions),
-                  ),
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: SlotterFeesWidget(itemDetails: widget.itemDetails),
               ),
-            ],
             if (widget.itemDetails.mubadaraDetails != null &&
                 widget.itemDetails.mubadaraDetails!.qtyPerQid >= 1) ...[
               const SizedBox(height: 20),
@@ -143,7 +133,6 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
                     },
                     attributionToken: widget.attributionToken,
                     itemId: widget.itemDetails.websiteItemId,
-                    optionsFromKey: _optionsFormKey,
                     hasVariants: hasVariants,
                     attributesFormKey: _attributesFormKey));
           }

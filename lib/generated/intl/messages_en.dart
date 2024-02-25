@@ -296,6 +296,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onlineChat": MessageLookupByLibrary.simpleMessage("Online Chat"),
         "openOrders": MessageLookupByLibrary.simpleMessage("Open Orders"),
         "openingHoures": MessageLookupByLibrary.simpleMessage("Opening Hours"),
+        "optional": MessageLookupByLibrary.simpleMessage("Optional"),
         "order": MessageLookupByLibrary.simpleMessage("Order"),
         "orderAgain": MessageLookupByLibrary.simpleMessage("Order Again"),
         "orderAmount": MessageLookupByLibrary.simpleMessage("Order Amount"),

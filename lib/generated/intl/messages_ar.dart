@@ -291,6 +291,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onlineChat": MessageLookupByLibrary.simpleMessage("محادثة فورية"),
         "openOrders": MessageLookupByLibrary.simpleMessage("الطلبات المفتوحة"),
         "openingHoures": MessageLookupByLibrary.simpleMessage("ساعات العمل"),
+        "optional": MessageLookupByLibrary.simpleMessage("اختياري"),
         "order": MessageLookupByLibrary.simpleMessage("طلب"),
         "orderAgain": MessageLookupByLibrary.simpleMessage("اطلب مرة أخرى"),
         "orderAmount": MessageLookupByLibrary.simpleMessage("مبلغ الطلب"),

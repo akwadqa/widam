@@ -19,8 +19,7 @@ class ItemOprionsButton extends ConsumerWidget {
           itemId: item.websiteItemId,
           itemType: item.websiteItemType,
           isMubadara: item.isMubadara,
-          mubadaraId: item.mubadaraId,
-          hasProductOptions: item.hasProductOptions),
+          mubadaraId: item.mubadaraId),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Assets.icons.optionsIcon.svg(),

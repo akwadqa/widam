@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:widam/src/features/items/presentation/item_details/item_details_body/item_details_options/item_details_options.dart';
-import 'package:widam/src/features/items/presentation/item_details/item_details_body/item_details_options/product_option_selector_form_field.dart';
 import '../../../../../../utils/utils.dart';
 import '../../../../domain/attribute.dart';
 import 'subscription_item_details_controller.dart';
@@ -35,7 +33,7 @@ class SubscribeButton extends ConsumerWidget {
           if (isSubscribed) {
             _removeSubscriptionItem(item.websiteItemId, ref);
           } else {
-            if (item.websiteItemType == 'V' || item.hasProductOptions == 1) {
+            if (item.websiteItemType == 'V') {
               _showItemAttributesSelector(context, ref, item);
             } else {
               _addSubscriptionItem(item.websiteItemId, ref);
@@ -146,19 +144,6 @@ class _ItemAttributesSelectorState
                                   .onVariantsChange(itemId),
                             ),
                           ),
-                          if (itemDetails.productOptions.isNotEmpty) ...[
-                            const SizedBox(height: 20),
-                            Form(
-                              key: _optionsFormKey,
-                              child: ItemDetailsOptions(
-                                  onSaved: (data) =>
-                                      _selectedOptions.add(data!),
-                                  productOptionType:
-                                      ProductOptionType.subscription,
-                                  productOptions: itemDetails.productOptions),
-                            ),
-                            const SizedBox(height: 200),
-                          ],
                         ],
                       ),
                     ),

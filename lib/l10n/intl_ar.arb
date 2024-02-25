@@ -335,5 +335,6 @@
   "complaint" : "شكوى",
   "addComplaint" : "إضافة شكوى",
   "writeDiscription" : "اكتب وصفاً",
-  "widam" : "ودام"
+  "widam" : "ودام",
+  "optional" : "اختياري"
 }

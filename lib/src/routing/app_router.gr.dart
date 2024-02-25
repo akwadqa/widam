@@ -8,14 +8,15 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i31;
-import 'package:flutter/material.dart' as _i32;
+import 'package:auto_route/auto_route.dart' as _i32;
+import 'package:flutter/cupertino.dart' as _i38;
+import 'package:flutter/material.dart' as _i33;
 import 'package:widam/src/features/account/presentation/edit_profile_screen/edit_profile_screen.dart'
     as _i10;
 import 'package:widam/src/features/account/presentation/register_screen/register_screen.dart'
-    as _i22;
+    as _i23;
 import 'package:widam/src/features/addresses/domain/address/address.dart'
-    as _i33;
+    as _i34;
 import 'package:widam/src/features/addresses/presentation/addresses/add_edit_address_screen/add_edit_address_screen.dart'
     as _i3;
 import 'package:widam/src/features/addresses/presentation/addresses/addresses_screen/addresses_screen.dart'
@@ -26,13 +27,13 @@ import 'package:widam/src/features/auth/presentation/login_screen/login_screen.d
     as _i15;
 import 'package:widam/src/features/cart/presentation/cart_screen/cart_screen.dart'
     as _i6;
-import 'package:widam/src/features/checkout/domain/order/order.dart' as _i37;
+import 'package:widam/src/features/checkout/domain/order/order.dart' as _i39;
 import 'package:widam/src/features/checkout/presentation/checkout_screen/checkout_screen.dart'
     as _i7;
 import 'package:widam/src/features/checkout/presentation/ordered_successfully_screen/ordered_successfully_screen.dart'
-    as _i18;
-import 'package:widam/src/features/checkout/presentation/payment_web_view/payment_web_view.dart'
     as _i19;
+import 'package:widam/src/features/checkout/presentation/payment_web_view/payment_web_view.dart'
+    as _i20;
 import 'package:widam/src/features/complaints/presentation/add_complaint_screen/add_complaint_screen.dart'
     as _i2;
 import 'package:widam/src/features/complaints/presentation/complaints_screen/complaints_screen.dart'
@@ -47,59 +48,61 @@ import 'package:widam/src/features/item_groups/presentation/item_groups_screen/i
     as _i14;
 import 'package:widam/src/features/items/presentation/item_details/item_details_screen.dart'
     as _i12;
-import 'package:widam/src/features/layouts/domain/banner/banner.dart' as _i36;
-import 'package:widam/src/features/layouts/domain/block.dart' as _i35;
+import 'package:widam/src/features/items/presentation/mubadara_items_screen/mubadara_items_screen.dart'
+    as _i17;
+import 'package:widam/src/features/layouts/domain/banner/banner.dart' as _i37;
+import 'package:widam/src/features/layouts/domain/block.dart' as _i36;
 import 'package:widam/src/features/loyalty_points/presentation/points_history_screen/points_history_screen.dart'
-    as _i20;
+    as _i21;
 import 'package:widam/src/features/loyalty_points/presentation/widam_loyalty_program_screen/widam_loyalty_program_screen.dart'
-    as _i29;
+    as _i30;
 import 'package:widam/src/features/main/presentation/main_screen/main_screen.dart'
     as _i16;
 import 'package:widam/src/features/notifications/presentation/notifications_settings_screen/notifications_settings_screen.dart'
-    as _i17;
+    as _i18;
 import 'package:widam/src/features/profile/domain/user_details/user_details.dart'
-    as _i34;
+    as _i35;
 import 'package:widam/src/features/profile/presentation/profile_screen/profile_screen.dart'
-    as _i21;
+    as _i22;
 import 'package:widam/src/features/profile/presentation/terms_conditions_and_privacy_policy_screen.dart'
-    as _i26;
-import 'package:widam/src/features/sales_orders/domain/sales_order/sales_order.dart'
-    as _i38;
-import 'package:widam/src/features/sales_orders/presentaion/sales_order_details_screen/sales_order_details_screen.dart'
-    as _i23;
-import 'package:widam/src/features/sales_orders/presentaion/sales_orders_screen/sales_orders_screen.dart'
-    as _i24;
-import 'package:widam/src/features/sales_orders/presentaion/track_map_screen/track_map_screen.dart'
     as _i27;
+import 'package:widam/src/features/sales_orders/domain/sales_order/sales_order.dart'
+    as _i40;
+import 'package:widam/src/features/sales_orders/presentaion/sales_order_details_screen/sales_order_details_screen.dart'
+    as _i24;
+import 'package:widam/src/features/sales_orders/presentaion/sales_orders_screen/sales_orders_screen.dart'
+    as _i25;
+import 'package:widam/src/features/sales_orders/presentaion/track_map_screen/track_map_screen.dart'
+    as _i28;
 import 'package:widam/src/features/subscriptions/presentation/active_subscriptions_screen/active_subscriptions_screen.dart'
     as _i1;
 import 'package:widam/src/features/subscriptions/presentation/subscription_screen/subscription_screen.dart'
-    as _i25;
+    as _i26;
 import 'package:widam/src/features/wallet/presentation/transaction_history_screen/transaction_history_screen.dart'
-    as _i28;
+    as _i29;
 import 'package:widam/src/features/wallet/presentation/widam_wallet_screen/widam_wallet_screen.dart'
-    as _i30;
+    as _i31;
 
-abstract class $AppRouter extends _i31.RootStackRouter {
+abstract class $AppRouter extends _i32.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i31.PageFactory> pagesMap = {
+  final Map<String, _i32.PageFactory> pagesMap = {
     ActiveSubscriptionsScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i1.ActiveSubscriptionsScreen(),
       );
     },
     AddComplaintScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i2.AddComplaintScreen(),
       );
     },
     AddEditAddressScreen.name: (routeData) {
       final args = routeData.argsAs<AddEditAddressScreenArgs>();
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i3.AddEditAddressScreen(
           key: args.key,
@@ -111,44 +114,44 @@ abstract class $AppRouter extends _i31.RootStackRouter {
       );
     },
     AddressesScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i4.AddressesScreen(),
       );
     },
     AppInitialScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i5.AppInitialScreen(),
       );
     },
     CartScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i6.CartScreen(),
       );
     },
     CheckoutScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i7.CheckoutScreen(),
       );
     },
     ComplaintsScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i8.ComplaintsScreen(),
       );
     },
     DealsScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i9.DealsScreen(),
       );
     },
     EditProfileScreen.name: (routeData) {
       final args = routeData.argsAs<EditProfileScreenArgs>();
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i10.EditProfileScreen(
           key: args.key,
@@ -159,7 +162,7 @@ abstract class $AppRouter extends _i31.RootStackRouter {
     HomeScreen.name: (routeData) {
       final args = routeData.argsAs<HomeScreenArgs>(
           orElse: () => const HomeScreenArgs());
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i11.HomeScreen(
           key: args.key,
@@ -169,7 +172,7 @@ abstract class $AppRouter extends _i31.RootStackRouter {
     },
     ItemDetailsScreen.name: (routeData) {
       final args = routeData.argsAs<ItemDetailsScreenArgs>();
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i12.ItemDetailsScreen(
           key: args.key,
@@ -181,7 +184,7 @@ abstract class $AppRouter extends _i31.RootStackRouter {
     },
     ItemGroupScreen.name: (routeData) {
       final args = routeData.argsAs<ItemGroupScreenArgs>();
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i13.ItemGroupScreen(
           key: args.key,
@@ -191,34 +194,44 @@ abstract class $AppRouter extends _i31.RootStackRouter {
       );
     },
     ItemGroupsScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i14.ItemGroupsScreen(),
       );
     },
     LoginScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i15.LoginScreen(),
       );
     },
     MainScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i16.MainScreen(),
       );
     },
-    NotificationsSettingsScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+    MubadaraItemsScreen.name: (routeData) {
+      final args = routeData.argsAs<MubadaraItemsScreenArgs>();
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i17.NotificationsSettingsScreen(),
+        child: _i17.MubadaraItemsScreen(
+          key: args.key,
+          mubadaraId: args.mubadaraId,
+        ),
+      );
+    },
+    NotificationsSettingsScreen.name: (routeData) {
+      return _i32.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i18.NotificationsSettingsScreen(),
       );
     },
     OrderedSuccessfullyScreen.name: (routeData) {
       final args = routeData.argsAs<OrderedSuccessfullyScreenArgs>();
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i18.OrderedSuccessfullyScreen(
+        child: _i19.OrderedSuccessfullyScreen(
           key: args.key,
           order: args.order,
           pun: args.pun,
@@ -227,31 +240,31 @@ abstract class $AppRouter extends _i31.RootStackRouter {
     },
     PaymentWebView.name: (routeData) {
       final args = routeData.argsAs<PaymentWebViewArgs>();
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i19.PaymentWebView(
+        child: _i20.PaymentWebView(
           key: args.key,
           redirectUrl: args.redirectUrl,
         ),
       );
     },
     PointsHistoryScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i20.PointsHistoryScreen(),
+        child: const _i21.PointsHistoryScreen(),
       );
     },
     ProfileScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i21.ProfileScreen(),
+        child: const _i22.ProfileScreen(),
       );
     },
     RegisterScreen.name: (routeData) {
       final args = routeData.argsAs<RegisterScreenArgs>();
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i22.RegisterScreen(
+        child: _i23.RegisterScreen(
           key: args.key,
           mobileNumber: args.mobileNumber,
         ),
@@ -259,9 +272,9 @@ abstract class $AppRouter extends _i31.RootStackRouter {
     },
     SalesOrderDetailsScreen.name: (routeData) {
       final args = routeData.argsAs<SalesOrderDetailsScreenArgs>();
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i23.SalesOrderDetailsScreen(
+        child: _i24.SalesOrderDetailsScreen(
           key: args.key,
           salesOrder: args.salesOrder,
           statuses: args.statuses,
@@ -271,26 +284,26 @@ abstract class $AppRouter extends _i31.RootStackRouter {
     SalesOrdersScreen.name: (routeData) {
       final args = routeData.argsAs<SalesOrdersScreenArgs>(
           orElse: () => const SalesOrdersScreenArgs());
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i24.SalesOrdersScreen(
+        child: _i25.SalesOrdersScreen(
           key: args.key,
           initialIndex: args.initialIndex,
         ),
       );
     },
     SubscriptionScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i25.SubscriptionScreen(),
+        child: const _i26.SubscriptionScreen(),
       );
     },
     TermsConditionsAndPrivacyPolicyScreen.name: (routeData) {
       final args = routeData.argsAs<TermsConditionsAndPrivacyPolicyScreenArgs>(
           orElse: () => const TermsConditionsAndPrivacyPolicyScreenArgs());
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i26.TermsConditionsAndPrivacyPolicyScreen(
+        child: _i27.TermsConditionsAndPrivacyPolicyScreen(
           key: args.key,
           title: args.title,
         ),
@@ -298,30 +311,30 @@ abstract class $AppRouter extends _i31.RootStackRouter {
     },
     TrackMapScreen.name: (routeData) {
       final args = routeData.argsAs<TrackMapScreenArgs>();
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i27.TrackMapScreen(
+        child: _i28.TrackMapScreen(
           key: args.key,
           salesOrder: args.salesOrder,
         ),
       );
     },
     TransactionHistoryScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i28.TransactionHistoryScreen(),
+        child: const _i29.TransactionHistoryScreen(),
       );
     },
     WidamLoyaltyProgramScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i29.WidamLoyaltyProgramScreen(),
+        child: const _i30.WidamLoyaltyProgramScreen(),
       );
     },
     WidamWalletScreen.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
+      return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i30.WidamWalletScreen(),
+        child: const _i31.WidamWalletScreen(),
       );
     },
   };
@@ -329,8 +342,8 @@ abstract class $AppRouter extends _i31.RootStackRouter {
 
 /// generated route for
 /// [_i1.ActiveSubscriptionsScreen]
-class ActiveSubscriptionsScreen extends _i31.PageRouteInfo<void> {
-  const ActiveSubscriptionsScreen({List<_i31.PageRouteInfo>? children})
+class ActiveSubscriptionsScreen extends _i32.PageRouteInfo<void> {
+  const ActiveSubscriptionsScreen({List<_i32.PageRouteInfo>? children})
       : super(
           ActiveSubscriptionsScreen.name,
           initialChildren: children,
@@ -338,13 +351,13 @@ class ActiveSubscriptionsScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'ActiveSubscriptionsScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i2.AddComplaintScreen]
-class AddComplaintScreen extends _i31.PageRouteInfo<void> {
-  const AddComplaintScreen({List<_i31.PageRouteInfo>? children})
+class AddComplaintScreen extends _i32.PageRouteInfo<void> {
+  const AddComplaintScreen({List<_i32.PageRouteInfo>? children})
       : super(
           AddComplaintScreen.name,
           initialChildren: children,
@@ -352,20 +365,20 @@ class AddComplaintScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'AddComplaintScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i3.AddEditAddressScreen]
 class AddEditAddressScreen
-    extends _i31.PageRouteInfo<AddEditAddressScreenArgs> {
+    extends _i32.PageRouteInfo<AddEditAddressScreenArgs> {
   AddEditAddressScreen({
-    _i32.Key? key,
-    _i33.Address? address,
+    _i33.Key? key,
+    _i34.Address? address,
     required String latitude,
     required String longitude,
     required String geofenceId,
-    List<_i31.PageRouteInfo>? children,
+    List<_i32.PageRouteInfo>? children,
   }) : super(
           AddEditAddressScreen.name,
           args: AddEditAddressScreenArgs(
@@ -380,8 +393,8 @@ class AddEditAddressScreen
 
   static const String name = 'AddEditAddressScreen';
 
-  static const _i31.PageInfo<AddEditAddressScreenArgs> page =
-      _i31.PageInfo<AddEditAddressScreenArgs>(name);
+  static const _i32.PageInfo<AddEditAddressScreenArgs> page =
+      _i32.PageInfo<AddEditAddressScreenArgs>(name);
 }
 
 class AddEditAddressScreenArgs {
@@ -393,9 +406,9 @@ class AddEditAddressScreenArgs {
     required this.geofenceId,
   });
 
-  final _i32.Key? key;
+  final _i33.Key? key;
 
-  final _i33.Address? address;
+  final _i34.Address? address;
 
   final String latitude;
 
@@ -411,8 +424,8 @@ class AddEditAddressScreenArgs {
 
 /// generated route for
 /// [_i4.AddressesScreen]
-class AddressesScreen extends _i31.PageRouteInfo<void> {
-  const AddressesScreen({List<_i31.PageRouteInfo>? children})
+class AddressesScreen extends _i32.PageRouteInfo<void> {
+  const AddressesScreen({List<_i32.PageRouteInfo>? children})
       : super(
           AddressesScreen.name,
           initialChildren: children,
@@ -420,13 +433,13 @@ class AddressesScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'AddressesScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i5.AppInitialScreen]
-class AppInitialScreen extends _i31.PageRouteInfo<void> {
-  const AppInitialScreen({List<_i31.PageRouteInfo>? children})
+class AppInitialScreen extends _i32.PageRouteInfo<void> {
+  const AppInitialScreen({List<_i32.PageRouteInfo>? children})
       : super(
           AppInitialScreen.name,
           initialChildren: children,
@@ -434,13 +447,13 @@ class AppInitialScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'AppInitialScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i6.CartScreen]
-class CartScreen extends _i31.PageRouteInfo<void> {
-  const CartScreen({List<_i31.PageRouteInfo>? children})
+class CartScreen extends _i32.PageRouteInfo<void> {
+  const CartScreen({List<_i32.PageRouteInfo>? children})
       : super(
           CartScreen.name,
           initialChildren: children,
@@ -448,13 +461,13 @@ class CartScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'CartScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i7.CheckoutScreen]
-class CheckoutScreen extends _i31.PageRouteInfo<void> {
-  const CheckoutScreen({List<_i31.PageRouteInfo>? children})
+class CheckoutScreen extends _i32.PageRouteInfo<void> {
+  const CheckoutScreen({List<_i32.PageRouteInfo>? children})
       : super(
           CheckoutScreen.name,
           initialChildren: children,
@@ -462,13 +475,13 @@ class CheckoutScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'CheckoutScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i8.ComplaintsScreen]
-class ComplaintsScreen extends _i31.PageRouteInfo<void> {
-  const ComplaintsScreen({List<_i31.PageRouteInfo>? children})
+class ComplaintsScreen extends _i32.PageRouteInfo<void> {
+  const ComplaintsScreen({List<_i32.PageRouteInfo>? children})
       : super(
           ComplaintsScreen.name,
           initialChildren: children,
@@ -476,13 +489,13 @@ class ComplaintsScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'ComplaintsScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i9.DealsScreen]
-class DealsScreen extends _i31.PageRouteInfo<void> {
-  const DealsScreen({List<_i31.PageRouteInfo>? children})
+class DealsScreen extends _i32.PageRouteInfo<void> {
+  const DealsScreen({List<_i32.PageRouteInfo>? children})
       : super(
           DealsScreen.name,
           initialChildren: children,
@@ -490,16 +503,16 @@ class DealsScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'DealsScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i10.EditProfileScreen]
-class EditProfileScreen extends _i31.PageRouteInfo<EditProfileScreenArgs> {
+class EditProfileScreen extends _i32.PageRouteInfo<EditProfileScreenArgs> {
   EditProfileScreen({
-    _i32.Key? key,
-    required _i34.UserDetails userDetails,
-    List<_i31.PageRouteInfo>? children,
+    _i33.Key? key,
+    required _i35.UserDetails userDetails,
+    List<_i32.PageRouteInfo>? children,
   }) : super(
           EditProfileScreen.name,
           args: EditProfileScreenArgs(
@@ -511,8 +524,8 @@ class EditProfileScreen extends _i31.PageRouteInfo<EditProfileScreenArgs> {
 
   static const String name = 'EditProfileScreen';
 
-  static const _i31.PageInfo<EditProfileScreenArgs> page =
-      _i31.PageInfo<EditProfileScreenArgs>(name);
+  static const _i32.PageInfo<EditProfileScreenArgs> page =
+      _i32.PageInfo<EditProfileScreenArgs>(name);
 }
 
 class EditProfileScreenArgs {
@@ -521,9 +534,9 @@ class EditProfileScreenArgs {
     required this.userDetails,
   });
 
-  final _i32.Key? key;
+  final _i33.Key? key;
 
-  final _i34.UserDetails userDetails;
+  final _i35.UserDetails userDetails;
 
   @override
   String toString() {
@@ -533,11 +546,11 @@ class EditProfileScreenArgs {
 
 /// generated route for
 /// [_i11.HomeScreen]
-class HomeScreen extends _i31.PageRouteInfo<HomeScreenArgs> {
+class HomeScreen extends _i32.PageRouteInfo<HomeScreenArgs> {
   HomeScreen({
-    _i32.Key? key,
-    _i35.Block<List<_i36.Banner>>? bannerBlock,
-    List<_i31.PageRouteInfo>? children,
+    _i33.Key? key,
+    _i36.Block<List<_i37.Banner>>? bannerBlock,
+    List<_i32.PageRouteInfo>? children,
   }) : super(
           HomeScreen.name,
           args: HomeScreenArgs(
@@ -549,8 +562,8 @@ class HomeScreen extends _i31.PageRouteInfo<HomeScreenArgs> {
 
   static const String name = 'HomeScreen';
 
-  static const _i31.PageInfo<HomeScreenArgs> page =
-      _i31.PageInfo<HomeScreenArgs>(name);
+  static const _i32.PageInfo<HomeScreenArgs> page =
+      _i32.PageInfo<HomeScreenArgs>(name);
 }
 
 class HomeScreenArgs {
@@ -559,9 +572,9 @@ class HomeScreenArgs {
     this.bannerBlock,
   });
 
-  final _i32.Key? key;
+  final _i33.Key? key;
 
-  final _i35.Block<List<_i36.Banner>>? bannerBlock;
+  final _i36.Block<List<_i37.Banner>>? bannerBlock;
 
   @override
   String toString() {
@@ -571,13 +584,13 @@ class HomeScreenArgs {
 
 /// generated route for
 /// [_i12.ItemDetailsScreen]
-class ItemDetailsScreen extends _i31.PageRouteInfo<ItemDetailsScreenArgs> {
+class ItemDetailsScreen extends _i32.PageRouteInfo<ItemDetailsScreenArgs> {
   ItemDetailsScreen({
-    _i32.Key? key,
+    _i33.Key? key,
     required String itemId,
     String? mubadaraId,
     String? attributionToken,
-    List<_i31.PageRouteInfo>? children,
+    List<_i32.PageRouteInfo>? children,
   }) : super(
           ItemDetailsScreen.name,
           args: ItemDetailsScreenArgs(
@@ -591,8 +604,8 @@ class ItemDetailsScreen extends _i31.PageRouteInfo<ItemDetailsScreenArgs> {
 
   static const String name = 'ItemDetailsScreen';
 
-  static const _i31.PageInfo<ItemDetailsScreenArgs> page =
-      _i31.PageInfo<ItemDetailsScreenArgs>(name);
+  static const _i32.PageInfo<ItemDetailsScreenArgs> page =
+      _i32.PageInfo<ItemDetailsScreenArgs>(name);
 }
 
 class ItemDetailsScreenArgs {
@@ -603,7 +616,7 @@ class ItemDetailsScreenArgs {
     this.attributionToken,
   });
 
-  final _i32.Key? key;
+  final _i33.Key? key;
 
   final String itemId;
 
@@ -619,12 +632,12 @@ class ItemDetailsScreenArgs {
 
 /// generated route for
 /// [_i13.ItemGroupScreen]
-class ItemGroupScreen extends _i31.PageRouteInfo<ItemGroupScreenArgs> {
+class ItemGroupScreen extends _i32.PageRouteInfo<ItemGroupScreenArgs> {
   ItemGroupScreen({
-    _i32.Key? key,
+    _i33.Key? key,
     bool autoFocus = false,
     required String itemGroupId,
-    List<_i31.PageRouteInfo>? children,
+    List<_i32.PageRouteInfo>? children,
   }) : super(
           ItemGroupScreen.name,
           args: ItemGroupScreenArgs(
@@ -637,8 +650,8 @@ class ItemGroupScreen extends _i31.PageRouteInfo<ItemGroupScreenArgs> {
 
   static const String name = 'ItemGroupScreen';
 
-  static const _i31.PageInfo<ItemGroupScreenArgs> page =
-      _i31.PageInfo<ItemGroupScreenArgs>(name);
+  static const _i32.PageInfo<ItemGroupScreenArgs> page =
+      _i32.PageInfo<ItemGroupScreenArgs>(name);
 }
 
 class ItemGroupScreenArgs {
@@ -648,7 +661,7 @@ class ItemGroupScreenArgs {
     required this.itemGroupId,
   });
 
-  final _i32.Key? key;
+  final _i33.Key? key;
 
   final bool autoFocus;
 
@@ -662,8 +675,8 @@ class ItemGroupScreenArgs {
 
 /// generated route for
 /// [_i14.ItemGroupsScreen]
-class ItemGroupsScreen extends _i31.PageRouteInfo<void> {
-  const ItemGroupsScreen({List<_i31.PageRouteInfo>? children})
+class ItemGroupsScreen extends _i32.PageRouteInfo<void> {
+  const ItemGroupsScreen({List<_i32.PageRouteInfo>? children})
       : super(
           ItemGroupsScreen.name,
           initialChildren: children,
@@ -671,13 +684,13 @@ class ItemGroupsScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'ItemGroupsScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i15.LoginScreen]
-class LoginScreen extends _i31.PageRouteInfo<void> {
-  const LoginScreen({List<_i31.PageRouteInfo>? children})
+class LoginScreen extends _i32.PageRouteInfo<void> {
+  const LoginScreen({List<_i32.PageRouteInfo>? children})
       : super(
           LoginScreen.name,
           initialChildren: children,
@@ -685,13 +698,13 @@ class LoginScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'LoginScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i16.MainScreen]
-class MainScreen extends _i31.PageRouteInfo<void> {
-  const MainScreen({List<_i31.PageRouteInfo>? children})
+class MainScreen extends _i32.PageRouteInfo<void> {
+  const MainScreen({List<_i32.PageRouteInfo>? children})
       : super(
           MainScreen.name,
           initialChildren: children,
@@ -699,13 +712,51 @@ class MainScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'MainScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i17.NotificationsSettingsScreen]
-class NotificationsSettingsScreen extends _i31.PageRouteInfo<void> {
-  const NotificationsSettingsScreen({List<_i31.PageRouteInfo>? children})
+/// [_i17.MubadaraItemsScreen]
+class MubadaraItemsScreen extends _i32.PageRouteInfo<MubadaraItemsScreenArgs> {
+  MubadaraItemsScreen({
+    _i38.Key? key,
+    required String mubadaraId,
+    List<_i32.PageRouteInfo>? children,
+  }) : super(
+          MubadaraItemsScreen.name,
+          args: MubadaraItemsScreenArgs(
+            key: key,
+            mubadaraId: mubadaraId,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'MubadaraItemsScreen';
+
+  static const _i32.PageInfo<MubadaraItemsScreenArgs> page =
+      _i32.PageInfo<MubadaraItemsScreenArgs>(name);
+}
+
+class MubadaraItemsScreenArgs {
+  const MubadaraItemsScreenArgs({
+    this.key,
+    required this.mubadaraId,
+  });
+
+  final _i38.Key? key;
+
+  final String mubadaraId;
+
+  @override
+  String toString() {
+    return 'MubadaraItemsScreenArgs{key: $key, mubadaraId: $mubadaraId}';
+  }
+}
+
+/// generated route for
+/// [_i18.NotificationsSettingsScreen]
+class NotificationsSettingsScreen extends _i32.PageRouteInfo<void> {
+  const NotificationsSettingsScreen({List<_i32.PageRouteInfo>? children})
       : super(
           NotificationsSettingsScreen.name,
           initialChildren: children,
@@ -713,18 +764,18 @@ class NotificationsSettingsScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'NotificationsSettingsScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i18.OrderedSuccessfullyScreen]
+/// [_i19.OrderedSuccessfullyScreen]
 class OrderedSuccessfullyScreen
-    extends _i31.PageRouteInfo<OrderedSuccessfullyScreenArgs> {
+    extends _i32.PageRouteInfo<OrderedSuccessfullyScreenArgs> {
   OrderedSuccessfullyScreen({
-    _i32.Key? key,
-    required _i37.Order order,
+    _i33.Key? key,
+    required _i39.Order order,
     String? pun,
-    List<_i31.PageRouteInfo>? children,
+    List<_i32.PageRouteInfo>? children,
   }) : super(
           OrderedSuccessfullyScreen.name,
           args: OrderedSuccessfullyScreenArgs(
@@ -737,8 +788,8 @@ class OrderedSuccessfullyScreen
 
   static const String name = 'OrderedSuccessfullyScreen';
 
-  static const _i31.PageInfo<OrderedSuccessfullyScreenArgs> page =
-      _i31.PageInfo<OrderedSuccessfullyScreenArgs>(name);
+  static const _i32.PageInfo<OrderedSuccessfullyScreenArgs> page =
+      _i32.PageInfo<OrderedSuccessfullyScreenArgs>(name);
 }
 
 class OrderedSuccessfullyScreenArgs {
@@ -748,9 +799,9 @@ class OrderedSuccessfullyScreenArgs {
     this.pun,
   });
 
-  final _i32.Key? key;
+  final _i33.Key? key;
 
-  final _i37.Order order;
+  final _i39.Order order;
 
   final String? pun;
 
@@ -761,12 +812,12 @@ class OrderedSuccessfullyScreenArgs {
 }
 
 /// generated route for
-/// [_i19.PaymentWebView]
-class PaymentWebView extends _i31.PageRouteInfo<PaymentWebViewArgs> {
+/// [_i20.PaymentWebView]
+class PaymentWebView extends _i32.PageRouteInfo<PaymentWebViewArgs> {
   PaymentWebView({
-    _i32.Key? key,
+    _i33.Key? key,
     required String redirectUrl,
-    List<_i31.PageRouteInfo>? children,
+    List<_i32.PageRouteInfo>? children,
   }) : super(
           PaymentWebView.name,
           args: PaymentWebViewArgs(
@@ -778,8 +829,8 @@ class PaymentWebView extends _i31.PageRouteInfo<PaymentWebViewArgs> {
 
   static const String name = 'PaymentWebView';
 
-  static const _i31.PageInfo<PaymentWebViewArgs> page =
-      _i31.PageInfo<PaymentWebViewArgs>(name);
+  static const _i32.PageInfo<PaymentWebViewArgs> page =
+      _i32.PageInfo<PaymentWebViewArgs>(name);
 }
 
 class PaymentWebViewArgs {
@@ -788,7 +839,7 @@ class PaymentWebViewArgs {
     required this.redirectUrl,
   });
 
-  final _i32.Key? key;
+  final _i33.Key? key;
 
   final String redirectUrl;
 
@@ -799,9 +850,9 @@ class PaymentWebViewArgs {
 }
 
 /// generated route for
-/// [_i20.PointsHistoryScreen]
-class PointsHistoryScreen extends _i31.PageRouteInfo<void> {
-  const PointsHistoryScreen({List<_i31.PageRouteInfo>? children})
+/// [_i21.PointsHistoryScreen]
+class PointsHistoryScreen extends _i32.PageRouteInfo<void> {
+  const PointsHistoryScreen({List<_i32.PageRouteInfo>? children})
       : super(
           PointsHistoryScreen.name,
           initialChildren: children,
@@ -809,13 +860,13 @@ class PointsHistoryScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'PointsHistoryScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i21.ProfileScreen]
-class ProfileScreen extends _i31.PageRouteInfo<void> {
-  const ProfileScreen({List<_i31.PageRouteInfo>? children})
+/// [_i22.ProfileScreen]
+class ProfileScreen extends _i32.PageRouteInfo<void> {
+  const ProfileScreen({List<_i32.PageRouteInfo>? children})
       : super(
           ProfileScreen.name,
           initialChildren: children,
@@ -823,16 +874,16 @@ class ProfileScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'ProfileScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i22.RegisterScreen]
-class RegisterScreen extends _i31.PageRouteInfo<RegisterScreenArgs> {
+/// [_i23.RegisterScreen]
+class RegisterScreen extends _i32.PageRouteInfo<RegisterScreenArgs> {
   RegisterScreen({
-    _i32.Key? key,
+    _i33.Key? key,
     required String mobileNumber,
-    List<_i31.PageRouteInfo>? children,
+    List<_i32.PageRouteInfo>? children,
   }) : super(
           RegisterScreen.name,
           args: RegisterScreenArgs(
@@ -844,8 +895,8 @@ class RegisterScreen extends _i31.PageRouteInfo<RegisterScreenArgs> {
 
   static const String name = 'RegisterScreen';
 
-  static const _i31.PageInfo<RegisterScreenArgs> page =
-      _i31.PageInfo<RegisterScreenArgs>(name);
+  static const _i32.PageInfo<RegisterScreenArgs> page =
+      _i32.PageInfo<RegisterScreenArgs>(name);
 }
 
 class RegisterScreenArgs {
@@ -854,7 +905,7 @@ class RegisterScreenArgs {
     required this.mobileNumber,
   });
 
-  final _i32.Key? key;
+  final _i33.Key? key;
 
   final String mobileNumber;
 
@@ -865,14 +916,14 @@ class RegisterScreenArgs {
 }
 
 /// generated route for
-/// [_i23.SalesOrderDetailsScreen]
+/// [_i24.SalesOrderDetailsScreen]
 class SalesOrderDetailsScreen
-    extends _i31.PageRouteInfo<SalesOrderDetailsScreenArgs> {
+    extends _i32.PageRouteInfo<SalesOrderDetailsScreenArgs> {
   SalesOrderDetailsScreen({
-    _i32.Key? key,
-    required _i38.SalesOrder salesOrder,
+    _i33.Key? key,
+    required _i40.SalesOrder salesOrder,
     required List<String> statuses,
-    List<_i31.PageRouteInfo>? children,
+    List<_i32.PageRouteInfo>? children,
   }) : super(
           SalesOrderDetailsScreen.name,
           args: SalesOrderDetailsScreenArgs(
@@ -885,8 +936,8 @@ class SalesOrderDetailsScreen
 
   static const String name = 'SalesOrderDetailsScreen';
 
-  static const _i31.PageInfo<SalesOrderDetailsScreenArgs> page =
-      _i31.PageInfo<SalesOrderDetailsScreenArgs>(name);
+  static const _i32.PageInfo<SalesOrderDetailsScreenArgs> page =
+      _i32.PageInfo<SalesOrderDetailsScreenArgs>(name);
 }
 
 class SalesOrderDetailsScreenArgs {
@@ -896,9 +947,9 @@ class SalesOrderDetailsScreenArgs {
     required this.statuses,
   });
 
-  final _i32.Key? key;
+  final _i33.Key? key;
 
-  final _i38.SalesOrder salesOrder;
+  final _i40.SalesOrder salesOrder;
 
   final List<String> statuses;
 
@@ -909,12 +960,12 @@ class SalesOrderDetailsScreenArgs {
 }
 
 /// generated route for
-/// [_i24.SalesOrdersScreen]
-class SalesOrdersScreen extends _i31.PageRouteInfo<SalesOrdersScreenArgs> {
+/// [_i25.SalesOrdersScreen]
+class SalesOrdersScreen extends _i32.PageRouteInfo<SalesOrdersScreenArgs> {
   SalesOrdersScreen({
-    _i32.Key? key,
+    _i33.Key? key,
     int initialIndex = 0,
-    List<_i31.PageRouteInfo>? children,
+    List<_i32.PageRouteInfo>? children,
   }) : super(
           SalesOrdersScreen.name,
           args: SalesOrdersScreenArgs(
@@ -926,8 +977,8 @@ class SalesOrdersScreen extends _i31.PageRouteInfo<SalesOrdersScreenArgs> {
 
   static const String name = 'SalesOrdersScreen';
 
-  static const _i31.PageInfo<SalesOrdersScreenArgs> page =
-      _i31.PageInfo<SalesOrdersScreenArgs>(name);
+  static const _i32.PageInfo<SalesOrdersScreenArgs> page =
+      _i32.PageInfo<SalesOrdersScreenArgs>(name);
 }
 
 class SalesOrdersScreenArgs {
@@ -936,7 +987,7 @@ class SalesOrdersScreenArgs {
     this.initialIndex = 0,
   });
 
-  final _i32.Key? key;
+  final _i33.Key? key;
 
   final int initialIndex;
 
@@ -947,9 +998,9 @@ class SalesOrdersScreenArgs {
 }
 
 /// generated route for
-/// [_i25.SubscriptionScreen]
-class SubscriptionScreen extends _i31.PageRouteInfo<void> {
-  const SubscriptionScreen({List<_i31.PageRouteInfo>? children})
+/// [_i26.SubscriptionScreen]
+class SubscriptionScreen extends _i32.PageRouteInfo<void> {
+  const SubscriptionScreen({List<_i32.PageRouteInfo>? children})
       : super(
           SubscriptionScreen.name,
           initialChildren: children,
@@ -957,17 +1008,17 @@ class SubscriptionScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'SubscriptionScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i26.TermsConditionsAndPrivacyPolicyScreen]
+/// [_i27.TermsConditionsAndPrivacyPolicyScreen]
 class TermsConditionsAndPrivacyPolicyScreen
-    extends _i31.PageRouteInfo<TermsConditionsAndPrivacyPolicyScreenArgs> {
+    extends _i32.PageRouteInfo<TermsConditionsAndPrivacyPolicyScreenArgs> {
   TermsConditionsAndPrivacyPolicyScreen({
-    _i32.Key? key,
+    _i33.Key? key,
     String? title,
-    List<_i31.PageRouteInfo>? children,
+    List<_i32.PageRouteInfo>? children,
   }) : super(
           TermsConditionsAndPrivacyPolicyScreen.name,
           args: TermsConditionsAndPrivacyPolicyScreenArgs(
@@ -979,8 +1030,8 @@ class TermsConditionsAndPrivacyPolicyScreen
 
   static const String name = 'TermsConditionsAndPrivacyPolicyScreen';
 
-  static const _i31.PageInfo<TermsConditionsAndPrivacyPolicyScreenArgs> page =
-      _i31.PageInfo<TermsConditionsAndPrivacyPolicyScreenArgs>(name);
+  static const _i32.PageInfo<TermsConditionsAndPrivacyPolicyScreenArgs> page =
+      _i32.PageInfo<TermsConditionsAndPrivacyPolicyScreenArgs>(name);
 }
 
 class TermsConditionsAndPrivacyPolicyScreenArgs {
@@ -989,7 +1040,7 @@ class TermsConditionsAndPrivacyPolicyScreenArgs {
     this.title,
   });
 
-  final _i32.Key? key;
+  final _i33.Key? key;
 
   final String? title;
 
@@ -1000,12 +1051,12 @@ class TermsConditionsAndPrivacyPolicyScreenArgs {
 }
 
 /// generated route for
-/// [_i27.TrackMapScreen]
-class TrackMapScreen extends _i31.PageRouteInfo<TrackMapScreenArgs> {
+/// [_i28.TrackMapScreen]
+class TrackMapScreen extends _i32.PageRouteInfo<TrackMapScreenArgs> {
   TrackMapScreen({
-    _i32.Key? key,
-    required _i38.SalesOrder salesOrder,
-    List<_i31.PageRouteInfo>? children,
+    _i33.Key? key,
+    required _i40.SalesOrder salesOrder,
+    List<_i32.PageRouteInfo>? children,
   }) : super(
           TrackMapScreen.name,
           args: TrackMapScreenArgs(
@@ -1017,8 +1068,8 @@ class TrackMapScreen extends _i31.PageRouteInfo<TrackMapScreenArgs> {
 
   static const String name = 'TrackMapScreen';
 
-  static const _i31.PageInfo<TrackMapScreenArgs> page =
-      _i31.PageInfo<TrackMapScreenArgs>(name);
+  static const _i32.PageInfo<TrackMapScreenArgs> page =
+      _i32.PageInfo<TrackMapScreenArgs>(name);
 }
 
 class TrackMapScreenArgs {
@@ -1027,9 +1078,9 @@ class TrackMapScreenArgs {
     required this.salesOrder,
   });
 
-  final _i32.Key? key;
+  final _i33.Key? key;
 
-  final _i38.SalesOrder salesOrder;
+  final _i40.SalesOrder salesOrder;
 
   @override
   String toString() {
@@ -1038,9 +1089,9 @@ class TrackMapScreenArgs {
 }
 
 /// generated route for
-/// [_i28.TransactionHistoryScreen]
-class TransactionHistoryScreen extends _i31.PageRouteInfo<void> {
-  const TransactionHistoryScreen({List<_i31.PageRouteInfo>? children})
+/// [_i29.TransactionHistoryScreen]
+class TransactionHistoryScreen extends _i32.PageRouteInfo<void> {
+  const TransactionHistoryScreen({List<_i32.PageRouteInfo>? children})
       : super(
           TransactionHistoryScreen.name,
           initialChildren: children,
@@ -1048,13 +1099,13 @@ class TransactionHistoryScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'TransactionHistoryScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i29.WidamLoyaltyProgramScreen]
-class WidamLoyaltyProgramScreen extends _i31.PageRouteInfo<void> {
-  const WidamLoyaltyProgramScreen({List<_i31.PageRouteInfo>? children})
+/// [_i30.WidamLoyaltyProgramScreen]
+class WidamLoyaltyProgramScreen extends _i32.PageRouteInfo<void> {
+  const WidamLoyaltyProgramScreen({List<_i32.PageRouteInfo>? children})
       : super(
           WidamLoyaltyProgramScreen.name,
           initialChildren: children,
@@ -1062,13 +1113,13 @@ class WidamLoyaltyProgramScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'WidamLoyaltyProgramScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i30.WidamWalletScreen]
-class WidamWalletScreen extends _i31.PageRouteInfo<void> {
-  const WidamWalletScreen({List<_i31.PageRouteInfo>? children})
+/// [_i31.WidamWalletScreen]
+class WidamWalletScreen extends _i32.PageRouteInfo<void> {
+  const WidamWalletScreen({List<_i32.PageRouteInfo>? children})
       : super(
           WidamWalletScreen.name,
           initialChildren: children,
@@ -1076,5 +1127,5 @@ class WidamWalletScreen extends _i31.PageRouteInfo<void> {
 
   static const String name = 'WidamWalletScreen';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
 }

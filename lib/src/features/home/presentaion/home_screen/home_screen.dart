@@ -24,7 +24,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     if (widget.bannerBlock != null) {
       final bannerBlock = widget.bannerBlock!.data.first;
-      Future.delayed(Duration.zero, () {
+      Future.delayed(const Duration(seconds: 4), () {
         showDialog(
             context: context,
             builder: (context) => HomeBannerDialog(banner: bannerBlock));

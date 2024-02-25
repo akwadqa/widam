@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/common_widgets/small_red_container.dart';
-import 'package:widam/src/features/items/presentation/item_details/item_details_body/item_details_options/price_modifiers_provider.dart';
+import 'package:widam/src/features/items/presentation/item_details/item_details_body/slotter_fees_widget/slotter_fees_controller.dart';
 import '../../../domain/item_details/item_details.dart';
 import 'quantity_form_field.dart';
 import '../../../../../theme/app_colors.dart';
@@ -38,15 +38,12 @@ class ItemDetailsInfo extends StatelessWidget {
                   children: [
                     Consumer(
                       builder: (context, ref, child) {
-                        final priceModifiers = ref
-                            .watch(priceModifiersProvider)
-                            .map((e) => e.value)
-                            .fold(
-                                0.0,
-                                (previousValue, element) =>
-                                    previousValue + element);
+                        final priceModifier =
+                            ref.watch(slotterFeesControllerProvider)
+                                ? itemDetails.priceModifier!
+                                : 0;
                         final price =
-                            itemDetails.price.discountedPrice + priceModifiers;
+                            itemDetails.price.discountedPrice + priceModifier;
                         return Text('${itemDetails.price.currency} $price',
                             style: const TextStyle(
                                 fontSize: 18,

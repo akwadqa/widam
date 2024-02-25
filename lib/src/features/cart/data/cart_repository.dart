@@ -40,8 +40,7 @@ class CartRepository {
       int? paymentToken,
       String? deliveryDate,
       int? useWalletBalance,
-      List<({String productOptionId, int radioOptionId, int isPriceModifier})>?
-          productOptions}) async {
+      bool? isPriceModifier}) async {
     return await _lock.synchronized(() async {
       final FormData formData = FormData.fromMap({
         if (itemId != null)
@@ -63,14 +62,7 @@ class CartRepository {
         if (paymentTokenId != null) 'payment_token_id': paymentTokenId,
         if (paymentToken != null) 'payment_token': paymentToken,
         if (deliveryDate != null) 'delivery_date': deliveryDate,
-        if (productOptions != null)
-          'product_options': jsonEncode(productOptions
-              .map((e) => {
-                    "product_option_name": e.productOptionId,
-                    "product_option_value": e.radioOptionId,
-                    "is_price_modifier": e.isPriceModifier
-                  })
-              .toList()),
+        if (isPriceModifier != null) 'price_modifier': isPriceModifier ? 1 : 0,
         if (useWalletBalance != null) 'use_wallet_balance': useWalletBalance,
       });
       final response = await _networkService.put(EndPoints.cart, formData);

@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart' hide Banner;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widam/src/routing/app_router.gr.dart';
 import '../../../../utils/magnetic_scroll_physics.dart';
 import '../../../../utils/utils.dart';
 
@@ -36,6 +38,8 @@ class BannerView extends ConsumerWidget {
           isMubadara: banner.mubadaraId != null ? 1 : 0,
           itemId: banner.bannerLink!,
           itemType: 'V');
+    } else if (banner.bannerType == 'Mubadara') {
+      context.pushRoute(MubadaraItemsScreen(mubadaraId: banner.bannerLink!));
     } else {
       pushItemGroupScreen(context: context, itemGroupId: banner.bannerLink!);
     }

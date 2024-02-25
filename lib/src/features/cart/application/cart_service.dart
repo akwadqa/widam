@@ -26,8 +26,7 @@ class UpdateCart extends _$UpdateCart {
       String? deliveryDate,
       int? useWalletBalance,
       String? attributionToken,
-      List<({String productOptionId, int radioOptionId, int isPriceModifier})>?
-          productOptions}) async {
+      bool? isPriceModifier}) async {
     state = const AsyncLoading();
     final cartRepository = ref.watch(cartRepositoryProvider);
     try {
@@ -43,7 +42,7 @@ class UpdateCart extends _$UpdateCart {
           paymentTokenId: paymentTokenId,
           paymentToken: paymentToken,
           deliveryDate: deliveryDate,
-          productOptions: productOptions,
+          isPriceModifier: isPriceModifier,
           useWalletBalance: useWalletBalance,
           attributionToken: attributionToken);
       ref.read(cartControllerProvider.notifier).updateCart(cart);

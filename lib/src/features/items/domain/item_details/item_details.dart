@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:widam/src/features/items/domain/product_option/product_option.dart';
 import '../../../tags/domain/tag/tag.dart';
 import '../additional_image/additional_image.dart';
 import '../item_specification/item_specification.dart';
@@ -39,7 +38,9 @@ class ItemDetails with _$ItemDetails {
     required List<ItemSpecification> websiteSpecifications,
     required MubadaraDetails? mubadaraDetails,
     required String? row,
-    required List<ProductOption> productOptions,
+    required int? isPriceModifier,
+    required double? priceModifier,
+    required String? priceModifierTitle
   }) = _ItemDetails;
 
   factory ItemDetails.fromJson(Map<String, dynamic> json) =>

@@ -58,7 +58,6 @@ class ItemContainer extends ConsumerWidget {
                         itemType: item.websiteItemType,
                         isMubadara: item.isMubadara,
                         mubadaraId: item.mubadaraId,
-                        hasProductOptions: item.hasProductOptions,
                         attributionToken: attributionToken),
             borderRadius: _borderRadius,
             child: child),

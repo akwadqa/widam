@@ -143,9 +143,8 @@ void navigateToItemDetails(
     String? itemType,
     int? isMubadara,
     String? mubadaraId,
-    int? hasProductOptions,
     String? attributionToken}) {
-  if (itemType == 'V' || isMubadara == 1 || hasProductOptions == 1) {
+  if (itemType == 'V' || isMubadara == 1) {
     context
         .pushRoute(ItemDetailsScreen(itemId: itemId, mubadaraId: mubadaraId));
   } else {

@@ -24,7 +24,6 @@ class Item with _$Item {
     required int inStock,
     required int? isMubadara,
     required String? mubadaraId,
-    required int? hasProductOptions,
   }) = _Item;
 
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);

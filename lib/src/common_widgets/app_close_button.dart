@@ -6,19 +6,23 @@ import '../theme/app_colors.dart';
 class AppCloseButton extends StatelessWidget {
   const AppCloseButton(
       {super.key,
-      this.icon = const Icon(Icons.close, color: AppColors.darkBlue),
+      this.icon,
       this.width,
-      this.height});
-  final Widget icon;
+      this.height,
+      this.backgroundColor = Colors.white,
+      this.iconColor = AppColors.darkBlue});
+  final Widget? icon;
   final double? width;
   final double? height;
+  final Color backgroundColor;
+  final Color iconColor;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: backgroundColor,
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
@@ -30,7 +34,7 @@ class AppCloseButton extends StatelessWidget {
       ),
       child: IconButton(
         onPressed: context.popRoute,
-        icon: icon,
+        icon: icon ?? Icon(Icons.close, color: iconColor),
       ),
     );
   }
