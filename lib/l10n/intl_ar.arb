@@ -336,5 +336,5 @@
   "addComplaint" : "إضافة شكوى",
   "writeDiscription" : "اكتب وصفاً",
   "widam" : "ودام",
-  "optional" : "اختياري"
+  "slotterFeesValidationMsg" : "يرجى تحديد رسوم التحميل"
 }

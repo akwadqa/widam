@@ -18,11 +18,16 @@ class ItemsHorizontalList extends StatelessWidget {
       height: 300,
       child: ListView.separated(
         itemBuilder: (BuildContext context, int index) {
+          const double width = 250;
           return items[index].isMubadara == 1
               ? MubadaraItem(
-                  item: items[index], attributionToken: attributionToken)
+                  item: items[index],
+                  attributionToken: attributionToken,
+                  width: width)
               : ItemCard(
-                  item: items[index], attributionToken: attributionToken);
+                  item: items[index],
+                  attributionToken: attributionToken,
+                  width: width);
         },
         itemCount: items.length,
         scrollDirection: Axis.horizontal,

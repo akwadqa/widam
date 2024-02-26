@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widam/generated/l10n.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/quantity_form_field.dart';
-import 'package:widam/src/features/items/presentation/item_details/item_details_body/slotter_fees_widget/slotter_fees_widget.dart';
+import 'package:widam/src/features/items/presentation/item_details/item_details_body/slotter_fees_form_field/slotter_fees_form_field.dart';
 
 import '../../../domain/item_details/item_details.dart';
 import '../item_attribute_variants_list.dart';
@@ -99,7 +100,17 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
             if (widget.itemDetails.isPriceModifier == 1)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: SlotterFeesWidget(itemDetails: widget.itemDetails),
+                child: Form(
+                  key: ref.read(slotterFeesFormKeyProvider),
+                  child: SlotterFeesFormField(
+                      itemDetails: widget.itemDetails,
+                      validator: (value) {
+                        if (value == false) {
+                          return S.of(context).slotterFeesValidationMsg;
+                        }
+                        return null;
+                      }),
+                ),
               ),
             if (widget.itemDetails.mubadaraDetails != null &&
                 widget.itemDetails.mubadaraDetails!.qtyPerQid >= 1) ...[

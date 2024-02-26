@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/common_widgets/app_filter_chip.dart';
-import 'package:widam/src/features/item_groups/domain/item_group/item_group.dart';
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/sub_item_groups_list/sub_item_groups_controller.dart';
-import '../../../../../theme/app_colors.dart';
 
 class SubItemGroupsList extends ConsumerWidget {
   const SubItemGroupsList(

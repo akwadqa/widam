@@ -9,7 +9,6 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i32;
-import 'package:flutter/cupertino.dart' as _i38;
 import 'package:flutter/material.dart' as _i33;
 import 'package:widam/src/features/account/presentation/edit_profile_screen/edit_profile_screen.dart'
     as _i10;
@@ -27,7 +26,7 @@ import 'package:widam/src/features/auth/presentation/login_screen/login_screen.d
     as _i15;
 import 'package:widam/src/features/cart/presentation/cart_screen/cart_screen.dart'
     as _i6;
-import 'package:widam/src/features/checkout/domain/order/order.dart' as _i39;
+import 'package:widam/src/features/checkout/domain/order/order.dart' as _i38;
 import 'package:widam/src/features/checkout/presentation/checkout_screen/checkout_screen.dart'
     as _i7;
 import 'package:widam/src/features/checkout/presentation/ordered_successfully_screen/ordered_successfully_screen.dart'
@@ -67,7 +66,7 @@ import 'package:widam/src/features/profile/presentation/profile_screen/profile_s
 import 'package:widam/src/features/profile/presentation/terms_conditions_and_privacy_policy_screen.dart'
     as _i27;
 import 'package:widam/src/features/sales_orders/domain/sales_order/sales_order.dart'
-    as _i40;
+    as _i39;
 import 'package:widam/src/features/sales_orders/presentaion/sales_order_details_screen/sales_order_details_screen.dart'
     as _i24;
 import 'package:widam/src/features/sales_orders/presentaion/sales_orders_screen/sales_orders_screen.dart'
@@ -719,7 +718,7 @@ class MainScreen extends _i32.PageRouteInfo<void> {
 /// [_i17.MubadaraItemsScreen]
 class MubadaraItemsScreen extends _i32.PageRouteInfo<MubadaraItemsScreenArgs> {
   MubadaraItemsScreen({
-    _i38.Key? key,
+    _i33.Key? key,
     required String mubadaraId,
     List<_i32.PageRouteInfo>? children,
   }) : super(
@@ -743,7 +742,7 @@ class MubadaraItemsScreenArgs {
     required this.mubadaraId,
   });
 
-  final _i38.Key? key;
+  final _i33.Key? key;
 
   final String mubadaraId;
 
@@ -773,7 +772,7 @@ class OrderedSuccessfullyScreen
     extends _i32.PageRouteInfo<OrderedSuccessfullyScreenArgs> {
   OrderedSuccessfullyScreen({
     _i33.Key? key,
-    required _i39.Order order,
+    required _i38.Order order,
     String? pun,
     List<_i32.PageRouteInfo>? children,
   }) : super(
@@ -801,7 +800,7 @@ class OrderedSuccessfullyScreenArgs {
 
   final _i33.Key? key;
 
-  final _i39.Order order;
+  final _i38.Order order;
 
   final String? pun;
 
@@ -921,7 +920,7 @@ class SalesOrderDetailsScreen
     extends _i32.PageRouteInfo<SalesOrderDetailsScreenArgs> {
   SalesOrderDetailsScreen({
     _i33.Key? key,
-    required _i40.SalesOrder salesOrder,
+    required _i39.SalesOrder salesOrder,
     required List<String> statuses,
     List<_i32.PageRouteInfo>? children,
   }) : super(
@@ -949,7 +948,7 @@ class SalesOrderDetailsScreenArgs {
 
   final _i33.Key? key;
 
-  final _i40.SalesOrder salesOrder;
+  final _i39.SalesOrder salesOrder;
 
   final List<String> statuses;
 
@@ -1055,7 +1054,7 @@ class TermsConditionsAndPrivacyPolicyScreenArgs {
 class TrackMapScreen extends _i32.PageRouteInfo<TrackMapScreenArgs> {
   TrackMapScreen({
     _i33.Key? key,
-    required _i40.SalesOrder salesOrder,
+    required _i39.SalesOrder salesOrder,
     List<_i32.PageRouteInfo>? children,
   }) : super(
           TrackMapScreen.name,
@@ -1080,7 +1079,7 @@ class TrackMapScreenArgs {
 
   final _i33.Key? key;
 
-  final _i40.SalesOrder salesOrder;
+  final _i39.SalesOrder salesOrder;
 
   @override
   String toString() {

@@ -3420,11 +3420,11 @@ class S {
     );
   }
 
-  /// `Optional`
-  String get optional {
+  /// `Please select slotter fees`
+  String get slotterFeesValidationMsg {
     return Intl.message(
-      'Optional',
-      name: 'optional',
+      'Please select slotter fees',
+      name: 'slotterFeesValidationMsg',
       desc: '',
       args: [],
     );

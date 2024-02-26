@@ -4,7 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:widam/src/common_widgets/banner/app_banner_dialog.dart';
 import 'package:widam/src/features/cart/presentation/cart_item_added_dialog/go_to_cart_controller.dart';
-import 'package:widam/src/features/items/presentation/item_details/item_details_body/slotter_fees_widget/slotter_fees_controller.dart';
+import 'package:widam/src/features/items/presentation/item_details/item_details_body/slotter_fees_form_field/slotter_fees_controller.dart';
+import 'package:widam/src/features/items/presentation/item_details/item_details_body/slotter_fees_form_field/slotter_fees_form_field.dart';
 import 'package:widam/src/features/recommendations/presentation/frequently_bought_together/frequently_bought_together_controller.dart';
 import 'package:widam/src/features/recommendations/presentation/recently_viewd/recently_viewd_controller.dart';
 import 'package:widam/src/features/recommendations/presentation/similar_items/similar_items_controller.dart';
@@ -119,6 +120,12 @@ class AddToCartWidget extends StatelessWidget {
     required WidgetRef ref,
     String? attributionToken,
   }) {
+    final slotterFeesFormKey = ref.read(slotterFeesFormKeyProvider);
+    if (slotterFeesFormKey.currentState != null &&
+        !slotterFeesFormKey.currentState!.validate()) {
+      return;
+    }
+
     final mubadaraFormKey = ref.read(mubadaraFormKeyProvider);
     if (mubadaraFormKey.currentState != null &&
         !mubadaraFormKey.currentState!.validate()) {
@@ -152,7 +159,7 @@ class AddToCartWidget extends StatelessWidget {
 
   void _listenForUpdateCart(WidgetRef ref, BuildContext context) {
     ref.listen(updateCartProvider, (previous, next) async {
-      if (next is AsyncError && ref.read(cartCountProvider) == 0) {
+      if (next is AsyncError) {
         showAppBannerDialog(context, next.error.toString(), next.stackTrace);
       } else if (next is AsyncData) {
         context.popRoute();

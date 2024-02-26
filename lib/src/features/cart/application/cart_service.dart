@@ -137,3 +137,11 @@ double cartTotal(CartTotalRef ref) =>
           data: (cart) => cart.value != null ? cart.value!.total : 0,
           orElse: () => 0,
         );
+
+@Riverpod(keepAlive: true)
+bool isMubadaraCart(IsMubadaraCartRef ref) =>
+    ref.watch(cartControllerProvider).maybeMap(
+          data: (cart) =>
+              cart.value != null ? cart.value!.mubadara == 1 : false,
+          orElse: () => false,
+        );

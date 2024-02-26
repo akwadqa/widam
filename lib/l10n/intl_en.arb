@@ -336,5 +336,5 @@
   "addComplaint" : "Add Complaint",
   "writeDiscription" : "Write Discription",
   "widam" : "Widam",
-  "optional" : "Optional"
+  "slotterFeesValidationMsg" : "Please select slotter fees"
 }

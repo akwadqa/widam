@@ -296,7 +296,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "onlineChat": MessageLookupByLibrary.simpleMessage("Online Chat"),
         "openOrders": MessageLookupByLibrary.simpleMessage("Open Orders"),
         "openingHoures": MessageLookupByLibrary.simpleMessage("Opening Hours"),
-        "optional": MessageLookupByLibrary.simpleMessage("Optional"),
         "order": MessageLookupByLibrary.simpleMessage("Order"),
         "orderAgain": MessageLookupByLibrary.simpleMessage("Order Again"),
         "orderAmount": MessageLookupByLibrary.simpleMessage("Order Amount"),
@@ -430,6 +429,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Should be number"),
         "signOut": MessageLookupByLibrary.simpleMessage("Sign Out"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+        "slotterFeesValidationMsg":
+            MessageLookupByLibrary.simpleMessage("Please select slotter fees"),
         "sortBy": MessageLookupByLibrary.simpleMessage("Sort By"),
         "specifications":
             MessageLookupByLibrary.simpleMessage("Specifications"),
