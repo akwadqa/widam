@@ -34,8 +34,7 @@ class SlotterFeesFormField extends FormField<bool> {
                               .setIsCheckedSoltterFees(value);
                           state.didChange(value);
                         },
-                        lable:
-                            '${itemDetails.priceModifierTitle} ${itemDetails.priceModifier}'),
+                        lable: itemDetails.priceModifier.toString()),
                     if (state.hasError)
                       Text(
                         state.errorText!,

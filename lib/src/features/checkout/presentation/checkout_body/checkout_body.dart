@@ -276,56 +276,58 @@ class _UpdatableCartContent extends ConsumerWidget {
             ],
           ),
         ),
-        const SizedBox(height: 20.0),
-        InkWell(
-          onTap: cart.couponCode == null
-              ? () {
-                  showAdaptiveModalBottomSheet<String?>(
-                          context: context,
-                          builder: (context) => const CouponCodeSelector())
-                      .then((couponCodeId) {
-                    if (couponCodeId != null) {
-                      ref
-                          .read(updateCartProvider.notifier)
-                          .updateCart(couponCode: couponCodeId);
-                    }
-                  });
-                }
-              : null,
-          child: Container(
-            color: AppColors.cultured,
-            padding: const EdgeInsets.all(10.0),
+        if (cart.mubadara != 1) ...[
+          const SizedBox(height: 20.0),
+          InkWell(
+            onTap: cart.couponCode == null
+                ? () {
+                    showAdaptiveModalBottomSheet<String?>(
+                            context: context,
+                            builder: (context) => const CouponCodeSelector())
+                        .then((couponCodeId) {
+                      if (couponCodeId != null) {
+                        ref
+                            .read(updateCartProvider.notifier)
+                            .updateCart(couponCode: couponCodeId);
+                      }
+                    });
+                  }
+                : null,
             child: Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(12.0),
-              child: Row(
-                children: [
-                  Assets.icons.discountIcon.svg(),
-                  const SizedBox(width: 10.0),
-                  Text(cart.couponCode ?? S.of(context).applyCoupon,
-                      style: const TextStyle(
-                          fontSize: 13.0,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500)),
-                  if (cart.couponCode != null) ...[
-                    const Spacer(),
-                    InkWell(
-                        onTap: () {
-                          ref
-                              .read(updateCartProvider.notifier)
-                              .updateCart(couponCode: '');
-                        },
-                        child: const CircleAvatar(
-                            radius: 12,
-                            backgroundColor: AppColors.red,
-                            child: Icon(Icons.close,
-                                color: Colors.white, size: 14)))
-                  ]
-                ],
+              color: AppColors.cultured,
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                color: Colors.white,
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
+                  children: [
+                    Assets.icons.discountIcon.svg(),
+                    const SizedBox(width: 10.0),
+                    Text(cart.couponCode ?? S.of(context).applyCoupon,
+                        style: const TextStyle(
+                            fontSize: 13.0,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500)),
+                    if (cart.couponCode != null) ...[
+                      const Spacer(),
+                      InkWell(
+                          onTap: () {
+                            ref
+                                .read(updateCartProvider.notifier)
+                                .updateCart(couponCode: '');
+                          },
+                          child: const CircleAvatar(
+                              radius: 12,
+                              backgroundColor: AppColors.red,
+                              child: Icon(Icons.close,
+                                  color: Colors.white, size: 14)))
+                    ]
+                  ],
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ],
     );
   }
@@ -334,7 +336,7 @@ class _UpdatableCartContent extends ConsumerWidget {
     showAdaptiveModalBottomSheet<(bool, String, String?)?>(
             context: context,
             builder: (context) => PaymentMethodSelector(
-              isMubadara: cart.mubadara == 1,
+                isMubadara: cart.mubadara == 1,
                 selectedPaymentMethodId: cart.paymentMethod?.paymentMethodId,
                 selectedPaymentTokenId: cart.savedCard?.paymentTokenId))
         .then(((bool, String, String?)? paymentData) {

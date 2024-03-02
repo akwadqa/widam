@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/generated/l10n.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/quantity_form_field.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/slotter_fees_form_field/slotter_fees_form_field.dart';
+import 'package:widam/src/features/items/presentation/item_details/option_label.dart';
 
 import '../../../domain/item_details/item_details.dart';
 import '../item_attribute_variants_list.dart';
@@ -97,21 +98,29 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
                 ),
               )
             ],
-            if (widget.itemDetails.isPriceModifier == 1)
+            if (widget.itemDetails.isPriceModifier == 1) ...[
+              const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Form(
-                  key: ref.read(slotterFeesFormKeyProvider),
-                  child: SlotterFeesFormField(
-                      itemDetails: widget.itemDetails,
-                      validator: (value) {
-                        if (value == false) {
-                          return S.of(context).slotterFeesValidationMsg;
-                        }
-                        return null;
-                      }),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    OptionLabel(label: widget.itemDetails.priceModifierTitle!),
+                    Form(
+                      key: ref.read(slotterFeesFormKeyProvider),
+                      child: SlotterFeesFormField(
+                          itemDetails: widget.itemDetails,
+                          validator: (value) {
+                            if (value == false) {
+                              return S.of(context).slotterFeesValidationMsg;
+                            }
+                            return null;
+                          }),
+                    ),
+                  ],
                 ),
               ),
+            ],
             if (widget.itemDetails.mubadaraDetails != null &&
                 widget.itemDetails.mubadaraDetails!.qtyPerQid >= 1) ...[
               const SizedBox(height: 20),

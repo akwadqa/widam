@@ -40,7 +40,8 @@ class ItemDetails with _$ItemDetails {
     required String? row,
     required int? isPriceModifier,
     required double? priceModifier,
-    required String? priceModifierTitle
+    required String? priceModifierTitle,
+    required String? customerQid,
   }) = _ItemDetails;
 
   factory ItemDetails.fromJson(Map<String, dynamic> json) =>

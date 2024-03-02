@@ -112,6 +112,8 @@ class __BodyState extends State<_Body> {
     super.initState();
   }
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final selectedDates =
@@ -163,82 +165,133 @@ class __BodyState extends State<_Body> {
                 fontWeight: FontWeight.bold,
                 color: Colors.black)),
         const SizedBox(height: 10),
-        GridView.builder(
-          padding: EdgeInsets.zero,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 7 / 2,
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
-              mainAxisExtent: 80),
-          itemCount: timeSlots.length,
-          itemBuilder: (context, index) {
-            return Consumer(
-              builder: (context, ref, child) {
-                return FilterChip(
-                  padding: EdgeInsets.zero,
-                  label: SizedBox(
-                    width: double.infinity,
-                    child: Column(children: [
-                      const SizedBox(height: 8),
-                      Text(timeSlots[index].timeFormatted,
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: _selectedTimeSlot.timeSlotId ==
-                                      timeSlots[index].timeSlotId
-                                  ? AppColors.darkBlue
-                                  : null)),
-                      const SizedBox(height: 8.0),
-                      Text(
-                          timeSlots[index].timeslotOverload == 1
-                              ? S.of(context).fullyBooked
-                              : '${S.of(context).deliveryFee}: ${widget.deliveryCharges}',
-                          style: TextStyle(
-                              color: _selectedTimeSlot.timeSlotId ==
-                                      timeSlots[index].timeSlotId
-                                  ? AppColors.darkBlue
-                                  : null))
-                    ]),
-                  ),
-                  side: _selectedTimeSlot.timeSlotId ==
-                          timeSlots[index].timeSlotId
-                      ? const BorderSide(color: AppColors.darkBlue, width: 1)
-                      : null,
-                  selected: _selectedTimeSlot.timeSlotId ==
-                      timeSlots[index].timeSlotId,
-                  onSelected: timeSlots[index].timeslotOverload == 1
-                      ? null
-                      : (value) {
-                          if (value) {
-                            if (ref.read(canVibrateProvider).requireValue) {
-                              Vibrate.feedback(FeedbackType.light);
-                            }
-                            setState(() {
-                              _selectedTimeSlot = timeSlots[index];
-                            });
-                          }
-                        },
-                );
+        Form(
+          key: _formKey,
+          child: _TimeSlotOptionsFormField(
+              timeSlots: timeSlots,
+              selectedTimeSlot: _selectedTimeSlot,
+              deliveryCharges: widget.deliveryCharges,
+              onSelected: (timeSlot) {
+                setState(() {
+                  _selectedTimeSlot = timeSlot;
+                });
               },
-            );
-          },
-          shrinkWrap: true,
+              validator: (value) {
+                if (_selectedDate != widget.initialDate && value == null) {
+                  return S.of(context).required;
+                }
+                return null;
+              }),
         ),
         const SizedBox(height: 40),
         SubmitButton(
             text: S.of(context).select,
             onPressed: () {
-              if (_selectedTimeSlot.timeSlotId !=
-                  widget.initialTimeSlot.timeSlotId) {
-                context.popRoute<({TimeSlot timeSlot, String deliveryDate})?>(
-                    (timeSlot: _selectedTimeSlot, deliveryDate: _selectedDate));
-              } else {
-                context.popRoute();
+              if (_formKey.currentState!.validate()) {
+                if (_selectedTimeSlot.timeSlotId !=
+                    widget.initialTimeSlot.timeSlotId) {
+                  context
+                      .popRoute<({TimeSlot timeSlot, String deliveryDate})?>((
+                    timeSlot: _selectedTimeSlot,
+                    deliveryDate: _selectedDate
+                  ));
+                } else {
+                  context.popRoute();
+                }
               }
             }),
         SizedBox(height: 20 + getBottomPadding(context))
       ],
     );
   }
+}
+
+class _TimeSlotOptionsFormField extends FormField<TimeSlot> {
+  _TimeSlotOptionsFormField(
+      {required List<TimeSlot> timeSlots,
+      required TimeSlot selectedTimeSlot,
+      required String deliveryCharges,
+      required void Function(TimeSlot timeSlot) onSelected,
+      super.validator})
+      : super(
+          builder: (state) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GridView.builder(
+                  padding: EdgeInsets.zero,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 7 / 2,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                      mainAxisExtent: 80),
+                  itemCount: timeSlots.length,
+                  itemBuilder: (context, index) {
+                    return Consumer(
+                      builder: (context, ref, child) {
+                        return FilterChip(
+                          padding: EdgeInsets.zero,
+                          label: SizedBox(
+                            width: double.infinity,
+                            child: Column(children: [
+                              const SizedBox(height: 8),
+                              Text(timeSlots[index].timeFormatted,
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: selectedTimeSlot.timeSlotId ==
+                                              timeSlots[index].timeSlotId
+                                          ? AppColors.darkBlue
+                                          : null)),
+                              const SizedBox(height: 8.0),
+                              Text(
+                                  timeSlots[index].timeslotOverload == 1
+                                      ? S.of(context).fullyBooked
+                                      : '${S.of(context).deliveryFee}: $deliveryCharges',
+                                  style: TextStyle(
+                                      color: selectedTimeSlot.timeSlotId ==
+                                              timeSlots[index].timeSlotId
+                                          ? AppColors.darkBlue
+                                          : null))
+                            ]),
+                          ),
+                          side: selectedTimeSlot.timeSlotId ==
+                                  timeSlots[index].timeSlotId
+                              ? const BorderSide(
+                                  color: AppColors.darkBlue, width: 1)
+                              : null,
+                          selected: selectedTimeSlot.timeSlotId ==
+                              timeSlots[index].timeSlotId,
+                          onSelected: timeSlots[index].timeslotOverload == 1
+                              ? null
+                              : (value) {
+                                  if (value) {
+                                    if (ref
+                                        .read(canVibrateProvider)
+                                        .requireValue) {
+                                      Vibrate.feedback(FeedbackType.light);
+                                    }
+                                    state.didChange(timeSlots[index]);
+                                    onSelected(timeSlots[index]);
+                                  }
+                                },
+                        );
+                      },
+                    );
+                  },
+                  shrinkWrap: true,
+                ),
+                if (state.hasError)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text(
+                      state.errorText!,
+                      style: const TextStyle(color: Colors.red, fontSize: 12),
+                    ),
+                  )
+              ],
+            );
+          },
+        );
 }

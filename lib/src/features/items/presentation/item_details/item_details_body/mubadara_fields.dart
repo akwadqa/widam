@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../../../common_widgets/banner/app_banner_dialog.dart';
-import '../../../../../common_widgets/fade_circle_loading_indicator.dart';
 import '../../../domain/mubadara_details/mubadara_details.dart';
-import 'validate_qid_notifier.dart';
 import '../option_label.dart';
 import '../../../../../theme/app_colors.dart';
 
@@ -57,19 +54,8 @@ class QIDTextFormField extends ConsumerStatefulWidget {
 }
 
 class _QIDTextFormFieldState extends ConsumerState<QIDTextFormField> {
-  String _text = '';
-
   @override
   Widget build(BuildContext context) {
-    ref.listen(validateQidNotifierProvider, (previous, next) {
-      if (next is ValidateQidError) {
-        showAppBannerDialog(context, next.error.toString(), next.stackTrace);
-      }
-      if (next is ValidateQidLoaded && next.isQidValid) {
-        ref.read(mubadaraFormKeyProvider).currentState?.validate();
-      }
-    });
-    final state = ref.watch(validateQidNotifierProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -77,40 +63,8 @@ class _QIDTextFormFieldState extends ConsumerState<QIDTextFormField> {
           decoration: InputDecoration(
             hintText: widget.mubadaraDetails.qidFieldPlaceholder,
             border: _border,
-            enabledBorder: _border,
-            suffixIcon: _text.isEmpty
-                ? null
-                : state is ValidateQidLoading
-                    ? const FadeCircleLoadingIndicator()
-                    : TextButton(
-                        onPressed: state is ValidateQidLoaded
-                            ? () => ref
-                                .read(validateQidNotifierProvider.notifier)
-                                .discard()
-                            : () => ref
-                                .read(validateQidNotifierProvider.notifier)
-                                .validateQid(
-                                    qid: _text,
-                                    mubadaraId:
-                                        widget.mubadaraDetails.mubadaraId),
-                        style: TextButton.styleFrom(
-                          foregroundColor: AppColors.darkBlue,
-                          textStyle: const TextStyle(
-                              fontSize: 12.0, fontWeight: FontWeight.bold),
-                        ),
-                        child: Text(state is ValidateQidLoaded
-                            ? S.of(context).cancel
-                            : widget.mubadaraDetails.buttonLabel)),
-          ),
+            enabledBorder: _border),
           onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
-          onChanged: (value) {
-            setState(() {
-              _text = value;
-            });
-            if (state is ValidateQidLoaded) {
-              ref.read(validateQidNotifierProvider.notifier).discard();
-            }
-          },
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
             ArabicNumberInputFormatter(),
@@ -124,31 +78,11 @@ class _QIDTextFormFieldState extends ConsumerState<QIDTextFormField> {
             if (value.length != 11) {
               return S.of(context).mustBeElevenDigits;
             }
-
-            if (state is ValidateQidLoaded && !state.isQidValid) {
-              return S.of(context).validateButtonMessage;
-            }
             return null;
           },
           onSaved: (value) =>
               ref.read(qidNumberProvider.notifier).state = value!,
         ),
-        if (state is ValidateQidLoaded) ...[
-          const SizedBox(height: 8.0),
-          Row(
-            children: [
-              state.isQidValid
-                  ? const Icon(Icons.check_circle, color: Colors.green)
-                  : const Icon(Icons.error, color: Colors.red),
-              const SizedBox(width: 3.0),
-              Text(
-                  state.isQidValid
-                      ? S.of(context).qidValidMessage
-                      : state.message,
-                  style: const TextStyle(color: Colors.grey)),
-            ],
-          )
-        ]
       ],
     );
   }

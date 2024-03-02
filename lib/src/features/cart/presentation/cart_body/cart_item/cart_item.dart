@@ -80,9 +80,12 @@ class CartItem extends StatelessWidget {
                     opacity: opacity,
                     child: Text(
                         itemDetails.websiteItemAttributes!
-                            .map((e) =>
-                                '${e.attributeTitle}: ${e.attributeValue.valueTitle}')
-                            .join('-'),
+                                .map((e) =>
+                                    '${e.attributeTitle}: ${e.attributeValue.valueTitle}')
+                                .join('-') +
+                            (itemDetails.customerQid != null
+                                ? ' - QID: ${itemDetails.customerQid}'
+                                : ''),
                         style: const TextStyle(
                             fontSize: 12,
                             color: AppColors.darkGray,

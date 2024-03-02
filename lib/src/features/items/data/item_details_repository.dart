@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../common_models/response/app_response.dart';
 import '../../../constants/end_points.dart';
@@ -37,28 +36,5 @@ class ItemDetailsRepository {
       throw AppException(itemDetailsResponse.message);
     }
     return itemDetailsResponse.data;
-  }
-
-  Future<({bool isValid, String message})> validateQid(
-      {required String qid,
-      required String mubadaraId,
-      required int quantity}) async {
-    final formData = FormData.fromMap({
-      'qid': qid,
-      'mubadara_id': mubadaraId,
-      'quantity': quantity,
-    });
-
-    final response =
-        await _networkService.post(EndPoints.validateQid, formData);
-    AppResponse<bool> validateQidResponse = AppResponse<bool>.fromJson(
-        response.data, (json) => json['permitted'] == 1);
-    if (validateQidResponse.error == 1) {
-      throw AppException(validateQidResponse.message);
-    }
-    return (
-      isValid: validateQidResponse.data,
-      message: response.data['message'] as String
-    );
   }
 }
