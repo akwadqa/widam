@@ -87,11 +87,13 @@ class _DatesList extends ConsumerWidget {
 }
 
 class _Body extends StatefulWidget {
-  const _Body(
-      {required this.dates,
-      required this.initialDate,
-      required this.initialTimeSlot,
-      required this.deliveryCharges});
+  const _Body({
+    required this.dates,
+    required this.initialDate,
+    required this.initialTimeSlot,
+    required this.deliveryCharges,
+  });
+
   final List<Date> dates;
   final String initialDate;
   final TimeSlot initialTimeSlot;
@@ -120,6 +122,7 @@ class __BodyState extends State<_Body> {
         widget.dates.where((element) => element.date == _selectedDate);
     final List<TimeSlot> timeSlots =
         selectedDates.toList().isNotEmpty ? selectedDates.first.timeSlots : [];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -133,13 +136,17 @@ class __BodyState extends State<_Body> {
               return FilterChip(
                 label: Column(
                   children: [
-                    Text(date.dateFormatted.split(',').last,
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600)),
+                    Text(
+                      date.dateFormatted.split(',').last,
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.w600),
+                    ),
                     const SizedBox(height: 8),
-                    Text(date.dateFormatted.split(',').first,
-                        style: const TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500))
+                    Text(
+                      date.dateFormatted.split(',').first,
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.w500),
+                    ),
                   ],
                 ),
                 labelStyle: TextStyle(
@@ -159,61 +166,62 @@ class __BodyState extends State<_Body> {
           ),
         ),
         const SizedBox(height: 20),
-        Text(S.of(context).chooseYourTimeSlot,
-            style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.black)),
+        Text(
+          S.of(context).chooseYourTimeSlot,
+          style: const TextStyle(
+              fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+        ),
         const SizedBox(height: 10),
         Form(
           key: _formKey,
           child: _TimeSlotOptionsFormField(
-              timeSlots: timeSlots,
-              selectedTimeSlot: _selectedTimeSlot,
-              deliveryCharges: widget.deliveryCharges,
-              onSelected: (timeSlot) {
-                setState(() {
-                  _selectedTimeSlot = timeSlot;
-                });
-              },
-              validator: (value) {
-                if (_selectedDate != widget.initialDate && value == null) {
-                  return S.of(context).required;
-                }
-                return null;
-              }),
+            timeSlots: timeSlots,
+            selectedTimeSlot: _selectedTimeSlot,
+            deliveryCharges: widget.deliveryCharges,
+            onSelected: (timeSlot) {
+              setState(() {
+                _selectedTimeSlot = timeSlot;
+              });
+            },
+            validator: (value) {
+              if (_selectedDate != widget.initialDate && value == null) {
+                return S.of(context).required;
+              }
+              return null;
+            },
+          ),
         ),
         const SizedBox(height: 40),
         SubmitButton(
-            text: S.of(context).select,
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                if (_selectedTimeSlot.timeSlotId !=
-                    widget.initialTimeSlot.timeSlotId) {
-                  context
-                      .popRoute<({TimeSlot timeSlot, String deliveryDate})?>((
-                    timeSlot: _selectedTimeSlot,
-                    deliveryDate: _selectedDate
-                  ));
-                } else {
-                  context.popRoute();
-                }
+          text: S.of(context).select,
+          onPressed: () {
+            if (_formKey.currentState!.validate()) {
+              if (_selectedTimeSlot.timeSlotId !=
+                  widget.initialTimeSlot.timeSlotId) {
+                context.popRoute<({TimeSlot timeSlot, String deliveryDate})?>((
+                  timeSlot: _selectedTimeSlot,
+                  deliveryDate: _selectedDate,
+                ));
+              } else {
+                context.popRoute();
               }
-            }),
-        SizedBox(height: 20 + getBottomPadding(context))
+            }
+          },
+        ),
+        SizedBox(height: 20 + getBottomPadding(context)),
       ],
     );
   }
 }
 
 class _TimeSlotOptionsFormField extends FormField<TimeSlot> {
-  _TimeSlotOptionsFormField(
-      {required List<TimeSlot> timeSlots,
-      required TimeSlot selectedTimeSlot,
-      required String deliveryCharges,
-      required void Function(TimeSlot timeSlot) onSelected,
-      super.validator})
-      : super(
+  _TimeSlotOptionsFormField({
+    required List<TimeSlot> timeSlots,
+    required TimeSlot selectedTimeSlot,
+    required String deliveryCharges,
+    required void Function(TimeSlot timeSlot) onSelected,
+    super.validator,
+  }) : super(
           builder: (state) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -221,11 +229,12 @@ class _TimeSlotOptionsFormField extends FormField<TimeSlot> {
                 GridView.builder(
                   padding: EdgeInsets.zero,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 7 / 2,
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 8,
-                      mainAxisExtent: 80),
+                    crossAxisCount: 2,
+                    childAspectRatio: 7 / 2,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    mainAxisExtent: 80,
+                  ),
                   itemCount: timeSlots.length,
                   itemBuilder: (context, index) {
                     return Consumer(
@@ -234,27 +243,34 @@ class _TimeSlotOptionsFormField extends FormField<TimeSlot> {
                           padding: EdgeInsets.zero,
                           label: SizedBox(
                             width: double.infinity,
-                            child: Column(children: [
-                              const SizedBox(height: 8),
-                              Text(timeSlots[index].timeFormatted,
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 8),
+                                Text(
+                                  timeSlots[index].timeFormatted,
                                   style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: selectedTimeSlot.timeSlotId ==
-                                              timeSlots[index].timeSlotId
-                                          ? AppColors.darkBlue
-                                          : null)),
-                              const SizedBox(height: 8.0),
-                              Text(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: selectedTimeSlot.timeSlotId ==
+                                            timeSlots[index].timeSlotId
+                                        ? AppColors.darkBlue
+                                        : null,
+                                  ),
+                                ),
+                                const SizedBox(height: 8.0),
+                                Text(
                                   timeSlots[index].timeslotOverload == 1
                                       ? S.of(context).fullyBooked
                                       : '${S.of(context).deliveryFee}: $deliveryCharges',
                                   style: TextStyle(
-                                      color: selectedTimeSlot.timeSlotId ==
-                                              timeSlots[index].timeSlotId
-                                          ? AppColors.darkBlue
-                                          : null))
-                            ]),
+                                    color: selectedTimeSlot.timeSlotId ==
+                                            timeSlots[index].timeSlotId
+                                        ? AppColors.darkBlue
+                                        : null,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           side: selectedTimeSlot.timeSlotId ==
                                   timeSlots[index].timeSlotId
@@ -289,7 +305,7 @@ class _TimeSlotOptionsFormField extends FormField<TimeSlot> {
                       state.errorText!,
                       style: const TextStyle(color: Colors.red, fontSize: 12),
                     ),
-                  )
+                  ),
               ],
             );
           },

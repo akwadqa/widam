@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../items/presentation/item_card/item_card.dart';
 import '../../../items/domain/item/item.dart';
-import 'mubadara_item.dart';
 
 class ItemsHorizontalList extends StatelessWidget {
   const ItemsHorizontalList(
@@ -18,13 +17,8 @@ class ItemsHorizontalList extends StatelessWidget {
       height: 300,
       child: ListView.separated(
         itemBuilder: (BuildContext context, int index) {
-          const double width = 250;
-          return items[index].isMubadara == 1
-              ? MubadaraItem(
-                  item: items[index],
-                  attributionToken: attributionToken,
-                  width: width)
-              : ItemCard(
+          const double width = 200;
+          return ItemCard(
                   item: items[index],
                   attributionToken: attributionToken,
                   width: width);
