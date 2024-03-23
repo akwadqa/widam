@@ -60,7 +60,7 @@ class _ItemGroupScreenState extends ConsumerState<ItemGroupScreen> {
         currentIndex: 1,
         onTap: (index) {
           if (index != 1) {
-            context.popRoute(index);
+            context.maybePop(index);
           }
         },
       ),

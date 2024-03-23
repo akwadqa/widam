@@ -2,21 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:queen_validators/queen_validators.dart';
-import 'package:widam/src/features/user_language/application/current_language.dart';
-
+import 'package:widam/src/features/subscriptions/presentation/subscription_screen/subscription_body/set_your_schedule/subscription_info/subscription_title_controller.dart';
 import '../../../../../../../gen/assets.gen.dart';
 import '../../../../../../../generated/l10n.dart';
 import '../../../../../../theme/app_colors.dart';
-import '../set_your_schedule/set_your_schedule.dart';
-
-final subscriptionTitleProvider = StateProvider.autoDispose<String>((ref) {
-  final interval = ref.watch(subscriptionInfoProvider).interval;
-  if (ref.watch(currentLanguageProvider) == 'ar') {
-    return 'اشتراك ${interval.frequencyName}';
-  } else {
-    return 'My ${interval.frequencyName} Subscription';
-  }
-});
 
 class SubscriptionTitle extends ConsumerWidget {
   const SubscriptionTitle({super.key});
@@ -63,14 +52,14 @@ class SubscriptionTitle extends ConsumerWidget {
             ),
             actions: <Widget>[
               TextButton(
-                onPressed: context.popRoute,
+                onPressed: context.maybePop,
                 child: Text(S.of(context).cancel),
               ),
               TextButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
-                      context.popRoute(title);
+                      context.maybePop(title);
                     }
                   },
                   child: Text(S.of(context).save)),
@@ -81,7 +70,9 @@ class SubscriptionTitle extends ConsumerWidget {
     );
 
     if (result != null) {
-      ref.read(subscriptionTitleProvider.notifier).state = result;
+      ref
+          .read(subscriptionTitleControllerProvider.notifier)
+          .setSubscriptionTitle(result);
     }
   }
 }
@@ -92,7 +83,7 @@ class _TextWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Text(
-      ref.watch(subscriptionTitleProvider),
+      ref.watch(subscriptionTitleControllerProvider),
       style: const TextStyle(
           fontWeight: FontWeight.bold,
           color: AppColors.midnightBlue,

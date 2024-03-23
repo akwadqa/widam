@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widam/src/features/subscriptions/presentation/subscription_screen/subscription_body/select_your_product/selected_subscription_items/selected_subscription_items_controller.dart';
 import '../../../../../../utils/utils.dart';
 import '../../../../domain/attribute.dart';
 import 'subscription_item_details_controller.dart';
@@ -14,9 +15,6 @@ import '../../../../../items/domain/item/item.dart';
 import '../../../../../items/presentation/item_details/item_attribute_variants_list.dart';
 import '../../../../domain/subscription_item.dart';
 
-final selectedSubscriptionItemsProvider =
-    StateProvider.autoDispose<List<SubscriptionItem>>((ref) => []);
-
 class SubscribeButton extends ConsumerWidget {
   const SubscribeButton({super.key, required this.item});
 
@@ -25,18 +23,22 @@ class SubscribeButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedSubscriptionItems =
-        ref.watch(selectedSubscriptionItemsProvider);
+        ref.watch(selectedSubscriptionItemsControllerProvider);
     final isSubscribed = selectedSubscriptionItems
         .any((element) => element.id == item.websiteItemId);
     return ElevatedButton(
         onPressed: () {
           if (isSubscribed) {
-            _removeSubscriptionItem(item.websiteItemId, ref);
+            ref
+                .read(selectedSubscriptionItemsControllerProvider.notifier)
+                .removeSubscriptionItem(item.websiteItemId);
           } else {
             if (item.websiteItemType == 'V') {
               _showItemAttributesSelector(context, ref, item);
             } else {
-              _addSubscriptionItem(item.websiteItemId, ref);
+              ref
+                  .read(selectedSubscriptionItemsControllerProvider.notifier)
+                  .addSubscriptionItemById(item.websiteItemId);
             }
           }
         },
@@ -63,22 +65,6 @@ class SubscribeButton extends ConsumerWidget {
         builder: (context) => SizedBox(
             height: MediaQuery.of(context).size.height * 0.6,
             child: _ItemAttributesSelector(item: item)));
-  }
-
-  void _addSubscriptionItem(String itemId, WidgetRef ref) {
-    ref.read(selectedSubscriptionItemsProvider.notifier).state = [
-      ...ref.watch(selectedSubscriptionItemsProvider),
-      SubscriptionItem(id: item.websiteItemId, quantity: 1)
-    ];
-  }
-
-  void _removeSubscriptionItem(String itemId, WidgetRef ref) {
-    final selectedSubscriptionItems =
-        ref.read(selectedSubscriptionItemsProvider);
-    ref.read(selectedSubscriptionItemsProvider.notifier).state =
-        selectedSubscriptionItems
-            .where((element) => element.id != itemId)
-            .toList();
   }
 }
 
@@ -163,34 +149,30 @@ class _ItemAttributesSelectorState
                                       _optionsFormKey.currentState!.save();
                                       ref
                                           .read(
-                                              selectedSubscriptionItemsProvider
+                                              selectedSubscriptionItemsControllerProvider
                                                   .notifier)
-                                          .state = [
-                                        ...ref.read(
-                                            selectedSubscriptionItemsProvider),
-                                        SubscriptionItem(
-                                            id: widget.item.websiteItemId,
-                                            quantity: 1,
-                                            attributes: itemDetails
-                                                .websiteItemAttributes!
-                                                .map((e) => Attribute(
-                                                    id: e.attributeId,
-                                                    value: e.attributeValue
-                                                        .valueId))
-                                                .toList(),
-                                            productOptions:
-                                                _selectedOptions.isEmpty
-                                                    ? null
-                                                    : _selectedOptions
-                                                        .map((e) => {
-                                                              'product_option_name':
-                                                                  e.productOptionName,
-                                                              'product_option_value':
-                                                                  e.valueId
-                                                            })
-                                                        .toList())
-                                      ];
-                                      context.popRoute();
+                                          .addSubscriptionItem(SubscriptionItem(
+                                              id: widget.item.websiteItemId,
+                                              quantity: 1,
+                                              attributes: itemDetails
+                                                  .websiteItemAttributes!
+                                                  .map((e) => Attribute(
+                                                      id: e.attributeId,
+                                                      value: e.attributeValue
+                                                          .valueId))
+                                                  .toList(),
+                                              productOptions:
+                                                  _selectedOptions.isEmpty
+                                                      ? null
+                                                      : _selectedOptions
+                                                          .map((e) => {
+                                                                'product_option_name':
+                                                                    e.productOptionName,
+                                                                'product_option_value':
+                                                                    e.valueId
+                                                              })
+                                                          .toList()));
+                                      context.maybePop();
                                     }
                                   }
                                 }),

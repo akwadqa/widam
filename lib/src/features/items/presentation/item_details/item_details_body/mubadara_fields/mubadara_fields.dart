@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../domain/mubadara_details/mubadara_details.dart';
-import '../option_label.dart';
-import '../../../../../theme/app_colors.dart';
+import 'package:widam/src/features/items/presentation/item_details/item_details_body/mubadara_fields/qid_attachment_controller.dart';
+import 'package:widam/src/features/items/presentation/item_details/item_details_body/mubadara_fields/qid_number_controller.dart';
+import '../../../../domain/mubadara_details/mubadara_details.dart';
+import '../../option_label.dart';
+import '../../../../../../theme/app_colors.dart';
 
-import '../../../../../../gen/assets.gen.dart';
-import '../../../../../../generated/l10n.dart';
-import '../../../../../utils/utils.dart';
+import '../../../../../../../gen/assets.gen.dart';
+import '../../../../../../../generated/l10n.dart';
+import '../../../../../../utils/utils.dart';
 import 'package:image_picker/image_picker.dart';
 part 'mubadara_fields.g.dart';
 
@@ -41,8 +43,6 @@ class MubadaraFields extends ConsumerWidget {
     );
   }
 }
-
-final qidNumberProvider = StateProvider.autoDispose<String>((ref) => '');
 
 class QIDTextFormField extends ConsumerStatefulWidget {
   const QIDTextFormField({super.key, required this.mubadaraDetails});
@@ -81,7 +81,7 @@ class _QIDTextFormFieldState extends ConsumerState<QIDTextFormField> {
             return null;
           },
           onSaved: (value) =>
-              ref.read(qidNumberProvider.notifier).state = value!,
+              ref.read(qidNumberControllerProvider.notifier).setQidNumber(value!),
         ),
       ],
     );
@@ -93,7 +93,6 @@ class _QIDTextFormFieldState extends ConsumerState<QIDTextFormField> {
       );
 }
 
-final qidAttachmentProvider = StateProvider.autoDispose<XFile?>((ref) => null);
 
 class _QIDAttachmentFormField extends FormField<XFile?> {
   _QIDAttachmentFormField(
@@ -108,7 +107,7 @@ class _QIDAttachmentFormField extends FormField<XFile?> {
               return null;
             },
             onSaved: (value) =>
-                ref.read(qidAttachmentProvider.notifier).state = value!,
+                ref.read(qidAttachmentControllerProvider.notifier).setQidAttachment(value!),
             builder: (state) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,12 +123,12 @@ class _QIDAttachmentFormField extends FormField<XFile?> {
                                   actions: [
                                     TextButton(
                                       onPressed: () =>
-                                          context.popRoute(ImageSource.camera),
+                                          context.maybePop(ImageSource.camera),
                                       child: Text(S.of(context).camera),
                                     ),
                                     TextButton(
                                       onPressed: () =>
-                                          context.popRoute(ImageSource.gallery),
+                                          context.maybePop(ImageSource.gallery),
                                       child: Text(S.of(context).gallery),
                                     ),
                                   ]));

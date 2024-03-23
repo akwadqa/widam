@@ -147,9 +147,9 @@ class _OtpScreenState extends State<OtpScreen> {
                 ref.listen(verifyOtpControllerProvider, (previous, next) {
                   if (next is AsyncData && next.value != null) {
                     if (next.value?.validation.userExist == true) {
-                      context.popRoute(true);
+                      context.maybePop(true);
                     } else {
-                      context.popRoute(false);
+                      context.maybePop(false);
                     }
                   } else if (next is AsyncError) {
                     showAppBannerDialog(

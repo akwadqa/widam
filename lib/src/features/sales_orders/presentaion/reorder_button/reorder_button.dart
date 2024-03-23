@@ -17,7 +17,7 @@ class ReorderButton extends ConsumerWidget {
     ref.listen(reorderControllerProvider, (previous, next) {
       if (next is AsyncData && next.value != null) {
         ref.read(updateCartProvider.notifier).setCart(next.value!);
-        context.popRoute(true);
+        context.maybePop(true);
       } else if (next is AsyncError) {
         showAppBannerDialog(context, next.error.toString(), next.stackTrace);
       }

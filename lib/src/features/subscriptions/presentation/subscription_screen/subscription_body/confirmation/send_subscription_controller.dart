@@ -1,8 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:widam/src/features/subscriptions/presentation/subscription_screen/subscription_body/set_your_schedule/subscription_info/subscription_title_controller.dart';
 import '../../../../data/subscriptions_repository.dart';
-import 'subscription_title.dart';
-
-import '../set_your_schedule/set_your_schedule.dart';
+import '../set_your_schedule/subscription_info/subscription_info_controller.dart';
 
 part 'send_subscription_controller.g.dart';
 
@@ -16,9 +15,9 @@ class SendSubscriptionAsync extends _$SendSubscriptionAsync {
     try {
       final SubscriptionsRepository subscriptionsRepository =
           ref.watch(subscriptionsRepositoryProvider);
-      final subscriptionInfo = ref.watch(subscriptionInfoProvider);
+      final subscriptionInfo = ref.watch(subscriptionInfoControllerProvider);
       final newSubscriptionInfo = subscriptionInfo.copyWith(
-          title: ref.watch(subscriptionTitleProvider));
+          title: ref.watch(subscriptionTitleControllerProvider));
       final appResponse =
           await subscriptionsRepository.addSubscription(newSubscriptionInfo);
       state = AsyncValue.data(appResponse.message);

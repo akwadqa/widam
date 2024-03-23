@@ -27,7 +27,7 @@ class LoyaltyProgramListTile extends ConsumerWidget {
                     content: Text(S.of(context).noLoyaltyProgramDesc),
                     actions: [
                       TextButton(
-                          onPressed: context.popRoute,
+                          onPressed: context.maybePop,
                           child: Text(S.of(context).ok)),
                     ],
                   );

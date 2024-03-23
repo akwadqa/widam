@@ -325,7 +325,7 @@ class _AddEditAddressScreenState extends ConsumerState<AddEditAddressScreen> {
                   ref.listen(addEditAddressControllerProvider,
                       (previous, next) {
                     if (next is AsyncData && next.value != null) {
-                      context.popRoute();
+                      context.maybePop();
                     } else if (next is AsyncError) {
                       showAppBannerDialog(
                           context, next.error.toString(), next.stackTrace);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/features/subscriptions/presentation/subscription_screen/subscription_body/set_your_schedule/subscription_address_controller.dart';
+import 'package:widam/src/features/subscriptions/presentation/subscription_screen/subscription_body/set_your_schedule/subscription_info/subscription_info_controller.dart';
 import 'package:widam/src/features/subscriptions/presentation/subscription_screen/subscription_body/set_your_schedule/time_slot_form_field.dart';
 import 'package:widam/src/features/time_slots/domain/geofence_details/time_slot.dart';
 import '../../../../../../common_widgets/change_button.dart';
@@ -16,23 +17,7 @@ import '../../../../../../../gen/assets.gen.dart';
 import '../../../../../../../generated/l10n.dart';
 import '../../../../../../common_widgets/submit_button.dart';
 import '../../../../../../theme/app_colors.dart';
-import '../../../../domain/subscription.dart';
-import '../select_your_product/subscribe_button.dart';
 import 'date_picker_form_field.dart';
-
-final subscriptionInfoProvider = StateProvider.autoDispose((ref) {
-  final items = ref.watch(selectedSubscriptionItemsProvider);
-  return Subscription(
-    title: '',
-    startDate: '',
-    endDate: '',
-    interval: Frequency.Daily,
-    intervalCount: 1,
-    timeSlotId: '',
-    addressId: '',
-    items: items,
-  );
-});
 
 class SetYourSchedule extends ConsumerStatefulWidget {
   const SetYourSchedule({super.key});
@@ -147,12 +132,15 @@ class _SetYourScheduleState extends ConsumerState<SetYourSchedule> {
               ),
             ),
             Consumer(builder: (context, ref, child) {
+              final subscriptionInfo =
+                  ref.read(subscriptionInfoControllerProvider);
               return SubmitButton(
                   text: S.of(context).proceed,
                   onPressed: () {
                     _formKey.currentState!.save();
-                    ref.read(subscriptionInfoProvider.notifier).update(
-                        (state) => state.copyWith(
+                    ref
+                        .read(subscriptionInfoControllerProvider.notifier)
+                        .setSubscriptionInfo(subscriptionInfo.copyWith(
                             startDate: _startDate!,
                             endDate: _endDate!,
                             interval: _frequency!,

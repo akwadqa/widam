@@ -56,7 +56,7 @@ class CouponCodeItem extends StatelessWidget {
               builder: (context, ref, child) {
                 final fontFamily = ref.watch(fontFamilyProvider);
                 return TextButton(
-                    onPressed: () => context.popRoute(coupon.couponCode),
+                    onPressed: () => context.maybePop(coupon.couponCode),
                     style: TextButton.styleFrom(
                         foregroundColor: AppColors.midnightBlue,
                         textStyle: TextStyle(

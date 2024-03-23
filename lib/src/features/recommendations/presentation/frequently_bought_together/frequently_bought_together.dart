@@ -6,7 +6,6 @@ import 'package:widam/src/features/recommendations/presentation/frequently_bough
 
 import '../../../../theme/app_colors.dart';
 import '../../../items/presentation/item_card/item_card.dart';
-import '../../../layouts/presentation/item/mubadara_item.dart';
 
 class FrequentlyBoughtTogether extends ConsumerWidget {
   const FrequentlyBoughtTogether({super.key});
@@ -56,9 +55,7 @@ class FrequentlyBoughtTogether extends ConsumerWidget {
                 height: 230,
                 child: ListView.separated(
                   itemBuilder: (BuildContext context, int index) {
-                    return items[index].isMubadara == 1
-                        ? MubadaraItem(item: items[index])
-                        : ItemCard(
+                    return ItemCard(
                             item: items[index],
                             width: 130,
                             isFrequencyItem: true);

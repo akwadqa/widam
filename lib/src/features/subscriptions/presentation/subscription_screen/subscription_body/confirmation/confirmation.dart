@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widam/src/features/subscriptions/presentation/subscription_screen/subscription_body/set_your_schedule/subscription_info/subscription_info_controller.dart';
+import 'package:widam/src/features/subscriptions/presentation/subscription_screen/subscription_body/set_your_schedule/subscription_info/subscription_title_controller.dart';
 import 'package:widam/src/theme/app_theme.dart';
 import 'package:widam/src/utils/utils.dart';
 import '../../../../../../common_widgets/banner/app_banner_dialog.dart';
@@ -13,7 +15,6 @@ import '../../../../../../../gen/assets.gen.dart';
 import '../../../../../../../generated/l10n.dart';
 import '../../../../../../common_widgets/submit_button.dart';
 import '../../../../../../theme/app_colors.dart';
-import '../set_your_schedule/set_your_schedule.dart';
 
 class Confirmation extends StatelessWidget {
   const Confirmation({super.key});
@@ -52,7 +53,7 @@ class Confirmation extends StatelessWidget {
             Consumer(builder: (context, ref, child) {
               ref.listen(sendSubscriptionAsyncProvider, (previous, next) {
                 if (next.value != null) {
-                  context.popRoute();
+                  context.maybePop();
                 } else if (next.hasError) {
                   showAppBannerDialog(
                       context, next.error.toString(), next.stackTrace);
@@ -93,7 +94,7 @@ class _SubscriptionSubTitle extends ConsumerWidget {
             fontFamily: fontFamily),
         children: [
           TextSpan(
-            text: ref.watch(subscriptionTitleProvider),
+            text: ref.watch(subscriptionTitleControllerProvider),
             style: const TextStyle(
               color: AppColors.lapisBlue,
             ),
@@ -152,7 +153,7 @@ class _DetailsContainer extends StatelessWidget {
             ],
           ),
           Consumer(builder: (context, ref, child) {
-            final subscriptionInfo = ref.watch(subscriptionInfoProvider);
+            final subscriptionInfo = ref.watch(subscriptionInfoControllerProvider);
             return Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [

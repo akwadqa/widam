@@ -26,7 +26,7 @@ class HomeBannerDialog extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                context.popRoute().then((_) => banner.bannerType == 'Mubadara'
+                context.maybePop().then((_) => banner.bannerType == 'Mubadara'
                     ? context.pushRoute(
                         MubadaraItemsScreen(mubadaraId: banner.bannerLink!))
                     : navigateToItemDetails(

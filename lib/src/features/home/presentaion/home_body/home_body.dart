@@ -73,7 +73,7 @@ class HomeBody extends ConsumerWidget {
                 constraints: const BoxConstraints(maxHeight: 400),
                 child: SingleChildScrollView(
                   child: TapRegion(
-                      onTapOutside: (_) => context.popRoute(),
+                      onTapOutside: (_) => context.maybePop(),
                       child: const CartItemAddedDialog()),
                 ),
               ),

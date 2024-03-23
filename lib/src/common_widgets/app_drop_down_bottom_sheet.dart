@@ -29,7 +29,7 @@ class AppDropDownBottomSheet<T> extends StatelessWidget {
                         style: const TextStyle(fontWeight: FontWeight.w600)),
                     onTap: () {
                       onTap(items[index]);
-                      context.popRoute();
+                      context.maybePop();
                     },
                   );
                 },

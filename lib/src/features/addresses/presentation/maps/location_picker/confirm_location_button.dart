@@ -22,7 +22,7 @@ class ConfirmLocationButton extends ConsumerWidget {
       }
       if (next is ValidateCoordinatesLoaded) {
         if (!isInvalidLocation(next, currentPosition)) {
-          context.popRoute(next.location);
+          context.maybePop(next.location);
         }
       }
     });

@@ -112,7 +112,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                             context, next.error.toString(), next.stackTrace);
                       }
                       if (next is AsyncData) {
-                        context.popRoute();
+                        context.maybePop();
                       }
                     });
                     final editProfileController =
@@ -159,7 +159,7 @@ class _DeleteAccountButton extends ConsumerWidget {
               title: Text(S.of(context).areYouSure),
               actions: [
                 TextButton(
-                    onPressed: context.popRoute, child: Text(S.of(context).no)),
+                    onPressed: context.maybePop, child: Text(S.of(context).no)),
                 TextButton(
                     child: Text(S.of(context).yes),
                     onPressed: () {

@@ -114,7 +114,7 @@ class _OrderReviewBottomSheetState extends State<OrderReviewBottomSheet> {
                               context, next.error.toString(), next.stackTrace);
                         }
                         if (next is AsyncData && next.value != null) {
-                          context.popRoute();
+                          context.maybePop();
                         }
                       });
                       final sendReviewAsync =

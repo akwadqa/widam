@@ -45,7 +45,7 @@ class ItemContainer extends ConsumerWidget {
                 ? null
                 : isFrequencyItem
                     ? () {
-                        context.popRoute().then((value) {
+                        context.maybePop().then((value) {
                           context.pushRoute(ItemDetailsScreen(
                               itemId: item.websiteItemId,
                               mubadaraId: item.mubadaraId));

@@ -22,7 +22,7 @@ class LanguageListTile extends ConsumerWidget {
                   color: Colors.white,
                 ));
       } else {
-        context.popRoute().then((value) {
+        context.maybePop().then((value) {
           if (next is AsyncError) {
             showAppBannerDialog(
                 context, next.error.toString(), next.stackTrace);

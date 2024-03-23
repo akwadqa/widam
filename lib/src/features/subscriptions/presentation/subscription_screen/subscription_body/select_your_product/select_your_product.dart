@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/constants/strings.dart';
+import 'package:widam/src/features/subscriptions/presentation/subscription_screen/subscription_body/select_your_product/selected_subscription_items/selected_subscription_items_controller.dart';
 import 'package:widam/src/utils/utils.dart';
 import '../../../../../../common_widgets/banner/app_banner.dart';
 import '../../../../../../common_widgets/app_pagination_widget.dart';
 import '../../../../../../common_widgets/fade_circle_loading_indicator.dart';
 import '../../../../../../common_widgets/forward_submit_button.dart';
 import '../block_title.dart';
-import 'subscribe_button.dart';
 import 'subscription_items_list.dart';
 import 'subscription_items_notifier.dart';
 
@@ -94,7 +94,7 @@ class SelectYourProduct extends ConsumerWidget {
               ),
               Consumer(builder: (context, WidgetRef ref, Widget? child) {
                 final selectedSubscriptionItems =
-                    ref.watch(selectedSubscriptionItemsProvider);
+                    ref.watch(selectedSubscriptionItemsControllerProvider);
                 return ForwardSubmitButton(
                   onPressed: selectedSubscriptionItems.isEmpty
                       ? null

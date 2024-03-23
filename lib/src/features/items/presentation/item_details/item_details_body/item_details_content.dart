@@ -13,7 +13,7 @@ import '../item_details_header/item_details_header.dart';
 import 'add_to_cart_widget.dart';
 import 'details_tab_bar.dart';
 import 'item_details_info.dart';
-import 'mubadara_fields.dart';
+import 'mubadara_fields/mubadara_fields.dart';
 
 class ItemDetailsContent extends ConsumerStatefulWidget {
   const ItemDetailsContent(

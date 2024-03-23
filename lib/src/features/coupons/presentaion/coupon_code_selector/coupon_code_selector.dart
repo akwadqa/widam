@@ -70,7 +70,7 @@ class _CouponCodeSelectorState extends ConsumerState<CouponCodeSelector> {
                           validator: qValidator([
                             IsRequired(S.of(context).required),
                           ]),
-                          onSaved: (value) => context.popRoute(value),
+                          onSaved: (value) => context.maybePop(value),
                         ),
                       ),
                       if (coupons.isEmpty) const SizedBox(height: 60.0),

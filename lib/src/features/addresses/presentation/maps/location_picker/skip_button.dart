@@ -24,7 +24,7 @@ class SkipButton extends ConsumerWidget {
           ? () => ref
               .read(validateCoordinatesProvider.notifier)
               .validateCoordinates(loadingType: LoadingType.skip)
-          : context.popRoute,
+          : context.maybePop,
       style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
           foregroundColor: AppColors.red,

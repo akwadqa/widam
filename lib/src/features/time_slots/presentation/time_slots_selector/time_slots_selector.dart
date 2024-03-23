@@ -198,12 +198,12 @@ class __BodyState extends State<_Body> {
             if (_formKey.currentState!.validate()) {
               if (_selectedTimeSlot.timeSlotId !=
                   widget.initialTimeSlot.timeSlotId) {
-                context.popRoute<({TimeSlot timeSlot, String deliveryDate})?>((
+                context.maybePop<({TimeSlot timeSlot, String deliveryDate})?>((
                   timeSlot: _selectedTimeSlot,
                   deliveryDate: _selectedDate,
                 ));
               } else {
-                context.popRoute();
+                context.maybePop();
               }
             }
           },

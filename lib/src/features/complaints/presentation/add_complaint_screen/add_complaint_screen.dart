@@ -61,7 +61,7 @@ class _AddComplaintScreenState extends State<AddComplaintScreen> {
               builder: (context, ref, child) {
                 ref.listen(sendComplaintControllerProvider, (previous, next) {
                   if (next is AsyncData) {
-                    context.popRoute(next.value);
+                    context.maybePop(next.value);
                   } else if (next is AsyncError) {
                     showAppBannerDialog(
                         context, next.error.toString(), next.stackTrace);

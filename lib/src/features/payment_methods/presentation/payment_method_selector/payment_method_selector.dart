@@ -177,7 +177,7 @@ class _PaymentMethodItem extends StatelessWidget {
           : null,
       onChanged: paymentMethod.paymentType == 'Payment Token'
           ? null
-          : (value) => context.popRoute<(bool, String, String?)?>(
+          : (value) => context.maybePop<(bool, String, String?)?>(
               (isWalletSelected, paymentMethod.paymentMethodId, null)),
       subtitle: paymentMethod.paymentType == 'Payment Token'
           ? ListView.builder(
@@ -199,7 +199,7 @@ class _PaymentMethodItem extends StatelessWidget {
                       ? paymentMethod.savedCards![index]
                       : null,
                   onChanged: (value) =>
-                      context.popRoute<(bool, String, String?)?>((
+                      context.maybePop<(bool, String, String?)?>((
                     isWalletSelected,
                     paymentMethod.paymentMethodId,
                     paymentMethod.savedCards![index].paymentTokenId

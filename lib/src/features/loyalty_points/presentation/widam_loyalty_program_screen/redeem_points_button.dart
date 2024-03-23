@@ -34,11 +34,11 @@ class RedeemPointsButton extends ConsumerWidget {
                     content: Text(S.of(context).redeemPointsConfirmation),
                     actions: [
                       TextButton(
-                          onPressed: context.popRoute,
+                          onPressed: context.maybePop,
                           child: Text(S.of(context).no)),
                       TextButton(
                           onPressed: () {
-                            context.popRoute();
+                            context.maybePop();
                             ref
                                 .read(redeemPointsControllerProvider.notifier)
                                 .redeemPoints();

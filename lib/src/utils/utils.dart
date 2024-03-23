@@ -161,7 +161,7 @@ void listenItemDetailsSheet(WidgetRef ref, BuildContext context) {
     } else if (next is AsyncData && next.asData!.value != null) {
       final ItemDetails item = next.asData!.value!.itemDetails;
       if (previous is AsyncLoading) {
-        context.popRoute().then((value) {
+        context.maybePop().then((value) {
           _showItemDetailsSheet(
               item: item,
               context: context,

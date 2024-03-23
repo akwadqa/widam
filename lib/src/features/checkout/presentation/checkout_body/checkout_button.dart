@@ -234,7 +234,7 @@ class _CheckoutButtonState extends ConsumerState<CheckoutButton> {
           actions: [
             TextButton(
                 onPressed: () {
-                  context.popRoute();
+                  context.maybePop();
                 },
                 child: Text(S.of(context).close))
           ]),

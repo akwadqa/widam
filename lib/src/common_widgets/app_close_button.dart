@@ -33,7 +33,7 @@ class AppCloseButton extends StatelessWidget {
         ],
       ),
       child: IconButton(
-        onPressed: context.popRoute,
+        onPressed: context.maybePop,
         icon: icon ?? Icon(Icons.close, color: iconColor),
       ),
     );

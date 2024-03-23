@@ -43,7 +43,7 @@ class AddressesList extends ConsumerWidget {
                         itemBuilder: (context, index) {
                           final address = addresses[index];
                           return InkWell(
-                              onTap: () => context.popRoute(address),
+                              onTap: () => context.maybePop(address),
                               child: AddressCard(address: address));
                         },
                         separatorBuilder: (context, index) =>
@@ -108,16 +108,16 @@ class __AnimatedListState extends State<_AnimatedList>
                           title: Text(S.of(context).areYouSure),
                           actions: [
                             TextButton(
-                                onPressed: () => context.popRoute(false),
+                                onPressed: () => context.maybePop(false),
                                 child: Text(S.of(context).no)),
                             Consumer(
                               builder: (context, ref, child) {
                                 ref.listen(deleteAddressControllerProvider,
                                     (previous, next) {
                                   if (next is AsyncData) {
-                                    context.popRoute(true);
+                                    context.maybePop(true);
                                   } else if (next is AsyncError) {
-                                    context.popRoute(false);
+                                    context.maybePop(false);
                                     showAppBannerDialog(context,
                                         next.error.toString(), next.stackTrace);
                                   }

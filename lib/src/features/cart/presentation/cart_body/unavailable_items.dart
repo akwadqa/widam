@@ -17,7 +17,7 @@ class UnavailableItems extends ConsumerWidget {
           next is AsyncData &&
               !next.asData?.value!.cartContent.normalDelivery!.websiteItems
                   .any((element) => element.inStock == 0)) {
-        context.popRoute();
+        context.maybePop();
       }
     });
     final cartAsync = ref.watch(cartControllerProvider);

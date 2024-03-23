@@ -46,7 +46,7 @@ class _PaymentWebViewState extends State<PaymentWebView> {
     }
     final Map<String, dynamic> parsedTextBody = json.decode(bodyText);
     final paymentResult = PaymentResult.fromJson(parsedTextBody);
-    context.popRoute(paymentResult);
+    context.maybePop(paymentResult);
   }
 
   @override
