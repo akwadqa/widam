@@ -182,8 +182,10 @@ class SalesOrderItem extends StatelessWidget {
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      Assets.icons.clockIcon
-                          .svg(color: AppColors.secondary, height: 20),
+                      Assets.icons.clockIcon.svg(
+                          colorFilter: const ColorFilter.mode(
+                              AppColors.secondary, BlendMode.srcIn),
+                          height: 20),
                       const SizedBox(width: 4),
                       Text(
                           salesOrder.deliveryCharges.first.deliveryMethodTitle!,

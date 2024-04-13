@@ -78,9 +78,9 @@ class SubscriptionScreen extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       ref.watch(iconsProvider)[index].svg(
-                          color: stepIndex >= index
+                          colorFilter: ColorFilter.mode(stepIndex >= index
                               ? AppColors.primary
-                              : AppColors.silver),
+                              : AppColors.silver, BlendMode.srcIn)),
                       const SizedBox(height: 6),
                       Text(
                           index == titles.length - 1

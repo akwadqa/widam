@@ -66,6 +66,7 @@ class TruckTimeIcon extends ConsumerWidget {
     final languageCode = ref.watch(currentLanguageProvider);
     return Transform.flip(
         flipX: languageCode == 'ar',
-        child: Assets.icons.truckTimeIcon.svg(color: foregroundColor));
+        child: Assets.icons.truckTimeIcon.svg(
+            colorFilter: ColorFilter.mode(foregroundColor, BlendMode.srcIn)));
   }
 }

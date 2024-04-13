@@ -31,7 +31,7 @@ class _MubadaraItemsScreenState extends ConsumerState<MubadaraItemsScreen> {
   Widget build(BuildContext context) {
     final mubadaraItemsAsync =
         ref.watch(mubadaraItemsProvider(widget.mubadaraId));
-    final topPadding = ref.watch(topPaddingProvider(context));
+    final topPadding = ref.watch(topPaddingProvider(MediaQuery.paddingOf(context).top));
     return Scaffold(
       body: Column(
         children: [

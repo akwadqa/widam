@@ -22,7 +22,9 @@ class ProfileButtons extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _Button(
-                image: Assets.icons.folderIcon.svg(color: AppColors.darkBlue),
+                image: Assets.icons.folderIcon.svg(
+                    colorFilter: const ColorFilter.mode(
+                        AppColors.darkBlue, BlendMode.srcIn)),
                 text: S.of(context).activeSubscription,
                 onTap: () =>
                     context.pushRoute(const ActiveSubscriptionsScreen())),
@@ -36,7 +38,9 @@ class ProfileButtons extends ConsumerWidget {
                       }
                     })),
             _Button(
-                image: Assets.icons.folderIcon.svg(color: AppColors.darkBlue),
+                image: Assets.icons.folderIcon.svg(
+                    colorFilter: const ColorFilter.mode(
+                        AppColors.darkBlue, BlendMode.srcIn)),
                 text: S.of(context).subscribe,
                 onTap: () => context.pushRoute(const SubscriptionScreen())),
             _Button(

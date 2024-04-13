@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -17,6 +16,6 @@ Future<PackageInfo> packageInfo(PackageInfoRef ref) async =>
     await PackageInfo.fromPlatform();
 
 @riverpod
-double topPadding(TopPaddingRef ref, BuildContext context) {
-  return MediaQuery.paddingOf(context).top > 30 ? 40 : 30;
+double topPadding(TopPaddingRef ref, double mediaQueryTopPadding) {
+  return mediaQueryTopPadding > 30 ? 40 : 30;
 }

@@ -40,8 +40,9 @@ class AddressLabels extends FormField<({String title, String value})> {
                                 ? AppColors.darkBlue
                                 : null),
                         avatar: icons[labels.indexOf(label)].svg(
-                            color: state.value == label
-                                ? AppColors.darkBlue
+                            colorFilter: state.value == label
+                                ? const ColorFilter.mode(
+                                    AppColors.darkBlue, BlendMode.srcIn)
                                 : null),
                         side: state.value == label
                             ? const BorderSide(

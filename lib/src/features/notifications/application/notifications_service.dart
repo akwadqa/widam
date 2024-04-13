@@ -1,8 +1,5 @@
 import 'dart:io';
-
-import 'package:auto_route/auto_route.dart';
 import 'package:fcm_config/fcm_config.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,8 +8,8 @@ import 'package:widam/src/constants/keys.dart';
 import 'package:widam/src/features/notifications/presentation/marketing_notifications_controller.dart';
 import 'package:widam/src/features/user_language/application/current_language.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
+import 'package:widam/src/routing/app_router.dart';
 import 'package:widam/src/routing/app_router.gr.dart';
-
 import '../data/notifications_repository.dart';
 
 part 'notifications_service.g.dart';
@@ -44,25 +41,25 @@ class NotificationsService {
     }
   }
 
-  Future<void> setupInteractedMessage(BuildContext context) async {
+  Future<void> setupInteractedMessage(AppRouter appRouter) async {
     RemoteMessage? initialMessage =
         await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage != null) {
-      _handleMessage(message: initialMessage, context: context);
+      _handleMessage(message: initialMessage, appRouter: appRouter);
     }
 
     FirebaseMessaging.onMessageOpenedApp.listen((remoteMessage) =>
-        _handleMessage(message: remoteMessage, context: context));
+        _handleMessage(message: remoteMessage, appRouter: appRouter));
   }
 
-  void _handleMessage(
-      {required RemoteMessage message, required BuildContext context}) {
+  void _handleMessage({required RemoteMessage message, required AppRouter appRouter}) {
     final linkType = message.data['link_type'];
     final resourceId = message.data['resource_id'];
     if (linkType == 'Product') {
-      context.router.push(ItemDetailsScreen(itemId: resourceId));
+      appRouter.push(ItemDetailsScreen(itemId: resourceId));
     } else if (linkType == 'Category') {
-      context.router.push(ItemGroupScreen(itemGroupId: resourceId));
+      appRouter
+          .push(ItemGroupScreen(itemGroupId: resourceId));
     }
   }
 

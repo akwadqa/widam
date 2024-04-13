@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:status_bar_control/status_bar_control.dart';
 import 'package:widam/src/features/notifications/application/notifications_service.dart';
+import 'package:widam/src/routing/app_router_provider.dart';
 import '../../../../routing/app_router.gr.dart';
 import 'app_bottom_navigation_bar.dart';
 
@@ -18,7 +19,9 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   @override
   void initState() {
     Future(() {
-      ref.read(notificationsServiceProvider).setupInteractedMessage(context);
+      ref
+          .read(notificationsServiceProvider)
+          .setupInteractedMessage(ref.read(appRouterProvider));
       StatusBarControl.setStyle(StatusBarStyle.LIGHT_CONTENT);
     });
     super.initState();

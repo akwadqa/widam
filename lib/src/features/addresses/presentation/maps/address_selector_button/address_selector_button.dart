@@ -44,7 +44,8 @@ class AddressSelector extends ConsumerWidget {
             });
           }
         },
-        icon: Assets.icons.locationIcon.svg(color: foregroundColor),
+        icon: Assets.icons.locationIcon.svg(
+            colorFilter: ColorFilter.mode(foregroundColor, BlendMode.srcIn)),
         label: const Row(
           mainAxisSize: MainAxisSize.min,
           children: [

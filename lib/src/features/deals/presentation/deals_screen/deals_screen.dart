@@ -15,7 +15,7 @@ class DealsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final topPadding = ref.watch(topPaddingProvider(context));
+    final topPadding = ref.watch(topPaddingProvider(MediaQuery.paddingOf(context).top));
     return Scaffold(
         body: Column(
       children: [
