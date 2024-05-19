@@ -52,14 +52,14 @@ class NotificationsService {
         _handleMessage(message: remoteMessage, appRouter: appRouter));
   }
 
-  void _handleMessage({required RemoteMessage message, required AppRouter appRouter}) {
+  void _handleMessage(
+      {required RemoteMessage message, required AppRouter appRouter}) {
     final linkType = message.data['link_type'];
     final resourceId = message.data['resource_id'];
     if (linkType == 'Product') {
       appRouter.push(ItemDetailsScreen(itemId: resourceId));
     } else if (linkType == 'Category') {
-      appRouter
-          .push(ItemGroupScreen(itemGroupId: resourceId));
+      appRouter.push(ItemGroupScreen(itemGroupId: resourceId));
     }
   }
 

@@ -61,9 +61,9 @@ class _QIDTextFormFieldState extends ConsumerState<QIDTextFormField> {
       children: [
         TextFormField(
           decoration: InputDecoration(
-            hintText: widget.mubadaraDetails.qidFieldPlaceholder,
-            border: _border,
-            enabledBorder: _border),
+              hintText: widget.mubadaraDetails.qidFieldPlaceholder,
+              border: _border,
+              enabledBorder: _border),
           onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
@@ -80,8 +80,9 @@ class _QIDTextFormFieldState extends ConsumerState<QIDTextFormField> {
             }
             return null;
           },
-          onSaved: (value) =>
-              ref.read(qidNumberControllerProvider.notifier).setQidNumber(value!),
+          onSaved: (value) => ref
+              .read(qidNumberControllerProvider.notifier)
+              .setQidNumber(value!),
         ),
       ],
     );
@@ -92,7 +93,6 @@ class _QIDTextFormFieldState extends ConsumerState<QIDTextFormField> {
         borderSide: const BorderSide(color: AppColors.taupeGray, width: 0.5),
       );
 }
-
 
 class _QIDAttachmentFormField extends FormField<XFile?> {
   _QIDAttachmentFormField(
@@ -106,8 +106,9 @@ class _QIDAttachmentFormField extends FormField<XFile?> {
               }
               return null;
             },
-            onSaved: (value) =>
-                ref.read(qidAttachmentControllerProvider.notifier).setQidAttachment(value!),
+            onSaved: (value) => ref
+                .read(qidAttachmentControllerProvider.notifier)
+                .setQidAttachment(value!),
             builder: (state) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

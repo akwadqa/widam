@@ -153,7 +153,8 @@ class _DetailsContainer extends StatelessWidget {
             ],
           ),
           Consumer(builder: (context, ref, child) {
-            final subscriptionInfo = ref.watch(subscriptionInfoControllerProvider);
+            final subscriptionInfo =
+                ref.watch(subscriptionInfoControllerProvider);
             return Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [

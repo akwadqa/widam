@@ -47,5 +47,3 @@ class ItemGroupItemsGrid extends ConsumerWidget {
     );
   }
 }
-
-

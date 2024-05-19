@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widam/src/features/cart/domain/cart/delivery_type.dart';
+import 'package:widam/src/features/cart/domain/cart/pickup/pickup.dart';
 import 'package:widam/src/features/checkout/presentation/checkout_body/saved_card_switch.dart';
 import 'package:widam/src/features/time_slots/domain/geofence_details/time_slot.dart';
 import '../../../../common_widgets/app_cached_network_image.dart';
@@ -39,29 +41,42 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
   void initState() {
     Future(() {
       final cart = ref.read(cartControllerProvider).asData!.value!;
-      showAdaptiveModalBottomSheet<({TimeSlot timeSlot, String deliveryDate})?>(
-          context: context,
-          builder: (ctx) {
-            return TimeSlotsSelector(
-                deleiveryMethodId: (cart.cartContent as CartContent)
-                    .normalDelivery!
-                    .deliveryMethodId,
-                initialDate: (cart.cartContent as CartContent)
-                    .normalDelivery!
-                    .deliveryDate
-                    .date,
-                initialTimeSlot:
-                    (cart.cartContent as CartContent).normalDelivery!.timeSlot);
-          }).then((value) {
-        if (value != null) {
-          ref.read(updateCartProvider.notifier).updateCart(
-              timeSlot: value.timeSlot.timeSlotId,
-              deliveryDate: value.deliveryDate);
-        }
-      });
+      if (cart.cartContent is CartContent) {
+        _showTimeSlotsSelector(context, cart, ref);
+      }
     });
 
     super.initState();
+  }
+
+  Future<void> _showTimeSlotsSelector(
+      BuildContext context, Cart cart, WidgetRef ref) async {
+    final cartContent = cart.cartContent;
+
+    final deliveryMethodId = cartContent.normalDelivery!.deliveryMethodId;
+
+    final initialDate = cartContent.normalDelivery!.deliveryDate.date;
+
+    final initialTimeSlot = cartContent.normalDelivery!.timeSlot;
+
+    final result = await showAdaptiveModalBottomSheet<
+        ({TimeSlot timeSlot, String deliveryDate})?>(
+      context: context,
+      builder: (ctx) {
+        return TimeSlotsSelector(
+          deleiveryMethodId: deliveryMethodId,
+          initialDate: initialDate,
+          initialTimeSlot: initialTimeSlot,
+        );
+      },
+    );
+
+    if (result != null) {
+      ref.read(updateCartProvider.notifier).updateCart(
+            timeSlot: result.timeSlot.timeSlotId,
+            deliveryDate: result.deliveryDate,
+          );
+    }
   }
 
   @override
@@ -117,7 +132,13 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
                                               .expressDelivery!),
                                   const SizedBox(height: 15.0),
                                 ],
-                              ],
+                              ] else if (cart.cartContent is List) ...[
+                                for (final pickup
+                                    in cart.cartContent as List<Pickup>)
+                                  DeliveryContainer(
+                                      currency: cart.currency,
+                                      deliveryType: pickup.toDeliveryType()),
+                              ]
                             ],
                           ),
                         ),

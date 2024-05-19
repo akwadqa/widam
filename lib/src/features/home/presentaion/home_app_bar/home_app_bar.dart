@@ -17,7 +17,8 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final topPadding = ref.watch(topPaddingProvider(MediaQuery.paddingOf(context).top));
+    final topPadding =
+        ref.watch(topPaddingProvider(MediaQuery.paddingOf(context).top));
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),

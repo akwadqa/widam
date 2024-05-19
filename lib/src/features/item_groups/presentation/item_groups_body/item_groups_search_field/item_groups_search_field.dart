@@ -21,7 +21,8 @@ class _SearchFieldState extends ConsumerState<ItemGroupsSearchField> {
   Widget build(BuildContext context) {
     final searchQuery = ref.watch(itemGroupsSearchControllerProvider);
     return PopScope(
-      onPopInvoked: (_) => ref.read(itemGroupsSearchControllerProvider.notifier).set(null),
+      onPopInvoked: (_) =>
+          ref.read(itemGroupsSearchControllerProvider.notifier).set(null),
       child: SearchField(
         autofocus: widget.autofocus,
         controller: _controller,

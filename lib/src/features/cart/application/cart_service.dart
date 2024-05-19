@@ -26,7 +26,8 @@ class UpdateCart extends _$UpdateCart {
       String? deliveryDate,
       int? useWalletBalance,
       String? attributionToken,
-      bool? isPriceModifier}) async {
+      bool? isPriceModifier,
+      String? pickupPointId}) async {
     state = const AsyncLoading();
     final cartRepository = ref.watch(cartRepositoryProvider);
     try {
@@ -44,7 +45,8 @@ class UpdateCart extends _$UpdateCart {
           deliveryDate: deliveryDate,
           isPriceModifier: isPriceModifier,
           useWalletBalance: useWalletBalance,
-          attributionToken: attributionToken);
+          attributionToken: attributionToken,
+          pickupPointId: pickupPointId);
       ref.read(cartControllerProvider.notifier).updateCart(cart);
       state = const AsyncData(null);
       return true;

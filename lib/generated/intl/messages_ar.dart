@@ -329,6 +329,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pickYouTimeSlot":
             MessageLookupByLibrary.simpleMessage("اختر فترة زمنية"),
         "pickupLocation": MessageLookupByLibrary.simpleMessage("الموقع"),
+        "pickupPointsValidationMsg":
+            MessageLookupByLibrary.simpleMessage("يرجى تحديد نقطة الاستلام"),
         "placeOrder": MessageLookupByLibrary.simpleMessage("تأكيد الطلب"),
         "pleaseSelectImageSource":
             MessageLookupByLibrary.simpleMessage("يرجى اختيار مصدر الصورة"),

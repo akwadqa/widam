@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:queen_validators/queen_validators.dart';
 import 'package:widam/src/constants/images.dart';
+import 'package:widam/src/constants/services_urls.dart';
 import 'package:widam/src/features/main/presentation/item_details_sheet_controller.dart';
 
 import '../../generated/l10n.dart';
@@ -204,7 +205,7 @@ void _showItemDetailsSheet(
 String getMapImageURL(String latitude, String longitude, String language,
     {int zoom = 18, int width = 600, int height = 400}) {
   final url =
-      'https://maps.googleapis.com/maps/api/staticmap?size=${width}x$height&markers=anchor:30,40|icon:${Images.customerMarker}|$latitude,$longitude&visible=$latitude,$longitude&zoom=$zoom&key=${Keys.googleAPIKey}&language=$language';
+      '${ServicesUrls.googleMapsBaseUrl}/staticmap?size=${width}x$height&markers=anchor:30,40|icon:${Images.customerMarker}|$latitude,$longitude&visible=$latitude,$longitude&zoom=$zoom&key=${Keys.googleAPIKey}&language=$language';
   return url;
 }
 

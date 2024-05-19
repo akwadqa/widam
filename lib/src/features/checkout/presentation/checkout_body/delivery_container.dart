@@ -69,8 +69,7 @@ class DeliveryContainer extends StatelessWidget {
                         context: context,
                         builder: (ctx) {
                           return TimeSlotsSelector(
-                              deleiveryMethodId:
-                                  deliveryType.deliveryMethodId,
+                              deleiveryMethodId: deliveryType.deliveryMethodId,
                               initialDate: deliveryType.deliveryDate.date,
                               initialTimeSlot: deliveryType.timeSlot);
                         }).then((value) {
@@ -81,9 +80,8 @@ class DeliveryContainer extends StatelessWidget {
                       }
                     });
                   },
-                  style: ButtonStyle(
-                      padding:
-                          MaterialStateProperty.all(const EdgeInsets.all(0.0))),
+                  style:
+                      TextButton.styleFrom(padding: const EdgeInsets.all(0.0)),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.end,

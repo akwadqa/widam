@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/generated/l10n.dart';
+import 'package:widam/src/features/items/presentation/item_details/item_details_body/pickup_points_form_field/pickup_points_form_field.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/quantity_form_field.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/slotter_fees_form_field/slotter_fees_form_field.dart';
 import 'package:widam/src/features/items/presentation/item_details/option_label.dart';
@@ -113,6 +114,29 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
                           validator: (value) {
                             if (value == false) {
                               return S.of(context).slotterFeesValidationMsg;
+                            }
+                            return null;
+                          }),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            if (widget.itemDetails.pickupPoints != null) ...[
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    OptionLabel(label: widget.itemDetails.pickupPoints!.label),
+                    Form(
+                      key: ref.read(pickupPointsFormKeyProvider),
+                      child: PickupPointsFormField(
+                          itemDetails: widget.itemDetails,
+                          validator: (value) {
+                            if (value == null) {
+                              return S.of(context).pickupPointsValidationMsg;
                             }
                             return null;
                           }),

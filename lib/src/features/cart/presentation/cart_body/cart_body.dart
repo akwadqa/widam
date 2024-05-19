@@ -183,10 +183,12 @@ class _NonEmptyCart extends ConsumerWidget {
                                 if (ref.read(canVibrateProvider).requireValue) {
                                   Vibrate.feedback(FeedbackType.light);
                                 }
-                                if ((cart.cartContent as CartContent)
-                                    .normalDelivery!
-                                    .websiteItems
-                                    .any((element) => element.inStock == 0)) {
+                                if (cart.cartContent is CartContent &&
+                                    (cart.cartContent as CartContent)
+                                        .normalDelivery!
+                                        .websiteItems
+                                        .any((element) =>
+                                            element.inStock == 0)) {
                                   showAdaptiveModalBottomSheet(
                                       context: context,
                                       builder: (context) {

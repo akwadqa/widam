@@ -336,5 +336,6 @@
   "addComplaint" : "إضافة شكوى",
   "writeDiscription" : "اكتب وصفاً",
   "widam" : "ودام",
-  "slotterFeesValidationMsg" : "يرجى تحديد رسوم التحميل"
+  "slotterFeesValidationMsg" : "يرجى تحديد رسوم التحميل",
+  "pickupPointsValidationMsg" : "يرجى تحديد نقطة الاستلام"
 }

@@ -3429,6 +3429,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Please select a pickup point`
+  String get pickupPointsValidationMsg {
+    return Intl.message(
+      'Please select a pickup point',
+      name: 'pickupPointsValidationMsg',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

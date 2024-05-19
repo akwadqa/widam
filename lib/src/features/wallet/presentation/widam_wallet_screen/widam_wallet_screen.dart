@@ -59,13 +59,12 @@ class WidamWalletScreen extends StatelessWidget {
                 return TextButton(
                     onPressed: () =>
                         context.pushRoute(const TransactionHistoryScreen()),
-                    style: ButtonStyle(
-                      foregroundColor:
-                          MaterialStateProperty.all(AppColors.darkBlue),
-                      textStyle: MaterialStateProperty.all(TextStyle(
+                    style: TextButton.styleFrom(
+                      foregroundColor: AppColors.darkBlue,
+                      textStyle: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          fontFamily: fontFamily)),
+                          fontFamily: fontFamily),
                     ),
                     child: Text(S.of(context).transactionHistory));
               },

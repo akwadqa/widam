@@ -38,7 +38,7 @@ class AppInitialController extends _$AppInitialController {
               ? layout.data.firstWhere((element) => element.popups == 1)
                   as Block<List<Banner>>?
               : null;
-              
+
       if (bannerBlock != null && bannerBlock.data.isNotEmpty) {
         return GoHomeWithMubadraBanner(bannerBlock);
       }

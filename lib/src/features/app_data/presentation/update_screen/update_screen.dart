@@ -57,9 +57,8 @@ class UpdateScreen extends ConsumerWidget {
                             androidAppId: packageName,
                             iOSAppId: Strings.iOSAppId);
                       },
-                      style: const ButtonStyle(
-                          minimumSize: MaterialStatePropertyAll(
-                              Size(double.infinity, 50))),
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(double.infinity, 50)),
                       child: Text(S.of(context).update)),
                   if (!(appData.mandatoryToUpdate == 1))
                     TextButton(

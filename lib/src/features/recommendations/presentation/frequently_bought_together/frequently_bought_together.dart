@@ -56,9 +56,7 @@ class FrequentlyBoughtTogether extends ConsumerWidget {
                 child: ListView.separated(
                   itemBuilder: (BuildContext context, int index) {
                     return ItemCard(
-                            item: items[index],
-                            width: 130,
-                            isFrequencyItem: true);
+                        item: items[index], width: 130, isFrequencyItem: true);
                   },
                   itemCount: items.length,
                   scrollDirection: Axis.horizontal,

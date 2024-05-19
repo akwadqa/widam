@@ -6,7 +6,7 @@ publish_to: 'none'
 version: 20.0.3+1
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: '>=3.4.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -17,7 +17,7 @@ dependencies:
 
   cupertino_icons: ^1.0.6
   auto_route: ^7.8.4
-  intl: ^0.18.1
+  intl: ^0.19.0
   flutter_riverpod: ^2.4.9
   riverpod_annotation: ^2.3.3
   flutter_native_splash: ^2.3.10
@@ -57,7 +57,7 @@ dependencies:
   firebase_core: ^2.24.2
   onboarding_overlay: ^3.2.1
   flutter_rating_bar: ^4.0.1
-  widget_to_marker: ^1.0.4
+  widget_to_marker: ^1.0.5
   flutter_polyline_points_plus: ^3.0.0
   step_progress_indicator: ^1.0.2
   synchronized: ^3.1.0+1

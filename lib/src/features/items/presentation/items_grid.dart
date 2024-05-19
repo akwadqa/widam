@@ -22,8 +22,8 @@ class ItemsGrid extends StatelessWidget {
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
       ),
-      padding: const EdgeInsetsDirectional.only(
-          start: 8.0, bottom: 8.0, end: 10.0),
+      padding:
+          const EdgeInsetsDirectional.only(start: 8.0, bottom: 8.0, end: 10.0),
       itemBuilder: (context, index) {
         return ItemCard(item: items[index]);
       },

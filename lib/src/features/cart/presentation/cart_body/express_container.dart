@@ -32,10 +32,10 @@ class ExpressContainer extends StatelessWidget {
         const Spacer(),
         TextButton(
           onPressed: () {},
-          style: const ButtonStyle(
-              foregroundColor: MaterialStatePropertyAll(AppColors.carminePink),
-              textStyle: MaterialStatePropertyAll(
-                  TextStyle(fontSize: 10.0, fontWeight: FontWeight.w500))),
+          style: TextButton.styleFrom(
+              foregroundColor: AppColors.carminePink,
+              textStyle:
+                  const TextStyle(fontSize: 10.0, fontWeight: FontWeight.w500)),
           child: Text(S.of(context).switchLabel),
         )
       ]),

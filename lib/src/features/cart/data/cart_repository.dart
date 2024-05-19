@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -40,7 +39,8 @@ class CartRepository {
       int? paymentToken,
       String? deliveryDate,
       int? useWalletBalance,
-      bool? isPriceModifier}) async {
+      bool? isPriceModifier,
+      String? pickupPointId}) async {
     return await _lock.synchronized(() async {
       final FormData formData = FormData.fromMap({
         if (itemId != null)
@@ -48,6 +48,7 @@ class CartRepository {
             {
               'website_item_id': itemId,
               'quantity': quantity,
+              if (pickupPointId != null) 'pickup_point': pickupPointId,
               if (attributionToken != null)
                 'attribution_token': attributionToken,
               if (isPriceModifier != null)

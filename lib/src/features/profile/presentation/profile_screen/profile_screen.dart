@@ -8,7 +8,7 @@ import '../reach_out_us/social_media_buttons.dart';
 import '../version_name.dart';
 import '../../../../routing/app_router.gr.dart';
 import '../../../../theme/app_colors.dart';
-  
+
 import '../../../../../generated/l10n.dart';
 import '../../../auth/application/user_data_provider.dart';
 import '../../data/profile_repository.dart';

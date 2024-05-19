@@ -9,10 +9,15 @@ class SendComplaintController extends _$SendComplaintController {
   @override
   FutureOr<Complaint?> build() => null;
 
-  Future<void> sendComplaint({required String complaintType, required String description, required String subject}) async {
+  Future<void> sendComplaint(
+      {required String complaintType,
+      required String description,
+      required String subject}) async {
     state = const AsyncLoading();
     final complaintsRepository = ref.watch(complaintsRepositoryProvider);
-    state = await AsyncValue.guard(
-        () => complaintsRepository.sendComplaint(complaintType: complaintType, description: description, subject: subject));
+    state = await AsyncValue.guard(() => complaintsRepository.sendComplaint(
+        complaintType: complaintType,
+        description: description,
+        subject: subject));
   }
 }

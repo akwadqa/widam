@@ -5,6 +5,7 @@ import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:widam/src/common_widgets/banner/app_banner_dialog.dart';
 import 'package:widam/src/features/cart/presentation/cart_item_added_dialog/go_to_cart_controller.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/mubadara_fields/qid_attachment_controller.dart';
+import 'package:widam/src/features/items/presentation/item_details/item_details_body/pickup_points_form_field/pickup_points_form_field.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/slotter_fees_form_field/slotter_fees_controller.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/slotter_fees_form_field/slotter_fees_form_field.dart';
 import 'package:widam/src/features/recommendations/presentation/frequently_bought_together/frequently_bought_together_controller.dart';
@@ -17,6 +18,7 @@ import '../../../../../routing/app_router.gr.dart';
 import '../../../../../common_widgets/fade_circle_loading_indicator.dart';
 import 'mubadara_fields/mubadara_fields.dart';
 import 'mubadara_fields/qid_number_controller.dart';
+import 'pickup_points_form_field/selected_pickup_point_controller.dart';
 import 'quantity_form_field.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../common_widgets/submit_button.dart';
@@ -128,6 +130,12 @@ class AddToCartWidget extends StatelessWidget {
       return;
     }
 
+    final pickupPointsFormKey = ref.read(pickupPointsFormKeyProvider);
+    if (pickupPointsFormKey.currentState != null &&
+        !pickupPointsFormKey.currentState!.validate()) {
+      return;
+    }
+
     final mubadaraFormKey = ref.read(mubadaraFormKeyProvider);
     if (mubadaraFormKey.currentState != null &&
         !mubadaraFormKey.currentState!.validate()) {
@@ -139,6 +147,7 @@ class AddToCartWidget extends StatelessWidget {
     ref.read(updateCartProvider.notifier).updateCart(
         itemId: itemId,
         quantity: ref.read(quantityProvider),
+        pickupPointId: ref.read(selectedPickupPointControllerProvider),
         qid: ref.read(qidNumberControllerProvider).isEmpty
             ? null
             : ref.read(qidNumberControllerProvider),

@@ -269,10 +269,6 @@ class $AssetsImagesGen {
   SvgGenImage get expressBackground =>
       const SvgGenImage('assets/images/express_background.svg');
 
-  /// File path: assets/images/map_image.png
-  AssetGenImage get mapImage =>
-      const AssetGenImage('assets/images/map_image.png');
-
   /// File path: assets/images/pattern.png
   AssetGenImage get pattern => const AssetGenImage('assets/images/pattern.png');
 
@@ -317,7 +313,6 @@ class $AssetsImagesGen {
         bestSellerBackground,
         cartBannerImage,
         expressBackground,
-        mapImage,
         pattern,
         qatarFlag,
         reviewImagePerson,

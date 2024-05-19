@@ -9,6 +9,7 @@ import 'package:widam/src/common_widgets/app_cached_network_image.dart';
 import 'package:widam/src/common_widgets/submit_button.dart';
 import 'package:widam/src/constants/images.dart';
 import 'package:widam/src/constants/keys.dart';
+import 'package:widam/src/constants/services_urls.dart';
 import 'package:widam/src/features/sales_orders/domain/sales_order/sales_order.dart';
 import 'package:widam/src/features/sales_orders/presentaion/reorder_button/reorder_button.dart';
 import 'package:widam/src/features/sales_orders/presentaion/reorder_button/reorder_controller.dart';
@@ -245,14 +246,13 @@ class SalesOrderItem extends StatelessWidget {
                                 launchUrl(telLaunchUri);
                               }
                             },
-                            style: ButtonStyle(
-                              foregroundColor:
-                                  MaterialStateProperty.all(AppColors.darkBlue),
-                              textStyle: MaterialStateProperty.all(TextStyle(
+                            style: TextButton.styleFrom(
+                              foregroundColor: AppColors.darkBlue,
+                              textStyle: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                   decoration: TextDecoration.underline,
-                                  fontFamily: fontFamily)),
+                                  fontFamily: fontFamily),
                             ),
                             child: Text(S.of(context).contactDriver));
                       },
@@ -264,7 +264,7 @@ class SalesOrderItem extends StatelessWidget {
                       clipBehavior: Clip.antiAlias,
                       child: AppCachedNetworkImage(
                           imageUrl:
-                              'https://maps.googleapis.com/maps/api/staticmap?size=640x260&markers=anchor:30,40|${Images.customerMarker}|${salesOrder.address.latitude},${salesOrder.address.longitude}&markers=anchor:10,10|icon:https://widam.akwad.qa/files/drivers-marker.png|${salesOrder.deliveryTrip!.driverAddress.latitude},${salesOrder.deliveryTrip!.driverAddress.longitude}&path=color:0055BB|weight:2|${salesOrder.address.latitude},${salesOrder.address.longitude}|${salesOrder.deliveryTrip!.driverAddress.latitude},${salesOrder.deliveryTrip!.driverAddress.longitude}&key=${Keys.googleAPIKey}&scale=1&language=${Directionality.of(context) == TextDirection.ltr ? 'en' : 'ar'}'),
+                              '${ServicesUrls.googleMapsBaseUrl}/staticmap?size=640x260&markers=anchor:30,40|${Images.customerMarker}|${salesOrder.address.latitude},${salesOrder.address.longitude}&markers=anchor:10,10|icon:https://widam.akwad.qa/files/drivers-marker.png|${salesOrder.deliveryTrip!.driverAddress.latitude},${salesOrder.deliveryTrip!.driverAddress.longitude}&path=color:0055BB|weight:2|${salesOrder.address.latitude},${salesOrder.address.longitude}|${salesOrder.deliveryTrip!.driverAddress.latitude},${salesOrder.deliveryTrip!.driverAddress.longitude}&key=${Keys.googleAPIKey}&scale=1&language=${Directionality.of(context) == TextDirection.ltr ? 'en' : 'ar'}'),
                     ),
                     const SizedBox(height: 5.0),
                     SizedBox(

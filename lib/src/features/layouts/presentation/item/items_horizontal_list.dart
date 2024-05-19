@@ -19,9 +19,9 @@ class ItemsHorizontalList extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           const double width = 200;
           return ItemCard(
-                  item: items[index],
-                  attributionToken: attributionToken,
-                  width: width);
+              item: items[index],
+              attributionToken: attributionToken,
+              width: width);
         },
         itemCount: items.length,
         scrollDirection: Axis.horizontal,

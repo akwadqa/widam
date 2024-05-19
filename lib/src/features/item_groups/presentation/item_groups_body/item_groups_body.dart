@@ -101,7 +101,8 @@ class _BodyState extends State<_Body> {
                       itemGroups: widget.itemGroups,
                       focusNode: widget.focusNodes?.last)),
             ),
-            const Expanded(flex: 4, child: ItemGroupItemsGrid(childAspectRatio: 0.49)),
+            const Expanded(
+                flex: 4, child: ItemGroupItemsGrid(childAspectRatio: 0.49)),
           ]),
         ),
       ],

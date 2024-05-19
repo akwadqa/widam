@@ -24,10 +24,8 @@ class MubadaraItemsRepository {
     final response = await _networkService.get(EndPoints.mubadaraItems,
         queryParameters: queryParameters);
     AppResponse<List<Item>> itemDetailsResponse =
-        AppResponse<List<Item>>.fromJson(
-            response.data,
-            (json) =>
-                json.map<Item>((e) => Item.fromJson(e)).toList());
+        AppResponse<List<Item>>.fromJson(response.data,
+            (json) => json.map<Item>((e) => Item.fromJson(e)).toList());
     if (itemDetailsResponse.error == 1) {
       throw AppException(itemDetailsResponse.message);
     }

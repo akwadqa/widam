@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:widam/src/constants/keys.dart';
+import 'package:widam/src/constants/services_urls.dart';
+import '../../../../common_widgets/app_cached_network_image.dart';
 import 'cart_item/cart_item.dart';
 import 'pickup_data.dart';
 import '../../../../theme/app_colors.dart';
 
-import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../time_slots/presentation/time_slot_label.dart';
 import '../../domain/cart/cart.dart';
@@ -24,11 +25,9 @@ class PickupList extends StatelessWidget {
             padding: EdgeInsets.only(top: index != 0 ? 20 : 0),
             child: ItemsContainer(
                 title: pickup.timeSlotGroup,
-                timeSlotWidget: Expanded(
-                  child: TimeSlotLabel(
-                    formattedDate: pickup.timeSlot.timeSlotId,
-                    formattedTime: pickup.timeSlot.timeFormatted,
-                  ),
+                timeSlotWidget: TimeSlotLabel(
+                  formattedDate: pickup.deliveryDate.dateFormatted,
+                  formattedTime: pickup.timeSlot.timeFormatted,
                 ),
                 content: Column(children: [
                   Row(
@@ -47,11 +46,14 @@ class PickupList extends StatelessWidget {
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.darkBlue)),
                           const SizedBox(height: 2),
-                          InkWell(
-                              child: Assets.images.mapImage.image(),
-                              onTap: () {
-                                launchUrl(Uri.parse(pickup.location));
-                              })
+                          Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              clipBehavior: Clip.antiAlias,
+                              child: AppCachedNetworkImage(
+                                  imageUrl:
+                                      '${ServicesUrls.googleMapsBaseUrl}/staticmap?size=${600}x${400}&visible=${pickup.coordinates.latitude},${pickup.coordinates.longitude}&zoom=${18}&key=${Keys.googleAPIKey}&language=${Directionality.of(context) == TextDirection.ltr ? 'en' : 'ar'}')),
                         ],
                       )
                     ],
@@ -60,7 +62,7 @@ class PickupList extends StatelessWidget {
                   ...pickup.websiteItems.map((e) => CartItem(itemDetails: e))
                 ]),
                 subTotal:
-                    '${pickup.subTotal} ${pickup.websiteItems.first.price.currency}}',
+                    '${pickup.subTotal} ${pickup.websiteItems.first.price.currency}',
                 itemsCount: pickup.websiteItems.length.toString()),
           );
         },

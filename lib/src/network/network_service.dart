@@ -42,10 +42,10 @@ Dio dio(DioRef ref) {
         onUnauthorized: ref.read(userDataProvider.notifier).removeUserData),
   });
   dio.interceptors.add(LogInterceptor(
-      requestBody: true,
-      responseBody: true,
-      // logPrint: (object) => log(object.toString())
-      ));
+    requestBody: true,
+    responseBody: true,
+    // logPrint: (object) => log(object.toString())
+  ));
 
   return dio;
 }

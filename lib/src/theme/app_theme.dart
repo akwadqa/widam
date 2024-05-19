@@ -30,13 +30,13 @@ abstract class AppTheme {
           )),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          elevation: MaterialStateProperty.all(0),
-          foregroundColor: const MaterialStatePropertyAll(Colors.white),
-          backgroundColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-              states.contains(MaterialState.disabled)
+          elevation: WidgetStateProperty.all(0),
+          foregroundColor: const WidgetStatePropertyAll(Colors.white),
+          backgroundColor: WidgetStateProperty.resolveWith<Color?>((states) =>
+              states.contains(WidgetState.disabled)
                   ? AppColors.silver
                   : AppColors.primary),
-          textStyle: MaterialStatePropertyAll(TextStyle(
+          textStyle: WidgetStatePropertyAll(TextStyle(
               fontWeight: FontWeight.w600,
               fontFamily: fontFamily,
               fontSize: 16)),
@@ -55,13 +55,13 @@ abstract class AppTheme {
       ),
       textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
-              textStyle: MaterialStateProperty.all(
-                  TextStyle(fontFamily: fontFamily)))),
+              textStyle:
+                  WidgetStateProperty.all(TextStyle(fontFamily: fontFamily)))),
       radioTheme: RadioThemeData(
-        fillColor: MaterialStateProperty.all(AppColors.primary),
+        fillColor: WidgetStateProperty.all(AppColors.primary),
       ),
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.all(AppColors.primary),
+        fillColor: WidgetStateProperty.all(AppColors.primary),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
       ),
       colorScheme: ColorScheme.fromSwatch(
@@ -97,8 +97,8 @@ abstract class AppTheme {
       ),
       dropdownMenuTheme: DropdownMenuThemeData(
           menuStyle: MenuStyle(
-        backgroundColor: const MaterialStatePropertyAll(AppColors.secondary),
-        shape: MaterialStatePropertyAll(
+        backgroundColor: const WidgetStatePropertyAll(AppColors.secondary),
+        shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
       )),
     );
