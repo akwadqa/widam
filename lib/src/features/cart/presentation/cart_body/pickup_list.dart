@@ -53,7 +53,7 @@ class PickupList extends StatelessWidget {
                               clipBehavior: Clip.antiAlias,
                               child: AppCachedNetworkImage(
                                   imageUrl:
-                                      '${ServicesUrls.googleMapsBaseUrl}/staticmap?size=${600}x${400}&visible=${pickup.coordinates.latitude},${pickup.coordinates.longitude}&zoom=${18}&key=${Keys.googleAPIKey}&language=${Directionality.of(context) == TextDirection.ltr ? 'en' : 'ar'}')),
+                                      '${ServicesUrls.googleMapsBaseUrl}/staticmap?size=${400}x${200}&visible=${pickup.coordinates.latitude},${pickup.coordinates.longitude}&zoom=${18}&key=${Keys.googleAPIKey}&language=${Directionality.of(context) == TextDirection.ltr ? 'en' : 'ar'}')),
                         ],
                       )
                     ],

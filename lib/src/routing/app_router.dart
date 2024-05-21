@@ -41,6 +41,8 @@ class AppRouter extends $AppRouter {
     AutoRoute(page: SalesOrderDetailsScreen.page),
     AutoRoute(page: ComplaintsScreen.page),
     AutoRoute(page: AddComplaintScreen.page),
-    AutoRoute(page: MubadaraItemsScreen.page)
+    AutoRoute(page: MubadaraItemsScreen.page),
+    AutoRoute(page: UdhiyaCouponsScreen.page),
+    AutoRoute(page: UdhiyaCouponDetailsScreen.page),
   ];
 }

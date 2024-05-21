@@ -121,7 +121,7 @@ class __BodyState extends State<_Body> {
     final selectedDates =
         widget.dates.where((element) => element.date == _selectedDate);
     final List<TimeSlot> timeSlots =
-        selectedDates.toList().isNotEmpty ? selectedDates.first.timeSlots : [];
+        selectedDates.toList().isNotEmpty ? selectedDates.first.timeSlots! : [];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,7 +152,7 @@ class __BodyState extends State<_Body> {
                 labelStyle: TextStyle(
                     color: _selectedDate == date.date ? Colors.white : null),
                 selected: _selectedDate == date.date,
-                onSelected: date.timeSlots.isEmpty
+                onSelected: date.timeSlots!.isEmpty
                     ? null
                     : (value) {
                         setState(() {

@@ -13,9 +13,13 @@ import '../../../time_slots/presentation/time_slots_selector/time_slots_selector
 
 class DeliveryContainer extends StatelessWidget {
   const DeliveryContainer(
-      {super.key, required this.deliveryType, required this.currency});
+      {super.key,
+      required this.deliveryType,
+      required this.currency,
+      this.isPickup});
   final DeliveryType deliveryType;
   final String currency;
+  final bool? isPickup;
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +79,9 @@ class DeliveryContainer extends StatelessWidget {
                         }).then((value) {
                       if (value != null) {
                         ref.read(updateCartProvider.notifier).updateCart(
+                            pickupPointId: isPickup == true
+                                ? deliveryType.deliveryMethodId
+                                : null,
                             timeSlot: value.timeSlot.timeSlotId,
                             deliveryDate: value.deliveryDate);
                       }

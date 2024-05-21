@@ -337,5 +337,14 @@
   "writeDiscription" : "اكتب وصفاً",
   "widam" : "ودام",
   "slotterFeesValidationMsg" : "يرجى تحديد رسوم التحميل",
-  "pickupPointsValidationMsg" : "يرجى تحديد نقطة الاستلام"
+  "pickupPointsValidationMsg" : "يرجى تحديد نقطة الاستلام",
+  "coupons" : "الكوبونات",
+  "couponNo" : "رقم الكوبون",
+  "view" : "عرض",
+  "couponDetails" : "تفاصيل الكوبون",
+  "scanCodeMsg" : "يمكنك مسح رمز الكوبون للحصول على الأضحية",
+  "pickupTime" : "وقت الاستلام",
+  "pickupDate" : "تاريخ الاستلام",
+  "couponItems" : "عناصر الكوبون",
+  "goToLocation" : "الذهاب إلى الموقع"
 }

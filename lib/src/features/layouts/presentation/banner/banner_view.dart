@@ -39,9 +39,11 @@ class BannerView extends ConsumerWidget {
           itemId: banner.bannerLink!,
           itemType: 'V');
     } else if (banner.bannerType == 'Mubadara') {
-      context.pushRoute(MubadaraItemsScreen(mubadaraId: banner.bannerLink!));
-    } else {
-      pushItemGroupScreen(context: context, itemGroupId: banner.bannerLink!);
+      if (banner.udhiyah == 1) {
+        context.pushRoute(const UdhiyaCouponsScreen());
+      } else {
+        pushItemGroupScreen(context: context, itemGroupId: banner.bannerLink!);
+      }
     }
   }
 }

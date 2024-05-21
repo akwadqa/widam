@@ -127,6 +127,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "continueShopping":
             MessageLookupByLibrary.simpleMessage("متابعة التسوق"),
         "country": MessageLookupByLibrary.simpleMessage("البلد"),
+        "couponDetails": MessageLookupByLibrary.simpleMessage("تفاصيل الكوبون"),
+        "couponItems": MessageLookupByLibrary.simpleMessage("عناصر الكوبون"),
+        "couponNo": MessageLookupByLibrary.simpleMessage("رقم الكوبون"),
+        "coupons": MessageLookupByLibrary.simpleMessage("الكوبونات"),
         "credit": MessageLookupByLibrary.simpleMessage("شحن"),
         "customerService": MessageLookupByLibrary.simpleMessage("خدمة الزبائن"),
         "customersAlsoBought":
@@ -200,6 +204,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أدخل الاسم الكامل الخاص بك"),
         "fullyBooked": MessageLookupByLibrary.simpleMessage("محجوز بالكامل"),
         "gallery": MessageLookupByLibrary.simpleMessage("المعرض"),
+        "goToLocation":
+            MessageLookupByLibrary.simpleMessage("الذهاب إلى الموقع"),
         "hello": MessageLookupByLibrary.simpleMessage("مرحباً"),
         "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "internalServerError":
@@ -328,9 +334,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "pickImage": MessageLookupByLibrary.simpleMessage("اختر الصورة"),
         "pickYouTimeSlot":
             MessageLookupByLibrary.simpleMessage("اختر فترة زمنية"),
+        "pickupDate": MessageLookupByLibrary.simpleMessage("تاريخ الاستلام"),
         "pickupLocation": MessageLookupByLibrary.simpleMessage("الموقع"),
         "pickupPointsValidationMsg":
             MessageLookupByLibrary.simpleMessage("يرجى تحديد نقطة الاستلام"),
+        "pickupTime": MessageLookupByLibrary.simpleMessage("وقت الاستلام"),
         "placeOrder": MessageLookupByLibrary.simpleMessage("تأكيد الطلب"),
         "pleaseSelectImageSource":
             MessageLookupByLibrary.simpleMessage("يرجى اختيار مصدر الصورة"),
@@ -395,6 +403,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "saveCardForFutureOrders": MessageLookupByLibrary.simpleMessage(
             "حفظ البطاقة للطلبات المستقبلية"),
+        "scanCodeMsg": MessageLookupByLibrary.simpleMessage(
+            "يمكنك مسح رمز الكوبون للحصول على الأضحية"),
         "search": MessageLookupByLibrary.simpleMessage("بحث"),
         "searchAllProducts":
             MessageLookupByLibrary.simpleMessage("البحث في جميع المنتجات"),
@@ -478,6 +488,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verificationCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
         "verify": MessageLookupByLibrary.simpleMessage("تحقق"),
         "version": MessageLookupByLibrary.simpleMessage("الإصدار"),
+        "view": MessageLookupByLibrary.simpleMessage("عرض"),
         "viewAllCategories":
             MessageLookupByLibrary.simpleMessage("عرض جميع التصنيفات"),
         "viewCart": MessageLookupByLibrary.simpleMessage("عرض السلة"),

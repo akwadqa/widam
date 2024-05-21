@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:widam/src/features/app_data/domain/delivery_date/delivery_date.dart';
-import 'package:widam/src/features/cart/domain/cart/coordinates/coordinates.dart';
+import 'package:widam/src/common_models/coordinates/coordinates.dart';
 import 'package:widam/src/features/cart/domain/cart/delivery_type.dart';
 import '../../../../items/domain/item_details/item_details.dart';
 import '../../../../time_slots/domain/geofence_details/time_slot.dart';

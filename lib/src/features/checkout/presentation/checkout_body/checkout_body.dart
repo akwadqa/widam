@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:widam/src/features/cart/domain/cart/delivery_type.dart';
 import 'package:widam/src/features/cart/domain/cart/pickup/pickup.dart';
 import 'package:widam/src/features/checkout/presentation/checkout_body/saved_card_switch.dart';
 import 'package:widam/src/features/time_slots/domain/geofence_details/time_slot.dart';
@@ -136,6 +135,7 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
                                 for (final pickup
                                     in cart.cartContent as List<Pickup>)
                                   DeliveryContainer(
+                                      isPickup: true,
                                       currency: cart.currency,
                                       deliveryType: pickup.toDeliveryType()),
                               ]

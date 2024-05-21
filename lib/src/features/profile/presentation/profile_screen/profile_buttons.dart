@@ -46,7 +46,7 @@ class ProfileButtons extends ConsumerWidget {
             _Button(
                 image: Assets.icons.couponsIcon.svg(),
                 text: S.of(context).yourCoupons,
-                onTap: () {}),
+                onTap: () => context.pushRoute(const UdhiyaCouponsScreen())),
           ],
         ),
       );

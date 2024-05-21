@@ -10,7 +10,9 @@ class Banner with _$Banner implements BlockData {
       {required String bannerType,
       required String? bannerLink,
       required String bannerImage,
-      required String? mubadaraId}) = _Banner;
+      required String? mubadaraId,
+      required int? udhiyah, 
+      }) = _Banner;
 
   factory Banner.fromJson(Map<String, dynamic> json) => _$BannerFromJson(json);
 }

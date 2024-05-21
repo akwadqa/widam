@@ -69,6 +69,7 @@ dependencies:
   status_bar_control: ^3.2.1
   flutter_chat_bubble: ^2.0.2
   firebase_analytics: ^10.8.0
+  map_launcher: ^3.3.0
 
 dev_dependencies:
   flutter_test:

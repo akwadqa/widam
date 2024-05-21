@@ -130,6 +130,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "continueShopping":
             MessageLookupByLibrary.simpleMessage("Continue Shopping"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
+        "couponDetails": MessageLookupByLibrary.simpleMessage("Coupon Details"),
+        "couponItems": MessageLookupByLibrary.simpleMessage("Coupon Items"),
+        "couponNo": MessageLookupByLibrary.simpleMessage("Coupon No."),
+        "coupons": MessageLookupByLibrary.simpleMessage("Coupons"),
         "credit": MessageLookupByLibrary.simpleMessage("Credit"),
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
@@ -207,6 +211,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter your full name"),
         "fullyBooked": MessageLookupByLibrary.simpleMessage("Fully Booked"),
         "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
+        "goToLocation": MessageLookupByLibrary.simpleMessage("Go to location"),
         "hello": MessageLookupByLibrary.simpleMessage("Hello"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "internalServerError":
@@ -331,10 +336,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "pickImage": MessageLookupByLibrary.simpleMessage("Pick Image"),
         "pickYouTimeSlot":
             MessageLookupByLibrary.simpleMessage("Pick your time slot"),
+        "pickupDate": MessageLookupByLibrary.simpleMessage("Pickup Date"),
+        "pickupDetails": MessageLookupByLibrary.simpleMessage("Pickup Details"),
         "pickupLocation":
             MessageLookupByLibrary.simpleMessage("Pick-Up Location"),
         "pickupPointsValidationMsg": MessageLookupByLibrary.simpleMessage(
             "Please select a pickup point"),
+        "pickupTime": MessageLookupByLibrary.simpleMessage("Pickup Time"),
         "placeOrder": MessageLookupByLibrary.simpleMessage("Place Order"),
         "pleaseSelectImageSource":
             MessageLookupByLibrary.simpleMessage("Please select image source"),
@@ -401,6 +409,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "saveCardForFutureOrders":
             MessageLookupByLibrary.simpleMessage("Save card for future orders"),
+        "scanCodeMsg": MessageLookupByLibrary.simpleMessage(
+            "Scan this QR code to get your Adhia"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "searchAllProducts":
             MessageLookupByLibrary.simpleMessage("Search all products"),
@@ -487,6 +497,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Verification code"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
+        "view": MessageLookupByLibrary.simpleMessage("View"),
         "viewAllCategories":
             MessageLookupByLibrary.simpleMessage("View All Categories"),
         "viewCart": MessageLookupByLibrary.simpleMessage("View Cart"),

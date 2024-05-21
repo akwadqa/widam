@@ -55,16 +55,23 @@ class CartRepository {
                 'price_modifier': isPriceModifier ? 1 : 0,
             }
           ]),
+        if (pickupPointId != null && timeSlot != null)
+          'item_pickup_point': jsonEncode({
+            'pickup_point_id': pickupPointId,
+            'time_slot': timeSlot,
+            'delivery_date': deliveryDate,
+          }),
         if (qid != null) 'qid_field_placeholder': qid,
         if (file != null)
           'file': await MultipartFile.fromFile(file.path, filename: file.name),
         if (shippingAddressId != null) 'shipping_address_id': shippingAddressId,
-        if (timeSlot != null) 'time_slot': timeSlot,
+        if (timeSlot != null && pickupPointId == null) 'time_slot': timeSlot,
         if (couponCode != null) 'coupon_code': couponCode,
         if (paymentMethodId != null) 'payment_method': paymentMethodId,
         if (paymentTokenId != null) 'payment_token_id': paymentTokenId,
         if (paymentToken != null) 'payment_token': paymentToken,
-        if (deliveryDate != null) 'delivery_date': deliveryDate,
+        if (deliveryDate != null && pickupPointId == null)
+          'delivery_date': deliveryDate,
         if (useWalletBalance != null) 'use_wallet_balance': useWalletBalance,
       });
       final response = await _networkService.put(EndPoints.cart, formData);

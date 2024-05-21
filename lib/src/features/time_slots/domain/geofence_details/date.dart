@@ -10,7 +10,7 @@ class Date with _$Date {
   factory Date({
     required String date,
     required String dateFormatted,
-    required List<TimeSlot> timeSlots,
+    required List<TimeSlot>? timeSlots,
   }) = _Date;
 
   factory Date.fromJson(Map<String, dynamic> json) => _$DateFromJson(json);

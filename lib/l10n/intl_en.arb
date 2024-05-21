@@ -337,5 +337,15 @@
   "writeDiscription" : "Write Discription",
   "widam" : "Widam",
   "slotterFeesValidationMsg" : "Please select slotter fees",
-  "pickupPointsValidationMsg" : "Please select a pickup point"
+  "pickupPointsValidationMsg" : "Please select a pickup point",
+  "coupons" : "Coupons",
+  "couponNo" : "Coupon No.",
+  "view" : "View",
+  "couponDetails" : "Coupon Details",
+  "scanCodeMsg" : "Scan this QR code to get your Adhia",
+  "pickupDetails" : "Pickup Details",
+  "pickupTime" : "Pickup Time",
+  "pickupDate" : "Pickup Date",
+  "couponItems" : "Coupon Items",
+  "goToLocation" : "Go to location"
 }

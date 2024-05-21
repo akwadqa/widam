@@ -3439,6 +3439,106 @@ class S {
       args: [],
     );
   }
+
+  /// `Coupons`
+  String get coupons {
+    return Intl.message(
+      'Coupons',
+      name: 'coupons',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coupon No.`
+  String get couponNo {
+    return Intl.message(
+      'Coupon No.',
+      name: 'couponNo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View`
+  String get view {
+    return Intl.message(
+      'View',
+      name: 'view',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coupon Details`
+  String get couponDetails {
+    return Intl.message(
+      'Coupon Details',
+      name: 'couponDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scan this QR code to get your Adhia`
+  String get scanCodeMsg {
+    return Intl.message(
+      'Scan this QR code to get your Adhia',
+      name: 'scanCodeMsg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pickup Details`
+  String get pickupDetails {
+    return Intl.message(
+      'Pickup Details',
+      name: 'pickupDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pickup Time`
+  String get pickupTime {
+    return Intl.message(
+      'Pickup Time',
+      name: 'pickupTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pickup Date`
+  String get pickupDate {
+    return Intl.message(
+      'Pickup Date',
+      name: 'pickupDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coupon Items`
+  String get couponItems {
+    return Intl.message(
+      'Coupon Items',
+      name: 'couponItems',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to location`
+  String get goToLocation {
+    return Intl.message(
+      'Go to location',
+      name: 'goToLocation',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
