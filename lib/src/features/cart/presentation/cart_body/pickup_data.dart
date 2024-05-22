@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../../gen/assets.gen.dart';
-import '../../../../../generated/l10n.dart';
-
 import '../../../../theme/app_colors.dart';
 
 class PickupData extends StatelessWidget {
@@ -41,22 +38,6 @@ class PickupData extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 3),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Assets.icons.clockIcon.svg(),
-            const SizedBox(width: 4),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(S.of(context).openingHoures, style: _textStyle),
-                const SizedBox(height: 2),
-                Text(openingHours, style: const TextStyle(fontSize: 12))
-              ],
-            ),
-          ],
-        )
       ],
     );
   }

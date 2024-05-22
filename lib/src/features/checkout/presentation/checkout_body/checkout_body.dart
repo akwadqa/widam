@@ -213,65 +213,67 @@ class _UpdatableCartContent extends ConsumerWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(
             children: [
-              const SizedBox(height: 12.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(S.of(context).shipTo, style: titlesTextStyle),
-                  ChangeButton(onPressed: () {
-                    showAdaptiveModalBottomSheet<Address?>(
-                            context: context,
-                            builder: (ctx) => const AddressesSelector())
-                        .then((Address? address) {
-                      if (address != null) {
-                        ref
-                            .read(updateCartProvider.notifier)
-                            .updateCart(
-                              shippingAddressId: address.addressId,
-                            )
-                            .then((value) {
-                          if (value == true) {
-                            if (context.mounted) {
-                              showAdaptiveModalBottomSheet<
-                                      ({
-                                        TimeSlot timeSlot,
-                                        String deliveryDate
-                                      })?>(
-                                  context: context,
-                                  builder: (ctx) {
-                                    return TimeSlotsSelector(
-                                        deleiveryMethodId:
-                                            (cart.cartContent as CartContent)
-                                                .normalDelivery!
-                                                .deliveryMethodId,
-                                        initialDate:
-                                            (cart.cartContent as CartContent)
-                                                .normalDelivery!
-                                                .deliveryDate
-                                                .date,
-                                        initialTimeSlot:
-                                            (cart.cartContent as CartContent)
-                                                .normalDelivery!
-                                                .timeSlot);
-                                  }).then((value) {
-                                if (value != null) {
-                                  ref
-                                      .read(updateCartProvider.notifier)
-                                      .updateCart(
-                                          timeSlot: value.timeSlot.timeSlotId,
-                                          deliveryDate: value.deliveryDate);
-                                }
-                              });
+              if (cart.pickup != 1) ...[
+                const SizedBox(height: 12.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(S.of(context).shipTo, style: titlesTextStyle),
+                    ChangeButton(onPressed: () {
+                      showAdaptiveModalBottomSheet<Address?>(
+                              context: context,
+                              builder: (ctx) => const AddressesSelector())
+                          .then((Address? address) {
+                        if (address != null) {
+                          ref
+                              .read(updateCartProvider.notifier)
+                              .updateCart(
+                                shippingAddressId: address.addressId,
+                              )
+                              .then((value) {
+                            if (value == true) {
+                              if (context.mounted) {
+                                showAdaptiveModalBottomSheet<
+                                        ({
+                                          TimeSlot timeSlot,
+                                          String deliveryDate
+                                        })?>(
+                                    context: context,
+                                    builder: (ctx) {
+                                      return TimeSlotsSelector(
+                                          deleiveryMethodId:
+                                              (cart.cartContent as CartContent)
+                                                  .normalDelivery!
+                                                  .deliveryMethodId,
+                                          initialDate:
+                                              (cart.cartContent as CartContent)
+                                                  .normalDelivery!
+                                                  .deliveryDate
+                                                  .date,
+                                          initialTimeSlot:
+                                              (cart.cartContent as CartContent)
+                                                  .normalDelivery!
+                                                  .timeSlot);
+                                    }).then((value) {
+                                  if (value != null) {
+                                    ref
+                                        .read(updateCartProvider.notifier)
+                                        .updateCart(
+                                            timeSlot: value.timeSlot.timeSlotId,
+                                            deliveryDate: value.deliveryDate);
+                                  }
+                                });
+                              }
                             }
-                          }
-                        });
-                      }
-                    });
-                  })
-                ],
-              ),
-              const SizedBox(height: 5.0),
-              AddressCard(address: cart.shippingAddressDetails!),
+                          });
+                        }
+                      });
+                    })
+                  ],
+                ),
+                const SizedBox(height: 5.0),
+                AddressCard(address: cart.shippingAddressDetails!),
+              ],
               const SizedBox(height: 20.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

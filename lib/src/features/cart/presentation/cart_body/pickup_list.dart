@@ -28,6 +28,7 @@ class PickupList extends StatelessWidget {
                 timeSlotWidget: TimeSlotLabel(
                   formattedDate: pickup.deliveryDate.dateFormatted,
                   formattedTime: pickup.timeSlot.timeFormatted,
+                  customeTitle: S.of(context).pickupTimeSlot,
                 ),
                 content: Column(children: [
                   Row(
@@ -36,8 +37,7 @@ class PickupList extends StatelessWidget {
                       PickupData(
                           title: pickup.pickupPointName,
                           description: pickup.address,
-                          openingHours:
-                              '${pickup.fromTime} - ${pickup.toTime}'),
+                          openingHours: pickup.timeSlot.timeFormatted),
                       Column(
                         children: [
                           Text(S.of(context).pickupLocation,

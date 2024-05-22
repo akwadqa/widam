@@ -347,5 +347,6 @@
   "pickupTime" : "Pickup Time",
   "pickupDate" : "Pickup Date",
   "couponItems" : "Coupon Items",
-  "goToLocation" : "Go to location"
+  "goToLocation" : "Go to location",
+  "pickupTimeSlot" : "Pickup\nTime"
 }

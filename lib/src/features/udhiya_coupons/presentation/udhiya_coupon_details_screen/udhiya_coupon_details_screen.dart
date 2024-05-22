@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:map_launcher/map_launcher.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:widam/generated/l10n.dart';
 import 'package:widam/src/common_widgets/app_cached_network_image.dart';
 import 'package:widam/src/common_widgets/banner/app_banner.dart';

@@ -3539,6 +3539,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Pickup\nTime`
+  String get pickupTimeSlot {
+    return Intl.message(
+      'Pickup\nTime',
+      name: 'pickupTimeSlot',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

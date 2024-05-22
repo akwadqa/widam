@@ -17,11 +17,10 @@ class Pickup with _$Pickup {
     required String pickupPointName,
     required String warehouse,
     required String timeSlotGroup,
+    required String deliveryMethod,
     required TimeSlot timeSlot,
     required String location,
     required String description,
-    required String fromTime,
-    required String toTime,
     required String address,
     required List<ItemDetails> websiteItems,
     required DeliveryDate deliveryDate,
@@ -34,7 +33,7 @@ class Pickup with _$Pickup {
 
   DeliveryType toDeliveryType() {
     return DeliveryType(
-      deliveryMethodId: pickupPointId,
+      deliveryMethodId: deliveryMethod,
       deliveryMethodTitle: pickupPointName,
       deliveryDate: deliveryDate,
       timeSlot: timeSlot,

@@ -346,5 +346,6 @@
   "pickupTime" : "وقت الاستلام",
   "pickupDate" : "تاريخ الاستلام",
   "couponItems" : "عناصر الكوبون",
-  "goToLocation" : "الذهاب إلى الموقع"
+  "goToLocation" : "الذهاب إلى الموقع",
+  "pickupTimeSlot" : "وقت\nالاستلام"
 }

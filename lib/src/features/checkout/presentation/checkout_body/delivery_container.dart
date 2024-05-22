@@ -23,6 +23,7 @@ class DeliveryContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('deliveryMethodId = ${deliveryType.deliveryMethodId}');
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.brightGray, width: 0.5),
@@ -107,17 +108,19 @@ class DeliveryContainer extends StatelessWidget {
             ),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(S.of(context).deliveryFee, style: _titleTextStyle()),
-            Text('${deliveryType.deliveryCharges.toStringAsFixed(2)} $currency',
-                style: const TextStyle(
-                    fontSize: 13.0,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600))
-          ],
-        )
+        if (isPickup != true)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(S.of(context).deliveryFee, style: _titleTextStyle()),
+              Text(
+                  '${deliveryType.deliveryCharges.toStringAsFixed(2)} $currency',
+                  style: const TextStyle(
+                      fontSize: 13.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600))
+            ],
+          )
       ]),
     );
   }

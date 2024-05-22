@@ -11,7 +11,6 @@ class DeliveryMethod with _$DeliveryMethod {
     required String deliveryMethodId,
     required String type,
     required String deliveryMethodTitle,
-    required String description,
     required num deliveryCharges,
     required num minimumOrderAmount,
     required TimeSlotGroup timeSlotGroup,

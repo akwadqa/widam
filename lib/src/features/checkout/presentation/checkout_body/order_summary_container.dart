@@ -34,8 +34,10 @@ class OrderSummaryContainer extends StatelessWidget {
                 children: [
                   Text(S.of(context).cartTotal),
                   const SizedBox(height: 10.0),
-                  Text(S.of(context).deliveryFee),
-                  const SizedBox(height: 10.0),
+                  if (cart.pickup != 1) ...[
+                    Text(S.of(context).deliveryFee),
+                    const SizedBox(height: 10.0),
+                  ],
                   Text(S.of(context).discount),
                 ],
               ),
@@ -50,9 +52,11 @@ class OrderSummaryContainer extends StatelessWidget {
                 children: [
                   Text('${cart.total.toStringAsFixed(2)} ${cart.currency}'),
                   const SizedBox(height: 10.0),
-                  Text(
-                      '${cart.totalCharges.toStringAsFixed(2)} ${cart.currency}'),
-                  const SizedBox(height: 10.0),
+                  if (cart.pickup != 1) ...[
+                    Text(
+                        '${cart.totalCharges.toStringAsFixed(2)} ${cart.currency}'),
+                    const SizedBox(height: 10.0),
+                  ],
                   Text(
                       '${cart.totalDiscountAmount?.toStringAsFixed(2)} ${cart.currency}'),
                 ],

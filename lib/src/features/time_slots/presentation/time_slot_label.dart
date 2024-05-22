@@ -12,11 +12,12 @@ class TimeSlotLabel extends StatelessWidget {
       required this.formattedDate,
       required this.formattedTime,
       this.foregroundColor = Colors.black,
-      this.onTap});
+      this.onTap, this.customeTitle});
   final String formattedDate;
   final String formattedTime;
   final VoidCallback? onTap;
   final Color foregroundColor;
+  final String? customeTitle;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -24,7 +25,7 @@ class TimeSlotLabel extends StatelessWidget {
         TruckTimeIcon(foregroundColor),
         const SizedBox(width: 8),
         EarliestDeliveryText(
-            isChangeable: onTap != null, foregroundColor: foregroundColor),
+            isChangeable: onTap != null, foregroundColor: foregroundColor, customeTitle: customeTitle),
         const SizedBox(width: 8),
         TimeSlotContainer(
           formattedDate: formattedDate,
@@ -40,16 +41,17 @@ class EarliestDeliveryText extends StatelessWidget {
   const EarliestDeliveryText({
     super.key,
     this.isChangeable = false,
-    this.foregroundColor = Colors.black,
+    this.foregroundColor = Colors.black, this.customeTitle,
   });
   final bool isChangeable;
   final Color foregroundColor;
+  final String? customeTitle;
   @override
   Widget build(BuildContext context) {
-    return Text(
-        isChangeable
+    return Text(customeTitle ??
+        (isChangeable
             ? S.of(context).changeTimeSlot
-            : S.of(context).earliestDelivery,
+            : S.of(context).earliestDelivery),
         style: TextStyle(
             color: foregroundColor,
             fontSize: 11,

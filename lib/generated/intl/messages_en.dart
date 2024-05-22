@@ -343,6 +343,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pickupPointsValidationMsg": MessageLookupByLibrary.simpleMessage(
             "Please select a pickup point"),
         "pickupTime": MessageLookupByLibrary.simpleMessage("Pickup Time"),
+        "pickupTimeSlot": MessageLookupByLibrary.simpleMessage("Pickup\nTime"),
         "placeOrder": MessageLookupByLibrary.simpleMessage("Place Order"),
         "pleaseSelectImageSource":
             MessageLookupByLibrary.simpleMessage("Please select image source"),
