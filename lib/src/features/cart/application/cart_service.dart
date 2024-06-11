@@ -93,13 +93,14 @@ bool isInCart(IsInCartRef ref, String itemId) =>
           final Cart? cart = data.value;
           if (cart != null) {
             if (cart.pickup == 1) {
+              bool result = false;
               cart.cartContent.forEach((Pickup element) {
                 if (element.websiteItems
                     .any((element) => element.websiteItemId == itemId)) {
-                  return true;
+                  result = true;
                 }
               });
-              return false;
+              return result;
             }
             return cart.cartContent.normalDelivery.websiteItems
                 .any((element) => element.websiteItemId == itemId);

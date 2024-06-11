@@ -11,6 +11,8 @@ import 'package:widam/src/features/items/data/mubadara_items_repository.dart';
 import 'package:widam/src/features/items/presentation/items_grid.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
 
+import '../../../main/presentation/main_screen/app_bottom_navigation_bar.dart';
+
 @RoutePage()
 class MubadaraItemsScreen extends ConsumerStatefulWidget {
   const MubadaraItemsScreen({super.key, required this.mubadaraId});
@@ -34,36 +36,43 @@ class _MubadaraItemsScreenState extends ConsumerState<MubadaraItemsScreen> {
     final topPadding =
         ref.watch(topPaddingProvider(MediaQuery.paddingOf(context).top));
     return Scaffold(
-      body: Column(
-        children: [
-          SizedBox(height: topPadding),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: AddressAndDeliveryWidget(),
-          ),
-          const Align(
-              alignment: AlignmentDirectional.centerStart,
-              child: AdaptiveBackButton(width: 40.0, height: 40.0)),
-          Expanded(
-            child: mubadaraItemsAsync.when(
-                data: (items) {
-                  if (items.isEmpty) {
-                    return Center(
-                        child: Text(
-                            S.of(context).noProductsMatchingYourSelection));
-                  }
-                  return ItemsGrid(items: items);
-                },
-                error: (error, stackTrace) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: AppBanner(
-                          message: error.toString(), stackTrace: stackTrace),
-                    ),
-                loading: () => const FadeCircleLoadingIndicator()),
-          )
-        ],
-      ),
-    );
+        body: Column(
+          children: [
+            SizedBox(height: topPadding),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              child: AddressAndDeliveryWidget(),
+            ),
+            const Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: AdaptiveBackButton(width: 40.0, height: 40.0)),
+            Expanded(
+              child: mubadaraItemsAsync.when(
+                  data: (items) {
+                    if (items.isEmpty) {
+                      return Center(
+                          child: Text(
+                              S.of(context).noProductsMatchingYourSelection));
+                    }
+                    return ItemsGrid(items: items);
+                  },
+                  error: (error, stackTrace) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: AppBanner(
+                            message: error.toString(), stackTrace: stackTrace),
+                      ),
+                  loading: () => const FadeCircleLoadingIndicator()),
+            )
+          ],
+        ),
+        bottomNavigationBar: AppBottomNavigationBar(
+          currentIndex: 1,
+          onTap: (index) {
+            if (index != 1) {
+              context.maybePop(index);
+            }
+          },
+        ));
   }
 
   @override

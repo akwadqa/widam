@@ -48,12 +48,16 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
   final ScrollController _scrollController = ScrollController();
   final FocusNode _attributeFocusNode = FocusNode();
   final FocusNode _optionsFocusNode = FocusNode();
+  final FocusNode _slotterFeesFocusNode = FocusNode();
+  final FocusNode _pickupPointFocusNode = FocusNode();
 
   @override
   void dispose() {
     _scrollController.dispose();
     _attributeFocusNode.dispose();
     _optionsFocusNode.dispose();
+    _slotterFeesFocusNode.dispose();
+    _pickupPointFocusNode.dispose();
     super.dispose();
   }
 
@@ -103,22 +107,26 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    OptionLabel(label: widget.itemDetails.priceModifierTitle!),
-                    Form(
-                      key: ref.read(slotterFeesFormKeyProvider),
-                      child: SlotterFeesFormField(
-                          itemDetails: widget.itemDetails,
-                          validator: (value) {
-                            if (value == false) {
-                              return S.of(context).slotterFeesValidationMsg;
-                            }
-                            return null;
-                          }),
-                    ),
-                  ],
+                child: Focus(
+                  focusNode: _slotterFeesFocusNode,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      OptionLabel(
+                          label: widget.itemDetails.priceModifierTitle!),
+                      Form(
+                        key: ref.read(slotterFeesFormKeyProvider),
+                        child: SlotterFeesFormField(
+                            itemDetails: widget.itemDetails,
+                            validator: (value) {
+                              if (value == false) {
+                                return S.of(context).slotterFeesValidationMsg;
+                              }
+                              return null;
+                            }),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -126,22 +134,26 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    OptionLabel(label: widget.itemDetails.pickupPoints!.label),
-                    Form(
-                      key: ref.read(pickupPointsFormKeyProvider),
-                      child: PickupPointsFormField(
-                          itemDetails: widget.itemDetails,
-                          validator: (value) {
-                            if (value == null) {
-                              return S.of(context).pickupPointsValidationMsg;
-                            }
-                            return null;
-                          }),
-                    ),
-                  ],
+                child: Focus(
+                  focusNode: _pickupPointFocusNode,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      OptionLabel(
+                          label: widget.itemDetails.pickupPoints!.label),
+                      Form(
+                        key: ref.read(pickupPointsFormKeyProvider),
+                        child: PickupPointsFormField(
+                            itemDetails: widget.itemDetails,
+                            validator: (value) {
+                              if (value == null) {
+                                return S.of(context).pickupPointsValidationMsg;
+                              }
+                              return null;
+                            }),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -150,8 +162,11 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: MubadaraFields(
-                    mubadaraDetails: widget.itemDetails.mubadaraDetails!),
+                child: Focus(
+                  focusNode: _optionsFocusNode,
+                  child: MubadaraFields(
+                      mubadaraDetails: widget.itemDetails.mubadaraDetails!),
+                ),
               )
             ],
             const SizedBox(height: 200),
@@ -167,8 +182,12 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
                     onInvalidForm: (formType) {
                       if (formType == FormType.variants) {
                         _attributeFocusNode.requestFocus();
-                      } else {
+                      } else if (formType == FormType.options) {
                         _optionsFocusNode.requestFocus();
+                      } else if (formType == FormType.slotterFees) {
+                        _slotterFeesFocusNode.requestFocus();
+                      } else if (formType == FormType.pickupPoint) {
+                        _pickupPointFocusNode.requestFocus();
                       }
                       _scrollController.animateTo(
                           _scrollController.position.maxScrollExtent,

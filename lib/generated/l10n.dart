@@ -3540,11 +3540,21 @@ class S {
     );
   }
 
-  /// `Pickup\nTime`
+  /// `Nearest\nPickup\nTime`
   String get pickupTimeSlot {
     return Intl.message(
-      'Pickup\nTime',
+      'Nearest\nPickup\nTime',
       name: 'pickupTimeSlot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Coupons Yet`
+  String get noCouponsYet {
+    return Intl.message(
+      'No Coupons Yet',
+      name: 'noCouponsYet',
       desc: '',
       args: [],
     );

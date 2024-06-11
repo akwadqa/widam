@@ -22,6 +22,11 @@ class UdhiyaCouponsScreen extends StatelessWidget {
           final couponsAsync = ref.watch(udhiyaCouponsProvider);
           return couponsAsync.when(
               data: (coupons) {
+                if (coupons.isEmpty) {
+                  return Center(
+                    child: Text(S.of(context).noCouponsYet),
+                  );
+                }
                 return ListView.separated(
                     itemCount: coupons.length,
                     itemBuilder: (context, index) {

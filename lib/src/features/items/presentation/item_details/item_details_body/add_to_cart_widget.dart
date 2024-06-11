@@ -25,7 +25,7 @@ import '../../../../../common_widgets/submit_button.dart';
 import '../../../../cart/application/cart_service.dart';
 import '../item_details_controller.dart';
 
-enum FormType { variants, options }
+enum FormType { variants, options, slotterFees, pickupPoint }
 
 class AddToCartWidget extends StatelessWidget {
   const AddToCartWidget({
@@ -120,42 +120,44 @@ class AddToCartWidget extends StatelessWidget {
     }
   }
 
-  void _addToCart({
-    required WidgetRef ref,
-    String? attributionToken,
-  }) {
-    final slotterFeesFormKey = ref.read(slotterFeesFormKeyProvider);
-    if (slotterFeesFormKey.currentState != null &&
-        !slotterFeesFormKey.currentState!.validate()) {
-      return;
-    }
+  void _addToCart({required WidgetRef ref, String? attributionToken}) {
+    if (!_validateForms(ref)) return;
 
-    final pickupPointsFormKey = ref.read(pickupPointsFormKeyProvider);
-    if (pickupPointsFormKey.currentState != null &&
-        !pickupPointsFormKey.currentState!.validate()) {
-      return;
-    }
-
-    final mubadaraFormKey = ref.read(mubadaraFormKeyProvider);
-    if (mubadaraFormKey.currentState != null &&
-        !mubadaraFormKey.currentState!.validate()) {
-      return;
-    }
-
-    mubadaraFormKey.currentState?.save();
+    ref.read(mubadaraFormKeyProvider).currentState?.save();
 
     ref.read(updateCartProvider.notifier).updateCart(
-        itemId: itemId,
-        quantity: ref.read(quantityProvider),
-        pickupPointId: ref.read(selectedPickupPointControllerProvider),
-        qid: ref.read(qidNumberControllerProvider).isEmpty
-            ? null
-            : ref.read(qidNumberControllerProvider),
-        file: ref.read(qidAttachmentControllerProvider),
-        attributionToken: attributionToken,
-        isPriceModifier: ref.read(slotterFeesControllerProvider));
+          itemId: itemId,
+          quantity: ref.read(quantityProvider),
+          pickupPointId: ref.read(selectedPickupPointControllerProvider),
+          qid: ref.read(qidNumberControllerProvider).isEmpty
+              ? null
+              : ref.read(qidNumberControllerProvider),
+          file: ref.read(qidAttachmentControllerProvider),
+          attributionToken: attributionToken,
+          isPriceModifier: ref.read(slotterFeesControllerProvider),
+        );
 
     _invalidateRecommendationProviders(ref);
+  }
+
+  bool _validateForms(WidgetRef ref) {
+    final validators = [
+      _validateForm(ref, slotterFeesFormKeyProvider, FormType.slotterFees),
+      _validateForm(ref, pickupPointsFormKeyProvider, FormType.pickupPoint),
+      _validateForm(ref, mubadaraFormKeyProvider, FormType.options),
+    ];
+
+    return validators.every((result) => result);
+  }
+
+  bool _validateForm(WidgetRef ref,
+      Provider<GlobalKey<FormState>> formKeyProvider, FormType formType) {
+    final formKey = ref.read(formKeyProvider);
+    if (formKey.currentState != null && !formKey.currentState!.validate()) {
+      onInvalidForm(formType);
+      return false;
+    }
+    return true;
   }
 
   void _invalidateRecommendationProviders(WidgetRef ref) {

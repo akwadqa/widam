@@ -279,6 +279,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "no": MessageLookupByLibrary.simpleMessage("No"),
         "noActiveSubscriptions":
             MessageLookupByLibrary.simpleMessage("No Active subscriptions"),
+        "noCouponsYet": MessageLookupByLibrary.simpleMessage("No Coupons Yet"),
         "noDatesAvailable":
             MessageLookupByLibrary.simpleMessage("No dates available"),
         "noInternetConnection":
@@ -343,7 +344,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pickupPointsValidationMsg": MessageLookupByLibrary.simpleMessage(
             "Please select a pickup point"),
         "pickupTime": MessageLookupByLibrary.simpleMessage("Pickup Time"),
-        "pickupTimeSlot": MessageLookupByLibrary.simpleMessage("Pickup\nTime"),
+        "pickupTimeSlot":
+            MessageLookupByLibrary.simpleMessage("Nearest\nPickup\nTime"),
         "placeOrder": MessageLookupByLibrary.simpleMessage("Place Order"),
         "pleaseSelectImageSource":
             MessageLookupByLibrary.simpleMessage("Please select image source"),

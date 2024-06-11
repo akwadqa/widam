@@ -46,9 +46,9 @@ class UdhiyaCouponDetailsScreen extends StatelessWidget {
                         S.of(context).scanCodeMsg,
                         style: const TextStyle(fontSize: 12),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       AppCachedNetworkImage(imageUrl: coupon.qrCode),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       Padding(
                         padding: const EdgeInsetsDirectional.only(start: 10),
                         child: Align(
@@ -62,7 +62,7 @@ class UdhiyaCouponDetailsScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       Container(
                         color: AppColors.brightGray,
                         padding: const EdgeInsets.all(10),
@@ -73,18 +73,18 @@ class UdhiyaCouponDetailsScreen extends StatelessWidget {
                               label: S.of(context).pickupLocation,
                               value: coupon.pickupDetails.pickupPoint,
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 10),
                             _InfoRow(
                               label: S.of(context).pickupDate,
                               value: coupon.pickupDetails.pickupDate.date,
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 10),
                             _InfoRow(
                               label: S.of(context).pickupTime,
                               value: coupon
                                   .pickupDetails.pickupTimeSlot.timeFormatted,
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 10),
                             Center(
                               child: ElevatedButton(
                                   onPressed: () => _launchMap(
@@ -94,9 +94,9 @@ class UdhiyaCouponDetailsScreen extends StatelessWidget {
                                       coupon.pickupDetails.pickupPoint),
                                   child: Text(S.of(context).goToLocation)),
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 10),
                             const Divider(color: Colors.black),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 10),
                             Text(S.of(context).couponItems,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w600,

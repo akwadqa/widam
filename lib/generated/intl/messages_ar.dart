@@ -274,6 +274,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "no": MessageLookupByLibrary.simpleMessage("لا"),
         "noActiveSubscriptions":
             MessageLookupByLibrary.simpleMessage("لا يوجد اشتراكات فعالة"),
+        "noCouponsYet":
+            MessageLookupByLibrary.simpleMessage("لا توجد كوبونات بعد"),
         "noDatesAvailable":
             MessageLookupByLibrary.simpleMessage("لا توجد مواعيد متاحة"),
         "noInternetConnection":
@@ -339,7 +341,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pickupPointsValidationMsg":
             MessageLookupByLibrary.simpleMessage("يرجى تحديد نقطة الاستلام"),
         "pickupTime": MessageLookupByLibrary.simpleMessage("وقت الاستلام"),
-        "pickupTimeSlot": MessageLookupByLibrary.simpleMessage("وقت\nالاستلام"),
+        "pickupTimeSlot":
+            MessageLookupByLibrary.simpleMessage("أقرب\nوقت\n للاستلام"),
         "placeOrder": MessageLookupByLibrary.simpleMessage("تأكيد الطلب"),
         "pleaseSelectImageSource":
             MessageLookupByLibrary.simpleMessage("يرجى اختيار مصدر الصورة"),

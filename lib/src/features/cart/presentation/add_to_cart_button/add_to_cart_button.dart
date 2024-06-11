@@ -22,14 +22,12 @@ class AddToCartButton extends ConsumerStatefulWidget {
   final String? row;
   final int? inStock;
   final String? attributionToken;
-  final bool? isUdhiya;
 
   const AddToCartButton({
     super.key,
     required this.minQuantity,
     required this.maxQuantity,
     required this.itemId,
-    this.isUdhiya,
     this.row,
     this.inStock,
     this.attributionToken,
@@ -55,7 +53,7 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
     _listenForCartUpdateErrors();
     _listenForIsInCart();
 
-    if (widget.inStock == 0 || widget.isUdhiya == true) {
+    if (widget.inStock == 0) {
       return _isLoading
           ? const FadeCircleLoadingIndicator()
           : CircleButton(

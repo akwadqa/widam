@@ -42,7 +42,13 @@ class BannerView extends ConsumerWidget {
       if (banner.udhiyah == 1) {
         context.pushRoute(const UdhiyaCouponsScreen());
       } else {
-        context.pushRoute(MubadaraItemsScreen(mubadaraId: banner.bannerLink!));
+        context
+            .pushRoute(MubadaraItemsScreen(mubadaraId: banner.bannerLink!))
+            .then((index) {
+          if (index != null) {
+            context.tabsRouter.setActiveIndex(index as int);
+          }
+        });
       }
     }
   }

@@ -23,7 +23,6 @@ class DeliveryContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('deliveryMethodId = ${deliveryType.deliveryMethodId}');
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.brightGray, width: 0.5),

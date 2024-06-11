@@ -347,5 +347,6 @@
   "pickupDate" : "تاريخ الاستلام",
   "couponItems" : "عناصر الكوبون",
   "goToLocation" : "الذهاب إلى الموقع",
-  "pickupTimeSlot" : "وقت\nالاستلام"
+  "pickupTimeSlot" : "أقرب\nوقت\n للاستلام",
+  "noCouponsYet" : "لا توجد كوبونات بعد"
 }

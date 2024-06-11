@@ -105,7 +105,6 @@ class CartItem extends StatelessWidget {
                     child: AddToCartButton(
                       minQuantity: itemDetails.minQty.toInt(),
                       maxQuantity: itemDetails.maxQty.toInt(),
-                      isUdhiya: itemDetails.isUdhiyaItem == 1,
                       itemId: itemDetails.websiteItemId,
                       row: itemDetails.row,
                       inStock: itemDetails.inStock,

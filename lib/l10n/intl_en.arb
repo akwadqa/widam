@@ -348,5 +348,6 @@
   "pickupDate" : "Pickup Date",
   "couponItems" : "Coupon Items",
   "goToLocation" : "Go to location",
-  "pickupTimeSlot" : "Pickup\nTime"
+  "pickupTimeSlot" : "Nearest\nPickup\nTime",
+  "noCouponsYet" : "No Coupons Yet"
 }
