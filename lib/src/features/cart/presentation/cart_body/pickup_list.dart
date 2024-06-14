@@ -33,6 +33,7 @@ class PickupList extends StatelessWidget {
                 content: Column(children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       PickupData(
                           title: pickup.pickupPointName,
@@ -53,7 +54,7 @@ class PickupList extends StatelessWidget {
                               clipBehavior: Clip.antiAlias,
                               child: AppCachedNetworkImage(
                                   imageUrl:
-                                      '${ServicesUrls.googleMapsBaseUrl}/staticmap?size=${400}x${200}&visible=${pickup.coordinates.latitude},${pickup.coordinates.longitude}&zoom=${18}&key=${Keys.googleAPIKey}&language=${Directionality.of(context) == TextDirection.ltr ? 'en' : 'ar'}')),
+                                      '${ServicesUrls.googleMapsBaseUrl}/staticmap?size=${100}x${50}&visible=${pickup.coordinates.latitude},${pickup.coordinates.longitude}&zoom=${15}&key=${Keys.googleAPIKey}&language=${Directionality.of(context) == TextDirection.ltr ? 'en' : 'ar'}')),
                         ],
                       )
                     ],

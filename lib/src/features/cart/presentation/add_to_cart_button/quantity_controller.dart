@@ -9,8 +9,8 @@ part 'quantity_controller.g.dart';
 class QuantityController extends _$QuantityController {
   final _debouncer = Debouncer(delayMilliseconds: 1000);
   @override
-  int build(String itemId, int minQuantity) {
-    final quantityInCart = ref.watch(quantityInCartProvider(itemId));
+  int build(String itemId, int minQuantity, [String? row]) {
+    final quantityInCart = ref.watch(quantityInCartProvider(itemId, row));
     return quantityInCart == 0 ? minQuantity : quantityInCart;
   }
 

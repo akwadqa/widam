@@ -59,8 +59,8 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
-        versionCode 50
-        versionName "20.0.5"
+        versionCode 51
+        versionName "20.0.6"
     }
 
        signingConfigs {

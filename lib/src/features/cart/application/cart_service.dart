@@ -110,7 +110,7 @@ bool isInCart(IsInCartRef ref, String itemId) =>
         orElse: () => false);
 
 @Riverpod(keepAlive: true)
-int quantityInCart(QuantityInCartRef ref, String itemId) {
+int quantityInCart(QuantityInCartRef ref, String itemId, [String? row]) {
   final cart = ref.watch(cartControllerProvider).asData?.value;
   if (cart == null) {
     return 0;
@@ -119,9 +119,15 @@ int quantityInCart(QuantityInCartRef ref, String itemId) {
   if (cart.pickup == 1) {
     for (var pickup in cart.cartContent) {
       for (var item in pickup.websiteItems) {
-        if (item.websiteItemId == itemId && item.qtyInCart != null) {
+        if (item.row == row && item.qtyInCart != null) {
           return item.qtyInCart.toInt();
         }
+      }
+    }
+  } else if (cart.mubadara == 1) {
+    for (var item in cart.cartContent.normalDelivery.websiteItems) {
+      if (item.row == row && item.qtyInCart != null) {
+        return item.qtyInCart.toInt();
       }
     }
   } else {

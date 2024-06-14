@@ -47,7 +47,7 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
     final state = ref.watch(updateCartProvider);
     final isInCart = ref.watch(isInCartProvider(widget.itemId));
     _quantityInCart = ref
-        .watch(quantityControllerProvider(widget.itemId, widget.minQuantity));
+        .watch(quantityControllerProvider(widget.itemId, widget.minQuantity, widget.row));
     _isLoading = state is AsyncLoading;
 
     _listenForCartUpdateErrors();
@@ -153,7 +153,7 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
     } else {
       _warningFeedback();
       ref
-          .read(quantityControllerProvider(widget.itemId, widget.minQuantity)
+          .read(quantityControllerProvider(widget.itemId, widget.minQuantity, widget.row)
               .notifier)
           .decrementQuantity();
     }
@@ -236,7 +236,7 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
   Future<void> _handleAddButtonTap() async {
     _heavyFeedback();
     ref
-        .read(quantityControllerProvider(widget.itemId, widget.minQuantity)
+        .read(quantityControllerProvider(widget.itemId, widget.minQuantity, widget.row)
             .notifier)
         .increamentQuantity();
   }
@@ -253,7 +253,7 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
       _isExpanded = true;
     });
     ref
-        .read(quantityControllerProvider(widget.itemId, widget.minQuantity)
+        .read(quantityControllerProvider(widget.itemId, widget.minQuantity, widget.row)
             .notifier)
         .addTocart(widget.attributionToken);
     ref.invalidate(recentlyViewdControllerProvider);
