@@ -629,10 +629,11 @@ packages:
   flutter_barcode_scanner:
     dependency: "direct main"
     description:
-      name: flutter_barcode_scanner
-      sha256: a4ba37daf9933f451a5e812c753ddd045d6354e4a3280342d895b07fecaab3fa
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: "379ded73012f1221a372edba8867ac3341b27f9e"
+      resolved-ref: "379ded73012f1221a372edba8867ac3341b27f9e"
+      url: "https://github.com/AmolGangadhare/flutter_barcode_scanner"
+    source: git
     version: "2.0.0"
   flutter_cache_manager:
     dependency: transitive

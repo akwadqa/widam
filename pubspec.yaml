@@ -52,7 +52,10 @@ dependencies:
     path: local_packages/fcm_config
   store_redirect: ^2.0.3
   flutter_html: ^3.0.0-beta.2
-  flutter_barcode_scanner: ^2.0.0
+  flutter_barcode_scanner:
+    git:
+      url: https://github.com/AmolGangadhare/flutter_barcode_scanner
+      ref: 379ded73012f1221a372edba8867ac3341b27f9e
   firebase_crashlytics: ^4.1.5
   firebase_core: ^3.8.0
   onboarding_overlay: ^3.2.2
