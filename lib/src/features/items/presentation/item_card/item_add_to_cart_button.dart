@@ -43,6 +43,7 @@ class ItemAddToCartButton extends StatelessWidget {
                       maxQuantity: item.maxQty.toInt(),
                       minQuantity: item.minQty.toInt(),
                       attributionToken: attributionToken,
+                      itemWarehouseId: item.warehouse.warehouseId,
                     ),
                   );
                 },

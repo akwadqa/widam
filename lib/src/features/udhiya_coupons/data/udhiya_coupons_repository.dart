@@ -52,7 +52,9 @@ FutureOr<List<UdhiyaCoupon>> udhiyaCoupons(UdhiyaCouponsRef ref) {
 }
 
 @riverpod
-FutureOr<UdhiyaCouponDetails> udhiyaCouponDetails(UdhiyaCouponDetailsRef ref, String couponId) {
-  return ref.watch(udhiyaCouponsRepositoryProvider)
+FutureOr<UdhiyaCouponDetails> udhiyaCouponDetails(
+    UdhiyaCouponDetailsRef ref, String couponId) {
+  return ref
+      .watch(udhiyaCouponsRepositoryProvider)
       .getUdhiyaCouponDetails(couponId);
 }

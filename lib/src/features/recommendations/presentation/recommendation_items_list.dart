@@ -13,7 +13,7 @@ class RecommendationItemsList extends StatelessWidget {
       required this.itemIdLoading});
 
   final List<ItemDetails> items;
-  final void Function(String websiteItemId, int quantity) onAddToCart;
+  final void Function(String websiteItemId, String itemWarehouseId, int quantity) onAddToCart;
   final String? itemIdLoading;
 
   @override
@@ -23,7 +23,7 @@ class RecommendationItemsList extends StatelessWidget {
           return SizedBox(
             width: 90,
             child: InkWell(
-              onTap: () => onAddToCart(items[index].websiteItemId, 1),
+              onTap: () => onAddToCart(items[index].websiteItemId, items[index].warehouse.warehouseId, 1),
               child: Column(
                 children: [
                   AppCachedNetworkImage(
@@ -48,7 +48,7 @@ class RecommendationItemsList extends StatelessWidget {
                       ? const FadeCircleLoadingIndicator()
                       : IconButton(
                           onPressed: () =>
-                              onAddToCart(items[index].websiteItemId, 1),
+                              onAddToCart(items[index].websiteItemId, items[index].warehouse.warehouseId, 1),
                           icon: Container(
                             decoration: BoxDecoration(
                               color: AppColors.secondary,

@@ -10,15 +10,19 @@ class CustomDeliveryContainer extends StatelessWidget {
       required this.deliveryType,
       required this.currency,
       this.timeSlotWidget,
-      required this.total});
+      required this.total,
+      this.title, this.header});
   final DeliveryType deliveryType;
   final String currency;
   final Widget? timeSlotWidget;
   final double total;
+  final String? title;
+  final Widget? header;
   @override
   Widget build(BuildContext context) {
     return ItemsContainer(
-        title: deliveryType.deliveryMethodTitle,
+      header: header,
+        title: title ?? deliveryType.deliveryMethodTitle,
         timeSlotWidget: timeSlotWidget ??
             TimeSlotLabel(
               formattedDate: deliveryType.deliveryDate.dateFormatted,

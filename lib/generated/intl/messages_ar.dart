@@ -66,8 +66,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSure": MessageLookupByLibrary.simpleMessage("هل أنت متأكد؟"),
         "areaName": MessageLookupByLibrary.simpleMessage("اسم المنطقة"),
         "areaNameHint": MessageLookupByLibrary.simpleMessage("حدد اسم منطقتك"),
-        "asSoonAsPossible":
-            MessageLookupByLibrary.simpleMessage("في أقرب وقت ممكن"),
+        "asSoonAsPossible": MessageLookupByLibrary.simpleMessage(
+            "في أقرب وقت ممكن خلال ساعتين"),
         "attemptsLeft": MessageLookupByLibrary.simpleMessage("محاولات متبقية"),
         "autoOrder": MessageLookupByLibrary.simpleMessage("طلب تلقائي"),
         "availableSoon": MessageLookupByLibrary.simpleMessage("سيتوفر قريباً"),
@@ -189,8 +189,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("العناوين الموجودة"),
         "express": MessageLookupByLibrary.simpleMessage("توصيل فوري"),
         "expressDelivery": MessageLookupByLibrary.simpleMessage("توصيل سريع"),
-        "expressItemsDescription": MessageLookupByLibrary.simpleMessage(
-            "لديك عناصر مؤهلة للحصول عليها"),
+        "expressDescription": MessageLookupByLibrary.simpleMessage(
+            "احصل على توصيل سريع لهذه العناصر."),
+        "expressPickup": MessageLookupByLibrary.simpleMessage("استلام سريع"),
         "firstName": MessageLookupByLibrary.simpleMessage("الاسم الأول"),
         "firstNameHint":
             MessageLookupByLibrary.simpleMessage("أدخل اسمك الأول"),
@@ -243,6 +244,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("قيمة نقاط الولاء"),
         "makeThisDefault":
             MessageLookupByLibrary.simpleMessage("جعل هذا الافتراضي"),
+        "merge": MessageLookupByLibrary.simpleMessage("دمج"),
+        "mergeDescription": MessageLookupByLibrary.simpleMessage(
+            "قم بتوصيل جميع العناصر من المستودع الرئيسي."),
         "minimum": MessageLookupByLibrary.simpleMessage("الحد الأدنى"),
         "minimumOrderAmount":
             MessageLookupByLibrary.simpleMessage("الحد الأدنى للطلب"),
@@ -336,7 +340,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "pickImage": MessageLookupByLibrary.simpleMessage("اختر الصورة"),
         "pickYouTimeSlot":
             MessageLookupByLibrary.simpleMessage("اختر فترة زمنية"),
+        "pickup": MessageLookupByLibrary.simpleMessage("التقاط"),
         "pickupDate": MessageLookupByLibrary.simpleMessage("تاريخ الاستلام"),
+        "pickupDescription": MessageLookupByLibrary.simpleMessage(
+            "استلم عناصر الطلب من أقرب مستودع."),
         "pickupLocation": MessageLookupByLibrary.simpleMessage("الموقع"),
         "pickupPointsValidationMsg":
             MessageLookupByLibrary.simpleMessage("يرجى تحديد نقطة الاستلام"),
@@ -441,6 +448,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("يرجى تحديد رسوم التحميل"),
         "sortBy": MessageLookupByLibrary.simpleMessage("ترتيب حسب"),
         "specifications": MessageLookupByLibrary.simpleMessage("المواصفات"),
+        "split": MessageLookupByLibrary.simpleMessage("فصل"),
+        "splitDescription": MessageLookupByLibrary.simpleMessage(
+            "قسّم السلة للتوصيل خلال ساعتين من أقرب مستودع."),
         "startDate": MessageLookupByLibrary.simpleMessage("تاريخ البدء"),
         "streetNo": MessageLookupByLibrary.simpleMessage("رقم الشارع"),
         "streetNoHint":
@@ -456,7 +466,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ينتهي الاشتراك في"),
         "subscriptionStartsOn":
             MessageLookupByLibrary.simpleMessage("يبدأ الاشتراك في"),
-        "switchLabel": MessageLookupByLibrary.simpleMessage("تبديل"),
         "technicalIssue": MessageLookupByLibrary.simpleMessage("مشكلة تقنية"),
         "termAndConditionsPrefix":
             MessageLookupByLibrary.simpleMessage("لقد قرأت ووافقت على"),
@@ -464,8 +473,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الشروط والأحكام"),
         "theOrderIsNearlyWithYou":
             MessageLookupByLibrary.simpleMessage("الطلب قريب منك"),
-        "theseItemsAreNotAvailable":
-            MessageLookupByLibrary.simpleMessage("هذه العناصر غير متوفرة"),
+        "theseItemsAreNotAvailable": MessageLookupByLibrary.simpleMessage(
+            "بعض العناصر الموجودة في عربة التسوق الخاصة بك غير متوفرة الآن بسبب تغيير موقعك. يرجى مراجعة عربة التسوق الخاصة بك"),
         "timeSlot": MessageLookupByLibrary.simpleMessage("الوقت المحدد"),
         "timeSlotChangerDescription": MessageLookupByLibrary.simpleMessage(
             "انقر هنا لتحديد وقت تسليم مختلف. سيتم تقديم مجموعة مختارة من المواعيد المتاحة لتختار من بينها. بمجرد العثور على خيار مناسب ، انقر فوق \"تحديد\" لتحديث المهلة الزمنية للتسليم."),

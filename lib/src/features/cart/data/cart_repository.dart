@@ -19,8 +19,10 @@ class CartRepository {
 
   CartRepository(this._networkService);
 
-  Future<Cart?> getCart() async {
-    final response = await _networkService.get(EndPoints.cart);
+  Future<Cart?> getCart([String? warehouseId]) async {
+    final response = await _networkService.get(EndPoints.cart,
+        queryParameters:
+            warehouseId != null ? {'warehouse': warehouseId} : null);
     return _handleResponse(response);
   }
 
@@ -40,7 +42,11 @@ class CartRepository {
       String? deliveryDate,
       int? useWalletBalance,
       bool? isPriceModifier,
-      String? pickupPointId}) async {
+      String? pickupPointId,
+      String? warehouseId,
+      String? itemWarehouseId,
+      bool? express,
+      bool? expressPickup}) async {
     return await _lock.synchronized(() async {
       final FormData formData = FormData.fromMap({
         if (itemId != null)
@@ -53,8 +59,10 @@ class CartRepository {
                 'attribution_token': attributionToken,
               if (isPriceModifier != null)
                 'price_modifier': isPriceModifier ? 1 : 0,
+              if (itemWarehouseId != null) 'warehouse': itemWarehouseId
             }
           ]),
+        if (itemId != null && warehouseId != null) 'warehouse': warehouseId,
         if (pickupPointId != null && timeSlot != null)
           'item_pickup_point': jsonEncode({
             'pickup_point_id': pickupPointId,
@@ -73,14 +81,17 @@ class CartRepository {
         if (deliveryDate != null && pickupPointId == null)
           'delivery_date': deliveryDate,
         if (useWalletBalance != null) 'use_wallet_balance': useWalletBalance,
+        if (express != null) 'express': express ? 1 : 0,
+        if (expressPickup != null) 'express_pickup': expressPickup ? 1 : 0
       });
-      final response = await _networkService.put(EndPoints.cart, formData);
+      final response = await _networkService.put(EndPoints.cart, formData,
+          warehouseId != null ? {'warehouse': warehouseId} : null);
       return _handleResponse(response);
     });
   }
 
   Future<Cart?> deleteItemFromCart(
-      {required String itemId, String? row}) async {
+      {required String itemId, String? row, String? warehouseId}) async {
     return await _lock.synchronized(() async {
       final FormData formData = FormData.fromMap({
         'website_items': jsonEncode([
@@ -88,7 +99,8 @@ class CartRepository {
         ]),
         if (row != null) 'row': row,
       });
-      final response = await _networkService.put(EndPoints.cart, formData);
+      final response = await _networkService.put(EndPoints.cart, formData,
+          warehouseId != null ? {'warehouse': warehouseId} : null);
       return _handleResponse(response);
     });
   }

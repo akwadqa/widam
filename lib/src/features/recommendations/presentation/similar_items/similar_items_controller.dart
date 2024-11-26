@@ -21,12 +21,12 @@ class SimilarItemsController extends _$SimilarItemsController {
     return SimilarItemsData(recommendationResponse: recommendationResponse);
   }
 
-  Future<void> addToCart(String itemId, int quantity) async {
+  Future<void> addToCart(String itemId, String itemWarehouseId, int quantity) async {
     final SimilarItemsData similarItemsData = state.asData!.value;
     state = AsyncData(similarItemsData.copyWith(itemIdLoading: itemId));
     final result = await ref
         .read(updateCartProvider.notifier)
-        .updateCart(itemId: itemId, quantity: quantity)
+        .updateCart(itemId: itemId, itemWarehouseId: itemWarehouseId, quantity: quantity)
         .catchError((error, stackTrace) {
       state = AsyncData(similarItemsData.copyWith(itemIdLoading: null));
       return false;

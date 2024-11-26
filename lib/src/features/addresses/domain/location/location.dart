@@ -13,8 +13,8 @@ class Location with _$Location {
     required String? longitude,
     @JsonKey(name: 'isValid') required bool? isValid,
     required String? message,
-    required DefaultAddress defaultAddress,
-    @JsonKey(name: 'matchedGeofence') required Geofence? matchedGeofence,
+    required DefaultAddress? defaultAddress,
+    @JsonKey(name: 'matchedGeofence') required Geofence? matchedGeofence
   }) = _Location;
 
   factory Location.fromJson(Map<String, dynamic> json) =>

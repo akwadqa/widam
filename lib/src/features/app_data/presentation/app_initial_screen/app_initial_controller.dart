@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:widam/src/features/layouts/data/layouts_repository.dart';
 import 'package:widam/src/features/layouts/domain/block.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
-import '../../../addresses/application/geofence_id_controller.dart';
+import '../../../addresses/application/local_location_info.dart';
 
 import '../../../layouts/domain/banner/banner.dart';
 import '../../application/app_data_controller.dart';
@@ -19,7 +19,7 @@ class AppInitialController extends _$AppInitialController {
   FutureOr<AppInitialResultState> build() => _initial();
 
   Future<AppInitialResultState> _initial() async {
-    if (ref.watch(geofenceIdAndCoordinatesProvider).geofenceId != null) {
+    if (ref.watch(localGeofenceIdProvider) != null) {
       final startTime = DateTime.now();
       await ref.read(appDataControllerProvider.future);
       final layout = await ref.read(layoutProvider(LayoutType.home).future);
@@ -87,11 +87,15 @@ class AppInitialController extends _$AppInitialController {
     return false;
   }
 
-  Future<void> setDefaultAddress(WidgetRef ref, String geofenceId,
-      String latitude, String longitude) async {
+  Future<void> setDefaultAddress(
+      WidgetRef ref, String geofenceId, String latitude, String longitude,
+      [String? warehouseId]) async {
     ref
-        .read(geofenceIdAndCoordinatesProvider.notifier)
-        .setGeofenceIdAndCoordinates(geofenceId, latitude, longitude);
+        .read(localLocationInfoProvider.notifier)
+        .setLocalLocationInfo(latitude, longitude, warehouseId);
+        ref
+        .read(localGeofenceIdProvider.notifier)
+        .setLocalGeofenceId(geofenceId);
     await ref.read(appDataControllerProvider.future);
     state = AsyncData(GoHome());
   }

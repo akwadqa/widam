@@ -37,11 +37,11 @@ class SimiliarItems extends ConsumerWidget {
                     child: RecommendationItemsList(
                         items: similarItemsResponse
                             .recommendationResponse.websiteItems,
-                        onAddToCart: (websiteItemId, quantity) {
+                        onAddToCart: (websiteItemId, itemWarehouseId, quantity) {
                           ref
                               .read(similarItemsControllerProvider(quotationId)
                                   .notifier)
-                              .addToCart(websiteItemId, quantity);
+                              .addToCart(websiteItemId, itemWarehouseId, quantity);
                         },
                         itemIdLoading: similarItemsResponse.itemIdLoading),
                   )

@@ -18,7 +18,8 @@ class ItemDetailsSheetController extends _$ItemDetailsSheetController {
     try {
       final itemDetails = await ref
           .watch(itemDetailsServiceProvider)
-          .getItemDetails(itemId: itemId, attributionToken: attributionToken);
+          .getItemDetails(
+              itemId: itemId, attributionToken: attributionToken, ref: ref);
       state = AsyncData(
           (itemDetails: itemDetails, attributionToken: attributionToken));
     } catch (error, stackTrace) {

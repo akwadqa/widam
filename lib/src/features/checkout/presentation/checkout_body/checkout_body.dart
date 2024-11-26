@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widam/src/features/addresses/application/local_location_info.dart';
 import 'package:widam/src/features/cart/domain/cart/pickup/pickup.dart';
 import 'package:widam/src/features/checkout/presentation/checkout_body/saved_card_switch.dart';
 import 'package:widam/src/features/time_slots/domain/geofence_details/time_slot.dart';
@@ -9,6 +10,7 @@ import '../../../../common_widgets/banner/app_banner.dart';
 import '../../../../common_widgets/banner/app_banner_dialog.dart';
 import '../../../../common_widgets/fade_circle_loading_indicator.dart';
 import '../../../../utils/utils.dart';
+import '../../../cart/presentation/cart_body/switch_container.dart';
 import '../../../coupons/presentaion/coupon_code_selector/coupon_code_selector.dart';
 
 import '../../../../../gen/assets.gen.dart';
@@ -83,6 +85,13 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
     final cartAsync = ref.watch(cartControllerProvider);
     return cartAsync.when(
         data: (cart) {
+          final normalDelivery =
+              (cart!.cartContent as CartContent).normalDelivery;
+          final expressDelivery =
+              (cart.cartContent as CartContent).expressDelivery;
+          final pickupDelivery =
+              (cart.cartContent as CartContent).pickupDelivery;
+
           return ProviderScope(
             overrides: [
               updateCartProvider.overrideWith(() => UpdateCart()),
@@ -95,7 +104,7 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _UpdatableCartContentContainer(
-                            cart: cart!, titlesTextStyle: _textStyle()),
+                            cart: cart, titlesTextStyle: _textStyle()),
                         const SizedBox(height: 20.0),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -109,11 +118,40 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
                               const SizedBox(height: 20.0),
                               Text(S.of(context).reviewYourOrder,
                                   style: _textStyle()),
+                              const SizedBox(height: 20.0),
+                              if (normalDelivery != null &&
+                                  (expressDelivery != null ||
+                                      pickupDelivery != null)) ...[
+                                AppStackedLoadingIndicator(
+                                  isLoading:
+                                      ref.watch(updateCartProvider).isLoading,
+                                  child: SwitchContainer(
+                                    description: S.of(context).mergeDescription,
+                                    title: S.of(context).merge,
+                                    onPressed: () => ref
+                                        .read(updateCartProvider.notifier)
+                                        .updateCart(
+                                            express: false,
+                                            expressPickup: false),
+                                  ),
+                                ),
+                              ] else ...[
+                                AppStackedLoadingIndicator(
+                                  isLoading:
+                                      ref.watch(updateCartProvider).isLoading,
+                                  child: SwitchContainer(
+                                    title: S.of(context).split,
+                                    description: S.of(context).splitDescription,
+                                    onPressed: () => ref
+                                        .read(updateCartProvider.notifier)
+                                        .updateCart(
+                                            express: true, expressPickup: true),
+                                  ),
+                                ),
+                              ],
                               const SizedBox(height: 8.0),
                               if (cart.cartContent is CartContent) ...[
-                                if ((cart.cartContent as CartContent)
-                                        .normalDelivery !=
-                                    null) ...[
+                                if (normalDelivery != null) ...[
                                   DeliveryContainer(
                                       currency: cart.currency,
                                       deliveryType:
@@ -121,14 +159,20 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
                                               .normalDelivery!),
                                   const SizedBox(height: 15.0),
                                 ],
-                                if ((cart.cartContent as CartContent)
-                                        .expressDelivery !=
-                                    null) ...[
+                                if (expressDelivery != null) ...[
+                                  DeliveryContainer(
+                                      currency: cart.currency,
+                                      deliveryType: expressDelivery,
+                                      isExpress: true),
+                                  const SizedBox(height: 15.0),
+                                ],
+                                if (pickupDelivery != null) ...[
                                   DeliveryContainer(
                                       currency: cart.currency,
                                       deliveryType:
                                           (cart.cartContent as CartContent)
-                                              .expressDelivery!),
+                                              .pickupDelivery!,
+                                      isPickup: true),
                                   const SizedBox(height: 15.0),
                                 ],
                               ] else if (cart.cartContent is List) ...[
@@ -138,7 +182,7 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
                                       isPickup: true,
                                       currency: cart.currency,
                                       deliveryType: pickup.toDeliveryType()),
-                              ]
+                              ],
                             ],
                           ),
                         ),
@@ -233,6 +277,23 @@ class _UpdatableCartContent extends ConsumerWidget {
                               .then((value) {
                             if (value == true) {
                               if (context.mounted) {
+                                if (ref
+                                        .read(localLocationInfoProvider)
+                                        .warehouseId !=
+                                    address.warehouse?.warehouseId) {
+                                  ref
+                                      .read(localLocationInfoProvider.notifier)
+                                      .setLocalLocationInfo(
+                                          address.latitude,
+                                          address.longitude,
+                                          address.warehouse?.warehouseId)
+                                      .then((_) {
+                                    ref
+                                        .read(localGeofenceIdProvider.notifier)
+                                        .setLocalGeofenceId(
+                                            address.geofence!.geofenceId);
+                                  });
+                                }
                                 showAdaptiveModalBottomSheet<
                                         ({
                                           TimeSlot timeSlot,
@@ -357,12 +418,17 @@ class _UpdatableCartContent extends ConsumerWidget {
 
   void _showPaymentMethodSelector(BuildContext context, WidgetRef ref) {
     showAdaptiveModalBottomSheet<(bool, String, String?)?>(
-            context: context,
-            builder: (context) => PaymentMethodSelector(
-                isMubadara: cart.mubadara == 1,
-                selectedPaymentMethodId: cart.paymentMethod?.paymentMethodId,
-                selectedPaymentTokenId: cart.savedCard?.paymentTokenId))
-        .then(((bool, String, String?)? paymentData) {
+        context: context,
+        builder: (context) => PaymentMethodSelector(
+            hasMoreDeliveryMethods: (cart.cartContent as CartContent)
+                        .normalDelivery !=
+                    null &&
+                ((cart.cartContent as CartContent).expressDelivery != null ||
+                    (cart.cartContent as CartContent).pickupDelivery != null),
+            isMubadara: cart.mubadara == 1,
+            selectedPaymentMethodId: cart.paymentMethod?.paymentMethodId,
+            selectedPaymentTokenId: cart.savedCard?.paymentTokenId)).then(
+        ((bool, String, String?)? paymentData) {
       if (paymentData != null) {
         ref.read(updateCartProvider.notifier).updateCart(
             useWalletBalance: paymentData.$1 ? 1 : 0,

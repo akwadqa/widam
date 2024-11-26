@@ -21,7 +21,8 @@ class ItemDetailsController extends _$ItemDetailsController {
       final itemDetails = await _itemDetailsService.getItemDetails(
           itemId: itemId,
           mubadaraId: mubadaraId,
-          attributionToken: attributionToken);
+          attributionToken: attributionToken,
+          ref: ref);
       state = AsyncData(ItemDetailsData(itemDetails));
     } catch (error, stackTrace) {
       state = AsyncError(error, stackTrace);
@@ -34,7 +35,8 @@ class ItemDetailsController extends _$ItemDetailsController {
       final itemDetails = await _itemDetailsService.getItemDetails(
           itemId: itemId,
           mubadaraId:
-              state.asData!.value!.itemDetails.mubadaraDetails?.mubadaraId);
+              state.asData!.value!.itemDetails.mubadaraDetails?.mubadaraId,
+          ref: ref);
       state = AsyncData(ItemDetailsData(itemDetails));
     } catch (error, stackTrace) {
       state = AsyncData(state.asData!.value!.copyWith(

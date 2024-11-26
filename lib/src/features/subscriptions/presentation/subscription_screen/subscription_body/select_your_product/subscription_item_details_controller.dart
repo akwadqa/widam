@@ -18,7 +18,7 @@ class SubscriptionItemDetailsController
     try {
       state = const AsyncLoading();
       final itemDetails = await _itemDetailsService.getItemDetails(
-          itemId: itemId, mubadaraId: mubadaraId);
+          itemId: itemId, mubadaraId: mubadaraId, ref: ref);
       state = AsyncData(ItemDetailsData(itemDetails));
     } catch (error, stackTrace) {
       state = AsyncError(error, stackTrace);
@@ -31,7 +31,8 @@ class SubscriptionItemDetailsController
       final itemDetails = await _itemDetailsService.getItemDetails(
           itemId: itemId,
           mubadaraId:
-              state.asData!.value!.itemDetails.mubadaraDetails?.mubadaraId);
+              state.asData!.value!.itemDetails.mubadaraDetails?.mubadaraId,
+          ref: ref);
       state = AsyncData(ItemDetailsData(itemDetails));
     } catch (error, stackTrace) {
       state = AsyncData(state.asData!.value!.copyWith(

@@ -40,6 +40,7 @@ class Pickup with _$Pickup {
       websiteItems: websiteItems,
       deliveryCharges: deliveryCharges,
       subTotal: subTotal,
+      coordinates: coordinates,
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pinput/pinput.dart';
 import 'package:queen_validators/queen_validators.dart';
+import 'package:smart_auth/smart_auth.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 import 'package:widam/src/theme/app_theme.dart';
 import '../../../../common_widgets/banner/app_banner.dart';
@@ -28,6 +29,13 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   final _formKey = GlobalKey<FormState>();
   String? _otp;
+  late final SmsRetrieverImpl smsRetrieverImpl;
+
+  @override
+  void initState() {
+    smsRetrieverImpl = SmsRetrieverImpl(SmartAuth());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +68,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 textDirection: TextDirection.ltr,
                 child: Pinput(
                   length: 6,
-                  androidSmsAutofillMethod:
-                      AndroidSmsAutofillMethod.smsUserConsentApi,
+                  smsRetriever: smsRetrieverImpl,
                   defaultPinTheme:
                       _createPinTheme(Colors.white, AppColors.antiFlashWhite),
                   focusedPinTheme:
@@ -216,4 +223,27 @@ class _ResendCodeButton extends ConsumerWidget {
         ),
         child: Text(S.of(context).resendMyCode));
   }
+}
+
+class SmsRetrieverImpl implements SmsRetriever {
+  const SmsRetrieverImpl(this.smartAuth);
+
+  final SmartAuth smartAuth;
+
+  @override
+  Future<void> dispose() {
+    return smartAuth.removeSmsListener();
+  }
+
+  @override
+  Future<String?> getSmsCode() async {
+    final res = await smartAuth.getSmsCode();
+    if (res.succeed && res.codeFound) {
+      return res.code!;
+    }
+    return null;
+  }
+
+  @override
+  bool get listenForMultipleSms => false;
 }

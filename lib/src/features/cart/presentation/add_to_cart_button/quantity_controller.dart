@@ -9,7 +9,8 @@ part 'quantity_controller.g.dart';
 class QuantityController extends _$QuantityController {
   final _debouncer = Debouncer(delayMilliseconds: 1000);
   @override
-  int build(String itemId, int minQuantity, [String? row]) {
+  int build(String itemId, String itemWarehouseId, int minQuantity,
+      [String? row]) {
     final quantityInCart = ref.watch(quantityInCartProvider(itemId, row));
     return quantityInCart == 0 ? minQuantity : quantityInCart;
   }
@@ -35,10 +36,12 @@ class QuantityController extends _$QuantityController {
           .updateCart(
               itemId: itemId,
               quantity: state,
+              itemWarehouseId: itemWarehouseId,
               attributionToken: attributionToken)
           .then((result) {
         if (!result) {
-          ref.invalidate(quantityControllerProvider(itemId, minQuantity));
+          ref.invalidate(
+              quantityControllerProvider(itemId, itemWarehouseId, minQuantity));
         }
       });
     });

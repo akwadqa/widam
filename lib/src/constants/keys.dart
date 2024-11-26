@@ -7,6 +7,7 @@ abstract class Keys {
   static const String countryCode = 'country_code';
   static const String latitude = 'latitude';
   static const String longitude = 'longitude';
+  static const String warehouseId = 'werehouse_id';
   static const String userFullName = 'full_name';
   static const String userMobile = 'mobile';
   static const String marketing = 'marketing';

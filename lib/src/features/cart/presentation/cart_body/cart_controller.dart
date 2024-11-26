@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:widam/src/features/addresses/application/local_location_info.dart';
 import '../../data/cart_repository.dart';
 import '../../domain/cart/cart.dart';
 
@@ -13,7 +14,8 @@ class CartController extends _$CartController {
 
   Future<Cart?> _getCart() async {
     final CartRepository cartRepository = ref.watch(cartRepositoryProvider);
-    return cartRepository.getCart();
+    final String? warehouseId = ref.watch(localLocationInfoProvider).warehouseId;
+    return cartRepository.getCart(warehouseId);
   }
 
   void updateCart(Cart? cart) {

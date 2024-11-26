@@ -15,7 +15,9 @@ import '../../../../common_widgets/banner/app_banner_dialog.dart';
 import '../../../../common_widgets/fade_circle_loading_indicator.dart';
 import '../../../../common_widgets/submit_button.dart';
 import '../../../../theme/app_colors.dart';
+import '../../../../utils/utils.dart';
 import '../../../cart/domain/cart/cart.dart';
+import '../../../cart/domain/cart/cart_content.dart';
 import 'place_order_controller.dart';
 import '../../../../routing/app_router.gr.dart';
 import '../../../../../generated/l10n.dart';
@@ -156,6 +158,7 @@ class _CheckoutButtonState extends ConsumerState<CheckoutButton> {
                       .read(placeOrderControllerProvider.notifier)
                       .placeOrder(widget.cart.quotationId),
                   type: GooglePayButtonType.buy,
+                  paymentConfiguration: _googlePayConfig(),
                 ),
               );
             } else {
@@ -175,9 +178,17 @@ class _CheckoutButtonState extends ConsumerState<CheckoutButton> {
                 if (ref.read(canVibrateProvider).requireValue) {
                   Vibrate.feedback(FeedbackType.heavy);
                 }
-                ref
-                    .read(placeOrderControllerProvider.notifier)
-                    .placeOrder(widget.cart.quotationId);
+                if (widget.cart.cartContent is CartContent &&
+                    (widget.cart.cartContent as CartContent)
+                        .normalDelivery!
+                        .websiteItems
+                        .any((element) => element.inStock == 0)) {
+                  showUnAvailableItems(context);
+                } else {
+                  ref
+                      .read(placeOrderControllerProvider.notifier)
+                      .placeOrder(widget.cart.quotationId);
+                }
               }
             : null,
         backgroundColor: AppColors.red);

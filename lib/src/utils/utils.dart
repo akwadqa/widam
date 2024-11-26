@@ -17,6 +17,7 @@ import '../common_widgets/banner/app_banner_dialog.dart';
 import '../common_widgets/fade_circle_loading_indicator.dart';
 import '../constants/keys.dart';
 import '../features/addresses/presentation/maps/validate_coordinates_banner/validate_coordinates_notifier.dart';
+import '../features/cart/presentation/cart_body/unavailable_items.dart';
 import '../features/items/domain/item_details/item_details.dart';
 import '../features/items/presentation/item_details/item_details_body/item_details_content.dart';
 import '../routing/app_router.gr.dart';
@@ -237,4 +238,12 @@ Future<void> pushItemGroupScreen(
       context.tabsRouter.setActiveIndex(index as int);
     }
   });
+}
+
+void showUnAvailableItems(BuildContext context) {
+  showAdaptiveModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return const UnavailableItems();
+      });
 }

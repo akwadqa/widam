@@ -37,9 +37,10 @@ class AppInitialScreen extends ConsumerWidget {
             if (location != null) {
               ref.read(appInitialControllerProvider.notifier).setDefaultAddress(
                   ref,
-                  location.defaultAddress.geofence.geofenceId,
-                  location.defaultAddress.latitude,
-                  location.defaultAddress.longitude);
+                  location.defaultAddress!.geofence.geofenceId,
+                  location.defaultAddress!.latitude,
+                  location.defaultAddress!.longitude,
+                  location.defaultAddress?.deliveryCenter.warehouseId);
             }
           });
         }

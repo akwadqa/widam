@@ -385,7 +385,8 @@ class _AddEditAddressScreenState extends ConsumerState<AddEditAddressScreen> {
           addressTitle: _addressTitle!,
           customerId: '',
           geofence: Geofence(geofenceId: widget.geofenceId, geofenceName: ''),
-          fullName: _fullname!);
+          fullName: _fullname!,
+          warehouse: widget.address?.warehouse);
       if (update) {
         ref
             .read(addEditAddressControllerProvider.notifier)

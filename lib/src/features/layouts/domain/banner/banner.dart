@@ -6,13 +6,13 @@ part 'banner.g.dart';
 
 @freezed
 class Banner with _$Banner implements BlockData {
-  const factory Banner(
-      {required String bannerType,
-      required String? bannerLink,
-      required String bannerImage,
-      required String? mubadaraId,
-      required int? udhiyah, 
-      }) = _Banner;
+  const factory Banner({
+    required String bannerType,
+    required String? bannerLink,
+    required String bannerImage,
+    required String? mubadaraId,
+    required int? udhiyah,
+  }) = _Banner;
 
   factory Banner.fromJson(Map<String, dynamic> json) => _$BannerFromJson(json);
 }

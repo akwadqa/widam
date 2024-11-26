@@ -196,6 +196,7 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
                     },
                     attributionToken: widget.attributionToken,
                     itemId: widget.itemDetails.websiteItemId,
+                    itemWarehouseId: widget.itemDetails.warehouse.warehouseId,
                     hasVariants: hasVariants,
                     attributesFormKey: _attributesFormKey));
           }

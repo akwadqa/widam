@@ -107,7 +107,7 @@ class CartItem extends StatelessWidget {
                       maxQuantity: itemDetails.maxQty.toInt(),
                       itemId: itemDetails.websiteItemId,
                       row: itemDetails.row,
-                      inStock: itemDetails.inStock,
+                      inStock: itemDetails.inStock, itemWarehouseId: itemDetails.warehouse.warehouseId,
                     ),
                   ),
                 )

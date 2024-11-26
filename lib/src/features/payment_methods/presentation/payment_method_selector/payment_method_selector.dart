@@ -18,11 +18,13 @@ class PaymentMethodSelector extends StatefulWidget {
       {super.key,
       required this.selectedPaymentMethodId,
       this.selectedPaymentTokenId,
-      required this.isMubadara});
+      required this.isMubadara,
+      required this.hasMoreDeliveryMethods});
 
   final String? selectedPaymentMethodId;
   final String? selectedPaymentTokenId;
   final bool isMubadara;
+  final bool hasMoreDeliveryMethods;
 
   @override
   State<PaymentMethodSelector> createState() => _PaymentMethodSelectorState();
@@ -83,6 +85,7 @@ class _PaymentMethodSelectorState extends State<PaymentMethodSelector> {
             ),
             _PaymentMethodsList(
                 isMubadara: widget.isMubadara,
+                hasMoreDeliveryMethods: widget.hasMoreDeliveryMethods,
                 isWalletSelected: _isWalletSelected,
                 selectedPaymentMethodId: widget.selectedPaymentMethodId,
                 selectedPaymentTokenId: widget.selectedPaymentTokenId),
@@ -98,12 +101,14 @@ class _PaymentMethodsList extends ConsumerWidget {
       {required this.selectedPaymentMethodId,
       this.selectedPaymentTokenId,
       required this.isWalletSelected,
-      required this.isMubadara});
+      required this.isMubadara,
+      required this.hasMoreDeliveryMethods});
 
   final String? selectedPaymentMethodId;
   final String? selectedPaymentTokenId;
   final bool isWalletSelected;
   final bool isMubadara;
+  final bool hasMoreDeliveryMethods;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -119,7 +124,7 @@ class _PaymentMethodsList extends ConsumerWidget {
             }
           }).toList();
 
-          if (isMubadara) {
+          if (isMubadara || hasMoreDeliveryMethods) {
             paymentMethods = paymentMethods
                 .where((element) => element.processor != 'Offline')
                 .toList();

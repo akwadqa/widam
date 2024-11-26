@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../addresses/domain/address/warehouse.dart';
 import '../../../tags/domain/tag/tag.dart';
 import 'price.dart';
 
@@ -24,6 +25,7 @@ class Item with _$Item {
     required int inStock,
     required int? isMubadara,
     required String? mubadaraId,
+    required Warehouse warehouse
   }) = _Item;
 
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);

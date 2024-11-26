@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:widam/src/features/addresses/application/local_location_info.dart';
 import 'package:widam/src/features/checkout/presentation/checkout_body/saved_card_value_controller.dart';
 import 'package:widam/src/features/user_language/application/current_language.dart';
 import '../../data/checkout_repository.dart';
@@ -19,9 +20,11 @@ class PlaceOrderController extends _$PlaceOrderController {
     final checkoutRepository = ref.watch(checkoutRepositoryProvider);
     final languageCode = ref.watch(currentLanguageProvider);
     final savedCardValue = ref.watch(savedCardValueControllerProvider);
+    final warehouseId = ref.watch(localLocationInfoProvider).warehouseId;
     state = const AsyncLoading();
     checkoutRepository
-        .palceOrder(quatationId, languageCode, savedCardValue ? 1 : 0)
+        .palceOrder(
+            quatationId, languageCode, savedCardValue ? 1 : 0, warehouseId)
         .then((value) {
       if (value is Order) {
         state = AsyncData(OrderPlaced(value));

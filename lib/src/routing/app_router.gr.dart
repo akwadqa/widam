@@ -86,279 +86,6 @@ import 'package:widam/src/features/wallet/presentation/transaction_history_scree
 import 'package:widam/src/features/wallet/presentation/widam_wallet_screen/widam_wallet_screen.dart'
     as _i33;
 
-abstract class $AppRouter extends _i34.RootStackRouter {
-  $AppRouter({super.navigatorKey});
-
-  @override
-  final Map<String, _i34.PageFactory> pagesMap = {
-    ActiveSubscriptionsScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i1.ActiveSubscriptionsScreen(),
-      );
-    },
-    AddComplaintScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i2.AddComplaintScreen(),
-      );
-    },
-    AddEditAddressScreen.name: (routeData) {
-      final args = routeData.argsAs<AddEditAddressScreenArgs>();
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i3.AddEditAddressScreen(
-          key: args.key,
-          address: args.address,
-          latitude: args.latitude,
-          longitude: args.longitude,
-          geofenceId: args.geofenceId,
-        ),
-      );
-    },
-    AddressesScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i4.AddressesScreen(),
-      );
-    },
-    AppInitialScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i5.AppInitialScreen(),
-      );
-    },
-    CartScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i6.CartScreen(),
-      );
-    },
-    CheckoutScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i7.CheckoutScreen(),
-      );
-    },
-    ComplaintsScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i8.ComplaintsScreen(),
-      );
-    },
-    DealsScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i9.DealsScreen(),
-      );
-    },
-    EditProfileScreen.name: (routeData) {
-      final args = routeData.argsAs<EditProfileScreenArgs>();
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i10.EditProfileScreen(
-          key: args.key,
-          userDetails: args.userDetails,
-        ),
-      );
-    },
-    HomeScreen.name: (routeData) {
-      final args = routeData.argsAs<HomeScreenArgs>(
-          orElse: () => const HomeScreenArgs());
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i11.HomeScreen(
-          key: args.key,
-          bannerBlock: args.bannerBlock,
-        ),
-      );
-    },
-    ItemDetailsScreen.name: (routeData) {
-      final args = routeData.argsAs<ItemDetailsScreenArgs>();
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i12.ItemDetailsScreen(
-          key: args.key,
-          itemId: args.itemId,
-          mubadaraId: args.mubadaraId,
-          attributionToken: args.attributionToken,
-        ),
-      );
-    },
-    ItemGroupScreen.name: (routeData) {
-      final args = routeData.argsAs<ItemGroupScreenArgs>();
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i13.ItemGroupScreen(
-          key: args.key,
-          autoFocus: args.autoFocus,
-          itemGroupId: args.itemGroupId,
-        ),
-      );
-    },
-    ItemGroupsScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i14.ItemGroupsScreen(),
-      );
-    },
-    LoginScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i15.LoginScreen(),
-      );
-    },
-    MainScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i16.MainScreen(),
-      );
-    },
-    MubadaraItemsScreen.name: (routeData) {
-      final args = routeData.argsAs<MubadaraItemsScreenArgs>();
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i17.MubadaraItemsScreen(
-          key: args.key,
-          mubadaraId: args.mubadaraId,
-        ),
-      );
-    },
-    NotificationsSettingsScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i18.NotificationsSettingsScreen(),
-      );
-    },
-    OrderedSuccessfullyScreen.name: (routeData) {
-      final args = routeData.argsAs<OrderedSuccessfullyScreenArgs>();
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i19.OrderedSuccessfullyScreen(
-          key: args.key,
-          order: args.order,
-          pun: args.pun,
-        ),
-      );
-    },
-    PaymentWebView.name: (routeData) {
-      final args = routeData.argsAs<PaymentWebViewArgs>();
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i20.PaymentWebView(
-          key: args.key,
-          redirectUrl: args.redirectUrl,
-        ),
-      );
-    },
-    PointsHistoryScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i21.PointsHistoryScreen(),
-      );
-    },
-    ProfileScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i22.ProfileScreen(),
-      );
-    },
-    RegisterScreen.name: (routeData) {
-      final args = routeData.argsAs<RegisterScreenArgs>();
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i23.RegisterScreen(
-          key: args.key,
-          mobileNumber: args.mobileNumber,
-        ),
-      );
-    },
-    SalesOrderDetailsScreen.name: (routeData) {
-      final args = routeData.argsAs<SalesOrderDetailsScreenArgs>();
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i24.SalesOrderDetailsScreen(
-          key: args.key,
-          salesOrder: args.salesOrder,
-          statuses: args.statuses,
-        ),
-      );
-    },
-    SalesOrdersScreen.name: (routeData) {
-      final args = routeData.argsAs<SalesOrdersScreenArgs>(
-          orElse: () => const SalesOrdersScreenArgs());
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i25.SalesOrdersScreen(
-          key: args.key,
-          initialIndex: args.initialIndex,
-        ),
-      );
-    },
-    SubscriptionScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i26.SubscriptionScreen(),
-      );
-    },
-    TermsConditionsAndPrivacyPolicyScreen.name: (routeData) {
-      final args = routeData.argsAs<TermsConditionsAndPrivacyPolicyScreenArgs>(
-          orElse: () => const TermsConditionsAndPrivacyPolicyScreenArgs());
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i27.TermsConditionsAndPrivacyPolicyScreen(
-          key: args.key,
-          title: args.title,
-        ),
-      );
-    },
-    TrackMapScreen.name: (routeData) {
-      final args = routeData.argsAs<TrackMapScreenArgs>();
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i28.TrackMapScreen(
-          key: args.key,
-          salesOrder: args.salesOrder,
-        ),
-      );
-    },
-    TransactionHistoryScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i29.TransactionHistoryScreen(),
-      );
-    },
-    UdhiyaCouponDetailsScreen.name: (routeData) {
-      final args = routeData.argsAs<UdhiyaCouponDetailsScreenArgs>();
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i30.UdhiyaCouponDetailsScreen(
-          key: args.key,
-          couponId: args.couponId,
-        ),
-      );
-    },
-    UdhiyaCouponsScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i31.UdhiyaCouponsScreen(),
-      );
-    },
-    WidamLoyaltyProgramScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i32.WidamLoyaltyProgramScreen(),
-      );
-    },
-    WidamWalletScreen.name: (routeData) {
-      return _i34.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i33.WidamWalletScreen(),
-      );
-    },
-  };
-}
-
 /// generated route for
 /// [_i1.ActiveSubscriptionsScreen]
 class ActiveSubscriptionsScreen extends _i34.PageRouteInfo<void> {
@@ -370,7 +97,12 @@ class ActiveSubscriptionsScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'ActiveSubscriptionsScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i1.ActiveSubscriptionsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -384,7 +116,12 @@ class AddComplaintScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'AddComplaintScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i2.AddComplaintScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -412,8 +149,19 @@ class AddEditAddressScreen
 
   static const String name = 'AddEditAddressScreen';
 
-  static const _i34.PageInfo<AddEditAddressScreenArgs> page =
-      _i34.PageInfo<AddEditAddressScreenArgs>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<AddEditAddressScreenArgs>();
+      return _i3.AddEditAddressScreen(
+        key: args.key,
+        address: args.address,
+        latitude: args.latitude,
+        longitude: args.longitude,
+        geofenceId: args.geofenceId,
+      );
+    },
+  );
 }
 
 class AddEditAddressScreenArgs {
@@ -452,7 +200,12 @@ class AddressesScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'AddressesScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i4.AddressesScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -466,7 +219,12 @@ class AppInitialScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'AppInitialScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i5.AppInitialScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -480,7 +238,12 @@ class CartScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'CartScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i6.CartScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -494,7 +257,12 @@ class CheckoutScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'CheckoutScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i7.CheckoutScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -508,7 +276,12 @@ class ComplaintsScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'ComplaintsScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i8.ComplaintsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -522,7 +295,12 @@ class DealsScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'DealsScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i9.DealsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -543,8 +321,16 @@ class EditProfileScreen extends _i34.PageRouteInfo<EditProfileScreenArgs> {
 
   static const String name = 'EditProfileScreen';
 
-  static const _i34.PageInfo<EditProfileScreenArgs> page =
-      _i34.PageInfo<EditProfileScreenArgs>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<EditProfileScreenArgs>();
+      return _i10.EditProfileScreen(
+        key: args.key,
+        userDetails: args.userDetails,
+      );
+    },
+  );
 }
 
 class EditProfileScreenArgs {
@@ -581,8 +367,17 @@ class HomeScreen extends _i34.PageRouteInfo<HomeScreenArgs> {
 
   static const String name = 'HomeScreen';
 
-  static const _i34.PageInfo<HomeScreenArgs> page =
-      _i34.PageInfo<HomeScreenArgs>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      final args =
+          data.argsAs<HomeScreenArgs>(orElse: () => const HomeScreenArgs());
+      return _i11.HomeScreen(
+        key: args.key,
+        bannerBlock: args.bannerBlock,
+      );
+    },
+  );
 }
 
 class HomeScreenArgs {
@@ -623,8 +418,18 @@ class ItemDetailsScreen extends _i34.PageRouteInfo<ItemDetailsScreenArgs> {
 
   static const String name = 'ItemDetailsScreen';
 
-  static const _i34.PageInfo<ItemDetailsScreenArgs> page =
-      _i34.PageInfo<ItemDetailsScreenArgs>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ItemDetailsScreenArgs>();
+      return _i12.ItemDetailsScreen(
+        key: args.key,
+        itemId: args.itemId,
+        mubadaraId: args.mubadaraId,
+        attributionToken: args.attributionToken,
+      );
+    },
+  );
 }
 
 class ItemDetailsScreenArgs {
@@ -669,8 +474,17 @@ class ItemGroupScreen extends _i34.PageRouteInfo<ItemGroupScreenArgs> {
 
   static const String name = 'ItemGroupScreen';
 
-  static const _i34.PageInfo<ItemGroupScreenArgs> page =
-      _i34.PageInfo<ItemGroupScreenArgs>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ItemGroupScreenArgs>();
+      return _i13.ItemGroupScreen(
+        key: args.key,
+        autoFocus: args.autoFocus,
+        itemGroupId: args.itemGroupId,
+      );
+    },
+  );
 }
 
 class ItemGroupScreenArgs {
@@ -703,7 +517,12 @@ class ItemGroupsScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'ItemGroupsScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i14.ItemGroupsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -717,7 +536,12 @@ class LoginScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'LoginScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i15.LoginScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -731,7 +555,12 @@ class MainScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'MainScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i16.MainScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -752,8 +581,16 @@ class MubadaraItemsScreen extends _i34.PageRouteInfo<MubadaraItemsScreenArgs> {
 
   static const String name = 'MubadaraItemsScreen';
 
-  static const _i34.PageInfo<MubadaraItemsScreenArgs> page =
-      _i34.PageInfo<MubadaraItemsScreenArgs>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<MubadaraItemsScreenArgs>();
+      return _i17.MubadaraItemsScreen(
+        key: args.key,
+        mubadaraId: args.mubadaraId,
+      );
+    },
+  );
 }
 
 class MubadaraItemsScreenArgs {
@@ -783,7 +620,12 @@ class NotificationsSettingsScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'NotificationsSettingsScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i18.NotificationsSettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -807,8 +649,17 @@ class OrderedSuccessfullyScreen
 
   static const String name = 'OrderedSuccessfullyScreen';
 
-  static const _i34.PageInfo<OrderedSuccessfullyScreenArgs> page =
-      _i34.PageInfo<OrderedSuccessfullyScreenArgs>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<OrderedSuccessfullyScreenArgs>();
+      return _i19.OrderedSuccessfullyScreen(
+        key: args.key,
+        order: args.order,
+        pun: args.pun,
+      );
+    },
+  );
 }
 
 class OrderedSuccessfullyScreenArgs {
@@ -848,8 +699,16 @@ class PaymentWebView extends _i34.PageRouteInfo<PaymentWebViewArgs> {
 
   static const String name = 'PaymentWebView';
 
-  static const _i34.PageInfo<PaymentWebViewArgs> page =
-      _i34.PageInfo<PaymentWebViewArgs>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<PaymentWebViewArgs>();
+      return _i20.PaymentWebView(
+        key: args.key,
+        redirectUrl: args.redirectUrl,
+      );
+    },
+  );
 }
 
 class PaymentWebViewArgs {
@@ -879,7 +738,12 @@ class PointsHistoryScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'PointsHistoryScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i21.PointsHistoryScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -893,7 +757,12 @@ class ProfileScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'ProfileScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i22.ProfileScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -914,8 +783,16 @@ class RegisterScreen extends _i34.PageRouteInfo<RegisterScreenArgs> {
 
   static const String name = 'RegisterScreen';
 
-  static const _i34.PageInfo<RegisterScreenArgs> page =
-      _i34.PageInfo<RegisterScreenArgs>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<RegisterScreenArgs>();
+      return _i23.RegisterScreen(
+        key: args.key,
+        mobileNumber: args.mobileNumber,
+      );
+    },
+  );
 }
 
 class RegisterScreenArgs {
@@ -955,8 +832,17 @@ class SalesOrderDetailsScreen
 
   static const String name = 'SalesOrderDetailsScreen';
 
-  static const _i34.PageInfo<SalesOrderDetailsScreenArgs> page =
-      _i34.PageInfo<SalesOrderDetailsScreenArgs>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<SalesOrderDetailsScreenArgs>();
+      return _i24.SalesOrderDetailsScreen(
+        key: args.key,
+        salesOrder: args.salesOrder,
+        statuses: args.statuses,
+      );
+    },
+  );
 }
 
 class SalesOrderDetailsScreenArgs {
@@ -996,8 +882,17 @@ class SalesOrdersScreen extends _i34.PageRouteInfo<SalesOrdersScreenArgs> {
 
   static const String name = 'SalesOrdersScreen';
 
-  static const _i34.PageInfo<SalesOrdersScreenArgs> page =
-      _i34.PageInfo<SalesOrdersScreenArgs>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<SalesOrdersScreenArgs>(
+          orElse: () => const SalesOrdersScreenArgs());
+      return _i25.SalesOrdersScreen(
+        key: args.key,
+        initialIndex: args.initialIndex,
+      );
+    },
+  );
 }
 
 class SalesOrdersScreenArgs {
@@ -1027,7 +922,12 @@ class SubscriptionScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'SubscriptionScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i26.SubscriptionScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1049,8 +949,17 @@ class TermsConditionsAndPrivacyPolicyScreen
 
   static const String name = 'TermsConditionsAndPrivacyPolicyScreen';
 
-  static const _i34.PageInfo<TermsConditionsAndPrivacyPolicyScreenArgs> page =
-      _i34.PageInfo<TermsConditionsAndPrivacyPolicyScreenArgs>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TermsConditionsAndPrivacyPolicyScreenArgs>(
+          orElse: () => const TermsConditionsAndPrivacyPolicyScreenArgs());
+      return _i27.TermsConditionsAndPrivacyPolicyScreen(
+        key: args.key,
+        title: args.title,
+      );
+    },
+  );
 }
 
 class TermsConditionsAndPrivacyPolicyScreenArgs {
@@ -1087,8 +996,16 @@ class TrackMapScreen extends _i34.PageRouteInfo<TrackMapScreenArgs> {
 
   static const String name = 'TrackMapScreen';
 
-  static const _i34.PageInfo<TrackMapScreenArgs> page =
-      _i34.PageInfo<TrackMapScreenArgs>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TrackMapScreenArgs>();
+      return _i28.TrackMapScreen(
+        key: args.key,
+        salesOrder: args.salesOrder,
+      );
+    },
+  );
 }
 
 class TrackMapScreenArgs {
@@ -1118,7 +1035,12 @@ class TransactionHistoryScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'TransactionHistoryScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i29.TransactionHistoryScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1140,8 +1062,16 @@ class UdhiyaCouponDetailsScreen
 
   static const String name = 'UdhiyaCouponDetailsScreen';
 
-  static const _i34.PageInfo<UdhiyaCouponDetailsScreenArgs> page =
-      _i34.PageInfo<UdhiyaCouponDetailsScreenArgs>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<UdhiyaCouponDetailsScreenArgs>();
+      return _i30.UdhiyaCouponDetailsScreen(
+        key: args.key,
+        couponId: args.couponId,
+      );
+    },
+  );
 }
 
 class UdhiyaCouponDetailsScreenArgs {
@@ -1171,7 +1101,12 @@ class UdhiyaCouponsScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'UdhiyaCouponsScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i31.UdhiyaCouponsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1185,7 +1120,12 @@ class WidamLoyaltyProgramScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'WidamLoyaltyProgramScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i32.WidamLoyaltyProgramScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1199,5 +1139,10 @@ class WidamWalletScreen extends _i34.PageRouteInfo<void> {
 
   static const String name = 'WidamWalletScreen';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static _i34.PageInfo page = _i34.PageInfo(
+    name,
+    builder: (data) {
+      return const _i33.WidamWalletScreen();
+    },
+  );
 }

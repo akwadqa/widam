@@ -37,11 +37,11 @@ class RecentlyViewd extends ConsumerWidget {
                     child: RecommendationItemsList(
                         items: recentlyViewdResponse
                             .recommendationResponse.websiteItems,
-                        onAddToCart: (websiteItemId, quantity) {
+                        onAddToCart: (websiteItemId, itemWarehouseId, quantity) {
                           ref
                               .read(recentlyViewdControllerProvider(quotationId)
                                   .notifier)
-                              .addToCart(websiteItemId, quantity);
+                              .addToCart(websiteItemId, itemWarehouseId, quantity);
                         },
                         itemIdLoading: recentlyViewdResponse.itemIdLoading),
                   )

@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:widam/src/features/addresses/domain/address/address.dart';
-import '../../addresses/application/geofence_id_controller.dart';
+import 'package:widam/src/features/auth/application/user_data_provider.dart';
+import '../../addresses/application/local_location_info.dart';
 import '../../addresses/domain/geofence.dart';
 import '../data/app_data_repository.dart';
 import '../domain/app_data/app_data.dart';
@@ -17,8 +18,10 @@ class AppDataController extends _$AppDataController {
   Future<AppData> _getAppData() async {
     final AppDataRepository appDataRepository =
         ref.watch(appDataRepositoryProvider);
-    final AppData appData = await appDataRepository
-        .getAppData(ref.watch(geofenceIdAndCoordinatesProvider).geofenceId!);
+    final AppData appData = await appDataRepository.getAppData(
+        ref.read(userDataProvider) != null
+            ? ref.read(localGeofenceIdProvider)!
+            : ref.watch(localGeofenceIdProvider)!);
     return appData;
   }
 
@@ -26,7 +29,12 @@ class AppDataController extends _$AppDataController {
     state = AsyncData(state.asData!.value.copyWith(geofence: geofence));
   }
 
-  void updateAddress(Address address) {
+  Future<void> updateAddress(Address address) async {
+    await ref.read(localLocationInfoProvider.notifier).setLocalLocationInfo(
+        address.latitude, address.longitude, address.warehouse?.warehouseId);
+    await ref
+        .read(localGeofenceIdProvider.notifier)
+        .setLocalGeofenceId(address.geofence!.geofenceId);
     state = AsyncData(state.asData!.value.copyWith(address: address));
   }
 }

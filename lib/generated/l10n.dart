@@ -1290,26 +1290,6 @@ class S {
     );
   }
 
-  /// `You have Items that are eligible for`
-  String get expressItemsDescription {
-    return Intl.message(
-      'You have Items that are eligible for',
-      name: 'expressItemsDescription',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Switch`
-  String get switchLabel {
-    return Intl.message(
-      'Switch',
-      name: 'switchLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Your Cart Details`
   String get yourCartDetails {
     return Intl.message(
@@ -2180,10 +2160,10 @@ class S {
     );
   }
 
-  /// `As soon as possible`
+  /// `As soon as possible within 2 hours`
   String get asSoonAsPossible {
     return Intl.message(
-      'As soon as possible',
+      'As soon as possible within 2 hours',
       name: 'asSoonAsPossible',
       desc: '',
       args: [],
@@ -2590,10 +2570,10 @@ class S {
     );
   }
 
-  /// `These items are not available`
+  /// `Some items in your cart are now unavailable due to your location change. Please review your cart`
   String get theseItemsAreNotAvailable {
     return Intl.message(
-      'These items are not available',
+      'Some items in your cart are now unavailable due to your location change. Please review your cart',
       name: 'theseItemsAreNotAvailable',
       desc: '',
       args: [],
@@ -3555,6 +3535,86 @@ class S {
     return Intl.message(
       'No Coupons Yet',
       name: 'noCouponsYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Merge`
+  String get merge {
+    return Intl.message(
+      'Merge',
+      name: 'merge',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Express Pickup`
+  String get expressPickup {
+    return Intl.message(
+      'Express Pickup',
+      name: 'expressPickup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Split`
+  String get split {
+    return Intl.message(
+      'Split',
+      name: 'split',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Split cart for 2-hour delivery from your nearest warehouse.`
+  String get splitDescription {
+    return Intl.message(
+      'Split cart for 2-hour delivery from your nearest warehouse.',
+      name: 'splitDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Make deliveries for all items from the main warehouse.`
+  String get mergeDescription {
+    return Intl.message(
+      'Make deliveries for all items from the main warehouse.',
+      name: 'mergeDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick up your items from the nearest warehouse.`
+  String get pickupDescription {
+    return Intl.message(
+      'Pick up your items from the nearest warehouse.',
+      name: 'pickupDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get express delivery for these items.`
+  String get expressDescription {
+    return Intl.message(
+      'Get express delivery for these items.',
+      name: 'expressDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pickup`
+  String get pickup {
+    return Intl.message(
+      'Pickup',
+      name: 'pickup',
       desc: '',
       args: [],
     );

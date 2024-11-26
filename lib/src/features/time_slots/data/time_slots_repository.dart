@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../addresses/application/geofence_id_controller.dart';
+import '../../addresses/application/local_location_info.dart';
 import '../../../common_models/response/app_response.dart';
 import '../../../constants/end_points.dart';
 import '../domain/geofence_details/geofence_details.dart';
@@ -26,6 +26,6 @@ class TimeSlotsRepository {
 }
 
 @riverpod
-Future<GeofenceDetails> geofenceDetails(GeofenceDetailsRef ref) =>
-    ref.watch(timeSlotsRepositoryProvider).getGeofenceDetails(
-        ref.watch(geofenceIdAndCoordinatesProvider).geofenceId!);
+Future<GeofenceDetails> geofenceDetails(GeofenceDetailsRef ref) => ref
+    .watch(timeSlotsRepositoryProvider)
+    .getGeofenceDetails(ref.watch(localGeofenceIdProvider)!);

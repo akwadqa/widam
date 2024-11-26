@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widam/src/features/cart/presentation/cart_body/switch_container.dart';
 import '../../../../../gen/assets.gen.dart';
+import '../../../../common_widgets/app_stacked_loading_indicator.dart';
 import '../../../../common_widgets/app_thumb_item.dart';
 import '../../../../utils/utils.dart';
 import '../../../cart/application/cart_service.dart';
@@ -16,10 +18,12 @@ class DeliveryContainer extends StatelessWidget {
       {super.key,
       required this.deliveryType,
       required this.currency,
-      this.isPickup});
+      this.isPickup,
+      this.isExpress});
   final DeliveryType deliveryType;
   final String currency;
   final bool? isPickup;
+  final bool? isExpress;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +46,34 @@ class DeliveryContainer extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 20.0),
+        if (isPickup == true || isExpress == true) ...[
+          Consumer(
+            builder: (context, ref, child) {
+              return AppStackedLoadingIndicator(
+                isLoading: ref.watch(updateCartProvider).isLoading,
+                child: isExpress == true
+                    ? SwitchContainer(
+                        title: S.of(context).pickup,
+                        description: S.of(context).pickupDescription,
+                        onPressed: () => ref
+                            .read(updateCartProvider.notifier)
+                            .updateCart(express: false, expressPickup: true),
+                      )
+                    : isPickup == true
+                        ? SwitchContainer(
+                            title: S.of(context).express,
+                            description: S.of(context).expressDescription,
+                            onPressed: () => ref
+                                .read(updateCartProvider.notifier)
+                                .updateCart(
+                                    express: true, expressPickup: false),
+                          )
+                        : SizedBox.shrink(),
+              );
+            },
+          ),
+          const SizedBox(height: 20.0),
+        ],
         SizedBox(
           height: 70,
           child: ListView.separated(
@@ -67,26 +99,29 @@ class DeliveryContainer extends StatelessWidget {
             Consumer(
               builder: (context, ref, child) {
                 return TextButton(
-                  onPressed: () {
-                    showAdaptiveModalBottomSheet<
-                            ({TimeSlot timeSlot, String deliveryDate})?>(
-                        context: context,
-                        builder: (ctx) {
-                          return TimeSlotsSelector(
-                              deleiveryMethodId: deliveryType.deliveryMethodId,
-                              initialDate: deliveryType.deliveryDate.date,
-                              initialTimeSlot: deliveryType.timeSlot);
-                        }).then((value) {
-                      if (value != null) {
-                        ref.read(updateCartProvider.notifier).updateCart(
-                            pickupPointId: isPickup == true
-                                ? deliveryType.deliveryMethodId
-                                : null,
-                            timeSlot: value.timeSlot.timeSlotId,
-                            deliveryDate: value.deliveryDate);
-                      }
-                    });
-                  },
+                  onPressed: isExpress == true
+                      ? null
+                      : () {
+                          showAdaptiveModalBottomSheet<
+                                  ({TimeSlot timeSlot, String deliveryDate})?>(
+                              context: context,
+                              builder: (ctx) {
+                                return TimeSlotsSelector(
+                                    deleiveryMethodId:
+                                        deliveryType.deliveryMethodId,
+                                    initialDate: deliveryType.deliveryDate.date,
+                                    initialTimeSlot: deliveryType.timeSlot);
+                              }).then((value) {
+                            if (value != null) {
+                              ref.read(updateCartProvider.notifier).updateCart(
+                                  pickupPointId: isPickup == true
+                                      ? deliveryType.deliveryMethodId
+                                      : null,
+                                  timeSlot: value.timeSlot.timeSlotId,
+                                  deliveryDate: value.deliveryDate);
+                            }
+                          });
+                        },
                   style:
                       TextButton.styleFrom(padding: const EdgeInsets.all(0.0)),
                   child: Row(
@@ -99,7 +134,7 @@ class DeliveryContainer extends StatelessWidget {
                               fontSize: 13.0,
                               color: AppColors.londonRain,
                               fontWeight: FontWeight.w600)),
-                      const Icon(Icons.arrow_drop_down)
+                      if (isExpress != true) const Icon(Icons.arrow_drop_down)
                     ],
                   ),
                 );

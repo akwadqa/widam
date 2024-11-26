@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../../addresses/domain/address/warehouse.dart';
 import '../../../tags/domain/tag/tag.dart';
 import '../additional_image/additional_image.dart';
 import '../item_specification/item_specification.dart';
@@ -44,7 +45,9 @@ class ItemDetails with _$ItemDetails {
       required String? priceModifierTitle,
       required String? customerQid,
       required PickupPointsDetails? pickupPoints,
-      required int? isUdhiyaItem}) = _ItemDetails;
+      required int? isUdhiyaItem,
+      required Warehouse warehouse
+      }) = _ItemDetails;
 
   factory ItemDetails.fromJson(Map<String, dynamic> json) =>
       _$ItemDetailsFromJson(json);

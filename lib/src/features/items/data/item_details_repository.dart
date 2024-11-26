@@ -19,12 +19,14 @@ class ItemDetailsRepository {
   Future<ItemDetails> getItemDetails(
       {required String itemId,
       String? mubadaraId,
-      String? attributionToken}) async {
+      String? attributionToken,
+      String? warehouseId}) async {
     final Map<String, dynamic> queryParameters = {
       'website_item_id': itemId,
       'get_attribute_variants': 1,
       if (mubadaraId != null) 'get_mubadara_details': mubadaraId,
-      if (attributionToken != null) 'attribution_token': attributionToken
+      if (attributionToken != null) 'attribution_token': attributionToken,
+      if (warehouseId != null) 'warehouse': warehouseId
     };
 
     final response = await _networkService.get(EndPoints.itemDetails,

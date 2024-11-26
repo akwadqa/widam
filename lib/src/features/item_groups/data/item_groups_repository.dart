@@ -3,6 +3,7 @@ import 'package:synchronized/synchronized.dart';
 import '../../../common_models/response/app_response.dart';
 import '../../../constants/end_points.dart';
 import '../../../network/network_service.dart';
+import '../../addresses/application/local_location_info.dart';
 import '../domain/item_group_details/item_group_details.dart';
 part 'item_groups_repository.g.dart';
 
@@ -24,7 +25,8 @@ class ItemGroupsRepository {
       String? sortOrder,
       String? searchQuery,
       String? barcode,
-      String? parameters}) async {
+      String? parameters,
+      String? warehouseId}) async {
     return await _lock.synchronized(() async {
       final queryParameters = {
         if (itemGroupId != null) 'item_group_id': itemGroupId,
@@ -33,6 +35,7 @@ class ItemGroupsRepository {
         if (sortOrder != null) 'sort_order': sortOrder,
         if (searchQuery != null) 'website_item_name': searchQuery,
         if (barcode != null) 'barcode': barcode,
+        if (warehouseId != null) 'warehouse': warehouseId,
         if (sortBy == null &&
             sortOrder == null &&
             searchQuery == null &&
@@ -70,5 +73,8 @@ class ItemGroupsRepository {
 @riverpod
 Future<AppResponse<ItemGroupDetails>> getAllItemGroups(
     GetAllItemGroupsRef ref) async {
-  return ref.watch(itemGroupsRepositoryProvider).getItemsByItemGroup(page: 1);
+  final warehouseId = ref.watch(localLocationInfoProvider).warehouseId;
+  return ref
+      .watch(itemGroupsRepositoryProvider)
+      .getItemsByItemGroup(page: 1, warehouseId: warehouseId);
 }

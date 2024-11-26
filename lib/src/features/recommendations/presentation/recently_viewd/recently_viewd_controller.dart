@@ -22,12 +22,16 @@ class RecentlyViewdController extends _$RecentlyViewdController {
     return RecentlyViewdData(recommendationResponse: recommendationResponse);
   }
 
-  Future<void> addToCart(String itemId, int quantity) async {
+  Future<void> addToCart(
+      String itemId, String itemWarehouseId, int quantity) async {
     final RecentlyViewdData recentlyViewdData = state.asData!.value;
     state = AsyncData(recentlyViewdData.copyWith(itemIdLoading: itemId));
     final result = await ref
         .read(updateCartProvider.notifier)
-        .updateCart(itemId: itemId, quantity: quantity)
+        .updateCart(
+            itemId: itemId,
+            itemWarehouseId: itemWarehouseId,
+            quantity: quantity)
         .catchError((error, stackTrace) {
       state = AsyncData(recentlyViewdData.copyWith(itemIdLoading: null));
       return false;

@@ -67,8 +67,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "areaName": MessageLookupByLibrary.simpleMessage("Area Name"),
         "areaNameHint":
             MessageLookupByLibrary.simpleMessage("Select your area name"),
-        "asSoonAsPossible":
-            MessageLookupByLibrary.simpleMessage("As soon as possible"),
+        "asSoonAsPossible": MessageLookupByLibrary.simpleMessage(
+            "As soon as possible within 2 hours"),
         "attemptsLeft": MessageLookupByLibrary.simpleMessage("attempts left"),
         "autoOrder": MessageLookupByLibrary.simpleMessage("Auto-Order"),
         "availableSoon": MessageLookupByLibrary.simpleMessage("Available Soon"),
@@ -196,8 +196,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "express": MessageLookupByLibrary.simpleMessage("Express"),
         "expressDelivery":
             MessageLookupByLibrary.simpleMessage("Express Delivery"),
-        "expressItemsDescription": MessageLookupByLibrary.simpleMessage(
-            "You have Items that are eligible for"),
+        "expressDescription": MessageLookupByLibrary.simpleMessage(
+            "Get express delivery for these items."),
+        "expressPickup": MessageLookupByLibrary.simpleMessage("Express Pickup"),
         "firstName": MessageLookupByLibrary.simpleMessage("First Name"),
         "firstNameHint":
             MessageLookupByLibrary.simpleMessage("Enter your first name"),
@@ -249,6 +250,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Loyalty Points Value"),
         "makeThisDefault":
             MessageLookupByLibrary.simpleMessage("Make This Default"),
+        "merge": MessageLookupByLibrary.simpleMessage("Merge"),
+        "mergeDescription": MessageLookupByLibrary.simpleMessage(
+            "Make deliveries for all items from the main warehouse."),
         "minimum": MessageLookupByLibrary.simpleMessage("Minimum"),
         "minimumOrderAmount":
             MessageLookupByLibrary.simpleMessage("Minimum order amount"),
@@ -337,7 +341,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "pickImage": MessageLookupByLibrary.simpleMessage("Pick Image"),
         "pickYouTimeSlot":
             MessageLookupByLibrary.simpleMessage("Pick your time slot"),
+        "pickup": MessageLookupByLibrary.simpleMessage("Pickup"),
         "pickupDate": MessageLookupByLibrary.simpleMessage("Pickup Date"),
+        "pickupDescription": MessageLookupByLibrary.simpleMessage(
+            "Pick up your items from the nearest warehouse."),
         "pickupDetails": MessageLookupByLibrary.simpleMessage("Pickup Details"),
         "pickupLocation":
             MessageLookupByLibrary.simpleMessage("Pick-Up Location"),
@@ -449,6 +456,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "sortBy": MessageLookupByLibrary.simpleMessage("Sort By"),
         "specifications":
             MessageLookupByLibrary.simpleMessage("Specifications"),
+        "split": MessageLookupByLibrary.simpleMessage("Split"),
+        "splitDescription": MessageLookupByLibrary.simpleMessage(
+            "Split cart for 2-hour delivery from your nearest warehouse."),
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
         "streetNo": MessageLookupByLibrary.simpleMessage("Street No."),
         "streetNoHint":
@@ -464,7 +474,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Subscription ends on"),
         "subscriptionStartsOn":
             MessageLookupByLibrary.simpleMessage("Subscription starts on"),
-        "switchLabel": MessageLookupByLibrary.simpleMessage("Switch"),
         "technicalIssue":
             MessageLookupByLibrary.simpleMessage("Technical Issue"),
         "termAndConditionsPrefix": MessageLookupByLibrary.simpleMessage(
@@ -474,7 +483,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "theOrderIsNearlyWithYou": MessageLookupByLibrary.simpleMessage(
             "The order is nearly with you"),
         "theseItemsAreNotAvailable": MessageLookupByLibrary.simpleMessage(
-            "These items are not available"),
+            "Some items in your cart are now unavailable due to your location change. Please review your cart"),
         "timeSlot": MessageLookupByLibrary.simpleMessage("Time slot"),
         "timeSlotChangerDescription": MessageLookupByLibrary.simpleMessage(
             "Click here to select a different delivery time. A selection of available timeslots will be presented for you to choose from. Once you\'ve found a suitable option, click \'Select\' to update your delivery timeslot."),

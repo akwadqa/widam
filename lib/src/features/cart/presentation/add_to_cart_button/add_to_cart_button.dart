@@ -19,6 +19,7 @@ class AddToCartButton extends ConsumerStatefulWidget {
   final int minQuantity;
   final int maxQuantity;
   final String itemId;
+  final String itemWarehouseId;
   final String? row;
   final int? inStock;
   final String? attributionToken;
@@ -28,6 +29,7 @@ class AddToCartButton extends ConsumerStatefulWidget {
     required this.minQuantity,
     required this.maxQuantity,
     required this.itemId,
+    required this.itemWarehouseId,
     this.row,
     this.inStock,
     this.attributionToken,
@@ -46,8 +48,8 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
   Widget build(BuildContext context) {
     final state = ref.watch(updateCartProvider);
     final isInCart = ref.watch(isInCartProvider(widget.itemId));
-    _quantityInCart = ref
-        .watch(quantityControllerProvider(widget.itemId, widget.minQuantity, widget.row));
+    _quantityInCart = ref.watch(quantityControllerProvider(
+        widget.itemId, widget.itemWarehouseId, widget.minQuantity, widget.row));
     _isLoading = state is AsyncLoading;
 
     _listenForCartUpdateErrors();
@@ -153,7 +155,8 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
     } else {
       _warningFeedback();
       ref
-          .read(quantityControllerProvider(widget.itemId, widget.minQuantity, widget.row)
+          .read(quantityControllerProvider(
+                  widget.itemId, widget.itemWarehouseId, widget.minQuantity, widget.row)
               .notifier)
           .decrementQuantity();
     }
@@ -236,7 +239,8 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
   Future<void> _handleAddButtonTap() async {
     _heavyFeedback();
     ref
-        .read(quantityControllerProvider(widget.itemId, widget.minQuantity, widget.row)
+        .read(quantityControllerProvider(
+                widget.itemId, widget.itemWarehouseId, widget.minQuantity, widget.row)
             .notifier)
         .increamentQuantity();
   }
@@ -253,7 +257,8 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
       _isExpanded = true;
     });
     ref
-        .read(quantityControllerProvider(widget.itemId, widget.minQuantity, widget.row)
+        .read(quantityControllerProvider(
+                widget.itemId, widget.itemWarehouseId, widget.minQuantity, widget.row)
             .notifier)
         .addTocart(widget.attributionToken);
     ref.invalidate(recentlyViewdControllerProvider);

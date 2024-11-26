@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../geofence.dart';
 import 'country.dart';
+import 'warehouse.dart';
 
 part 'address.freezed.dart';
 part 'address.g.dart';
@@ -25,7 +26,8 @@ class Address with _$Address {
       required Geofence? geofence,
       required String phone,
       required String fullName,
-      required String? landmark}) = _Address;
+      required String? landmark,
+      required Warehouse? warehouse}) = _Address;
 
   factory Address.fromJson(Map<String, dynamic> json) =>
       _$AddressFromJson(json);
@@ -49,7 +51,8 @@ class AddressConverter implements JsonConverter<Address, Map<String, dynamic>> {
       'phone': address.phone,
       'is_shipping_address': address.preferredShippingAddress,
       'full_name': address.fullName,
-      'landmark': address.landmark
+      'landmark': address.landmark,
+      if(address.warehouse != null) 'warehouse': address.warehouse!.warehouseId
     };
   }
 

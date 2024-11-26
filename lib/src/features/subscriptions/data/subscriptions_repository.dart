@@ -3,6 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../network/network_service.dart';
 import '../../../common_models/response/app_response.dart';
 import '../../../constants/end_points.dart';
+import '../../addresses/application/local_location_info.dart';
 import '../../item_groups/domain/item_group_details/item_group_details.dart';
 import '../domain/subscription.dart';
 part 'subscriptions_repository.g.dart';
@@ -18,8 +19,12 @@ class SubscriptionsRepository {
   SubscriptionsRepository(this._networkService);
 
   Future<AppResponse<ItemGroupDetails>> getAllItemGroupsSubscriptions(
-      {required int page}) async {
-    final queryParameters = {'page_no': page, 'subscription_item_group': 1};
+      {required int page, String? warehouseId}) async {
+    final queryParameters = {
+      'page_no': page,
+      'subscription_item_group': 1,
+      if (warehouseId != null) 'warehouse': warehouseId
+    };
     final response = await _networkService.get(EndPoints.itemGroups,
         queryParameters: queryParameters);
     AppResponse<ItemGroupDetails> itemGroupsResponse =
@@ -32,11 +37,14 @@ class SubscriptionsRepository {
   }
 
   Future<AppResponse<ItemGroupDetails>> getItemsByItemGroupSubscriptions(
-      {required String itemGroupId, required int page}) async {
+      {required String itemGroupId,
+      required int page,
+      String? warehouseId}) async {
     final queryParameters = {
       'item_group_id': itemGroupId,
       'page_no': page,
-      'subscription_item_group': 1
+      'subscription_item_group': 1,
+      if (warehouseId != null) 'warehouse': warehouseId,
     };
     final response = await _networkService.get(EndPoints.itemGroups,
         queryParameters: queryParameters);
@@ -49,10 +57,14 @@ class SubscriptionsRepository {
     return itemGroupResponse;
   }
 
-  Future<AppResponse> addSubscription(Subscription subscriptionInfo) async {
+  Future<AppResponse> addSubscription(Subscription subscriptionInfo,
+      [String? warehouseId]) async {
+    final queryParameters = {
+      if (warehouseId != null) 'warehouse': warehouseId,
+    };
     final formData = FormData.fromMap(subscriptionInfo.toJson());
-    final response =
-        await _networkService.post(EndPoints.addSubscription, formData);
+    final response = await _networkService.post(
+        EndPoints.addSubscription, formData, queryParameters);
     AppResponse subscriptionResponse =
         AppResponse.fromJson(response.data, (json) => json);
     if (subscriptionResponse.error == 1) {
@@ -80,9 +92,10 @@ class SubscriptionsRepository {
 @riverpod
 Future<AppResponse<ItemGroupDetails>> getAllItemGroupsSubscriptions(
     GetAllItemGroupsSubscriptionsRef ref) async {
+  final warehouseId = ref.watch(localLocationInfoProvider).warehouseId;
   return ref
       .read(subscriptionsRepositoryProvider)
-      .getAllItemGroupsSubscriptions(page: 1);
+      .getAllItemGroupsSubscriptions(page: 1, warehouseId: warehouseId);
 }
 
 @riverpod

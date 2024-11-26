@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../common_models/response/app_response.dart';
+import '../../addresses/application/local_location_info.dart';
 import '../../app_data/application/app_data_controller.dart';
 import '../../../network/network_service.dart';
 import '../../../constants/end_points.dart';
@@ -20,11 +21,15 @@ class LayoutsRepository {
   const LayoutsRepository(this._networkService);
 
   Future<Layout> getLayout(
-      {String? layoutId, String? sortBy, String? sortOrder}) async {
+      {String? layoutId,
+      String? sortBy,
+      String? sortOrder,
+      String? warehouseId}) async {
     final Map<String, dynamic> queryParameters = {
       if (layoutId != null) 'layout_id': layoutId,
       if (sortBy != null) 'sort_by': sortBy,
-      if (sortOrder != null) 'sort_order': sortOrder
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (warehouseId != null) 'warehouse': warehouseId
     };
     final response = await _networkService.get(EndPoints.layouts,
         queryParameters: queryParameters);
@@ -36,9 +41,11 @@ class LayoutsRepository {
     return layoutResponse.data;
   }
 
-  Future<Block<List<Item>>> getBlock({required String blockId}) async {
+  Future<Block<List<Item>>> getBlock(
+      {required String blockId, String? warehouseId}) async {
     final Map<String, dynamic> queryParameters = {
       'block_id': blockId,
+      if (warehouseId != null) 'warehouse': warehouseId
     };
     final response = await _networkService.get(EndPoints.blocks,
         queryParameters: queryParameters);
@@ -61,15 +68,18 @@ Future<Layout> layout(LayoutRef ref, LayoutType type,
     {String? sortBy, String? sortOrder}) async {
   final repository = ref.watch(layoutsRepositoryProvider);
   final appData = await ref.watch(appDataControllerProvider.future);
+  final warehouseId = ref.watch(localLocationInfoProvider).warehouseId;
   return repository.getLayout(
       layoutId:
           type == LayoutType.home ? appData.homeLayout : appData.featuredLayout,
       sortBy: sortBy,
-      sortOrder: sortOrder);
+      sortOrder: sortOrder,
+      warehouseId: warehouseId);
 }
 
 @Riverpod(keepAlive: true)
 Future<Block<List<Item>>> block(BlockRef ref, {required String blockId}) async {
   final repository = ref.watch(layoutsRepositoryProvider);
-  return repository.getBlock(blockId: blockId);
+  final warehouseId = ref.watch(localLocationInfoProvider).warehouseId;
+  return repository.getBlock(blockId: blockId, warehouseId: warehouseId);
 }

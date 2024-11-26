@@ -28,16 +28,17 @@ import '../item_details_controller.dart';
 enum FormType { variants, options, slotterFees, pickupPoint }
 
 class AddToCartWidget extends StatelessWidget {
-  const AddToCartWidget({
-    super.key,
-    required this.itemId,
-    this.attributionToken,
-    required this.hasVariants,
-    required this.attributesFormKey,
-    required this.onInvalidForm,
-  });
+  const AddToCartWidget(
+      {super.key,
+      required this.itemId,
+      required this.itemWarehouseId,
+      this.attributionToken,
+      required this.hasVariants,
+      required this.attributesFormKey,
+      required this.onInvalidForm});
 
   final String itemId;
+  final String itemWarehouseId;
   final String? attributionToken;
   final GlobalKey<FormState> attributesFormKey;
   final bool hasVariants;
@@ -135,6 +136,7 @@ class AddToCartWidget extends StatelessWidget {
           file: ref.read(qidAttachmentControllerProvider),
           attributionToken: attributionToken,
           isPriceModifier: ref.read(slotterFeesControllerProvider),
+          itemWarehouseId: itemWarehouseId
         );
 
     _invalidateRecommendationProviders(ref);

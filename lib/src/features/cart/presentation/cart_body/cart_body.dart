@@ -7,10 +7,12 @@ import 'package:widam/src/common_widgets/banner/app_banner_dialog.dart';
 import 'package:widam/src/features/cart/application/cart_service.dart';
 import 'package:widam/src/features/cart/domain/cart/cart.dart';
 import 'package:widam/src/features/cart/presentation/cart_banner/cart_banner.dart';
-import 'package:widam/src/features/cart/presentation/cart_body/unavailable_items.dart';
+import 'package:widam/src/features/cart/presentation/cart_body/pickup_image.dart';
+import 'package:widam/src/features/cart/presentation/cart_body/switch_container.dart';
 import 'package:widam/src/features/recommendations/presentation/recently_viewd/recently_viewd.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
 import 'package:widam/src/theme/app_colors.dart';
+import '../../../../common_widgets/app_stacked_loading_indicator.dart';
 import '../../../../common_widgets/total_container.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/l10n.dart';
@@ -18,6 +20,7 @@ import '../../../../common_widgets/banner/app_banner.dart';
 import '../../../../common_widgets/fade_circle_loading_indicator.dart';
 import '../../../../common_widgets/forward_submit_button.dart';
 import '../../../../utils/utils.dart';
+import '../../../addresses/application/local_location_info.dart';
 import '../../../addresses/domain/address/address.dart';
 import '../../../addresses/presentation/addresses/addresses_selector/addresses_selector.dart';
 import '../../../recommendations/presentation/similar_items/similar_items.dart';
@@ -93,6 +96,8 @@ class _NonEmptyCart extends ConsumerWidget {
         cart.pickup != 1 ? cart.cartContent.expressDelivery : null;
     final normalDelivery =
         cart.pickup != 1 ? cart.cartContent.normalDelivery : null;
+    final pickupDelivery =
+        cart.pickup != 1 ? cart.cartContent.pickupDelivery : null;
     return Stack(
       children: [
         Padding(
@@ -105,6 +110,34 @@ class _NonEmptyCart extends ConsumerWidget {
                   child: SimiliarItems(quotationId: cart.quotationId),
                 ),
                 const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
+              ],
+              if (normalDelivery != null &&
+                  (expressDelivery != null || pickupDelivery != null)) ...[
+                SliverToBoxAdapter(
+                    child: AppStackedLoadingIndicator(
+                  isLoading: ref.watch(updateCartProvider).isLoading,
+                  child: SwitchContainer(
+                    description: S.of(context).mergeDescription,
+                    title: S.of(context).merge,
+                    onPressed: () => ref
+                        .read(updateCartProvider.notifier)
+                        .updateCart(express: false, expressPickup: false),
+                  ),
+                )),
+                const SliverToBoxAdapter(child: SizedBox(height: 12.0))
+              ] else ...[
+                SliverToBoxAdapter(
+                    child: AppStackedLoadingIndicator(
+                  isLoading: ref.watch(updateCartProvider).isLoading,
+                  child: SwitchContainer(
+                    title: S.of(context).split,
+                    description: S.of(context).splitDescription,
+                    onPressed: () => ref
+                        .read(updateCartProvider.notifier)
+                        .updateCart(express: true, expressPickup: true),
+                  ),
+                )),
+                const SliverToBoxAdapter(child: SizedBox(height: 12.0))
               ],
               SliverToBoxAdapter(
                   child: Text(S.of(context).yourCartDetails,
@@ -120,12 +153,23 @@ class _NonEmptyCart extends ConsumerWidget {
                     CustomDeliveryContainer(
                         deliveryType: normalDelivery,
                         currency: cart.currency,
-                        total: cart.total),
+                        total: normalDelivery.subTotal),
                   const SizedBox(height: 20.0),
                   if (expressDelivery != null)
                     CustomDeliveryContainer(
+                        header: AppStackedLoadingIndicator(
+                          isLoading: ref.watch(updateCartProvider).isLoading,
+                          child: SwitchContainer(
+                            title: S.of(context).pickup,
+                            description: S.of(context).pickupDescription,
+                            onPressed: () => ref
+                                .read(updateCartProvider.notifier)
+                                .updateCart(
+                                    express: false, expressPickup: true),
+                          ),
+                        ),
                         deliveryType: expressDelivery,
-                        total: cart.total,
+                        total: expressDelivery.subTotal,
                         timeSlotWidget: Row(
                           children: [
                             Assets.icons.truckTimeIcon.svg(),
@@ -137,7 +181,29 @@ class _NonEmptyCart extends ConsumerWidget {
                                     color: Colors.black))
                           ],
                         ),
-                        currency: cart.currency)
+                        currency: cart.currency),
+                  if (pickupDelivery != null)
+                    CustomDeliveryContainer(
+                        header: AppStackedLoadingIndicator(
+                          isLoading: ref.watch(updateCartProvider).isLoading,
+                          child: SwitchContainer(
+                            title: S.of(context).express,
+                            description: S.of(context).expressDescription,
+                            onPressed: () => ref
+                                .read(updateCartProvider.notifier)
+                                .updateCart(
+                                    express: true, expressPickup: false),
+                          ),
+                        ),
+                        title: pickupDelivery
+                            .websiteItems.first.warehouse.warehouseName,
+                        deliveryType: pickupDelivery,
+                        total: pickupDelivery.subTotal,
+                        currency: cart.currency,
+                        timeSlotWidget: PickupImage(
+                          latitude: pickupDelivery.coordinates.latitude,
+                          longitude: pickupDelivery.coordinates.longitude,
+                        )),
                 ])),
               if (cart.mubadara != 1) ...[
                 const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
@@ -189,11 +255,7 @@ class _NonEmptyCart extends ConsumerWidget {
                                         .websiteItems
                                         .any((element) =>
                                             element.inStock == 0)) {
-                                  showAdaptiveModalBottomSheet(
-                                      context: context,
-                                      builder: (context) {
-                                        return const UnavailableItems();
-                                      });
+                                  showUnAvailableItems(context);
                                 } else if (cart.shippingAddressDetails ==
                                     null) {
                                   showAdaptiveModalBottomSheet<Address?>(
@@ -209,6 +271,27 @@ class _NonEmptyCart extends ConsumerWidget {
                                                   address.addressId)
                                           .then((value) {
                                         if (value) {
+                                          if (ref
+                                                  .read(
+                                                      localLocationInfoProvider)
+                                                  .warehouseId !=
+                                              address.warehouse?.warehouseId) {
+                                            ref
+                                                .read(localLocationInfoProvider
+                                                    .notifier)
+                                                .setLocalLocationInfo(
+                                                    address.latitude,
+                                                    address.longitude,
+                                                    address
+                                                        .warehouse?.warehouseId)
+                                                .then((_) {
+                                              ref
+                                                  .read(localGeofenceIdProvider
+                                                      .notifier)
+                                                  .setLocalGeofenceId(address
+                                                      .geofence!.geofenceId);
+                                            });
+                                          }
                                           context.pushRoute(
                                               const CheckoutScreen());
                                         }

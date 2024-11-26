@@ -10,12 +10,14 @@ class ItemsContainer extends StatelessWidget {
       required this.timeSlotWidget,
       required this.content,
       required this.subTotal,
-      required this.itemsCount});
+      required this.itemsCount,
+      this.header});
   final String title;
   final Widget timeSlotWidget;
   final Widget content;
   final String subTotal;
   final String itemsCount;
+  final Widget? header;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -23,6 +25,12 @@ class ItemsContainer extends StatelessWidget {
       children: [
         CartContainer(
           child: Column(children: [
+            if (header != null) ...[
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: header!,
+              ),
+            ],
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

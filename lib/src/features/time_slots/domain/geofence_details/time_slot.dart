@@ -6,7 +6,7 @@ part 'time_slot.g.dart';
 @freezed
 class TimeSlot with _$TimeSlot {
   factory TimeSlot({
-    required String timeSlotId,
+    required String? timeSlotId,
     required String timeFormatted,
     required String? fromTime,
     required String? toTime,

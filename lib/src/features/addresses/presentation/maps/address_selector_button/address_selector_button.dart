@@ -22,9 +22,9 @@ class AddressSelector extends ConsumerWidget {
             showAdaptiveModalBottomSheet<Address?>(
               context: context,
               builder: (context) => const AddressesSelector(),
-            ).then((address) {
+            ).then((address) async {
               if (address != null) {
-                ref
+                await ref
                     .read(addressSelectorButtonControllerProvider.notifier)
                     .onAddressSelected(address);
               }
@@ -38,8 +38,11 @@ class AddressSelector extends ConsumerWidget {
               if (location != null) {
                 ref
                     .read(addressSelectorButtonControllerProvider.notifier)
-                    .onCoordinatesSelected(location.matchedGeofence!,
-                        location.latitude!, location.longitude!);
+                    .onCoordinatesSelected(
+                        location.matchedGeofence!,
+                        location.latitude!,
+                        location.longitude!,
+                        location.defaultAddress?.deliveryCenter.warehouseId);
               }
             });
           }

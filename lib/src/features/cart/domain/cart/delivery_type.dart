@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:widam/src/common_models/coordinates/coordinates.dart';
 import 'package:widam/src/features/app_data/domain/delivery_date/delivery_date.dart';
 
 import '../../../items/domain/item_details/item_details.dart';
@@ -17,6 +18,7 @@ class DeliveryType with _$DeliveryType {
     required List<ItemDetails> websiteItems,
     required double deliveryCharges,
     required double subTotal,
+    required Coordinates? coordinates,
   }) = _DeliveryType;
 
   factory DeliveryType.fromJson(Map<String, dynamic> json) =>

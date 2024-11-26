@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:widam/src/constants/keys.dart';
-import 'package:widam/src/constants/services_urls.dart';
-import '../../../../common_widgets/app_cached_network_image.dart';
+import 'package:widam/src/features/cart/presentation/cart_body/pickup_image.dart';
 import 'cart_item/cart_item.dart';
 import 'pickup_data.dart';
 import '../../../../theme/app_colors.dart';
@@ -47,14 +45,10 @@ class PickupList extends StatelessWidget {
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.darkBlue)),
                           const SizedBox(height: 2),
-                          Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              clipBehavior: Clip.antiAlias,
-                              child: AppCachedNetworkImage(
-                                  imageUrl:
-                                      '${ServicesUrls.googleMapsBaseUrl}/staticmap?size=${100}x${50}&visible=${pickup.coordinates.latitude},${pickup.coordinates.longitude}&zoom=${15}&key=${Keys.googleAPIKey}&language=${Directionality.of(context) == TextDirection.ltr ? 'en' : 'ar'}')),
+                          PickupImage(
+                            latitude: pickup.coordinates.latitude,
+                            longitude: pickup.coordinates.longitude,
+                          )
                         ],
                       )
                     ],

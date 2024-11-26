@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/constants/strings.dart';
+import '../../../../../addresses/application/local_location_info.dart';
 import '../../../../data/subscriptions_repository.dart';
 import 'select_your_product.dart';
 
@@ -32,13 +33,12 @@ class SubscriptionsItemsNotifier
       return false;
     }
     try {
+      final warehouseId = _ref.watch(localLocationInfoProvider).warehouseId;
       final dynamic appResponse = _itemGroupId == Strings.allItemGroup
           ? await _subscriptionsRepository.getAllItemGroupsSubscriptions(
-              page: page)
+              page: page, warehouseId: warehouseId)
           : await _subscriptionsRepository.getItemsByItemGroupSubscriptions(
-              itemGroupId: _itemGroupId,
-              page: page,
-            );
+              itemGroupId: _itemGroupId, page: page, warehouseId: warehouseId);
 
       state = (state as SubscriptionsItemsLoaded).copyWith(
         items: _itemGroupId == Strings.allItemGroup
@@ -77,8 +77,10 @@ class SubscriptionsItemsNotifier
   Future<void> _loadItemsByItemGroupId() async {
     state = const SubscriptionsItemsLoading();
     try {
-      final appResponse = await _subscriptionsRepository
-          .getItemsByItemGroupSubscriptions(itemGroupId: _itemGroupId, page: 1);
+      final warehouseId = _ref.watch(localLocationInfoProvider).warehouseId;
+      final appResponse =
+          await _subscriptionsRepository.getItemsByItemGroupSubscriptions(
+              itemGroupId: _itemGroupId, page: 1, warehouseId: warehouseId);
       state = SubscriptionsItemsLoaded(
         items: appResponse.data.websiteItems,
         pagination: appResponse.pagination!,
@@ -92,8 +94,9 @@ class SubscriptionsItemsNotifier
   Future<void> _loadAllItems() async {
     state = const SubscriptionsItemsLoading();
     try {
-      final appResponse =
-          await _subscriptionsRepository.getAllItemGroupsSubscriptions(page: 1);
+      final warehouseId = _ref.watch(localLocationInfoProvider).warehouseId;
+      final appResponse = await _subscriptionsRepository
+          .getAllItemGroupsSubscriptions(page: 1, warehouseId: warehouseId);
       state = SubscriptionsItemsLoaded(
         items: appResponse.data.websiteItems,
         pagination: appResponse.pagination!,

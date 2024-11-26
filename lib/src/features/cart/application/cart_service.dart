@@ -1,8 +1,10 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:widam/src/features/items/domain/item_details/item_details.dart';
+import '../../addresses/application/local_location_info.dart';
 import '../data/cart_repository.dart';
 import '../domain/cart/cart.dart';
-import '../domain/cart/pickup/pickup.dart';
 import '../presentation/cart_body/cart_controller.dart';
 
 part 'cart_service.g.dart';
@@ -27,10 +29,15 @@ class UpdateCart extends _$UpdateCart {
       int? useWalletBalance,
       String? attributionToken,
       bool? isPriceModifier,
-      String? pickupPointId}) async {
+      String? pickupPointId,
+      String? itemWarehouseId,
+      bool? express,
+      bool? expressPickup}) async {
     state = const AsyncLoading();
     final cartRepository = ref.watch(cartRepositoryProvider);
     try {
+      final String? warehouseId =
+          ref.watch(localLocationInfoProvider).warehouseId;
       final cart = await cartRepository.updateCart(
           itemId: itemId,
           quantity: quantity,
@@ -46,7 +53,11 @@ class UpdateCart extends _$UpdateCart {
           isPriceModifier: isPriceModifier,
           useWalletBalance: useWalletBalance,
           attributionToken: attributionToken,
-          pickupPointId: pickupPointId);
+          pickupPointId: pickupPointId,
+          warehouseId: warehouseId,
+          express: express,
+          expressPickup: expressPickup,
+          itemWarehouseId: itemWarehouseId);
       ref.read(cartControllerProvider.notifier).updateCart(cart);
       state = const AsyncData(null);
       return true;
@@ -60,8 +71,10 @@ class UpdateCart extends _$UpdateCart {
     state = const AsyncLoading();
     final cartRepository = ref.watch(cartRepositoryProvider);
     try {
-      final cart =
-          await cartRepository.deleteItemFromCart(itemId: itemId, row: row);
+      final String? warehouseId =
+          ref.watch(localLocationInfoProvider).warehouseId;
+      final cart = await cartRepository.deleteItemFromCart(
+          itemId: itemId, row: row, warehouseId: warehouseId);
       ref.read(cartControllerProvider.notifier).updateCart(cart);
       state = const AsyncData(null);
       return true;
@@ -81,36 +94,57 @@ class UpdateCart extends _$UpdateCart {
 }
 
 @Riverpod(keepAlive: true)
-int cartCount(CartCountRef ref) => ref.watch(cartControllerProvider).maybeMap(
+int cartCount(Ref ref) => ref.watch(cartControllerProvider).maybeMap(
       data: (cart) => cart.value != null ? cart.value!.totalQty.toInt() : 0,
       orElse: () => 0,
     );
 
 @Riverpod(keepAlive: true)
-bool isInCart(IsInCartRef ref, String itemId) =>
-    ref.watch(cartControllerProvider).maybeMap(
+bool isInCart(Ref ref, String itemId) {
+  return ref.watch(cartControllerProvider).maybeMap(
         data: (data) {
-          final Cart? cart = data.value;
-          if (cart != null) {
-            if (cart.pickup == 1) {
-              bool result = false;
-              cart.cartContent.forEach((Pickup element) {
-                if (element.websiteItems
-                    .any((element) => element.websiteItemId == itemId)) {
-                  result = true;
-                }
-              });
-              return result;
-            }
-            return cart.cartContent.normalDelivery.websiteItems
-                .any((element) => element.websiteItemId == itemId);
+          final cart = data.value;
+          if (cart == null) return false;
+
+          // Check pickup items
+          if (cart.pickup == 1) {
+            return cart.cartContent.any((pickup) => pickup.websiteItems
+                .any((item) => item.websiteItemId == itemId));
           }
+
+          // Check normal delivery items
+          final normalDeliveryItems =
+              cart.cartContent.normalDelivery?.websiteItems;
+          if (normalDeliveryItems != null &&
+              normalDeliveryItems.any((item) => item.websiteItemId == itemId)) {
+            return true;
+          }
+
+          // Check express delivery items
+          final expressDeliveryItems =
+              cart.cartContent.expressDelivery?.websiteItems;
+          if (expressDeliveryItems != null &&
+              expressDeliveryItems
+                  .any((item) => item.websiteItemId == itemId)) {
+            return true;
+          }
+
+          // Check pickup delivery items
+          final pickupDeliveryItems =
+              cart.cartContent.pickupDelivery?.websiteItems;
+          if (pickupDeliveryItems != null &&
+              pickupDeliveryItems.any((item) => item.websiteItemId == itemId)) {
+            return true;
+          }
+
           return false;
         },
-        orElse: () => false);
+        orElse: () => false,
+      );
+}
 
 @Riverpod(keepAlive: true)
-int quantityInCart(QuantityInCartRef ref, String itemId, [String? row]) {
+int quantityInCart(Ref ref, String itemId, [String? row]) {
   final cart = ref.watch(cartControllerProvider).asData?.value;
   if (cart == null) {
     return 0;
@@ -131,26 +165,43 @@ int quantityInCart(QuantityInCartRef ref, String itemId, [String? row]) {
       }
     }
   } else {
-    for (var item in cart.cartContent.normalDelivery.websiteItems) {
-      if (item.websiteItemId == itemId && item.qtyInCart != null) {
-        return item.qtyInCart.toInt();
-      }
-    }
+    return _getItemQuantityInCart(cart, itemId);
   }
   return 0;
 }
 
-@Riverpod(keepAlive: true)
-double cartTotal(CartTotalRef ref) =>
-    ref.watch(cartControllerProvider).maybeMap(
-          data: (cart) => cart.value != null ? cart.value!.total : 0,
-          orElse: () => 0,
-        );
+int _getItemQuantityInCart(Cart cart, String itemId) {
+  int count = 0;
+
+  void addItemQuantity(List<ItemDetails> items) {
+    for (var item in items) {
+      if (item.websiteItemId == itemId && item.qtyInCart != null) {
+        count += item.qtyInCart!.toInt();
+      }
+    }
+  }
+
+  if (cart.cartContent.normalDelivery != null) {
+    addItemQuantity(cart.cartContent.normalDelivery!.websiteItems);
+  }
+  if (cart.cartContent.expressDelivery != null) {
+    addItemQuantity(cart.cartContent.expressDelivery!.websiteItems);
+  }
+  if (cart.cartContent.pickupDelivery != null) {
+    addItemQuantity(cart.cartContent.pickupDelivery!.websiteItems);
+  }
+
+  return count;
+}
 
 @Riverpod(keepAlive: true)
-bool isMubadaraCart(IsMubadaraCartRef ref) =>
-    ref.watch(cartControllerProvider).maybeMap(
-          data: (cart) =>
-              cart.value != null ? cart.value!.mubadara == 1 : false,
-          orElse: () => false,
-        );
+double cartTotal(Ref ref) => ref.watch(cartControllerProvider).maybeMap(
+      data: (cart) => cart.value != null ? cart.value!.total : 0,
+      orElse: () => 0,
+    );
+
+@Riverpod(keepAlive: true)
+bool isMubadaraCart(Ref ref) => ref.watch(cartControllerProvider).maybeMap(
+      data: (cart) => cart.value != null ? cart.value!.mubadara == 1 : false,
+      orElse: () => false,
+    );

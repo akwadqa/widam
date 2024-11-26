@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:widam/src/common_models/response/app_response.dart';
 import 'package:widam/src/constants/strings.dart';
+import 'package:widam/src/features/addresses/application/local_location_info.dart';
 import 'package:widam/src/features/item_groups/domain/item_group_details/item_group_details.dart';
 import 'package:widam/src/features/item_groups/presentation/barcode_widget/barcode_controller.dart';
 import 'package:widam/src/features/item_groups/presentation/item_group_screen/params_controller.dart';
@@ -62,6 +63,7 @@ class ItemGroupItemsController extends _$ItemGroupItemsController {
       return false;
     }
     try {
+      final warehouseId = ref.watch(localLocationInfoProvider).warehouseId;
       final AppResponse<ItemGroupDetails> appResponse =
           await _itemGroupsRepository.getItemsByItemGroup(
               itemGroupId: _itemGroupId,
@@ -70,7 +72,8 @@ class ItemGroupItemsController extends _$ItemGroupItemsController {
               sortOrder: _sortOrder,
               barcode: _barcode,
               searchQuery: _searchQuery,
-              parameters: _params);
+              parameters: _params,
+              warehouseId: warehouseId);
 
       state = AsyncData((state.asData!.value as ItemGroupItemsLoaded).copyWith(
         items: [
@@ -98,6 +101,7 @@ class ItemGroupItemsController extends _$ItemGroupItemsController {
 
   Future<void> _getItems() async {
     try {
+      final warehouseId = ref.watch(localLocationInfoProvider).warehouseId;
       final appResponse = await _itemGroupsRepository.getItemsByItemGroup(
           itemGroupId: _itemGroupId,
           page: 1,
@@ -105,7 +109,8 @@ class ItemGroupItemsController extends _$ItemGroupItemsController {
           sortOrder: _sortOrder,
           barcode: _barcode,
           parameters: _params,
-          searchQuery: _searchQuery);
+          searchQuery: _searchQuery,
+          warehouseId: warehouseId);
       state = AsyncData(ItemGroupItemsLoaded(
         items: appResponse.data.websiteItems,
         pagination: appResponse.pagination!,
