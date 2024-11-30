@@ -45,7 +45,7 @@ class PickupList extends StatelessWidget {
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.darkBlue)),
                           const SizedBox(height: 2),
-                          PickupImage(
+                          PickupMapImage(
                             latitude: pickup.coordinates.latitude,
                             longitude: pickup.coordinates.longitude,
                           )

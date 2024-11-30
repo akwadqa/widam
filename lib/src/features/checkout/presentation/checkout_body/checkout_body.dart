@@ -10,6 +10,7 @@ import '../../../../common_widgets/banner/app_banner.dart';
 import '../../../../common_widgets/banner/app_banner_dialog.dart';
 import '../../../../common_widgets/fade_circle_loading_indicator.dart';
 import '../../../../utils/utils.dart';
+import '../../../addresses/presentation/maps/address_selector_button/address_selector_button_controller.dart';
 import '../../../cart/presentation/cart_body/switch_container.dart';
 import '../../../coupons/presentaion/coupon_code_selector/coupon_code_selector.dart';
 
@@ -282,17 +283,10 @@ class _UpdatableCartContent extends ConsumerWidget {
                                         .warehouseId !=
                                     address.warehouse?.warehouseId) {
                                   ref
-                                      .read(localLocationInfoProvider.notifier)
-                                      .setLocalLocationInfo(
-                                          address.latitude,
-                                          address.longitude,
-                                          address.warehouse?.warehouseId)
-                                      .then((_) {
-                                    ref
-                                        .read(localGeofenceIdProvider.notifier)
-                                        .setLocalGeofenceId(
-                                            address.geofence!.geofenceId);
-                                  });
+                                      .read(
+                                          addressSelectorButtonControllerProvider
+                                              .notifier)
+                                      .onAddressSelected(address);
                                 }
                                 showAdaptiveModalBottomSheet<
                                         ({

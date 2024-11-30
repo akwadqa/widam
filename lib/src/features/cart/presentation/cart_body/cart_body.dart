@@ -23,6 +23,7 @@ import '../../../../utils/utils.dart';
 import '../../../addresses/application/local_location_info.dart';
 import '../../../addresses/domain/address/address.dart';
 import '../../../addresses/presentation/addresses/addresses_selector/addresses_selector.dart';
+import '../../../addresses/presentation/maps/address_selector_button/address_selector_button_controller.dart';
 import '../../../recommendations/presentation/similar_items/similar_items.dart';
 import '../../domain/cart/cart_content.dart';
 import 'custom_delivery_container.dart';
@@ -200,7 +201,7 @@ class _NonEmptyCart extends ConsumerWidget {
                         deliveryType: pickupDelivery,
                         total: pickupDelivery.subTotal,
                         currency: cart.currency,
-                        timeSlotWidget: PickupImage(
+                        timeSlotWidget: PickupMapImage(
                           latitude: pickupDelivery.coordinates.latitude,
                           longitude: pickupDelivery.coordinates.longitude,
                         )),
@@ -277,20 +278,10 @@ class _NonEmptyCart extends ConsumerWidget {
                                                   .warehouseId !=
                                               address.warehouse?.warehouseId) {
                                             ref
-                                                .read(localLocationInfoProvider
-                                                    .notifier)
-                                                .setLocalLocationInfo(
-                                                    address.latitude,
-                                                    address.longitude,
-                                                    address
-                                                        .warehouse?.warehouseId)
-                                                .then((_) {
-                                              ref
-                                                  .read(localGeofenceIdProvider
-                                                      .notifier)
-                                                  .setLocalGeofenceId(address
-                                                      .geofence!.geofenceId);
-                                            });
+                                                .read(
+                                                    addressSelectorButtonControllerProvider
+                                                        .notifier)
+                                                .onAddressSelected(address);
                                           }
                                           context.pushRoute(
                                               const CheckoutScreen());
