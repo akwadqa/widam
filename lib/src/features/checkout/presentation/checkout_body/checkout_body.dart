@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/features/addresses/application/local_location_info.dart';
+import 'package:widam/src/features/cart/domain/cart/delivery_type.dart';
 import 'package:widam/src/features/cart/domain/cart/pickup/pickup.dart';
 import 'package:widam/src/features/checkout/presentation/checkout_body/saved_card_switch.dart';
 import 'package:widam/src/features/time_slots/domain/geofence_details/time_slot.dart';
@@ -296,19 +297,17 @@ class _UpdatableCartContent extends ConsumerWidget {
                                     context: context,
                                     builder: (ctx) {
                                       return TimeSlotsSelector(
-                                          deleiveryMethodId:
-                                              (cart.cartContent as CartContent)
-                                                  .normalDelivery!
-                                                  .deliveryMethodId,
-                                          initialDate:
-                                              (cart.cartContent as CartContent)
-                                                  .normalDelivery!
-                                                  .deliveryDate
-                                                  .date,
-                                          initialTimeSlot:
-                                              (cart.cartContent as CartContent)
-                                                  .normalDelivery!
-                                                  .timeSlot);
+                                        deleiveryMethodId:
+                                            _getDeliveryType(cart.cartContent)!
+                                                .deliveryMethodId,
+                                        initialDate:
+                                            _getDeliveryType(cart.cartContent)!
+                                                .deliveryDate
+                                                .date,
+                                        initialTimeSlot:
+                                            _getDeliveryType(cart.cartContent)!
+                                                .timeSlot,
+                                      );
                                     }).then((value) {
                                   if (value != null) {
                                     ref
@@ -410,15 +409,19 @@ class _UpdatableCartContent extends ConsumerWidget {
     );
   }
 
+  DeliveryType? _getDeliveryType(CartContent cartContent) {
+    return cartContent.normalDelivery ??
+        cartContent.expressDelivery ??
+        cartContent.pickupDelivery;
+  }
+
   void _showPaymentMethodSelector(BuildContext context, WidgetRef ref) {
     showAdaptiveModalBottomSheet<(bool, String, String?)?>(
         context: context,
         builder: (context) => PaymentMethodSelector(
-            hasMoreDeliveryMethods: (cart.cartContent as CartContent)
-                        .normalDelivery !=
-                    null &&
-                ((cart.cartContent as CartContent).expressDelivery != null ||
-                    (cart.cartContent as CartContent).pickupDelivery != null),
+            hasMoreDeliveryMethods:
+                (cart.cartContent as CartContent).expressDelivery != null ||
+                    (cart.cartContent as CartContent).pickupDelivery != null,
             isMubadara: cart.mubadara == 1,
             selectedPaymentMethodId: cart.paymentMethod?.paymentMethodId,
             selectedPaymentTokenId: cart.savedCard?.paymentTokenId)).then(

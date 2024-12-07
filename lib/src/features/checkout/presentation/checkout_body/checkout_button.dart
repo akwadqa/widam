@@ -178,16 +178,15 @@ class _CheckoutButtonState extends ConsumerState<CheckoutButton> {
                 if (ref.read(canVibrateProvider).requireValue) {
                   Vibrate.feedback(FeedbackType.heavy);
                 }
-                if (widget.cart.cartContent is CartContent &&
-                    (widget.cart.cartContent as CartContent)
-                        .normalDelivery!
-                        .websiteItems
-                        .any((element) => element.inStock == 0)) {
-                  showUnAvailableItems(context);
-                } else {
-                  ref
-                      .read(placeOrderControllerProvider.notifier)
-                      .placeOrder(widget.cart.quotationId);
+                if (widget.cart.cartContent is CartContent) {
+                  final cartContent = widget.cart.cartContent as CartContent;
+                  if (hasUnavailableItems(cartContent)) {
+                    showUnAvailableItems(context);
+                  } else {
+                    ref
+                        .read(placeOrderControllerProvider.notifier)
+                        .placeOrder(widget.cart.quotationId);
+                  }
                 }
               }
             : null,

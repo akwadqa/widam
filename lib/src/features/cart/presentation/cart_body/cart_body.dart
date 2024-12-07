@@ -250,48 +250,7 @@ class _NonEmptyCart extends ConsumerWidget {
                                 if (ref.read(canVibrateProvider).requireValue) {
                                   Vibrate.feedback(FeedbackType.light);
                                 }
-                                if (cart.cartContent is CartContent &&
-                                    (cart.cartContent as CartContent)
-                                        .normalDelivery!
-                                        .websiteItems
-                                        .any((element) =>
-                                            element.inStock == 0)) {
-                                  showUnAvailableItems(context);
-                                } else if (cart.shippingAddressDetails ==
-                                    null) {
-                                  showAdaptiveModalBottomSheet<Address?>(
-                                    context: context,
-                                    builder: (context) =>
-                                        const AddressesSelector(),
-                                  ).then((address) {
-                                    if (address != null) {
-                                      ref
-                                          .read(updateCartProvider.notifier)
-                                          .updateCart(
-                                              shippingAddressId:
-                                                  address.addressId)
-                                          .then((value) {
-                                        if (value) {
-                                          if (ref
-                                                  .read(
-                                                      localLocationInfoProvider)
-                                                  .warehouseId !=
-                                              address.warehouse?.warehouseId) {
-                                            ref
-                                                .read(
-                                                    addressSelectorButtonControllerProvider
-                                                        .notifier)
-                                                .onAddressSelected(address);
-                                          }
-                                          context.pushRoute(
-                                              const CheckoutScreen());
-                                        }
-                                      });
-                                    }
-                                  });
-                                } else {
-                                  context.pushRoute(const CheckoutScreen());
-                                }
+                                _handleCartLogic(cart, context, ref);
                               },
                         title: S.of(context).proceedToCheckout),
                   ],
@@ -299,5 +258,42 @@ class _NonEmptyCart extends ConsumerWidget {
                 cart: cart))
       ],
     );
+  }
+
+  void _handleCartLogic(Cart cart, BuildContext context, WidgetRef ref) {
+    if (cart.cartContent is CartContent) {
+      final cartContent = cart.cartContent as CartContent;
+
+      if (hasUnavailableItems(cartContent)) {
+        showUnAvailableItems(context);
+      } else if (cart.shippingAddressDetails == null) {
+        showAdaptiveModalBottomSheet<Address?>(
+          context: context,
+          builder: (context) => const AddressesSelector(),
+        ).then((address) {
+          if (address != null) {
+            ref
+                .read(updateCartProvider.notifier)
+                .updateCart(
+                  shippingAddressId: address.addressId,
+                )
+                .then((value) {
+              if (value) {
+                final localWarehouseId =
+                    ref.read(localLocationInfoProvider).warehouseId;
+                if (localWarehouseId != address.warehouse?.warehouseId) {
+                  ref
+                      .read(addressSelectorButtonControllerProvider.notifier)
+                      .onAddressSelected(address);
+                }
+                context.pushRoute(const CheckoutScreen());
+              }
+            });
+          }
+        });
+      } else {
+        context.pushRoute(const CheckoutScreen());
+      }
+    }
   }
 }

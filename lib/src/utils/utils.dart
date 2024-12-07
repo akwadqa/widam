@@ -10,6 +10,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:queen_validators/queen_validators.dart';
 import 'package:widam/src/constants/images.dart';
 import 'package:widam/src/constants/services_urls.dart';
+import 'package:widam/src/features/cart/domain/cart/cart_content.dart';
 import 'package:widam/src/features/main/presentation/item_details_sheet_controller.dart';
 
 import '../../generated/l10n.dart';
@@ -17,6 +18,7 @@ import '../common_widgets/banner/app_banner_dialog.dart';
 import '../common_widgets/fade_circle_loading_indicator.dart';
 import '../constants/keys.dart';
 import '../features/addresses/presentation/maps/validate_coordinates_banner/validate_coordinates_notifier.dart';
+import '../features/cart/domain/cart/delivery_type.dart';
 import '../features/cart/presentation/cart_body/unavailable_items.dart';
 import '../features/items/domain/item_details/item_details.dart';
 import '../features/items/presentation/item_details/item_details_body/item_details_content.dart';
@@ -246,4 +248,18 @@ void showUnAvailableItems(BuildContext context) {
       builder: (context) {
         return const UnavailableItems();
       });
+}
+
+bool hasUnavailableItems(CartContent? cartContent) {
+  if (cartContent == null) return false;
+
+  return cartContent.normalDelivery != null &&
+          cartContent.normalDelivery!.websiteItems
+              .any((element) => element.inStock == 0) ||
+      cartContent.expressDelivery != null &&
+          cartContent.expressDelivery!.websiteItems
+              .any((element) => element.inStock == 0) ||
+      cartContent.pickupDelivery != null &&
+          cartContent.pickupDelivery!.websiteItems
+              .any((element) => element.inStock == 0);
 }
