@@ -15,6 +15,7 @@ class _FadeCircleLoadingIndicatorState extends State<FadeCircleLoadingIndicator>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
+  
   double _circleSize = 30;
   double _circleOpacity = 1;
   late double _maxCircleSize;

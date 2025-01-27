@@ -99,7 +99,7 @@ class DeliveryContainer extends StatelessWidget {
             Consumer(
               builder: (context, ref, child) {
                 return TextButton(
-                  onPressed: isExpress == true
+                  onPressed: isExpress == true || isPickup == true
                       ? null
                       : () {
                           showAdaptiveModalBottomSheet<

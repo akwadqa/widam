@@ -471,6 +471,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("لقد قرأت ووافقت على"),
         "termsAndConditions":
             MessageLookupByLibrary.simpleMessage("الشروط والأحكام"),
+        "test": MessageLookupByLibrary.simpleMessage("اختبار"),
         "theOrderIsNearlyWithYou":
             MessageLookupByLibrary.simpleMessage("الطلب قريب منك"),
         "theseItemsAreNotAvailable": MessageLookupByLibrary.simpleMessage(

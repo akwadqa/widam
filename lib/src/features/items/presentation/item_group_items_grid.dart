@@ -34,7 +34,9 @@ class ItemGroupItemsGrid extends ConsumerWidget {
             message: state.error.toString(), stackTrace: state.stackTrace),
       );
     }
-    if ((state.asData?.value as ItemGroupItemsLoaded).items.isEmpty) {
+    if (state.asData?.value is ItemGroupItemsLoading) {
+      return const FadeCircleLoadingIndicator();
+    } else if ((state.asData?.value as ItemGroupItemsLoaded).items.isEmpty) {
       return Center(child: Text(S.of(context).noProductsMatchingYourSelection));
     }
     final items = (state.asData?.value as ItemGroupItemsLoaded).items;

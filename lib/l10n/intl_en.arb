@@ -355,5 +355,6 @@
   "mergeDescription" : "Make deliveries for all items from the main warehouse.",
   "pickupDescription" : "Pick up your items from the nearest warehouse.",
   "expressDescription" : "Get express delivery for these items.",
-  "pickup" : "Pickup"
+  "pickup" : "Pickup",
+  "test" : "Test"
 }

@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart' hide Banner;
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,8 +11,8 @@ import 'routing/app_router_provider.dart';
 import 'theme/app_theme.dart';
 
 class App extends ConsumerWidget {
-  const App({super.key});
-
+  const App({super.key, required this.analytics});
+  final FirebaseAnalytics analytics;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appRouter = ref.watch(appRouterProvider);
@@ -22,9 +24,11 @@ class App extends ConsumerWidget {
     return MaterialApp.router(
       onGenerateTitle: (context) => S.of(context).appTitle,
       debugShowCheckedModeBanner: false,
-      routerDelegate: appRouter.delegate(
-          deepLinkBuilder: (deepLink) => DeepLink.defaultPath),
-      routeInformationParser: appRouter.defaultRouteParser(),
+      routerConfig: appRouter.config(
+        deepLinkBuilder: (deepLink) => DeepLink.defaultPath,
+        navigatorObservers: () =>
+            [FirebaseAnalyticsObserver(analytics: analytics)],
+      ),
       theme: ref.watch(themeDataProvider),
       localizationsDelegates: const [
         S.delegate,

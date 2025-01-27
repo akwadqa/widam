@@ -44,7 +44,8 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
   void initState() {
     Future(() {
       final cart = ref.read(cartControllerProvider).asData!.value!;
-      if (cart.cartContent is CartContent) {
+
+      if (hasOnlyNormalDelivery(cart)) {
         _showTimeSlotsSelector(context, cart, ref);
       }
     });
@@ -289,34 +290,37 @@ class _UpdatableCartContent extends ConsumerWidget {
                                               .notifier)
                                       .onAddressSelected(address);
                                 }
-                                showAdaptiveModalBottomSheet<
-                                        ({
-                                          TimeSlot timeSlot,
-                                          String deliveryDate
-                                        })?>(
-                                    context: context,
-                                    builder: (ctx) {
-                                      return TimeSlotsSelector(
-                                        deleiveryMethodId:
-                                            _getDeliveryType(cart.cartContent)!
-                                                .deliveryMethodId,
-                                        initialDate:
-                                            _getDeliveryType(cart.cartContent)!
-                                                .deliveryDate
-                                                .date,
-                                        initialTimeSlot:
-                                            _getDeliveryType(cart.cartContent)!
-                                                .timeSlot,
-                                      );
-                                    }).then((value) {
-                                  if (value != null) {
-                                    ref
-                                        .read(updateCartProvider.notifier)
-                                        .updateCart(
-                                            timeSlot: value.timeSlot.timeSlotId,
-                                            deliveryDate: value.deliveryDate);
-                                  }
-                                });
+                                if (hasOnlyNormalDelivery(cart)) {
+                                  showAdaptiveModalBottomSheet<
+                                          ({
+                                            TimeSlot timeSlot,
+                                            String deliveryDate
+                                          })?>(
+                                      context: context,
+                                      builder: (ctx) {
+                                        return TimeSlotsSelector(
+                                          deleiveryMethodId: _getDeliveryType(
+                                                  cart.cartContent)!
+                                              .deliveryMethodId,
+                                          initialDate: _getDeliveryType(
+                                                  cart.cartContent)!
+                                              .deliveryDate
+                                              .date,
+                                          initialTimeSlot: _getDeliveryType(
+                                                  cart.cartContent)!
+                                              .timeSlot,
+                                        );
+                                      }).then((value) {
+                                    if (value != null) {
+                                      ref
+                                          .read(updateCartProvider.notifier)
+                                          .updateCart(
+                                              timeSlot:
+                                                  value.timeSlot.timeSlotId,
+                                              deliveryDate: value.deliveryDate);
+                                    }
+                                  });
+                                }
                               }
                             }
                           });

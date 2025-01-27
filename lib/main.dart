@@ -26,5 +26,6 @@ Future<void> main() async {
   };
   FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   analytics.setAnalyticsCollectionEnabled(true);
-  runApp(UncontrolledProviderScope(container: container, child: const App()));
+  runApp(UncontrolledProviderScope(
+      container: container, child: App(analytics: analytics)));
 }

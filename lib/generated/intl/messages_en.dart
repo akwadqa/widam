@@ -480,6 +480,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "I have read and agree to the"),
         "termsAndConditions":
             MessageLookupByLibrary.simpleMessage("Terms and Conditions"),
+        "test": MessageLookupByLibrary.simpleMessage("Test"),
         "theOrderIsNearlyWithYou": MessageLookupByLibrary.simpleMessage(
             "The order is nearly with you"),
         "theseItemsAreNotAvailable": MessageLookupByLibrary.simpleMessage(

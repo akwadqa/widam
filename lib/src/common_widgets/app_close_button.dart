@@ -26,7 +26,7 @@ class AppCloseButton extends StatelessWidget {
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.16),
+            color: Colors.black.withValues(alpha: 0.16),
             blurRadius: 4.0,
             offset: const Offset(0.0, 1.0),
           ),

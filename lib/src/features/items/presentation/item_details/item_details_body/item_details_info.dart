@@ -77,7 +77,7 @@ class ItemDetailsInfo extends StatelessWidget {
               padding: EdgeInsets.zero,
               child: IntrinsicHeight(
                 child: QuantityFormField(
-                  maxQty: 5,
+                  maxQty: itemDetails.maxQty.toInt(),
                   minQty: itemDetails.minQty.toInt(),
                 ),
               ),

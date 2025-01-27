@@ -3,7 +3,7 @@ description: Browse our products with ease and choose your favorite meat cut and
 
 publish_to: 'none'
 
-version: 20.1.0+1
+version: 20.1.1+1
 
 environment:
   sdk: '>=3.5.4 <4.0.0'
@@ -71,7 +71,8 @@ dependencies:
   firebase_database: ^11.2.0
   firebase_ui_database: ^1.5.0
   firebase_auth: ^5.3.4
-  status_bar_control: ^3.2.1
+  status_bar_control:
+    path: local_packages/flutter_statusbar_control-main
   flutter_chat_bubble: ^2.0.2
   firebase_analytics: ^11.3.6
   map_launcher: ^3.5.0
