@@ -50,15 +50,9 @@ dependencies:
   pay: ^2.0.0
   fcm_config: 
     path: local_packages/fcm_config
-  store_redirect:
-    git:
-      url: https://github.com/Danesz/store_redirect
-      ref: 8edbefa83bf3f276538c4b4464c10849585db743
+  store_redirect: ^2.0.4
   flutter_html: ^3.0.0-beta.2
-  flutter_barcode_scanner:
-    git:
-      url: https://github.com/AmolGangadhare/flutter_barcode_scanner
-      ref: 379ded73012f1221a372edba8867ac3341b27f9e
+  # flutter_barcode_scanner: ^2.0.0
   firebase_crashlytics: ^4.2.0
   firebase_core: ^3.8.1
   onboarding_overlay: ^3.2.2
@@ -81,7 +75,7 @@ dependencies:
     path: local_packages/flutter_vibrate-master
 
 dependency_overrides:
-  web: ^1.0.0
+  web: ^1.1.1
 
 dev_dependencies:
   flutter_test:

@@ -9,13 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/services.dart';
 
-import 'package:status_bar_control_example/main.dart';
+import '../lib/main.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('test status_bar_control example',
-      (WidgetTester tester) async {
+  testWidgets('test status_bar_control example', (WidgetTester tester) async {
     // Build the app and trigger a frame.
     await tester.pumpWidget(const StatusBarControlApp());
 
