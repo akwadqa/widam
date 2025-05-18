@@ -1,0 +1,2 @@
+/Users/sarakisar/Development/projects/widam/android/app/.cxx/Debug/6e4k6nw2/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/sarakisar/Development/projects/widam/android/app/.cxx/Debug/6e4k6nw2/armeabi-v7a/CMakeFiles/rebuild_cache.dir

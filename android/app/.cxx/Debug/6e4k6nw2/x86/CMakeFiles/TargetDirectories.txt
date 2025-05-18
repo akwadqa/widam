@@ -1,0 +1,2 @@
+/Users/sarakisar/Development/projects/widam/android/app/.cxx/Debug/6e4k6nw2/x86/CMakeFiles/edit_cache.dir
+/Users/sarakisar/Development/projects/widam/android/app/.cxx/Debug/6e4k6nw2/x86/CMakeFiles/rebuild_cache.dir

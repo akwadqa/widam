@@ -3,7 +3,6 @@ package com.foo.statusbarcontrol;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.util.Log;
@@ -21,7 +20,6 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /**
  * StatusBarControlPlugin
@@ -32,25 +30,12 @@ public class StatusBarControlPlugin implements FlutterPlugin, ActivityAware, Met
     private MethodChannel channel;
     private static Activity activity;
 
-    /**
-     * Plugin registration.
-     */
-
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
         // The plugin is now attached to a Flutter experience
         Log.d("StatusBarControl", "StatusBarControl: Attached to Flutter Engine");
         channel = new MethodChannel(binding.getBinaryMessenger(), channelName);
         channel.setMethodCallHandler(this);
-    }
-
-    public static void registerWith(Registrar registrar) {
-        // For compatibility of apps not using the v2 Android embedding
-        Log.d("StatusBarControl", "StatusBarControl: Registered with Compatibility");
-        activity = registrar.activity();
-        final MethodChannel channel = new MethodChannel(registrar.messenger(), channelName);
-        StatusBarControlPlugin instance = new StatusBarControlPlugin();
-        channel.setMethodCallHandler(instance);
     }
 
     @Override
@@ -60,12 +45,8 @@ public class StatusBarControlPlugin implements FlutterPlugin, ActivityAware, Met
         channel.setMethodCallHandler(null);
     }
 
-    /**
-     * Activity registration.
-     */
-
     @Override
-    public void onAttachedToActivity(ActivityPluginBinding binding) {
+    public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
         // The plugin is now attached to an Activity.
         Log.d("StatusBarControl", "StatusBarControl: Attached to Activity");
         activity = binding.getActivity();
@@ -80,7 +61,7 @@ public class StatusBarControlPlugin implements FlutterPlugin, ActivityAware, Met
     }
 
     @Override
-    public void onReattachedToActivityForConfigChanges(ActivityPluginBinding binding) {
+    public void onReattachedToActivityForConfigChanges(@NonNull ActivityPluginBinding binding) {
         // The plugin is now attached to a new Activity after a configuration change.
         Log.d("StatusBarControl", "StatusBarControl: Reattached to Activity for Config changes");
         activity = binding.getActivity();
@@ -92,10 +73,6 @@ public class StatusBarControlPlugin implements FlutterPlugin, ActivityAware, Met
         Log.d("StatusBarControl", "StatusBarControl: Detached from Activity");
         activity = null;
     }
-
-    /**
-     * Method handling.
-     */
 
     @Override
     public void onMethodCall(MethodCall call, Result result) {
@@ -260,6 +237,14 @@ public class StatusBarControlPlugin implements FlutterPlugin, ActivityAware, Met
     }
 
     private void handleGetHeight(MethodCall call, Result result) {
+        if (activity == null) {
+            Log.e("StatusBarControl",
+                    "StatusBarControl: Ignored status bar change, current activity is null.");
+            result.error("StatusBarControl",
+                    "StatusBarControl: Ignored status bar change, current activity is null.", null);
+            return;
+        }
+
         int height = 0;
         int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
@@ -268,7 +253,7 @@ public class StatusBarControlPlugin implements FlutterPlugin, ActivityAware, Met
         result.success((double) toDIPFromPixel(height));
     }
 
-    @TargetApi((Build.VERSION_CODES.LOLLIPOP))
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void handleSetNavigationBarColor(MethodCall call, Result result) {
         if (activity == null) {
             Log.e("StatusBarControl",
@@ -279,7 +264,6 @@ public class StatusBarControlPlugin implements FlutterPlugin, ActivityAware, Met
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            @SuppressWarnings("unkchecked")
             final int color = ((Number) call.argument("color")).intValue();
             final boolean animated = call.argument("animated");
 
@@ -308,7 +292,7 @@ public class StatusBarControlPlugin implements FlutterPlugin, ActivityAware, Met
         }
     }
 
-    @TargetApi((Build.VERSION_CODES.O))
+    @TargetApi(Build.VERSION_CODES.O)
     private void handleSetNavigationBarStyle(MethodCall call, Result result) {
         if (activity == null) {
             Log.e("StatusBarControl",
@@ -351,5 +335,4 @@ public class StatusBarControlPlugin implements FlutterPlugin, ActivityAware, Met
     private float getDensity() {
         return activity.getResources().getDisplayMetrics().density;
     }
-
 }

@@ -30,7 +30,9 @@ class BannerView extends ConsumerWidget {
     if (banner.bannerType == 'Banner') {
       return;
     }
-    if (banner.bannerType == 'Website Item') {
+    if (banner.bannerType == 'Item Group' && banner.bannerLink != null) {
+      context.pushRoute(ItemGroupScreen(itemGroupId: banner.bannerLink!));
+    } else if (banner.bannerType == 'Website Item') {
       navigateToItemDetails(
           context: context,
           ref: ref,
