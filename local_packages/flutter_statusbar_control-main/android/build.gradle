@@ -22,7 +22,8 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    namespace "com.example.status_bar_control"
+    namespace 'com.foo.statusbarcontrol'
+
 
     compileSdkVersion 31
 

@@ -51,6 +51,7 @@ dependencies:
   fcm_config: 
     path: local_packages/fcm_config
   store_redirect: ^2.0.4
+  store_redirect: ^2.0.4
   flutter_html: ^3.0.0-beta.2
   flutter_barcode_scanner:
     path: local_packages/flutter_barcode_scanner-master
