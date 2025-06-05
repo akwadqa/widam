@@ -31,57 +31,64 @@ class UdhiyaCouponsScreen extends StatelessWidget {
                     itemCount: coupons.length,
                     itemBuilder: (context, index) {
                       final coupon = coupons[index];
-                      return Row(
-                        children: [
-                          AppCachedNetworkImage(
-                              imageUrl: coupon.qrCode,
-                              width: 80.0,
-                              height: 80.0),
-                          const Spacer(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                  '${S.of(context).couponNo} ${coupon.couponId}',
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black)),
-                              const SizedBox(height: 10),
-                              Row(
-                                children: [
-                                  Assets.icons.clockIcon.svg(height: 14),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                      coupon.pickupDetails.pickupTimeSlot
-                                          .timeFormatted,
-                                      style: const TextStyle(fontSize: 12)),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const Spacer(flex: 3),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(coupon.status,
-                                  style: TextStyle(
-                                      color: coupon.status == 'Active'
-                                          ? Colors.green
-                                          : null,
-                                      fontWeight: FontWeight.bold)),
-                              const SizedBox(height: 10),
-                              Text(coupon.pickupDetails.pickupDate.date),
-                              TextButton(
-                                  style: TextButton.styleFrom(
-                                      textStyle: const TextStyle(
-                                          fontWeight: FontWeight.w500)),
-                                  onPressed: () => context.pushRoute(
-                                      UdhiyaCouponDetailsScreen(
-                                          couponId: coupon.couponId)),
-                                  child: Text(S.of(context).view))
-                            ],
-                          )
-                        ],
+                      return GestureDetector(
+                        onTap: (){
+                          context.pushRoute(
+                              UdhiyaCouponDetailsScreen(
+                                  couponId: coupon.couponId));
+                        },
+                        child: Row(
+                          children: [
+                            AppCachedNetworkImage(
+                                imageUrl: coupon.qrCode,
+                                width: 80.0,
+                                height: 80.0),
+                            const Spacer(),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                    '${S.of(context).couponNo} ${coupon.couponId}',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black)),
+                                const SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    Assets.icons.clockIcon.svg(height: 14),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                        coupon.pickupDetails.pickupTimeSlot
+                                            .timeFormatted,
+                                        style: const TextStyle(fontSize: 12)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const Spacer(flex: 3),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(coupon.status,
+                                    style: TextStyle(
+                                        color: coupon.status == 'Active'
+                                            ? Colors.green
+                                            : null,
+                                        fontWeight: FontWeight.bold)),
+                                const SizedBox(height: 10),
+                                Text(coupon.pickupDetails.pickupDate.date),
+                                TextButton(
+                                    style: TextButton.styleFrom(
+                                        textStyle: const TextStyle(
+                                            fontWeight: FontWeight.w500)),
+                                    onPressed: () => context.pushRoute(
+                                        UdhiyaCouponDetailsScreen(
+                                            couponId: coupon.couponId)),
+                                    child: Text(S.of(context).view))
+                              ],
+                            )
+                          ],
+                        ),
                       );
                     },
                     separatorBuilder: (context, index) => const Divider(),

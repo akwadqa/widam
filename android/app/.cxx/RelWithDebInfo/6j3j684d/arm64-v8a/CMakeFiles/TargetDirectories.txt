@@ -1,2 +1,0 @@
-/Users/sarakisar/Development/projects/widam/android/app/.cxx/RelWithDebInfo/6j3j684d/arm64-v8a/CMakeFiles/edit_cache.dir
-/Users/sarakisar/Development/projects/widam/android/app/.cxx/RelWithDebInfo/6j3j684d/arm64-v8a/CMakeFiles/rebuild_cache.dir

@@ -2,7 +2,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:widam/src/common_models/response/app_response.dart';
 import 'package:widam/src/constants/end_points.dart';
 import 'package:widam/src/features/items/domain/item/item.dart';
-import 'package:widam/src/network/network_service.dart';
+import 'package:widam/src/network/exception/dio_exceptions.dart';
+import 'package:widam/src/network/services/dio_client.dart';
+import 'package:widam/src/network/services/network_service.dart';
 
 part 'mubadara_items_repository.g.dart';
 

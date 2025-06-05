@@ -3,7 +3,8 @@ import '../../addresses/application/local_location_info.dart';
 import '../../../common_models/response/app_response.dart';
 import '../../../constants/end_points.dart';
 import '../domain/geofence_details/geofence_details.dart';
-import '../../../network/network_service.dart';
+import 'package:widam/src/network/services/dio_client.dart';
+import 'package:widam/src/network/services/network_service.dart';
 
 part 'time_slots_repository.g.dart';
 

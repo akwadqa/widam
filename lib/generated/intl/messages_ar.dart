@@ -207,8 +207,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "احصل على توصيل سريع لهذه العناصر.",
     ),
     "expressPickup": MessageLookupByLibrary.simpleMessage("استلام سريع"),
+    "fifthEidDay": MessageLookupByLibrary.simpleMessage("خامس أيام العيد"),
+    "firstEidDay": MessageLookupByLibrary.simpleMessage("أول أيام العيد"),
     "firstName": MessageLookupByLibrary.simpleMessage("الاسم الأول"),
     "firstNameHint": MessageLookupByLibrary.simpleMessage("أدخل اسمك الأول"),
+    "fourthEidDay": MessageLookupByLibrary.simpleMessage("رابع أيام العيد"),
     "freiendlyErrorMessage": MessageLookupByLibrary.simpleMessage(
       "حدث خطأ تقني! يرجى التواصل مع فريق خدمة العملاء.",
     ),
@@ -473,6 +476,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "searchForAnyProduct": MessageLookupByLibrary.simpleMessage(
       "بحث عن أي منتج",
     ),
+    "secondEidDay": MessageLookupByLibrary.simpleMessage("ثاني أيام العيد"),
     "select": MessageLookupByLibrary.simpleMessage("تحديد"),
     "selectComplaintType": MessageLookupByLibrary.simpleMessage(
       "حدد نوع الشكوى",
@@ -485,14 +489,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectYourDeliverySlot": MessageLookupByLibrary.simpleMessage(
       "اختر فترة التسليم",
     ),
+    "selectYourPickupSlot": MessageLookupByLibrary.simpleMessage(
+      "اختر فترة التسليم",
+    ),
     "selectYourProducts": MessageLookupByLibrary.simpleMessage("اختر منتجاتك"),
     "serviceFee": MessageLookupByLibrary.simpleMessage("رسوم الخدمة"),
     "setUpYourPlan": MessageLookupByLibrary.simpleMessage("قم بإعداد خطتك"),
     "setYourSchedule": MessageLookupByLibrary.simpleMessage("حدد جدولك"),
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+    "seventhEidDay": MessageLookupByLibrary.simpleMessage("سابع أيام العيد"),
     "shipTo": MessageLookupByLibrary.simpleMessage("الشحن إلى"),
     "shouldBeNumber": MessageLookupByLibrary.simpleMessage("يجب أن يكون رقماً"),
     "signOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+    "sixthEidDay": MessageLookupByLibrary.simpleMessage("سادس أيام العيد"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
     "slotterFeesValidationMsg": MessageLookupByLibrary.simpleMessage(
       "يرجى تحديد رسوم التحميل",
@@ -537,6 +546,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "theseItemsAreNotAvailable": MessageLookupByLibrary.simpleMessage(
       "بعض العناصر الموجودة في عربة التسوق الخاصة بك غير متوفرة الآن بسبب تغيير موقعك. يرجى مراجعة عربة التسوق الخاصة بك",
     ),
+    "thirdEidDay": MessageLookupByLibrary.simpleMessage("ثالث أيام العيد"),
     "timeSlot": MessageLookupByLibrary.simpleMessage("الوقت المحدد"),
     "timeSlotChangerDescription": MessageLookupByLibrary.simpleMessage(
       "انقر هنا لتحديد وقت تسليم مختلف. سيتم تقديم مجموعة مختارة من المواعيد المتاحة لتختار من بينها. بمجرد العثور على خيار مناسب ، انقر فوق \"تحديد\" لتحديث المهلة الزمنية للتسليم.",

@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:widam/src/network/network_service.dart';
+import 'package:widam/src/network/exception/dio_exceptions.dart';
+import 'package:widam/src/network/services/dio_client.dart';
+import 'package:widam/src/network/services/network_service.dart';
 
 import '../domain/payment_result/payment_result.dart';
 
@@ -26,7 +28,7 @@ class PaymentRepository {
   Future<PaymentResult> payWithSavedCard(
       {required String url, required String qutationId}) async {
     final response =
-        await _networkService.post(url, {'quotation_id': qutationId});
+        await _networkService.post(url,data:  {'quotation_id': qutationId});
     PaymentResult paymentResult = PaymentResult.fromJson(response.data);
     return paymentResult;
   }
@@ -36,7 +38,7 @@ class PaymentRepository {
       required String qutationId,
       String? type,
       required token}) async {
-    final response = await _networkService.post(url, {
+    final response = await _networkService.post(url,data:  {
       'quotation_id': qutationId,
       if (type != null) 'type': '00$type',
       if (type != null) 'transaction_type': '1',

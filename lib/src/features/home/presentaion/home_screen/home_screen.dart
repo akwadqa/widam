@@ -38,6 +38,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       appBar: const HomeAppBar(),
       body: ProviderScope(overrides: [
+        // ignore: scoped_providers_should_specify_dependencies
         itemDetailsSheetControllerProvider
             .overrideWith(() => ItemDetailsSheetController())
       ], child: const HomeBody()),

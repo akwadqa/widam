@@ -159,6 +159,7 @@
   "items" : "عناصر",
   "proceedToCheckout" : "متابعة",
   "selectYourDeliverySlot" : "اختر فترة التسليم",
+  "selectYourPickupSlot" : "اختر فترة التسليم",
   "fullyBooked" : "محجوز بالكامل",
   "select" : "تحديد",
   "youHaveItemsAddedToYourCart" : "لديك عناصر مضافة إلى سلة التسوق الخاصة بك",
@@ -355,5 +356,12 @@
   "pickupDescription": "استلم عناصر الطلب من أقرب مستودع.",
   "expressDescription": "احصل على توصيل سريع لهذه العناصر.",
   "pickup" : "التقاط",
-  "test" : "اختبار"
+  "test" : "اختبار",
+  "firstEidDay": "أول أيام العيد",
+  "secondEidDay": "ثاني أيام العيد",
+  "thirdEidDay": "ثالث أيام العيد",
+  "fourthEidDay": "رابع أيام العيد",
+  "fifthEidDay": "خامس أيام العيد",
+  "sixthEidDay": "سادس أيام العيد",
+  "seventhEidDay": "سابع أيام العيد"
 }

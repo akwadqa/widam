@@ -35,10 +35,16 @@ class ItemsContainer extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(title,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.black)),
-                timeSlotWidget
+                Expanded(
+                  // width: 70,
+                  child: Text(title,
+                      softWrap: true,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black)),
+                ),
+                FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerLeft,child: timeSlotWidget)
               ],
             ),
             const Divider(),

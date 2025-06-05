@@ -2,6 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:widam/src/features/cart/application/cart_service.dart';
+import 'package:widam/src/features/cart/presentation/cart_body/cart_controller.dart';
+import 'package:widam/src/features/items/presentation/item_details/item_details_controller.dart';
 import 'package:widam/src/features/time_slots/domain/geofence_details/time_slot.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
 import 'package:widam/src/utils/utils.dart';
@@ -14,7 +17,7 @@ import '../../../../theme/app_colors.dart';
 
 import '../../domain/geofence_details/date.dart';
 
-class TimeSlotsSelector extends StatelessWidget {
+class TimeSlotsSelector extends ConsumerWidget {
   const TimeSlotsSelector(
       {super.key,
       required this.deleiveryMethodId,
@@ -24,14 +27,23 @@ class TimeSlotsSelector extends StatelessWidget {
   final String initialDate;
   final TimeSlot initialTimeSlot;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+           final cartDetails=   ref.read(cartControllerProvider).asData?.value;
+
+     final isUdhiyaItem =
+              getPrimaryDeliveryType(cartDetails?.cartContent)?.first.websiteItems.first.isUdhiyaItem
+                       ==
+                      1
+                  ? true
+                  : false;
     return Material(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(S.of(context).selectYourDeliverySlot,
+            Text(
+            isUdhiyaItem? S.of(context).selectYourPickupSlot: S.of(context).selectYourDeliverySlot,
                 style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -107,6 +119,8 @@ class __BodyState extends State<_Body> {
   late String _selectedDate;
   late TimeSlot _selectedTimeSlot;
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     _selectedDate = widget.initialDate;
@@ -114,55 +128,67 @@ class __BodyState extends State<_Body> {
     super.initState();
   }
 
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     final selectedDates =
         widget.dates.where((element) => element.date == _selectedDate);
     final List<TimeSlot> timeSlots =
-        selectedDates.toList().isNotEmpty ? selectedDates.first.timeSlots! : [];
+        selectedDates.isNotEmpty ? selectedDates.first.timeSlots! : [];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           height: 65,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: widget.dates.length,
-            itemBuilder: (context, index) {
-              final date = widget.dates[index];
-              return FilterChip(
-                label: Column(
-                  children: [
-                    Text(
-                      date.dateFormatted.split(',').last,
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w600),
+          child: Consumer(
+            builder: (context, ref, _) {
+           final cartDetails=   ref.read(cartControllerProvider).asData?.value;
+           final deliveryTypes = getPrimaryDeliveryType(cartDetails?.cartContent);
+              final isUdhiyaItem =
+              deliveryTypes?.first.websiteItems.first.isUdhiyaItem
+                       ==
+                      1
+                  ? true
+                  : false;
+              // final isUdhiyaTimeSlot = isUdhiyaItem == 1 ? true : false;
+              return ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.dates.length,
+                itemBuilder: (context, index) {
+                  final date = widget.dates[index];
+                  return FilterChip(
+                    label: Column(
+                      children: [
+                        Text(
+                          date.dateFormatted.split(',').last,
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                         date.dateFormatted.split(',').first,
+                          style: const TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w500),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      date.dateFormatted.split(',').first,
-                      style: const TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.w500),
+                    labelStyle: TextStyle(
+                      color: _selectedDate == date.date ? Colors.white : null,
                     ),
-                  ],
-                ),
-                labelStyle: TextStyle(
-                    color: _selectedDate == date.date ? Colors.white : null),
-                selected: _selectedDate == date.date,
-                onSelected: date.timeSlots!.isEmpty
-                    ? null
-                    : (value) {
-                        setState(() {
-                          _selectedDate = date.date;
-                        });
-                      },
-                selectedColor: AppColors.londonRain,
+                    selected: _selectedDate == date.date,
+                    onSelected: date.timeSlots!.isEmpty
+                        ? null
+                        : (value) {
+                            setState(() {
+                              _selectedDate = date.date;
+                            });
+                          },
+                    selectedColor: AppColors.londonRain,
+                  );
+                },
+                separatorBuilder: (context, index) => const SizedBox(width: 5),
               );
             },
-            separatorBuilder: (context, index) => const SizedBox(width: 5),
           ),
         ),
         const SizedBox(height: 20),
@@ -198,10 +224,8 @@ class __BodyState extends State<_Body> {
             if (_formKey.currentState!.validate()) {
               if (_selectedTimeSlot.timeSlotId !=
                   widget.initialTimeSlot.timeSlotId) {
-                context.maybePop<({TimeSlot timeSlot, String deliveryDate})?>((
-                  timeSlot: _selectedTimeSlot,
-                  deliveryDate: _selectedDate,
-                ));
+                context.maybePop<({TimeSlot timeSlot, String deliveryDate})?>(
+                    (timeSlot: _selectedTimeSlot, deliveryDate: _selectedDate));
               } else {
                 context.maybePop();
               }
@@ -212,6 +236,30 @@ class __BodyState extends State<_Body> {
       ],
     );
   }
+
+  // String _getDayLabel(
+  //     BuildContext context, String dateFormatted, int index, bool isUdhiya) {
+  //   final baseLabel = dateFormatted.split(',').first;
+
+  //   if (!isUdhiya) return baseLabel;
+
+  //   final eidLabels = [
+  //     S.of(context).firstEidDay,
+  //     S.of(context).secondEidDay,
+  //     S.of(context).thirdEidDay,
+  //     S.of(context).fourthEidDay,
+  //     S.of(context).fifthEidDay,
+  //     S.of(context).sixthEidDay,
+  //     S.of(context).seventhEidDay,
+  //   ];
+
+  //   if (index < eidLabels.length) {
+  //     return '$baseLabel (${eidLabels[index]})';
+  //   } else {
+  //     return baseLabel;
+  //   }
+  // }
+
 }
 
 class _TimeSlotOptionsFormField extends FormField<TimeSlot> {

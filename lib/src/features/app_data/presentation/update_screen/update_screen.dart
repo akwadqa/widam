@@ -54,8 +54,9 @@ class UpdateScreen extends ConsumerWidget {
                             ref.watch(packageInfoProvider).requireValue;
                         final packageName = packageInfo.packageName;
                         StoreRedirect.redirect(
-                            androidAppId: packageName,
-                            iOSAppId: Strings.iOSAppId);
+                          androidAppId: packageName,
+                          iOSAppId: Strings.iOSAppId,
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                           minimumSize: const Size(double.infinity, 50)),

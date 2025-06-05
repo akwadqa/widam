@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../network/network_service.dart';
+import 'package:widam/src/network/exception/dio_exceptions.dart';
+import 'package:widam/src/network/services/dio_client.dart';
+import 'package:widam/src/network/services/network_service.dart';
 import '../../../common_models/response/app_response.dart';
 import '../../../constants/end_points.dart';
 import '../../addresses/application/local_location_info.dart';
@@ -64,7 +66,7 @@ class SubscriptionsRepository {
     };
     final formData = FormData.fromMap(subscriptionInfo.toJson());
     final response = await _networkService.post(
-        EndPoints.addSubscription, formData, queryParameters);
+        EndPoints.addSubscription,data:  formData,queryParameters:  queryParameters);
     AppResponse subscriptionResponse =
         AppResponse.fromJson(response.data, (json) => json);
     if (subscriptionResponse.error == 1) {

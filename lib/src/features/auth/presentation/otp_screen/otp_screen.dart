@@ -6,6 +6,7 @@ import 'package:pinput/pinput.dart';
 import 'package:queen_validators/queen_validators.dart';
 import 'package:smart_auth/smart_auth.dart';
 import 'package:timer_count_down/timer_count_down.dart';
+import 'package:widam/src/features/cart/presentation/cart_body/cart_controller.dart';
 import 'package:widam/src/theme/app_theme.dart';
 import '../../../../common_widgets/banner/app_banner.dart';
 import '../../../../common_widgets/banner/app_banner_dialog.dart';
@@ -154,8 +155,13 @@ class _OtpScreenState extends State<OtpScreen> {
                 ref.listen(verifyOtpControllerProvider, (previous, next) {
                   if (next is AsyncData && next.value != null) {
                     if (next.value?.validation.userExist == true) {
-                      context.maybePop(true);
+                      debugPrint("next.value?.validation.userExist == true");
+                      ref.invalidate(cartControllerProvider);
+                      // Future.delayed(Duration(seconds: 1));
+                      if (mounted) context.maybePop(true);
                     } else {
+                      debugPrint("next.value?.validation.userExist == false");
+
                       context.maybePop(false);
                     }
                   } else if (next is AsyncError) {

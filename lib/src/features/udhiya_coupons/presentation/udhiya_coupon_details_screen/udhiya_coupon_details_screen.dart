@@ -105,10 +105,17 @@ class UdhiyaCouponDetailsScreen extends StatelessWidget {
                             const SizedBox(height: 20),
                             ...coupon.couponItems!.map((item) => Row(
                                   children: [
-                                    Text(item.itemName,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.black)),
+                                    Flexible(
+                                      flex:3,
+                                      child: Text(item.itemName,
+                                          softWrap: true,
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                      
+                                              color: Colors.black,
+                                      
+                                          )),
+                                    ),
                                     const Spacer(),
                                     Text(item.qty.toString(),
                                         style: const TextStyle(
@@ -156,6 +163,7 @@ class _InfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(
           label,
@@ -163,9 +171,12 @@ class _InfoRow extends StatelessWidget {
               fontWeight: FontWeight.w500, fontSize: 14, color: Colors.black),
         ),
         const Spacer(),
-        Text(
-          value,
-          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+        Flexible(
+          flex: 2,
+          child: Text(
+            value,
+            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+          ),
         ),
       ],
     );

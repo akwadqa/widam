@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/constants/strings.dart';
+import 'package:widam/src/features/app_data/presentation/splash_screen/splash_screen.dart';
 import 'package:widam/src/features/item_groups/presentation/barcode_widget/barcode_widget.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
 import 'package:widam/src/utils/utils.dart';
@@ -37,10 +38,12 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AddressSelector(foregroundColor: Colors.white),
-              Spacer(),
-              AppTimeSlot(foregroundColor: Colors.white),
+              Flexible(child: AddressSelector(foregroundColor: Colors.white)),
+              // Spacer(),
+               FittedBox(
+                    fit: BoxFit.scaleDown,child: AppTimeSlot(foregroundColor: Colors.white)),
             ],
           ),
           _SearchWidget(),
@@ -71,7 +74,7 @@ class _SearchWidget extends ConsumerWidget implements PreferredSizeWidget {
                 context: context,
                 autoFocus: true,
                 itemGroupId: Strings.allItemGroup),
-            suffixIcon: const BarcodeWidget(),
+            suffixIcon:  BarcodeWidget(),
             fillColor: Colors.white,
             hintText: S.of(context).searchForAnyProduct,
           ),

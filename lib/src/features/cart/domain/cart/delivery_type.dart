@@ -19,6 +19,8 @@ class DeliveryType with _$DeliveryType {
     required double deliveryCharges,
     required double subTotal,
     required Coordinates? coordinates,
+      required String? pickupPointId, // Add this
+
   }) = _DeliveryType;
 
   factory DeliveryType.fromJson(Map<String, dynamic> json) =>

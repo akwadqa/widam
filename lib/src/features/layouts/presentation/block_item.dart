@@ -34,18 +34,26 @@ class BlockItem extends StatelessWidget {
       } else if (block.title == null) {
         return const SizedBox.shrink();
       }
-      return Padding(
-        padding: titlePadding,
-        child: Text(
-          block.title!,
-          style: const TextStyle(
-              fontSize: 18.0, fontWeight: FontWeight.w700, color: Colors.black),
+      return Flexible(
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Padding(
+            padding: titlePadding,
+            child: Text(
+              block.title!,
+              style: const TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black),
+            ),
+          ),
         ),
       );
     }
 
     return Container(
       color: backgroundColor,
+      padding: EdgeInsets.symmetric(vertical: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

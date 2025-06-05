@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widam/src/features/cart/domain/cart/cart.dart';
 import 'package:widam/src/features/recommendations/presentation/recommendation_items_list.dart';
 import 'package:widam/src/features/recommendations/presentation/similar_items/similar_items_controller.dart';
 
@@ -7,14 +8,29 @@ import '../../../../../generated/l10n.dart';
 import '../../../cart/presentation/cart_body/cart_container.dart';
 
 class SimiliarItems extends ConsumerWidget {
-  const SimiliarItems({super.key, required this.quotationId});
+  const SimiliarItems({
+    super.key,
+    required this.quotationId,
+  });
   final String quotationId;
+  // final Cart cart;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final similarItemsAsync =
         ref.watch(similarItemsControllerProvider(quotationId));
     return similarItemsAsync.when(
         data: (similarItemsResponse) {
+//  final items =
+//               similarItemsResponse.recommendationResponse.websiteItems;
+// debugPrint("item.isUdhiyaItem => ${items[0].isUdhiyaItem}");
+//           final hasUdhiyaOrMubadra = items.any(
+//             (item) => item.isUdhiyaItem == 1
+//           );
+
+//           if (items.isEmpty || hasUdhiyaOrMubadra) {
+//             return const SizedBox.shrink();
+//           }
+
           if (similarItemsResponse
               .recommendationResponse.websiteItems.isEmpty) {
             return const SizedBox.shrink();
@@ -37,11 +53,13 @@ class SimiliarItems extends ConsumerWidget {
                     child: RecommendationItemsList(
                         items: similarItemsResponse
                             .recommendationResponse.websiteItems,
-                        onAddToCart: (websiteItemId, itemWarehouseId, quantity) {
+                        onAddToCart:
+                            (websiteItemId, itemWarehouseId, quantity) {
                           ref
                               .read(similarItemsControllerProvider(quotationId)
                                   .notifier)
-                              .addToCart(websiteItemId, itemWarehouseId, quantity);
+                              .addToCart(
+                                  websiteItemId, itemWarehouseId, quantity);
                         },
                         itemIdLoading: similarItemsResponse.itemIdLoading),
                   )

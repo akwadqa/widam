@@ -1,9 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:widam/src/common_models/response/app_response.dart';
 import 'package:widam/src/constants/end_points.dart';
 import 'package:widam/src/features/recommendations/domain/recommendation_response/recommendation_response.dart';
-import 'package:widam/src/network/network_service.dart';
+import 'package:widam/src/network/exception/dio_exceptions.dart';
+import 'package:widam/src/network/services/dio_client.dart';
+import 'package:widam/src/network/services/network_service.dart';
 
 part 'recommendations_repository.g.dart';
 
@@ -30,8 +33,14 @@ class RecommendationsRespository {
     });
     final response = await _networkService.post(
       EndPoints.recommendations,
-      formData,
+    data:   formData,
     );
+    debugPrint("**********************");
+    debugPrint(servingConfigs.toString());
+    debugPrint(quotationId.toString());
+    debugPrint(websiteItemId.toString());
+    debugPrint(quantity.toString());
+    debugPrint(formData.toString());
     AppResponse<RecommendationResponse> recommendationResponse =
         AppResponse<RecommendationResponse>.fromJson(
             response.data, (json) => RecommendationResponse.fromJson(json));

@@ -3,7 +3,9 @@ import '../../../common_models/response/app_response.dart';
 import '../../../constants/end_points.dart';
 import '../domain/order/order.dart';
 import '../domain/payment/payment.dart';
-import '../../../network/network_service.dart';
+import 'package:widam/src/network/exception/dio_exceptions.dart';
+import 'package:widam/src/network/services/dio_client.dart';
+import 'package:widam/src/network/services/network_service.dart';
 
 part 'checkout_repository.g.dart';
 
@@ -19,7 +21,7 @@ class CheckoutRepository {
   Future<dynamic> palceOrder(
       String quatationId, String languageCode, int createToken,
       [String? warehouseId]) async {
-    final response = await _networkService.post(EndPoints.checkoutPlaceOrder, {
+    final response = await _networkService.post(EndPoints.checkoutPlaceOrder,data:  {
       'quotation_id': quatationId,
       '_lang': languageCode,
       'create_token': createToken,

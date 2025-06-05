@@ -63,7 +63,7 @@ class AddressSelector extends ConsumerWidget {
           maximumSize: const Size.fromWidth(135),
           textStyle: TextStyle(
               fontFamily: fontFamily,
-              fontSize: 13.5,
+              fontSize: 12,
               fontWeight: FontWeight.bold,
               overflow: TextOverflow.ellipsis),
         ));

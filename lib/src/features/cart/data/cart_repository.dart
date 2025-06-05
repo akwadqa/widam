@@ -1,12 +1,15 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:synchronized/synchronized.dart';
 import '../../../common_models/response/app_response.dart';
 import '../../../constants/end_points.dart';
 import '../domain/cart/cart.dart';
-import '../../../network/network_service.dart';
+import 'package:widam/src/network/exception/dio_exceptions.dart';
+import 'package:widam/src/network/services/dio_client.dart';
+import 'package:widam/src/network/services/network_service.dart';
 
 part 'cart_repository.g.dart';
 
@@ -84,8 +87,15 @@ class CartRepository {
         if (express != null) 'express': express ? 1 : 0,
         if (expressPickup != null) 'express_pickup': expressPickup ? 1 : 0
       });
-      final response = await _networkService.put(EndPoints.cart, formData,
-          warehouseId != null ? {'warehouse': warehouseId} : null);
+      debugPrint(formData.toString());
+      for (var field in formData.fields) {
+        debugPrint('Field: ${field.key} => ${field.value}');
+      }
+
+      final response = await _networkService.put(EndPoints.cart,
+          data: formData,
+          queryParameters:
+              warehouseId != null ? {'warehouse': warehouseId} : null);
       return _handleResponse(response);
     });
   }
@@ -99,8 +109,10 @@ class CartRepository {
         ]),
         if (row != null) 'row': row,
       });
-      final response = await _networkService.put(EndPoints.cart, formData,
-          warehouseId != null ? {'warehouse': warehouseId} : null);
+      final response = await _networkService.put(EndPoints.cart,
+          data: formData,
+          queryParameters:
+              warehouseId != null ? {'warehouse': warehouseId} : null);
       return _handleResponse(response);
     });
   }

@@ -1,6 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:widam/src/features/cart/domain/cart/cart_content.dart';
+import 'package:widam/src/features/cart/domain/cart/delivery_type.dart';
+import 'package:widam/src/features/cart/domain/cart/pickup/pickup.dart';
 import 'package:widam/src/features/items/domain/item_details/item_details.dart';
 import '../../addresses/application/local_location_info.dart';
 import '../data/cart_repository.dart';
@@ -98,6 +101,36 @@ int cartCount(Ref ref) => ref.watch(cartControllerProvider).maybeMap(
       data: (cart) => cart.value != null ? cart.value!.totalQty.toInt() : 0,
       orElse: () => 0,
     );
+List<DeliveryType>? getPrimaryDeliveryType(dynamic cartContent) {
+  if (cartContent is CartContent) {
+    final selected = cartContent.normalDelivery ??
+        cartContent.expressDelivery ??
+        cartContent.pickupDelivery;
+
+    return selected != null ? [selected] : null;
+  } else if (cartContent is List<Pickup>) {
+    return cartContent.isNotEmpty
+        ? cartContent.map((p) => p.toDeliveryType()).toList()
+        : null;
+  }
+  return null;
+}
+
+// List<DeliveryType> getAllDeliveryTypes(dynamic cartContent) {
+//   if (cartContent is CartContent) {
+//     return [
+//       cartContent.normalDelivery ??
+//           cartContent.expressDelivery ??
+//           cartContent.pickupDelivery??
+//       if (cartContent.normalDelivery != null) cartContent.normalDelivery!,
+//       if (cartContent.expressDelivery != null) cartContent.expressDelivery!,
+//       if (cartContent.pickupDelivery != null) cartContent.pickupDelivery!,
+//     ];
+//   } else if (cartContent is List<Pickup>) {
+//     return cartContent.map((p) => p.toDeliveryType()).toList();
+//   }
+//   return [];
+// }
 
 @Riverpod(keepAlive: true)
 bool isInCart(Ref ref, String itemId) {
@@ -107,36 +140,36 @@ bool isInCart(Ref ref, String itemId) {
           if (cart == null) return false;
 
           // Check pickup items
-          if (cart.pickup == 1) {
-            return cart.cartContent.any((pickup) => pickup.websiteItems
+          if (cart.pickup == 1 && cart.cartContent is List<Pickup>) {
+            final pickups = cart.cartContent as List<Pickup>;
+            return pickups.any((pickup) => pickup.websiteItems
                 .any((item) => item.websiteItemId == itemId));
           }
 
           // Check normal delivery items
-          final normalDeliveryItems =
-              cart.cartContent.normalDelivery?.websiteItems;
-          if (normalDeliveryItems != null &&
-              normalDeliveryItems.any((item) => item.websiteItemId == itemId)) {
-            return true;
-          }
+          final content = cart.cartContent;
+          if (content is CartContent) {
+            final normalDeliveryItems = content.normalDelivery?.websiteItems;
+            if (normalDeliveryItems != null &&
+                normalDeliveryItems
+                    .any((item) => item.websiteItemId == itemId)) {
+              return true;
+            }
 
-          // Check express delivery items
-          final expressDeliveryItems =
-              cart.cartContent.expressDelivery?.websiteItems;
-          if (expressDeliveryItems != null &&
-              expressDeliveryItems
-                  .any((item) => item.websiteItemId == itemId)) {
-            return true;
-          }
+            final expressDeliveryItems = content.expressDelivery?.websiteItems;
+            if (expressDeliveryItems != null &&
+                expressDeliveryItems
+                    .any((item) => item.websiteItemId == itemId)) {
+              return true;
+            }
 
-          // Check pickup delivery items
-          final pickupDeliveryItems =
-              cart.cartContent.pickupDelivery?.websiteItems;
-          if (pickupDeliveryItems != null &&
-              pickupDeliveryItems.any((item) => item.websiteItemId == itemId)) {
-            return true;
+            final pickupDeliveryItems = content.pickupDelivery?.websiteItems;
+            if (pickupDeliveryItems != null &&
+                pickupDeliveryItems
+                    .any((item) => item.websiteItemId == itemId)) {
+              return true;
+            }
           }
-
           return false;
         },
         orElse: () => false,

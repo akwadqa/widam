@@ -23,7 +23,7 @@ class CartContainer extends StatelessWidget {
       ),
       padding: withoutPadding
           ? const EdgeInsets.only(top: 16)
-          : const EdgeInsets.all(16),
+          : const EdgeInsets.all(14),
       child: child,
     );
   }

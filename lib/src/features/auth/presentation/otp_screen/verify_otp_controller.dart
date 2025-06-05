@@ -23,7 +23,7 @@ class VerifyOtpController extends _$VerifyOtpController {
       final userId = appResponse.userId;
       final fullName = appResponse.fullName;
       if (token != null && userId != null && fullName != null) {
-        ref
+      await  ref
             .read(userDataProvider.notifier)
             .setUserData(token: token, id: userId, fullName: fullName);
       }

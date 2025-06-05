@@ -1310,6 +1310,16 @@ class S {
     );
   }
 
+  /// `Select your pickup slot`
+  String get selectYourPickupSlot {
+    return Intl.message(
+      'Select your pickup slot',
+      name: 'selectYourPickupSlot',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Fully Booked`
   String get fullyBooked {
     return Intl.message(
@@ -2973,6 +2983,76 @@ class S {
   /// `Test`
   String get test {
     return Intl.message('Test', name: 'test', desc: '', args: []);
+  }
+
+  /// `First Day of Eid`
+  String get firstEidDay {
+    return Intl.message(
+      'First Day of Eid',
+      name: 'firstEidDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Second Day of Eid`
+  String get secondEidDay {
+    return Intl.message(
+      'Second Day of Eid',
+      name: 'secondEidDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Third Day of Eid`
+  String get thirdEidDay {
+    return Intl.message(
+      'Third Day of Eid',
+      name: 'thirdEidDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fourth Day of Eid`
+  String get fourthEidDay {
+    return Intl.message(
+      'Fourth Day of Eid',
+      name: 'fourthEidDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fifth Day of Eid`
+  String get fifthEidDay {
+    return Intl.message(
+      'Fifth Day of Eid',
+      name: 'fifthEidDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sixth Day of Eid`
+  String get sixthEidDay {
+    return Intl.message(
+      'Sixth Day of Eid',
+      name: 'sixthEidDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Seventh Day of Eid`
+  String get seventhEidDay {
+    return Intl.message(
+      'Seventh Day of Eid',
+      name: 'seventhEidDay',
+      desc: '',
+      args: [],
+    );
   }
 }
 

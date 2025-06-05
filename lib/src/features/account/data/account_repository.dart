@@ -1,8 +1,10 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:widam/src/network/exception/dio_exceptions.dart';
+import 'package:widam/src/network/services/dio_client.dart';
+import 'package:widam/src/network/services/network_service.dart';
 
 import '../../../common_models/response/app_response.dart';
 import '../../../constants/end_points.dart';
-import '../../../network/network_service.dart';
 import '../../profile/domain/user_details/user_details.dart';
 
 part 'account_repository.g.dart';
@@ -22,7 +24,8 @@ class AccountRepository {
       required String firstName,
       required String lastName,
       String? email}) async {
-    final response = await _networkService.post(EndPoints.register, {
+    final response = await _networkService.post(EndPoints.register,
+    data:  {
       'mobile_no': mobileNumber,
       'salutation': title,
       'first_name': firstName,
@@ -49,7 +52,7 @@ class AccountRepository {
       String? firstName,
       String? lastName,
       String? email}) async {
-    final response = await _networkService.put(EndPoints.users, {
+    final response = await _networkService.put(EndPoints.users, data: {
       if (title != null) 'salutation': title,
       if (firstName != null) 'first_name': firstName,
       if (lastName != null) 'last_name': lastName,

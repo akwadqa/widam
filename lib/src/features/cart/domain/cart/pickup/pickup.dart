@@ -41,6 +41,8 @@ class Pickup with _$Pickup {
       deliveryCharges: deliveryCharges,
       subTotal: subTotal,
       coordinates: coordinates,
+          pickupPointId: pickupPointId, // Pass this too
+
     );
   }
 }

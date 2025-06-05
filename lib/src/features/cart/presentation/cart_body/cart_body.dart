@@ -4,11 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:widam/src/common_widgets/app_step_progress_indicator.dart';
 import 'package:widam/src/common_widgets/banner/app_banner_dialog.dart';
+import 'package:widam/src/features/app_data/presentation/splash_screen/splash_screen.dart';
 import 'package:widam/src/features/cart/application/cart_service.dart';
 import 'package:widam/src/features/cart/domain/cart/cart.dart';
+import 'package:widam/src/features/cart/domain/cart/pickup/pickup.dart';
 import 'package:widam/src/features/cart/presentation/cart_banner/cart_banner.dart';
 import 'package:widam/src/features/cart/presentation/cart_body/pickup_image.dart';
 import 'package:widam/src/features/cart/presentation/cart_body/switch_container.dart';
+import 'package:widam/src/features/checkout/presentation/checkout_body/checkout_body.dart';
 import 'package:widam/src/features/recommendations/presentation/recently_viewd/recently_viewd.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
 import 'package:widam/src/theme/app_colors.dart';
@@ -42,15 +45,21 @@ class CartBody extends ConsumerWidget {
   }
 }
 
-class UnAthenticatedCart extends StatelessWidget {
+class UnAthenticatedCart extends ConsumerWidget {
   const UnAthenticatedCart({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return CartBanner(
       title: S.of(context).cartUnathorizedDesc,
       buttonText: S.of(context).loginOrRegister,
-      onPressed: () => context.pushRoute(const LoginScreen()),
+      onPressed: () async {
+        final loginSuccess = await context.pushRoute(const LoginScreen());
+        if (loginSuccess == true) {
+          // User just logged in, refresh cart
+          ref.invalidate(cartControllerProvider);
+        }
+      },
     );
   }
 }
@@ -60,6 +69,12 @@ class AuthenticatedCart extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+     ref.listen(userDataProvider, (previous, next) {
+    if (previous == null && next != null) {
+      // User just logged in
+      ref.invalidate(cartControllerProvider);
+    }
+  });
     final cartAsync = ref.watch(cartControllerProvider);
     return cartAsync.when(
       data: (cart) {
@@ -77,7 +92,7 @@ class AuthenticatedCart extends ConsumerWidget {
         child: Center(
             child: AppBanner(message: error.toString(), stackTrace: stack)),
       ),
-      loading: () => const FadeCircleLoadingIndicator(),
+      loading: () => Center(child: const FadeCircleLoadingIndicator()),
     );
   }
 }
@@ -127,18 +142,20 @@ class _NonEmptyCart extends ConsumerWidget {
                 )),
                 const SliverToBoxAdapter(child: SizedBox(height: 12.0))
               ] else ...[
-                SliverToBoxAdapter(
-                    child: AppStackedLoadingIndicator(
-                  isLoading: ref.watch(updateCartProvider).isLoading,
-                  child: SwitchContainer(
-                    title: S.of(context).split,
-                    description: S.of(context).splitDescription,
-                    onPressed: () => ref
-                        .read(updateCartProvider.notifier)
-                        .updateCart(express: true, expressPickup: true),
-                  ),
-                )),
-                const SliverToBoxAdapter(child: SizedBox(height: 12.0))
+                if (normalDelivery != null && expressDelivery != null) ...[
+                  SliverToBoxAdapter(
+                      child: AppStackedLoadingIndicator(
+                    isLoading: ref.watch(updateCartProvider).isLoading,
+                    child: SwitchContainer(
+                      title: S.of(context).split,
+                      description: S.of(context).splitDescription,
+                      onPressed: () => ref
+                          .read(updateCartProvider.notifier)
+                          .updateCart(express: true, expressPickup: true),
+                    ),
+                  )),
+                  const SliverToBoxAdapter(child: SizedBox(height: 12.0))
+                ]
               ],
               SliverToBoxAdapter(
                   child: Text(S.of(context).yourCartDetails,
@@ -247,6 +264,8 @@ class _NonEmptyCart extends ConsumerWidget {
                         onPressed: cart.orderTotal.remainderAmount > 0
                             ? null
                             : () {
+                                // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SplashScreen()));
+
                                 if (ref.read(canVibrateProvider).requireValue) {
                                   Vibrate.feedback(FeedbackType.light);
                                 }
@@ -261,12 +280,15 @@ class _NonEmptyCart extends ConsumerWidget {
   }
 
   void _handleCartLogic(Cart cart, BuildContext context, WidgetRef ref) {
-    if (cart.cartContent is CartContent) {
-      final cartContent = cart.cartContent as CartContent;
+    final content = cart.cartContent;
 
-      if (hasUnavailableItems(cartContent)) {
+    if (content is CartContent) {
+      if (hasUnavailableItems(content)) {
         showUnAvailableItems(context);
-      } else if (cart.shippingAddressDetails == null) {
+        return;
+      }
+
+      if (cart.shippingAddressDetails == null) {
         showAdaptiveModalBottomSheet<Address?>(
           context: context,
           builder: (context) => const AddressesSelector(),
@@ -291,9 +313,61 @@ class _NonEmptyCart extends ConsumerWidget {
             });
           }
         });
-      } else {
-        context.pushRoute(const CheckoutScreen());
+        return;
       }
+
+      context.pushRoute(const CheckoutScreen());
+    } else if (content is List<Pickup>) {
+      // For pickup carts (no shipping address needed)
+      context.pushRoute(const CheckoutScreen());
     }
   }
+
+  // void _handleCartLogic(Cart cart, BuildContext context, WidgetRef ref) {
+  //   if (cart.cartContent is CartContent) {
+  //     final cartContent = cart.cartContent as CartContent;
+
+  //     if (hasUnavailableItems(cartContent)) {
+  //       showUnAvailableItems(context);
+  //     } else if (cart.shippingAddressDetails == null) {
+  //       showAdaptiveModalBottomSheet<Address?>(
+  //         context: context,
+  //         builder: (context) => const AddressesSelector(),
+  //       ).then((address) {
+  //         if (address != null) {
+  //           ref
+  //               .read(updateCartProvider.notifier)
+  //               .updateCart(
+  //                 shippingAddressId: address.addressId,
+  //               )
+  //               .then((value) {
+  //             if (value) {
+  //               final localWarehouseId =
+  //                   ref.read(localLocationInfoProvider).warehouseId;
+  //               if (localWarehouseId != address.warehouse?.warehouseId) {
+  //                 ref
+  //                     .read(addressSelectorButtonControllerProvider.notifier)
+  //                     .onAddressSelected(address);
+  //               }
+  //               context.pushRoute(const CheckoutScreen());
+  //             }
+  //           });
+  //         }
+  //       });
+  //     } else {
+  //       debugPrint('proceed to checkout');
+  //       // Navigator.pushNamed(context, CheckoutScreen.name);
+  //   // Navigator.of(context).push(MaterialPageRoute(builder: (context) => CheckoutBody()));
+  //               // context.pushRoute(const CheckoutScreen());
+
+  //       // context.router.push(CheckoutScreen());
+  //       context.pushRoute(const CheckoutScreen());
+  //     }
+  //   }else if(cart.cartContent is List<Pickup>){
+  //     final cartContent = cart.cartContent as List<Pickup>;
+  //     final cc=cartContent.first;
+  //       debugPrint('proceed to cartContent$cc');
+
+  //   }
+  // }
 }

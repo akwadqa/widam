@@ -18,9 +18,13 @@ class RecommendationItemsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return ListView.separated(
         itemBuilder: (context, index) {
-          return SizedBox(
+          final disableItem=items[index].status=="Disabled";
+          return 
+          disableItem?SizedBox():
+          SizedBox(
             width: 90,
             child: InkWell(
               onTap: () => onAddToCart(items[index].websiteItemId, items[index].warehouse.warehouseId, 1),
@@ -32,16 +36,11 @@ class RecommendationItemsList extends StatelessWidget {
                       height: 70,
                       width: 70),
                   Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          items[index].websiteItemShortName ?? '',
-                          style: const TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w600),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                    child: Text(
+                      items[index].websiteItemShortName ?? '',
+                      style: const TextStyle(
+                          fontSize: 12, fontWeight: FontWeight.w600),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   itemIdLoading == items[index].websiteItemId

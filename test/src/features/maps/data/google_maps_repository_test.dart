@@ -4,11 +4,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:widam/src/features/addresses/data/google_maps_repository.dart';
 import 'package:widam/src/features/addresses/domain/place/place.dart';
-import 'package:widam/src/network/network_service.dart';
+import 'package:widam/src/network/services/network_service.dart';
 
 class MockNetworkService extends Mock implements NetworkService {
   @override
-  Future<Response> get(String url, {dynamic data, Map<String, dynamic>? queryParameters, CancelToken? cancelToken}) async {
+  Future<Response> get(String url, {dynamic data, Map<String, dynamic>? queryParameters,
+    Map<String, String>? headers,
+   CancelToken? cancelToken}) async {
     if(queryParameters?['input'] != null && queryParameters?['input'] != '') {
       return Response(data: _kSuccessResponse, requestOptions: RequestOptions());
     }else {

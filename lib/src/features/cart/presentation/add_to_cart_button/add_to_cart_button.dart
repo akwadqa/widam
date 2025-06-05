@@ -46,6 +46,7 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("ITEM ID${widget.itemId}");
     final state = ref.watch(updateCartProvider);
     final isInCart = ref.watch(isInCartProvider(widget.itemId));
     _quantityInCart = ref.watch(quantityControllerProvider(
@@ -67,7 +68,8 @@ class _AddToCartButtonState extends ConsumerState<AddToCartButton> {
               onTap: () async {
                 await _deleteItem();
               },
-              child: _deleteIcon(),
+              child: 
+              _deleteIcon(),
             );
     }
 

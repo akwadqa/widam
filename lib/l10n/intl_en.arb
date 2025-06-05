@@ -159,6 +159,7 @@
   "items" : "Items",
   "proceedToCheckout" : "Proceed To Checkout",
   "selectYourDeliverySlot" : "Select your delivery slot",
+  "selectYourPickupSlot" : "Select your pickup slot",
   "fullyBooked" : "Fully Booked",
   "select" : "Select",
   "youHaveItemsAddedToYourCart" : "You have items added to your cart",
@@ -356,5 +357,12 @@
   "pickupDescription" : "Pick up your items from the nearest warehouse.",
   "expressDescription" : "Get express delivery for these items.",
   "pickup" : "Pickup",
-  "test" : "Test"
+  "test" : "Test",
+  "firstEidDay": "First Day of Eid",
+  "secondEidDay": "Second Day of Eid",
+  "thirdEidDay": "Third Day of Eid",
+  "fourthEidDay": "Fourth Day of Eid",
+  "fifthEidDay": "Fifth Day of Eid",
+  "sixthEidDay": "Sixth Day of Eid",
+  "seventhEidDay": "Seventh Day of Eid"
 }

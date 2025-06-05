@@ -4,7 +4,9 @@ import 'package:widam/src/features/udhiya_coupons/domain/udhiya_coupon/udhiya_co
 import 'package:widam/src/features/udhiya_coupons/domain/udhiya_coupon_details/udhiya_coupon_details.dart';
 
 import '../../../constants/end_points.dart';
-import '../../../network/network_service.dart';
+import 'package:widam/src/network/exception/dio_exceptions.dart';
+import 'package:widam/src/network/services/dio_client.dart';
+import 'package:widam/src/network/services/network_service.dart';
 
 part 'udhiya_coupons_repository.g.dart';
 

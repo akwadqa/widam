@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:pay/pay.dart';
 import 'package:widam/src/features/cart/application/cart_service.dart';
+import 'package:widam/src/features/cart/domain/cart/pickup/pickup.dart';
 import 'package:widam/src/features/checkout/domain/order/order.dart';
 import 'package:widam/src/features/checkout/domain/payment_result/payment_result.dart';
 import 'package:widam/src/features/checkout/presentation/checkout_body/custom_payment_controller.dart';
@@ -187,6 +188,16 @@ class _CheckoutButtonState extends ConsumerState<CheckoutButton> {
                         .read(placeOrderControllerProvider.notifier)
                         .placeOrder(widget.cart.quotationId);
                   }
+                }
+                else if(widget.cart.cartContent is List<Pickup>){
+                  final cartInfo=widget.cart.cartContent as List<Pickup>;
+                  final cartData=cartInfo.first;
+                  // if (hasUnavailableItems(cartData)) {
+                  //   showUnAvailableItems(context);
+                  // } else {
+                    ref
+                        .read(placeOrderControllerProvider.notifier)
+                        .placeOrder(widget.cart.quotationId);
                 }
               }
             : null,

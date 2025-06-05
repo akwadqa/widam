@@ -169,11 +169,14 @@ class _PaymentMethodItem extends StatelessWidget {
         child: Row(children: [
           AppCachedNetworkImage(imageUrl: paymentMethod.icon, height: 20.0),
           const SizedBox(width: 10),
-          Text(paymentMethod.title,
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.bold))
+          Flexible(
+            child: Text(paymentMethod.title,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 12.0,
+                    overflow: TextOverflow.ellipsis,
+                    fontWeight: FontWeight.bold)),
+          )
         ]),
       ),
       value: paymentMethod,

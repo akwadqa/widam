@@ -38,11 +38,24 @@ class DeliveryContainer extends StatelessWidget {
           children: [
             Assets.icons.truckTimeIcon.svg(),
             const SizedBox(width: 8.0),
-            Text(deliveryType.deliveryMethodTitle,
+            Flexible(
+              child: Text(
+                deliveryType.deliveryMethodTitle,
+                softWrap: true,
+
                 style: const TextStyle(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black)),
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                overflow: TextOverflow.visible,
+              ),
+            ),
+            ),
+            // Text(deliveryType.deliveryMethodTitle,
+            //     style: const TextStyle(
+            //         fontSize: 14.0,
+            //         fontWeight: FontWeight.bold,
+            //         color: Colors.black)),
           ],
         ),
         const SizedBox(height: 20.0),
@@ -59,7 +72,10 @@ class DeliveryContainer extends StatelessWidget {
                             .read(updateCartProvider.notifier)
                             .updateCart(express: false, expressPickup: true),
                       )
-                    : isPickup == true
+                    : 
+                    isPickup == true && deliveryType.websiteItems.first.isUdhiyaItem!=1
+
+                    // isPickup == true
                         ? SwitchContainer(
                             title: S.of(context).express,
                             description: S.of(context).expressDescription,
@@ -99,7 +115,7 @@ class DeliveryContainer extends StatelessWidget {
             Consumer(
               builder: (context, ref, child) {
                 return TextButton(
-                  onPressed: isExpress == true || isPickup == true
+                  onPressed: isExpress == true ||  isPickup == true && deliveryType.websiteItems.first.isUdhiyaItem!=1
                       ? null
                       : () {
                           showAdaptiveModalBottomSheet<
@@ -113,9 +129,13 @@ class DeliveryContainer extends StatelessWidget {
                                     initialTimeSlot: deliveryType.timeSlot);
                               }).then((value) {
                             if (value != null) {
+                              debugPrint(
+                                  'ISPICKUP : ${isPickup}');
+                              debugPrint(
+                                  'isUdhiyaItem : ${deliveryType.websiteItems.any((d)=>d.isUdhiyaItem==1)}');
                               ref.read(updateCartProvider.notifier).updateCart(
-                                  pickupPointId: isPickup == true
-                                      ? deliveryType.deliveryMethodId
+                                  pickupPointId: isPickup == true ||deliveryType.websiteItems.first.isUdhiyaItem==1
+                                      ? deliveryType.pickupPointId
                                       : null,
                                   timeSlot: value.timeSlot.timeSlotId,
                                   deliveryDate: value.deliveryDate);

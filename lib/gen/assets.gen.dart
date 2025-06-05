@@ -203,56 +203,56 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<dynamic> get values => [
-        addressIcon,
-        addressesIcon,
-        apartmentIcon,
-        barcodeIcon,
-        calenderIcon,
-        cardIcon,
-        cartAgainIcon,
-        cartIcon,
-        categoriesIcon,
-        categoryIcon,
-        clockIcon,
-        couponsIcon,
-        dateTimeIcon,
-        dealsIcon,
-        deleteIcon,
-        deliveryIcon,
-        discountIcon,
-        driverMarkerIcon,
-        editIcon,
-        emptyFileIcon,
-        emptyFolder,
-        errorIcon,
-        exclamationMark,
-        filledLocationIcon,
-        folderIcon,
-        homeIcon,
-        idCardIcon,
-        loadingIcon,
-        locationIcon,
-        locationMarkerIcon,
-        loyaltyIcon,
-        newCart,
-        officeIcon,
-        optionsIcon,
-        pastOrdersIcon,
-        profileIcon,
-        rocketIcon,
-        searchIcon,
-        selectedCartIcon,
-        selectedCategoriesIcon,
-        selectedDealsIcon,
-        selectedHomeIcon,
-        selectedProfileIcon,
-        thumbIcon,
-        truckTimeIcon,
-        villaIcon,
-        walletIcon,
-        warningIcon,
-        widamPointsIcon
-      ];
+    addressIcon,
+    addressesIcon,
+    apartmentIcon,
+    barcodeIcon,
+    calenderIcon,
+    cardIcon,
+    cartAgainIcon,
+    cartIcon,
+    categoriesIcon,
+    categoryIcon,
+    clockIcon,
+    couponsIcon,
+    dateTimeIcon,
+    dealsIcon,
+    deleteIcon,
+    deliveryIcon,
+    discountIcon,
+    driverMarkerIcon,
+    editIcon,
+    emptyFileIcon,
+    emptyFolder,
+    errorIcon,
+    exclamationMark,
+    filledLocationIcon,
+    folderIcon,
+    homeIcon,
+    idCardIcon,
+    loadingIcon,
+    locationIcon,
+    locationMarkerIcon,
+    loyaltyIcon,
+    newCart,
+    officeIcon,
+    optionsIcon,
+    pastOrdersIcon,
+    profileIcon,
+    rocketIcon,
+    searchIcon,
+    selectedCartIcon,
+    selectedCategoriesIcon,
+    selectedDealsIcon,
+    selectedHomeIcon,
+    selectedProfileIcon,
+    thumbIcon,
+    truckTimeIcon,
+    villaIcon,
+    walletIcon,
+    warningIcon,
+    widamPointsIcon,
+  ];
 }
 
 class $AssetsImagesGen {
@@ -311,20 +311,20 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values => [
-        bestSellerBackground,
-        cartBannerImage,
-        expressBackground,
-        pattern,
-        qatarFlag,
-        reviewImagePerson,
-        starHalfImage,
-        starImage,
-        starOffImage,
-        subscriptionImage,
-        walletImage,
-        widamLogo,
-        widamLogoWhite
-      ];
+    bestSellerBackground,
+    cartBannerImage,
+    expressBackground,
+    pattern,
+    qatarFlag,
+    reviewImagePerson,
+    starHalfImage,
+    starImage,
+    starOffImage,
+    subscriptionImage,
+    walletImage,
+    widamLogo,
+    widamLogoWhite,
+  ];
 }
 
 class $AssetsSplashGen {
@@ -341,7 +341,7 @@ class $AssetsSplashGen {
 }
 
 class Assets {
-  Assets._();
+  const Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
@@ -349,11 +349,7 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  });
+  const AssetGenImage(this._assetName, {this.size, this.flavors = const {}});
 
   final String _assetName;
 
@@ -381,7 +377,7 @@ class AssetGenImage {
     bool gaplessPlayback = true,
     bool isAntiAlias = false,
     String? package,
-    FilterQuality filterQuality = FilterQuality.low,
+    FilterQuality filterQuality = FilterQuality.medium,
     int? cacheWidth,
     int? cacheHeight,
   }) {
@@ -413,15 +409,8 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider({
-    AssetBundle? bundle,
-    String? package,
-  }) {
-    return AssetImage(
-      _assetName,
-      bundle: bundle,
-      package: package,
-    );
+  ImageProvider provider({AssetBundle? bundle, String? package}) {
+    return AssetImage(_assetName, bundle: bundle, package: package);
   }
 
   String get path => _assetName;
@@ -430,17 +419,11 @@ class AssetGenImage {
 }
 
 class SvgGenImage {
-  const SvgGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  }) : _isVecFormat = false;
+  const SvgGenImage(this._assetName, {this.size, this.flavors = const {}})
+    : _isVecFormat = false;
 
-  const SvgGenImage.vec(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  }) : _isVecFormat = true;
+  const SvgGenImage.vec(this._assetName, {this.size, this.flavors = const {}})
+    : _isVecFormat = true;
 
   final String _assetName;
   final Size? size;
@@ -494,7 +477,8 @@ class SvgGenImage {
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      colorFilter: colorFilter ??
+      colorFilter:
+          colorFilter ??
           (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
       clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,

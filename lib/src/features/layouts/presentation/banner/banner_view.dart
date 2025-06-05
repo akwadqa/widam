@@ -60,18 +60,19 @@ class _BannerImage extends StatelessWidget {
   const _BannerImage({required this.banner, required this.onTap});
   final Banner banner;
   final VoidCallback onTap;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(4),
-      child: Container(
-        height: 100,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            image: DecorationImage(
-                image: CachedNetworkImageProvider(banner.bannerImage),
-                fit: BoxFit.fitWidth)),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(4),
+        child: CachedNetworkImage(
+          imageUrl: banner.bannerImage,
+          fit: BoxFit.fitWidth,
+          width: double.infinity,
+        ),
       ),
     );
   }

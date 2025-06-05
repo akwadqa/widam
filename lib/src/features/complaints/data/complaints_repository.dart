@@ -3,7 +3,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:widam/src/common_models/response/app_response.dart';
 import 'package:widam/src/constants/end_points.dart';
 import 'package:widam/src/features/complaints/domain/complaint/complaint.dart';
-import 'package:widam/src/network/network_service.dart';
+import 'package:widam/src/network/exception/dio_exceptions.dart';
+import 'package:widam/src/network/services/dio_client.dart';
+import 'package:widam/src/network/services/network_service.dart';
 
 part 'complaints_repository.g.dart';
 
@@ -26,7 +28,7 @@ class ComplaintsRepository {
       'description': description,
       'subject': subject,
     });
-    final response = await _networkService.post(EndPoints.complaints, data);
+    final response = await _networkService.post(EndPoints.complaints,data:  data);
     final AppResponse<Complaint> appDataResponse =
         AppResponse.fromJson(response.data, (json) => Complaint.fromJson(json));
     if (appDataResponse.error == 1) {

@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../common_models/response/app_response.dart';
 import '../../../constants/end_points.dart';
-import '../../../network/network_service.dart';
+import 'package:widam/src/network/exception/dio_exceptions.dart';
+import 'package:widam/src/network/services/dio_client.dart';
+import 'package:widam/src/network/services/network_service.dart';
 
 import '../domain/address/address.dart';
 
@@ -33,7 +35,7 @@ class AddressesRepository {
     AddressConverter addressConverter = const AddressConverter();
     final FormData formData =
         FormData.fromMap(addressConverter.toJson(address));
-    final response = await _networkService.post(EndPoints.addresses, formData);
+    final response = await _networkService.post(EndPoints.addresses, data: formData);
     return _handelResponse(response);
   }
 
@@ -41,7 +43,7 @@ class AddressesRepository {
     AddressConverter addressConverter = const AddressConverter();
     final FormData formData =
         FormData.fromMap(addressConverter.toJson(address, true));
-    final response = await _networkService.put(EndPoints.addresses, formData);
+    final response = await _networkService.put(EndPoints.addresses,data:  formData);
     return _handelResponse(response);
   }
 

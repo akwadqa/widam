@@ -227,10 +227,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "Get express delivery for these items.",
     ),
     "expressPickup": MessageLookupByLibrary.simpleMessage("Express Pickup"),
+    "fifthEidDay": MessageLookupByLibrary.simpleMessage("Fifth Day of Eid"),
+    "firstEidDay": MessageLookupByLibrary.simpleMessage("First Day of Eid"),
     "firstName": MessageLookupByLibrary.simpleMessage("First Name"),
     "firstNameHint": MessageLookupByLibrary.simpleMessage(
       "Enter your first name",
     ),
+    "fourthEidDay": MessageLookupByLibrary.simpleMessage("Fourth Day of Eid"),
     "freiendlyErrorMessage": MessageLookupByLibrary.simpleMessage(
       "Something went wrong! Please contact our customer support.",
     ),
@@ -512,6 +515,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "searchForAnyProduct": MessageLookupByLibrary.simpleMessage(
       "Search for any product",
     ),
+    "secondEidDay": MessageLookupByLibrary.simpleMessage("Second Day of Eid"),
     "select": MessageLookupByLibrary.simpleMessage("Select"),
     "selectComplaintType": MessageLookupByLibrary.simpleMessage(
       "Select Complaint Type",
@@ -526,6 +530,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectYourDeliverySlot": MessageLookupByLibrary.simpleMessage(
       "Select your delivery slot",
     ),
+    "selectYourPickupSlot": MessageLookupByLibrary.simpleMessage(
+      "Select your pickup slot",
+    ),
     "selectYourProducts": MessageLookupByLibrary.simpleMessage(
       "Select Your\nProducts",
     ),
@@ -535,9 +542,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "Set Your\nSchedule",
     ),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+    "seventhEidDay": MessageLookupByLibrary.simpleMessage("Seventh Day of Eid"),
     "shipTo": MessageLookupByLibrary.simpleMessage("Ship To"),
     "shouldBeNumber": MessageLookupByLibrary.simpleMessage("Should be number"),
     "signOut": MessageLookupByLibrary.simpleMessage("Sign Out"),
+    "sixthEidDay": MessageLookupByLibrary.simpleMessage("Sixth Day of Eid"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "slotterFeesValidationMsg": MessageLookupByLibrary.simpleMessage(
       "Please select slotter fees",
@@ -582,6 +591,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "theseItemsAreNotAvailable": MessageLookupByLibrary.simpleMessage(
       "Some items in your cart are now unavailable due to your location change. Please review your cart",
     ),
+    "thirdEidDay": MessageLookupByLibrary.simpleMessage("Third Day of Eid"),
     "timeSlot": MessageLookupByLibrary.simpleMessage("Time slot"),
     "timeSlotChangerDescription": MessageLookupByLibrary.simpleMessage(
       "Click here to select a different delivery time. A selection of available timeslots will be presented for you to choose from. Once you\'ve found a suitable option, click \'Select\' to update your delivery timeslot.",

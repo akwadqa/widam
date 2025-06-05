@@ -16,12 +16,13 @@ class TimeSlotContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+    
         decoration: BoxDecoration(
           color: AppColors.paleGray,
           borderRadius: BorderRadius.circular(4),
         ),
         padding: const EdgeInsetsDirectional.only(
-            start: 2, end: 4, top: 4, bottom: 4),
+            start: 2, end: 2, top: 4, bottom: 4),
         child: TimeSlotRow(
             formattedDate: formattedDate,
             formattedTime: formattedTime,
@@ -48,27 +49,32 @@ class TimeSlotRow extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(2),
+          Flexible(
+            child: Container(
+              // width: 40,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(2),
+              ),
+              padding: const EdgeInsets.all(2),
+              child: Text(_getFormattedDate(formattedDate, context),
+                  style: const TextStyle(
+                      color: AppColors.red,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center),
             ),
-            padding: const EdgeInsets.all(4),
-            child: Text(_getFormattedDate(formattedDate, context),
-                style: const TextStyle(
-                    color: AppColors.red,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center),
           ),
-          const SizedBox(width: 8),
-          Text(formattedTime,
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold)),
+          const SizedBox(width: 4),
+          Flexible(
+            child: Text(formattedTime,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold)),
+          ),
           if (onTap != null) ...[
-            const SizedBox(width: 8),
+            const SizedBox(width: 4),
             const Icon(Icons.arrow_drop_down, color: Colors.black, size: 16)
           ]
         ],

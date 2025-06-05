@@ -33,23 +33,28 @@ class PickupList extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      PickupData(
-                          title: pickup.pickupPointName,
-                          description: pickup.address,
-                          openingHours: pickup.timeSlot.timeFormatted),
-                      Column(
-                        children: [
-                          Text(S.of(context).pickupLocation,
-                              style: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.darkBlue)),
-                          const SizedBox(height: 2),
-                          PickupMapImage(
-                            latitude: pickup.coordinates.latitude,
-                            longitude: pickup.coordinates.longitude,
-                          )
-                        ],
+                      Flexible(
+                        child: PickupData(
+                            title: pickup.pickupPointName,
+                            description: pickup.address,
+                            openingHours: pickup.timeSlot.timeFormatted),
+                      ),
+                      const SizedBox(height: 10),
+                      Flexible(
+                        child: Column(
+                          children: [
+                            Text(S.of(context).pickupLocation,
+                                style: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.darkBlue)),
+                            const SizedBox(height: 2),
+                            PickupMapImage(
+                              latitude: pickup.coordinates.latitude,
+                              longitude: pickup.coordinates.longitude,
+                            )
+                          ],
+                        ),
                       )
                     ],
                   ),

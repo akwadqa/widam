@@ -25,7 +25,14 @@ class PickupData extends StatelessWidget {
                   border: Border.all(color: AppColors.darkBlue, width: 2)),
             ),
             const SizedBox(width: 4),
-            Text(title, style: _textStyle),
+            Flexible(
+              child: Text(
+                title,
+                style: _textStyle,
+                softWrap: true,
+                overflow: TextOverflow.visible,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 2),
@@ -34,7 +41,13 @@ class PickupData extends StatelessWidget {
             children: [
               const VerticalDivider(color: AppColors.darkBlue, thickness: 2),
               const SizedBox(width: 8),
-              Text(description, style: const TextStyle(fontSize: 12))
+              Flexible(
+                flex: 2,
+                    // fit: BoxFit.scaleDown,
+                    // alignment: Alignment.centerLeft,
+                    child: Text(description, 
+                    softWrap: true,
+                    style: const TextStyle(fontSize: 12)))
             ],
           ),
         ),

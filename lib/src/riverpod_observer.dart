@@ -26,7 +26,7 @@ class RiverpodObserver extends ProviderObserver {
     Object? newValue,
     ProviderContainer container,
   ) {
-    debugPrint('Provider $provider updated from $previousValue to $newValue');
+    // debugPrint('Provider $provider updated from $previousValue to $newValue');
   }
 
   @override

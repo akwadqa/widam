@@ -11,6 +11,7 @@ import 'package:widam/src/features/items/presentation/item_details/item_details_
 import 'package:widam/src/features/recommendations/presentation/frequently_bought_together/frequently_bought_together_controller.dart';
 import 'package:widam/src/features/recommendations/presentation/recently_viewd/recently_viewd_controller.dart';
 import 'package:widam/src/features/recommendations/presentation/similar_items/similar_items_controller.dart';
+import 'package:widam/src/features/udhiya_coupons/data/udhiya_coupons_repository.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
 import 'package:widam/src/utils/utils.dart';
 import '../../../../auth/application/user_data_provider.dart';
@@ -125,19 +126,26 @@ class AddToCartWidget extends StatelessWidget {
     if (!_validateForms(ref)) return;
 
     ref.read(mubadaraFormKeyProvider).currentState?.save();
+    final isUdhiyaItem = ref
+        .watch(itemDetailsControllerProvider)
+        .value
+        ?.itemDetails
+        .isUdhiyaItem;
+    debugPrint("isUdhiyaItem IN ADD to cart : ${isUdhiyaItem}");
+    final udhiyaExpress=isUdhiyaItem==1?false:true;
 
     ref.read(updateCartProvider.notifier).updateCart(
-          itemId: itemId,
-          quantity: ref.read(quantityProvider),
-          pickupPointId: ref.read(selectedPickupPointControllerProvider),
-          qid: ref.read(qidNumberControllerProvider).isEmpty
-              ? null
-              : ref.read(qidNumberControllerProvider),
-          file: ref.read(qidAttachmentControllerProvider),
-          attributionToken: attributionToken,
-          isPriceModifier: ref.read(slotterFeesControllerProvider),
-          itemWarehouseId: itemWarehouseId
-        );
+        itemId: itemId,
+        quantity: ref.read(quantityProvider),
+        pickupPointId: ref.read(selectedPickupPointControllerProvider),
+        qid: ref.read(qidNumberControllerProvider).isEmpty
+            ? null
+            : ref.read(qidNumberControllerProvider),
+        file: ref.read(qidAttachmentControllerProvider),
+        attributionToken: attributionToken,
+        isPriceModifier: ref.read(slotterFeesControllerProvider),
+        express:udhiyaExpress,
+        itemWarehouseId: itemWarehouseId);
 
     _invalidateRecommendationProviders(ref);
   }

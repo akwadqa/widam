@@ -4,7 +4,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../constants/end_points.dart';
 import '../../../constants/keys.dart';
 import '../../../constants/services_urls.dart';
-import '../../../network/network_service.dart';
+import 'package:widam/src/network/exception/dio_exceptions.dart';
+import 'package:widam/src/network/services/dio_client.dart';
+import 'package:widam/src/network/services/network_service.dart';
 import '../domain/place/place.dart';
 
 part 'google_maps_repository.g.dart';

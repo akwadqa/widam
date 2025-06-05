@@ -1,6 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:widam/src/constants/end_points.dart';
-import 'package:widam/src/network/network_service.dart';
+import 'package:widam/src/network/exception/dio_exceptions.dart';
+import 'package:widam/src/network/services/dio_client.dart';
+import 'package:widam/src/network/services/network_service.dart';
 
 import '../../../common_models/response/app_response.dart';
 import '../domain/tag/tag.dart';

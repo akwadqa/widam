@@ -102,7 +102,10 @@ class CartItem extends StatelessWidget {
                       updateCartProvider.overrideWith(() => UpdateCart()),
                       quantityControllerProvider.overriddenFamily
                     ],
-                    child: AddToCartButton(
+                    child: 
+                    // Container(),
+                    
+                    AddToCartButton(
                       minQuantity: itemDetails.minQty.toInt(),
                       maxQuantity: itemDetails.maxQty.toInt(),
                       itemId: itemDetails.websiteItemId,
