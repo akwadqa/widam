@@ -43,8 +43,10 @@ class ItemContainer extends ConsumerWidget {
         child: InkWell(
             onTap: item.inStock == 0
                 ? null
-                : isFrequencyItem
-                    ? () {
+                : 
+                isFrequencyItem
+                    ?
+                     () {
                         context.maybePop().then((value) {
                           context.pushRoute(ItemDetailsScreen(
                               itemId: item.websiteItemId,

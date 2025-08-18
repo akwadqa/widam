@@ -39,7 +39,7 @@ class ItemCard extends StatelessWidget {
               children: [
                 Positioned.fill(
                     child: AppCachedNetworkImage(
-                        fit: BoxFit.fitWidth, imageUrl: item.websiteItemImage)),
+                        fit: BoxFit.cover, imageUrl: item.websiteItemImage)),
                 if (item.tags
                         .where((element) => element.productLabel == 1)
                         .isNotEmpty &&
@@ -85,8 +85,9 @@ class ItemCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ItemTitle(
-                      title: item.websiteItemName,
-                      maxLines: isFrequencyItem ? 1 : null),
+                      title: item.websiteItemShortName??item.websiteItemName,
+                      
+                      maxLines: isFrequencyItem ? 1 : 2),
                   const SizedBox(height: 5),
                   ItemPriceRow(item: item),
                   if (item.price.discountTitle != null) ...[
@@ -96,10 +97,15 @@ class ItemCard extends StatelessWidget {
                         maxLines: isFrequencyItem ? 1 : null),
                   ],
                   const SizedBox(height: 5),
-                  ItemUnit(stockUom: item.stockUom),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ItemUnit(stockUom: item.stockUom),
+                      ItemAddToCartButton(
+                          item: item, attributionToken: attributionToken)
+                    ],
+                  ),
                   const SizedBox(height: 2),
-                  ItemAddToCartButton(
-                      item: item, attributionToken: attributionToken)
                 ],
               ),
             )

@@ -6,6 +6,7 @@ import 'package:widam/gen/fonts.gen.dart';
 import 'package:widam/generated/l10n.dart';
 import 'package:widam/src/common_widgets/banner/app_banner_dialog.dart';
 import 'package:widam/src/common_widgets/fade_circle_loading_indicator.dart';
+import 'package:widam/src/features/layouts/data/layouts_repository.dart';
 import 'package:widam/src/features/user_language/presentation/user_language_controller.dart';
 import 'package:widam/src/theme/app_colors.dart';
 
@@ -45,8 +46,10 @@ class LanguageListTile extends ConsumerWidget {
           const Icon(Icons.arrow_forward_ios)
         ]),
       ),
-      onTap:
-          ref.read(userLanguageControllerProvider.notifier).changeUserLanguage,
-    );
+      onTap:(){
+          ref.read(userLanguageControllerProvider.notifier).changeUserLanguage();
+          ref.invalidate(layoutProvider(LayoutType.home));
+          ref.invalidate(layoutProvider(LayoutType.featured));
+}    );
   }
 }

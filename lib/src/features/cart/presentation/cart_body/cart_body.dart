@@ -69,12 +69,12 @@ class AuthenticatedCart extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-     ref.listen(userDataProvider, (previous, next) {
-    if (previous == null && next != null) {
-      // User just logged in
-      ref.invalidate(cartControllerProvider);
-    }
-  });
+    ref.listen(userDataProvider, (previous, next) {
+      if (previous == null && next != null) {
+        // User just logged in
+        ref.invalidate(cartControllerProvider);
+      }
+    });
     final cartAsync = ref.watch(cartControllerProvider);
     return cartAsync.when(
       data: (cart) {
@@ -97,6 +97,8 @@ class AuthenticatedCart extends ConsumerWidget {
   }
 }
 
+final mergedOnceProvider = StateProvider<bool>((ref) => false);
+
 class _NonEmptyCart extends ConsumerWidget {
   const _NonEmptyCart({required this.cart});
   final Cart cart;
@@ -104,6 +106,15 @@ class _NonEmptyCart extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(updateCartProvider, (previous, next) {
+      if (next is AsyncData<bool>) {
+        final ok = next.value == true;
+
+        // Detect last action by the arguments you passed to updateCart
+        // Easiest: expose the last intent in your notifier, or simpler:
+        // wrap calls below to set the flag right after a successful await.
+
+        // We'll han
+      }
       if (next is AsyncError) {
         showAppBannerDialog(context, next.error.toString(), next.stackTrace);
       }
@@ -114,6 +125,23 @@ class _NonEmptyCart extends ConsumerWidget {
         cart.pickup != 1 ? cart.cartContent.normalDelivery : null;
     final pickupDelivery =
         cart.pickup != 1 ? cart.cartContent.pickupDelivery : null;
+    final hasNormal = normalDelivery != null;
+    final hasExpress = expressDelivery != null;
+    final hasPickup = pickupDelivery != null;
+    final isSplit = hasExpress || hasPickup;
+    // Option A: if you have a list of items
+// final normalItemCount = hasNormal
+//     ? normalDelivery!.websiteItems
+//         .fold<int>(0, (sum, it) => sum + (it.quantity ?? 1))
+//     : 0;
+
+// Option B (if your model already exposes a count):
+// final normalItemCount = normalDelivery?.itemsCount ?? 0;
+final mergedOnce = ref.watch(mergedOnceProvider);
+// count items if you also want to require > 1:
+final normalItemCount =
+    hasNormal ? (normalDelivery!.websiteItems as List).length : 0;
+
     return Stack(
       children: [
         Padding(
@@ -127,35 +155,38 @@ class _NonEmptyCart extends ConsumerWidget {
                 ),
                 const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
               ],
-              if (normalDelivery != null &&
-                  (expressDelivery != null || pickupDelivery != null)) ...[
+              if (hasNormal && isSplit) ...[
                 SliverToBoxAdapter(
                     child: AppStackedLoadingIndicator(
                   isLoading: ref.watch(updateCartProvider).isLoading,
                   child: SwitchContainer(
                     description: S.of(context).mergeDescription,
                     title: S.of(context).merge,
-                    onPressed: () => ref
-                        .read(updateCartProvider.notifier)
-                        .updateCart(express: false, expressPickup: false),
+                    onPressed: () async {
+                      final ok = await ref
+                          .read(updateCartProvider.notifier)
+                          .updateCart(express: false, expressPickup: false);
+                      if (ok) {
+                        // after merging (now normal-only), allow showing Split
+                        ref.read(mergedOnceProvider.notifier).state = true;
+                      }
+                    },
                   ),
                 )),
                 const SliverToBoxAdapter(child: SizedBox(height: 12.0))
-              ] else ...[
-                if (normalDelivery != null && expressDelivery != null) ...[
-                  SliverToBoxAdapter(
-                      child: AppStackedLoadingIndicator(
-                    isLoading: ref.watch(updateCartProvider).isLoading,
-                    child: SwitchContainer(
-                      title: S.of(context).split,
-                      description: S.of(context).splitDescription,
-                      onPressed: () => ref
-                          .read(updateCartProvider.notifier)
-                          .updateCart(express: true, expressPickup: true),
-                    ),
-                  )),
-                  const SliverToBoxAdapter(child: SizedBox(height: 12.0))
-                ]
+              ] else if (hasNormal && !isSplit && normalItemCount > 1 && mergedOnce) ...[
+                SliverToBoxAdapter(
+                    child: AppStackedLoadingIndicator(
+                  isLoading: ref.watch(updateCartProvider).isLoading,
+                  child: SwitchContainer(
+                    title: S.of(context).split,
+                    description: S.of(context).splitDescription,
+                    onPressed: () => ref
+                        .read(updateCartProvider.notifier)
+                        .updateCart(express: true, expressPickup: true),
+                  ),
+                )),
+                const SliverToBoxAdapter(child: SizedBox(height: 12.0))
               ],
               SliverToBoxAdapter(
                   child: Text(S.of(context).yourCartDetails,

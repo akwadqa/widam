@@ -271,7 +271,7 @@ class _CheckoutButtonState extends ConsumerState<CheckoutButton> {
   String get _defaultApplePayConfigurations => '''{
 "provider": "apple_pay",
 "data": {
-  "merchantIdentifier": "merchant.qa.com.widam.app",
+  "merchantIdentifier": "merchant.qa.akwad.widam",
   "displayName": "Widam Food",
   "merchantCapabilities": ["3DS", "debit", "credit"],
   "supportedNetworks": ["visa", "masterCard"],
@@ -282,6 +282,7 @@ class _CheckoutButtonState extends ConsumerState<CheckoutButton> {
   "shippingMethods": []
 }
 }''';
+  // "merchantIdentifier": "merchant.qa.com.widam.app",
 
   String get _defaultGooglePayConfigurations => '''{
   "provider": "google_pay",

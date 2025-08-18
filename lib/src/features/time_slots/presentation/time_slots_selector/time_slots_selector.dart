@@ -31,7 +31,7 @@ class TimeSlotsSelector extends ConsumerWidget {
            final cartDetails=   ref.read(cartControllerProvider).asData?.value;
 
      final isUdhiyaItem =
-              getPrimaryDeliveryType(cartDetails?.cartContent)?.first.websiteItems.first.isUdhiyaItem
+              getAllDeliveryTypes(cartDetails?.cartContent).first.websiteItems.first.isUdhiyaItem
                        ==
                       1
                   ? true
@@ -143,9 +143,9 @@ class __BodyState extends State<_Body> {
           child: Consumer(
             builder: (context, ref, _) {
            final cartDetails=   ref.read(cartControllerProvider).asData?.value;
-           final deliveryTypes = getPrimaryDeliveryType(cartDetails?.cartContent);
+           final deliveryTypes = getAllDeliveryTypes(cartDetails?.cartContent);
               final isUdhiyaItem =
-              deliveryTypes?.first.websiteItems.first.isUdhiyaItem
+              deliveryTypes.first.websiteItems.first.isUdhiyaItem
                        ==
                       1
                   ? true

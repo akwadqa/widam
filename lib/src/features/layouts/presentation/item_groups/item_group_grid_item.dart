@@ -42,7 +42,8 @@ class ItemGroupGridItem extends StatelessWidget {
                   ? Center(
                       child:
                           Assets.icons.categoryIcon.svg(height: 50, width: 50))
-                  : AppCachedNetworkImage(
+                  :
+                   AppCachedNetworkImage(
                       imageUrl: itemGroup!.itemGroupImage,
                     ),
             ],

@@ -81,7 +81,7 @@ abstract class AppTheme {
         disabledColor: AppColors.brightGray,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       ),
-      tabBarTheme: TabBarTheme(
+      tabBarTheme: TabBarThemeData(
         labelColor: AppColors.darkBlue,
         unselectedLabelColor: Colors.black,
         labelStyle: TextStyle(

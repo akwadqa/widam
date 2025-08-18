@@ -20,6 +20,8 @@ class CurrentLanguage extends _$CurrentLanguage {
         .read(sharedPreferencesProvider)
         .requireValue
         .setString(Keys.languageCode, language);
+    // context.setLocale(Locale(languageCode));
+
     state = language;
   }
 }

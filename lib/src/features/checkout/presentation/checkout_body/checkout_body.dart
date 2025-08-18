@@ -46,7 +46,7 @@ void initState() {
   super.initState();
   Future(() async {
     final cart = ref.read(cartControllerProvider).asData?.value;
-    final deliveryTypes = getPrimaryDeliveryType(cart?.cartContent);
+    final deliveryTypes = getAllDeliveryTypes(cart?.cartContent);
 
     if (deliveryTypes != null && deliveryTypes.isNotEmpty) {
       // Show time selector ONCE, based on the first deliveryType
@@ -113,7 +113,7 @@ Future<({TimeSlot timeSlot, String deliveryDate})?> _showTimeSlotsSelector(
 
     return cartAsync.when(
       data: (cart) {
-        final deliveryTypes = getPrimaryDeliveryType(cart!.cartContent);
+        final deliveryTypes = getAllDeliveryTypes(cart!.cartContent);
 
         return Stack(
           children: [
@@ -191,7 +191,7 @@ Future<({TimeSlot timeSlot, String deliveryDate})?> _showTimeSlotsSelector(
                       if (warehouseId != address.warehouse?.warehouseId) {
                         ref.read(addressSelectorButtonControllerProvider.notifier).onAddressSelected(address);
                       }
-                      final dt = getPrimaryDeliveryType(cart.cartContent);
+                      final dt = getAllDeliveryTypes(cart.cartContent);
                       if (dt != null && dt.isNotEmpty) {
                         _showTimeSlotsSelector(context, dt.first);
                       }

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:widam/src/features/layouts/domain/basic_item_group/basic_item_group.dart';
 
 import '../../../addresses/domain/address/warehouse.dart';
 import '../../../tags/domain/tag/tag.dart';
@@ -29,4 +30,14 @@ class Item with _$Item {
   }) = _Item;
 
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
+}
+extension ItemAsGroupExtension on Item {
+  BasicItemGroup toBasicItemGroup() {
+    return BasicItemGroup(
+      itemGroupId: websiteItemId,
+      itemGroupImage: websiteItemImage,
+      itemGroupName: websiteItemName,
+      parameters: ""
+    );
+  }
 }

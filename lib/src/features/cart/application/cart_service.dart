@@ -101,36 +101,36 @@ int cartCount(Ref ref) => ref.watch(cartControllerProvider).maybeMap(
       data: (cart) => cart.value != null ? cart.value!.totalQty.toInt() : 0,
       orElse: () => 0,
     );
-List<DeliveryType>? getPrimaryDeliveryType(dynamic cartContent) {
-  if (cartContent is CartContent) {
-    final selected = cartContent.normalDelivery ??
-        cartContent.expressDelivery ??
-        cartContent.pickupDelivery;
-
-    return selected != null ? [selected] : null;
-  } else if (cartContent is List<Pickup>) {
-    return cartContent.isNotEmpty
-        ? cartContent.map((p) => p.toDeliveryType()).toList()
-        : null;
-  }
-  return null;
-}
-
-// List<DeliveryType> getAllDeliveryTypes(dynamic cartContent) {
+// List<DeliveryType>? getPrimaryDeliveryType(dynamic cartContent) {
 //   if (cartContent is CartContent) {
-//     return [
-//       cartContent.normalDelivery ??
-//           cartContent.expressDelivery ??
-//           cartContent.pickupDelivery??
-//       if (cartContent.normalDelivery != null) cartContent.normalDelivery!,
-//       if (cartContent.expressDelivery != null) cartContent.expressDelivery!,
-//       if (cartContent.pickupDelivery != null) cartContent.pickupDelivery!,
-//     ];
+//     final selected = cartContent.expressDelivery ??
+//         cartContent.normalDelivery ??
+//         cartContent.pickupDelivery;
+
+//     return selected != null ? [selected] : null;
 //   } else if (cartContent is List<Pickup>) {
-//     return cartContent.map((p) => p.toDeliveryType()).toList();
+//     return cartContent.isNotEmpty
+//         ? cartContent.map((p) => p.toDeliveryType()).toList()
+//         : null;
 //   }
 //   return [];
 // }
+
+List<DeliveryType> getAllDeliveryTypes(dynamic cartContent) {
+  if (cartContent is CartContent) {
+    return [
+      // cartContent.normalDelivery ??
+      //     cartContent.expressDelivery ??
+      //     cartContent.pickupDelivery??
+      if (cartContent.normalDelivery != null) cartContent.normalDelivery!,
+      if (cartContent.expressDelivery != null) cartContent.expressDelivery!,
+      if (cartContent.pickupDelivery != null) cartContent.pickupDelivery!,
+    ];
+  } else if (cartContent is List<Pickup>) {
+    return cartContent.map((p) => p.toDeliveryType()).toList();
+  }
+  return [];
+}
 
 @Riverpod(keepAlive: true)
 bool isInCart(Ref ref, String itemId) {

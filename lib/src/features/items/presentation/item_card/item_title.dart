@@ -13,6 +13,7 @@ class ItemTitle extends StatelessWidget {
             fontSize: 13,
             fontWeight: FontWeight.w600,
             color: AppColors.raisinBlack),
+            overflow: TextOverflow.ellipsis,
         maxLines: maxLines);
   }
 }
