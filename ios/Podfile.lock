@@ -234,6 +234,11 @@ PODS:
     - Flutter
   - url_launcher_ios (0.0.1):
     - Flutter
+  - video_player_avfoundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - wakelock_plus (0.0.1):
+    - Flutter
   - webview_flutter_wkwebview (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -266,6 +271,8 @@ DEPENDENCIES:
   - status_bar_control (from `.symlinks/plugins/status_bar_control/ios`)
   - store_redirect (from `.symlinks/plugins/store_redirect/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+  - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/darwin`)
+  - wakelock_plus (from `.symlinks/plugins/wakelock_plus/ios`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/darwin`)
 
 SPEC REPOS:
@@ -352,6 +359,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/store_redirect/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
+  video_player_avfoundation:
+    :path: ".symlinks/plugins/video_player_avfoundation/darwin"
+  wakelock_plus:
+    :path: ".symlinks/plugins/wakelock_plus/ios"
   webview_flutter_wkwebview:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/darwin"
 
@@ -377,10 +388,10 @@ SPEC CHECKSUMS:
   FirebaseRemoteConfigInterop: 82b81fd06ee550cbeff40004e2c106daedf73e38
   FirebaseSessions: 9b3b30947b97a15370e0902ee7a90f50ef60ead6
   FirebaseSharedSwift: d2475748a2d2a36242ed13baa34b2acda846c925
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   flutter_barcode_scanner: 7a1144744c28dc0c57a8de7218ffe5ec59a9e4bf
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
-  flutter_local_notifications: 4cde75091f6327eb8517fa068a0a5950212d2086
+  flutter_local_notifications: ff50f8405aaa0ccdc7dcfb9022ca192e8ad9688f
   flutter_native_splash: df59bb2e1421aa0282cb2e95618af4dcb0c56c29
   flutter_vibrate: 9f4c2ab57008965f78969472367c329dd77eb801
   geocoding_ios: d7460f56e80e118d57678efe5c2cdc888739ff18
@@ -409,8 +420,10 @@ SPEC CHECKSUMS:
   status_bar_control: 7c84146799e6a076315cc1550f78ef53aae3e446
   store_redirect: 2977747cf81689a39bd62c248c2deacb7a0d131e
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
+  video_player_avfoundation: 7c6c11d8470e1675df7397027218274b6d2360b3
+  wakelock_plus: 76957ab028e12bfa4e66813c99e46637f367fc7e
   webview_flutter_wkwebview: a4af96a051138e28e29f60101d094683b9f82188
 
-PODFILE CHECKSUM: 1a1e18fe6a188015a724c44aa177fb8bc07d4b75
+PODFILE CHECKSUM: eef56dc9b68240a9dc78c65a6c4868842adef58e
 
 COCOAPODS: 1.16.2

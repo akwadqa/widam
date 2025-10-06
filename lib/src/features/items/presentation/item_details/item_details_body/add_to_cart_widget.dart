@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:widam/src/common_widgets/banner/app_banner_dialog.dart';
+import 'package:widam/src/features/addresses/presentation/maps/address_selector_button/address_selector_button_controller.dart';
 import 'package:widam/src/features/cart/presentation/cart_item_added_dialog/go_to_cart_controller.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/mubadara_fields/qid_attachment_controller.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/pickup_points_form_field/pickup_points_form_field.dart';
@@ -133,10 +134,12 @@ class AddToCartWidget extends StatelessWidget {
         .isUdhiyaItem;
     debugPrint("isUdhiyaItem IN ADD to cart : ${isUdhiyaItem}");
     final udhiyaExpress=isUdhiyaItem==1?false:true;
+final selectedAddress= ref.watch(addressSelectorButtonControllerProvider);
 
     ref.read(updateCartProvider.notifier).updateCart(
         itemId: itemId,
         quantity: ref.read(quantityProvider),
+        // shippingAddressId:selectedAddress.value. ,
         pickupPointId: ref.read(selectedPickupPointControllerProvider),
         qid: ref.read(qidNumberControllerProvider).isEmpty
             ? null

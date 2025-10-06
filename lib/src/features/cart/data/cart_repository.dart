@@ -48,6 +48,7 @@ class CartRepository {
       String? pickupPointId,
       String? warehouseId,
       String? itemWarehouseId,
+      String? shippingAddress,
       bool? express,
       bool? expressPickup}) async {
     return await _lock.synchronized(() async {
@@ -95,7 +96,9 @@ class CartRepository {
       final response = await _networkService.put(EndPoints.cart,
           data: formData,
           queryParameters:
-              warehouseId != null ? {'warehouse': warehouseId} : null);
+              warehouseId != null ? {'warehouse': warehouseId,
+            // if(shippingAddressId!=null)  "shipping_address_id":shippingAddressId
+              } : null);
       return _handleResponse(response);
     });
   }

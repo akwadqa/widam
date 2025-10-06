@@ -237,6 +237,7 @@ class ItemsCircleHorizontalGrid extends ConsumerWidget {
                   child: Text(
                     item.websiteItemShortName ?? item.websiteItemName,
                     maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 12,

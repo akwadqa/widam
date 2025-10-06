@@ -271,7 +271,7 @@ class _CheckoutButtonState extends ConsumerState<CheckoutButton> {
   String get _defaultApplePayConfigurations => '''{
 "provider": "apple_pay",
 "data": {
-  "merchantIdentifier": "merchant.qa.com.widam.app",
+  "merchantIdentifier": "merchant.qa.com.widam",
   "displayName": "Widam Food",
   "merchantCapabilities": ["3DS", "debit", "credit"],
   "supportedNetworks": ["visa", "masterCard"],

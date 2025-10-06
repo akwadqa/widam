@@ -1,5 +1,6 @@
 import 'package:geocoding/geocoding.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:widam/src/features/addresses/data/addresses_repository.dart';
 import 'package:widam/src/features/user_language/application/current_language.dart';
 import '../../../domain/geofence.dart';
 import '../../../application/local_location_info.dart';
@@ -40,6 +41,8 @@ class AddressSelectorButtonController
   }
 
   Future<void> onAddressSelected(Address address) async {
+    await ref.read(addressesRepositoryProvider).selectAddress(address.addressId);
+
     await ref.read(appDataControllerProvider.notifier).updateAddress(address);
     state = AsyncData(address.addressTitle);
   }
