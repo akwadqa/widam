@@ -15,13 +15,14 @@ class UserData extends _$UserData {
       ref.read(sharedPreferencesProvider).requireValue;
 
   @override
-  ({String token, String id, String fullName})? build() {
+  ({String token, String id, String fullName, String customerId})? build() {
     final sharedPreferences = ref.watch(sharedPreferencesProvider).requireValue;
     final token = sharedPreferences.getString(Keys.userAccessToken);
     final id = sharedPreferences.getString(Keys.userId);
+    final customerId = sharedPreferences.getString(Keys.customerId);
     final fullName = sharedPreferences.getString(Keys.userFullName);
-    final userData = token != null && id != null && fullName != null
-        ? (token: token, id: id, fullName: fullName)
+    final userData = token != null && id != null && fullName != null&& customerId != null
+        ? (token: token, id: id, fullName: fullName,customerId:customerId)
         : null;
     if (userData != null) {
       _notificationsServiceProvider.subscribeOrdersTopic();
@@ -34,12 +35,16 @@ class UserData extends _$UserData {
   Future<void> setUserData(
       {required String token,
       required String id,
-      required String fullName}) async {
+      required String fullName,
+      required String customerId,
+      
+      }) async {
     _notificationsServiceProvider.subscribeOrdersTopic();
     _sharedPreferences.setString(Keys.userAccessToken, token);
     _sharedPreferences.setString(Keys.userId, id);
     _sharedPreferences.setString(Keys.userFullName, fullName);
-    state = (token: token, id: id, fullName: fullName);
+    _sharedPreferences.setString(Keys.customerId, customerId);
+    state = (token: token, id: id, fullName: fullName,customerId:customerId);
     ref.read(notificationsServiceProvider).sendDeviceToken(id);
   }
 
@@ -47,7 +52,16 @@ class UserData extends _$UserData {
     await _sharedPreferences.remove(Keys.userAccessToken);
     await _sharedPreferences.remove(Keys.userId);
     await _sharedPreferences.remove(Keys.userFullName);
+    await _sharedPreferences.remove(Keys.customerId);
     state = null;
     await _notificationsServiceProvider.unsubscribeOrdersTopic();
+  }
+    bool hasSeenAd() {
+    return _sharedPreferences.getBool(Keys.firstTime) ?? false;
+  }
+
+  /// Mark the ad as seen
+  Future<void> markAdAsSeen() async {
+    await _sharedPreferences.setBool(Keys.firstTime, true);
   }
 }

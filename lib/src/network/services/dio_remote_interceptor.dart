@@ -6,6 +6,9 @@ import 'package:widam/src/constants/services_urls.dart';
 import 'package:widam/src/features/auth/application/user_data_provider.dart';
 import 'package:widam/src/features/user_language/application/current_language.dart';
 import 'package:widam/src/network/exception/dio_exceptions.dart';
+import 'package:widam/src/routing/app_router.gr.dart';
+
+import '../../routing/app_router_provider.dart';
 
 class RemoteInterceptor extends Interceptor {
   final Ref ref;
@@ -52,6 +55,26 @@ class RemoteInterceptor extends Interceptor {
       debugPrint(err.response!.data.toString());
     }
     final String? message = err.response?.data['message'];
+    
+    final statusCode = err.response?.statusCode;
+    final responseData = err.response?.data;
+
+    // ✅ تحقق من إذا كان Unauthorized
+    final isUnauthorized = statusCode == 401 ||
+        (responseData is Map &&
+            responseData['message']?.toString().toLowerCase().contains("unauthorized") == true);
+
+    if (isUnauthorized) {
+      debugPrint("🚪 Session expired → redirect to Login");
+
+      // 1. مسح بيانات المستخدم (التوكن)
+      ref.read(userDataProvider.notifier).removeUserData();
+
+      // 2. توجيه المستخدم لصفحة تسجيل الدخول
+      ref.read(appRouterProvider).replaceAll([const LoginScreen()]);
+      // لو تستخدم GoRouter:
+      // ref.read(goRouterProvider).go('/login');
+    }
     switch (err.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:

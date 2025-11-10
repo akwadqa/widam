@@ -41,46 +41,54 @@ class CheckoutBody extends ConsumerStatefulWidget {
 }
 
 class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
-@override
-void initState() {
-  super.initState();
-  Future(() async {
-    final cart = ref.read(cartControllerProvider).asData?.value;
-    final deliveryTypes = getAllDeliveryTypes(cart?.cartContent);
+  @override
+  void initState() {
+    super.initState();
+    Future(() async {
+      final cart = ref.read(cartControllerProvider).asData?.value;
+      final deliveryTypes = getAllDeliveryTypes(cart?.cartContent);
+final isExpress=deliveryTypes.any( (d)=>d.deliveryMethodTitle.toLowerCase()
+                                .contains('express') );
+      if (deliveryTypes != null && deliveryTypes.isNotEmpty&& !isExpress  ) {
+        // Show time selector ONCE, based on the first deliveryType
+        final result =
+            await _showTimeSlotsSelector(context, deliveryTypes.first);
 
-    if (deliveryTypes != null && deliveryTypes.isNotEmpty) {
-      // Show time selector ONCE, based on the first deliveryType
-      final result = await _showTimeSlotsSelector(context, deliveryTypes.first);
+        if (result != null) {
+          // Update cart for each deliveryType using the same timeSlot and deliveryDate
+          for (final deliveryType in deliveryTypes) {
+            final isPickup = deliveryType.deliveryMethodTitle
+                .toLowerCase()
+                .contains('pickup');
+            final isUdhiya = deliveryType.websiteItems.first.isUdhiyaItem == 1;
 
-      if (result != null) {
-        // Update cart for each deliveryType using the same timeSlot and deliveryDate
-        for (final deliveryType in deliveryTypes) {
-          final isPickup = deliveryType.deliveryMethodTitle.toLowerCase().contains('pickup');
-          final isUdhiya = deliveryType.websiteItems.first.isUdhiyaItem == 1;
-
-          await ref.read(updateCartProvider.notifier).updateCart(
-            pickupPointId: (isPickup || isUdhiya) ? deliveryType.pickupPointId : null,
-            timeSlot: result.timeSlot.timeSlotId,
-            deliveryDate: result.deliveryDate,
-          );
+            await ref.read(updateCartProvider.notifier).updateCart(
+                  pickupPointId: (isPickup || isUdhiya)
+                      ? deliveryType.pickupPointId
+                      : null,
+                  timeSlot: result.timeSlot.timeSlotId,
+                  deliveryDate: result.deliveryDate,
+                );
+          }
         }
       }
-    }
-  });
-}
-Future<({TimeSlot timeSlot, String deliveryDate})?> _showTimeSlotsSelector(
-  BuildContext context,
-  DeliveryType deliveryType,
-) async {
-  return await showAdaptiveModalBottomSheet<({TimeSlot timeSlot, String deliveryDate})?>(
-    context: context,
-    builder: (_) => TimeSlotsSelector(
-      deleiveryMethodId: deliveryType.deliveryMethodId,
-      initialDate: deliveryType.deliveryDate.date,
-      initialTimeSlot: deliveryType.timeSlot,
-    ),
-  );
-}
+    });
+  }
+
+  Future<({TimeSlot timeSlot, String deliveryDate})?> _showTimeSlotsSelector(
+    BuildContext context,
+    DeliveryType deliveryType,
+  ) async {
+    return await showAdaptiveModalBottomSheet<
+        ({TimeSlot timeSlot, String deliveryDate})?>(
+      context: context,
+      builder: (_) => TimeSlotsSelector(
+        deleiveryMethodId: deliveryType.deliveryMethodId,
+        initialDate: deliveryType.deliveryDate.date,
+        initialTimeSlot: deliveryType.timeSlot,
+      ),
+    );
+  }
 
   void _showPaymentMethodSelector(BuildContext context) {
     final cart = ref.read(cartControllerProvider).asData?.value;
@@ -93,16 +101,17 @@ Future<({TimeSlot timeSlot, String deliveryDate})?> _showTimeSlotsSelector(
         selectedPaymentMethodId: cart?.paymentMethod?.paymentMethodId,
         selectedPaymentTokenId: cart?.savedCard?.paymentTokenId,
         hasMoreDeliveryMethods: (content is CartContent &&
-            (content.expressDelivery != null || content.pickupDelivery != null)),
+            (content.expressDelivery != null ||
+                content.pickupDelivery != null)),
       ),
     ).then((paymentData) {
       if (paymentData != null) {
         ref.read(updateCartProvider.notifier).updateCart(
-          useWalletBalance: paymentData.$1 ? 1 : 0,
-          paymentMethodId: paymentData.$2,
-          paymentTokenId: paymentData.$3,
-          paymentToken: paymentData.$3 != null ? 1 : null,
-        );
+              useWalletBalance: paymentData.$1 ? 1 : 0,
+              paymentMethodId: paymentData.$2,
+              paymentTokenId: paymentData.$3,
+              paymentToken: paymentData.$3 != null ? 1 : null,
+            );
       }
     });
   }
@@ -141,8 +150,12 @@ Future<({TimeSlot timeSlot, String deliveryDate})?> _showTimeSlotsSelector(
                           DeliveryContainer(
                             currency: cart.currency,
                             deliveryType: deliveryType,
-                            isPickup: deliveryType.deliveryMethodTitle.toLowerCase().contains('pickup'),
-                            isExpress: deliveryType.deliveryMethodTitle.toLowerCase().contains('express'),
+                            isPickup: deliveryType.deliveryMethodTitle
+                                .toLowerCase()
+                                .contains('pickup'),
+                            isExpress: deliveryType.deliveryMethodTitle
+                                .toLowerCase()
+                                .contains('express'),
                           ),
                       ],
                       const SizedBox(height: 150),
@@ -183,13 +196,20 @@ Future<({TimeSlot timeSlot, String deliveryDate})?> _showTimeSlotsSelector(
                 builder: (_) => const AddressesSelector(),
               ).then((address) {
                 if (address != null) {
-                  ref.read(updateCartProvider.notifier).updateCart(
-                    shippingAddressId: address.addressId,
-                  ).then((success) {
+                  ref
+                      .read(updateCartProvider.notifier)
+                      .updateCart(
+                        shippingAddressId: address.addressId,
+                      )
+                      .then((success) {
                     if (success) {
-                      final warehouseId = ref.read(localLocationInfoProvider).warehouseId;
+                      final warehouseId =
+                          ref.read(localLocationInfoProvider).warehouseId;
                       if (warehouseId != address.warehouse?.warehouseId) {
-                        ref.read(addressSelectorButtonControllerProvider.notifier).onAddressSelected(address);
+                        ref
+                            .read(addressSelectorButtonControllerProvider
+                                .notifier)
+                            .onAddressSelected(address);
                       }
                       final dt = getAllDeliveryTypes(cart.cartContent);
                       if (dt != null && dt.isNotEmpty) {
@@ -217,7 +237,8 @@ Future<({TimeSlot timeSlot, String deliveryDate})?> _showTimeSlotsSelector(
           children: [
             Text(S.of(context).paymentMethod, style: _textStyle()),
             if (cart.paymentMethod != null)
-              ChangeButton(onPressed: () => _showPaymentMethodSelector(context)),
+              ChangeButton(
+                  onPressed: () => _showPaymentMethodSelector(context)),
           ],
         ),
         const SizedBox(height: 5.0),
@@ -225,10 +246,12 @@ Future<({TimeSlot timeSlot, String deliveryDate})?> _showTimeSlotsSelector(
           onTap: () => _showPaymentMethodSelector(context),
           child: _PaymentMethodCard(cart: cart),
         ),
-        if (cart.paymentMethod?.gatewaySettings == 'CyberSource Secure Acceptance Settings' &&
+        if (cart.paymentMethod?.gatewaySettings ==
+                'CyberSource Secure Acceptance Settings' &&
             cart.savedCard == null)
           const SizedBox(height: 10),
-        if (cart.paymentMethod?.gatewaySettings == 'CyberSource Secure Acceptance Settings' &&
+        if (cart.paymentMethod?.gatewaySettings ==
+                'CyberSource Secure Acceptance Settings' &&
             cart.savedCard == null)
           const SavedCardSwitch(),
       ],
@@ -239,13 +262,15 @@ Future<({TimeSlot timeSlot, String deliveryDate})?> _showTimeSlotsSelector(
     return InkWell(
       onTap: cart.couponCode == null
           ? () => showAdaptiveModalBottomSheet<String?>(
-        context: context,
-        builder: (_) => const CouponCodeSelector(),
-      ).then((couponCodeId) {
-        if (couponCodeId != null) {
-          ref.read(updateCartProvider.notifier).updateCart(couponCode: couponCodeId);
-        }
-      })
+                context: context,
+                builder: (_) => const CouponCodeSelector(),
+              ).then((couponCodeId) {
+                if (couponCodeId != null) {
+                  ref
+                      .read(updateCartProvider.notifier)
+                      .updateCart(couponCode: couponCodeId);
+                }
+              })
           : null,
       child: Container(
         color: AppColors.cultured,
@@ -259,13 +284,18 @@ Future<({TimeSlot timeSlot, String deliveryDate})?> _showTimeSlotsSelector(
               const SizedBox(width: 10),
               Text(
                 cart.couponCode ?? S.of(context).applyCoupon,
-                style: const TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w500),
+                style: const TextStyle(
+                    fontSize: 13,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500),
               ),
               if (cart.couponCode != null) ...[
                 const Spacer(),
                 InkWell(
                   onTap: () {
-                    ref.read(updateCartProvider.notifier).updateCart(couponCode: '');
+                    ref
+                        .read(updateCartProvider.notifier)
+                        .updateCart(couponCode: '');
                   },
                   child: const CircleAvatar(
                     radius: 12,
@@ -282,10 +312,10 @@ Future<({TimeSlot timeSlot, String deliveryDate})?> _showTimeSlotsSelector(
   }
 
   TextStyle _textStyle() => const TextStyle(
-    fontWeight: FontWeight.bold,
-    color: Colors.black,
-    fontSize: 15,
-  );
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+        fontSize: 15,
+      );
 }
 
 class _PaymentMethodCard extends StatelessWidget {
@@ -305,16 +335,17 @@ class _PaymentMethodCard extends StatelessWidget {
         children: [
           cart.paymentMethod != null
               ? AppCachedNetworkImage(
-            imageUrl: cart.savedCard?.icon ?? cart.paymentMethod!.icon,
-            height: 20.0,
-          )
+                  imageUrl: cart.savedCard?.icon ?? cart.paymentMethod!.icon,
+                  height: 20.0,
+                )
               : Assets.icons.cardIcon.svg(),
           const SizedBox(width: 10.0),
           Text(
             cart.savedCard != null
                 ? '${S.of(context).cardEndingIn} ${cart.savedCard!.cardNumber.substring(cart.savedCard!.cardNumber.length - 4)}'
                 : cart.paymentMethod?.title ?? S.of(context).addAPaymentMethod,
-            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
+            style: const TextStyle(
+                fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
           ),
         ],
       ),

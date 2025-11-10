@@ -6,6 +6,7 @@ import 'package:widam/src/features/items/presentation/item_details/item_details_
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/quantity_form_field.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/slotter_fees_form_field/slotter_fees_form_field.dart';
 import 'package:widam/src/features/items/presentation/item_details/option_label.dart';
+import 'package:widam/src/features/items/presentation/item_details/product_option_section.dart';
 
 import '../../../domain/item_details/item_details.dart';
 import '../item_attribute_variants_list.dart';
@@ -16,6 +17,8 @@ import 'details_tab_bar.dart';
 import 'item_details_info.dart';
 import 'mubadara_fields/mubadara_fields.dart';
 
+
+    
 class ItemDetailsContent extends ConsumerStatefulWidget {
   const ItemDetailsContent(
       {super.key,
@@ -50,6 +53,7 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
   final FocusNode _optionsFocusNode = FocusNode();
   final FocusNode _slotterFeesFocusNode = FocusNode();
   final FocusNode _pickupPointFocusNode = FocusNode();
+  Map<String, String> _selectedProductOptions = {};
 
   @override
   void dispose() {
@@ -169,6 +173,16 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
                 ),
               )
             ],
+            if (widget.itemDetails.productOptions != null ||
+                widget.itemDetails.productOptions!.isNotEmpty)
+              ProductOptionsSection(
+                productOptions: widget.itemDetails.productOptions!,
+                // onChanged: (values) {
+                //   setState(() {
+                //     _selectedProductOptions = values;
+                //   });
+                // },
+              ),
             const SizedBox(height: 200),
           ]),
         ),
@@ -198,6 +212,7 @@ class _ItemDetailsContentState extends ConsumerState<ItemDetailsContent> {
                     itemId: widget.itemDetails.websiteItemId,
                     itemWarehouseId: widget.itemDetails.warehouse.warehouseId,
                     hasVariants: hasVariants,
+                    // productOptionsValues: _selectedProductOptions,
                     attributesFormKey: _attributesFormKey));
           }
           return const SizedBox.shrink();

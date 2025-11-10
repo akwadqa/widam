@@ -2,6 +2,7 @@ abstract class Keys {
   static const String googleAPIKey = 'AIzaSyAOrO2OXzOmcTR91AtrAnKSWJwXnfGrJYA';
   static const String userAccessToken = 'user_access_token';
   static const String userId = 'user_id';
+  static const String customerId = 'customer_id';
   static const String geofenceId = 'geofence_id';
   static const String languageCode = 'language_code';
   static const String countryCode = 'country_code';
@@ -9,6 +10,7 @@ abstract class Keys {
   static const String longitude = 'longitude';
   static const String warehouseId = 'werehouse_id';
   static const String userFullName = 'full_name';
+  static const String firstTime = 'first_time';
   static const String userMobile = 'mobile';
   static const String marketing = 'marketing';
   static const String orders = 'orders';

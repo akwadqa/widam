@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:widam/src/features/cart/presentation/cart_body/cart_controller.dart';
 import 'send_otp_controller.dart';
 
 import '../../application/user_data_provider.dart';
@@ -22,10 +23,13 @@ class VerifyOtpController extends _$VerifyOtpController {
       final token = appResponse.token;
       final userId = appResponse.userId;
       final fullName = appResponse.fullName;
+      final customerId = appResponse.verifyProfileDetails?.customerDetails.customerNumber;
       if (token != null && userId != null && fullName != null) {
       await  ref
             .read(userDataProvider.notifier)
-            .setUserData(token: token, id: userId, fullName: fullName);
+            .setUserData(token: token, id: userId, fullName: fullName,customerId: customerId??"");
+                      ref.invalidate(cartControllerProvider);
+
       }
       state = AsyncValue.data(appResponse);
     } catch (e, stack) {

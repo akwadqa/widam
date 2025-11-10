@@ -48,7 +48,10 @@ class CartRepository {
       String? pickupPointId,
       String? warehouseId,
       String? itemWarehouseId,
+      String? shippingAddress,
       bool? express,
+      List<Map<String, dynamic>>? productOptions, // ✅ added
+
       bool? expressPickup}) async {
     return await _lock.synchronized(() async {
       final FormData formData = FormData.fromMap({
@@ -62,7 +65,9 @@ class CartRepository {
                 'attribution_token': attributionToken,
               if (isPriceModifier != null)
                 'price_modifier': isPriceModifier ? 1 : 0,
-              if (itemWarehouseId != null) 'warehouse': itemWarehouseId
+              if (itemWarehouseId != null) 'warehouse': itemWarehouseId,
+              if (productOptions != null && productOptions.isNotEmpty)
+                'product_options': productOptions, // ✅ inserted correctly
             }
           ]),
         if (itemId != null && warehouseId != null) 'warehouse': warehouseId,
@@ -94,8 +99,12 @@ class CartRepository {
 
       final response = await _networkService.put(EndPoints.cart,
           data: formData,
-          queryParameters:
-              warehouseId != null ? {'warehouse': warehouseId} : null);
+          queryParameters: warehouseId != null
+              ? {
+                  'warehouse': warehouseId,
+                  // if(shippingAddressId!=null)  "shipping_address_id":shippingAddressId
+                }
+              : null);
       return _handleResponse(response);
     });
   }

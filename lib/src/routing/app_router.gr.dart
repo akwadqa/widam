@@ -27,7 +27,7 @@ import 'package:widam/src/features/auth/presentation/login_screen/login_screen.d
     as _i15;
 import 'package:widam/src/features/cart/presentation/cart_screen/cart_screen.dart'
     as _i6;
-import 'package:widam/src/features/checkout/domain/order/order.dart' as _i40;
+import 'package:widam/src/features/checkout/domain/order/order.dart' as _i39;
 import 'package:widam/src/features/checkout/presentation/checkout_screen/checkout_screen.dart'
     as _i7;
 import 'package:widam/src/features/checkout/presentation/ordered_successfully_screen/ordered_successfully_screen.dart'
@@ -50,8 +50,8 @@ import 'package:widam/src/features/items/presentation/item_details/item_details_
     as _i12;
 import 'package:widam/src/features/items/presentation/mubadara_items_screen/mubadara_items_screen.dart'
     as _i17;
-import 'package:widam/src/features/layouts/domain/banner/banner.dart' as _i39;
-import 'package:widam/src/features/layouts/domain/block.dart' as _i38;
+import 'package:widam/src/features/layouts/domain/banner/banner.dart' as _i38;
+import 'package:widam/src/features/layouts/domain/block.dart' as _i37;
 import 'package:widam/src/features/loyalty_points/presentation/points_history_screen/points_history_screen.dart'
     as _i21;
 import 'package:widam/src/features/loyalty_points/presentation/widam_loyalty_program_screen/widam_loyalty_program_screen.dart'
@@ -60,14 +60,12 @@ import 'package:widam/src/features/main/presentation/main_screen/main_screen.dar
     as _i16;
 import 'package:widam/src/features/notifications/presentation/notifications_settings_screen/notifications_settings_screen.dart'
     as _i18;
-import 'package:widam/src/features/profile/domain/user_details/user_details.dart'
-    as _i37;
 import 'package:widam/src/features/profile/presentation/profile_screen/profile_screen.dart'
     as _i22;
 import 'package:widam/src/features/profile/presentation/terms_conditions_and_privacy_policy_screen.dart'
     as _i27;
 import 'package:widam/src/features/sales_orders/domain/sales_order/sales_order.dart'
-    as _i41;
+    as _i40;
 import 'package:widam/src/features/sales_orders/presentaion/sales_order_details_screen/sales_order_details_screen.dart'
     as _i24;
 import 'package:widam/src/features/sales_orders/presentaion/sales_orders_screen/sales_orders_screen.dart'
@@ -282,42 +280,18 @@ class DealsScreen extends _i34.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i10.EditProfileScreen]
-class EditProfileScreen extends _i34.PageRouteInfo<EditProfileScreenArgs> {
-  EditProfileScreen({
-    _i35.Key? key,
-    required _i37.UserDetails userDetails,
-    List<_i34.PageRouteInfo>? children,
-  }) : super(
-         EditProfileScreen.name,
-         args: EditProfileScreenArgs(key: key, userDetails: userDetails),
-         initialChildren: children,
-       );
+class EditProfileScreen extends _i34.PageRouteInfo<void> {
+  const EditProfileScreen({List<_i34.PageRouteInfo>? children})
+    : super(EditProfileScreen.name, initialChildren: children);
 
   static const String name = 'EditProfileScreen';
 
   static _i34.PageInfo page = _i34.PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<EditProfileScreenArgs>();
-      return _i10.EditProfileScreen(
-        key: args.key,
-        userDetails: args.userDetails,
-      );
+      return const _i10.EditProfileScreen();
     },
   );
-}
-
-class EditProfileScreenArgs {
-  const EditProfileScreenArgs({this.key, required this.userDetails});
-
-  final _i35.Key? key;
-
-  final _i37.UserDetails userDetails;
-
-  @override
-  String toString() {
-    return 'EditProfileScreenArgs{key: $key, userDetails: $userDetails}';
-  }
 }
 
 /// generated route for
@@ -325,7 +299,7 @@ class EditProfileScreenArgs {
 class HomeScreen extends _i34.PageRouteInfo<HomeScreenArgs> {
   HomeScreen({
     _i35.Key? key,
-    _i38.Block<List<_i39.Banner>>? bannerBlock,
+    _i37.Block<List<_i38.Banner>>? bannerBlock,
     List<_i34.PageRouteInfo>? children,
   }) : super(
          HomeScreen.name,
@@ -351,7 +325,7 @@ class HomeScreenArgs {
 
   final _i35.Key? key;
 
-  final _i38.Block<List<_i39.Banner>>? bannerBlock;
+  final _i37.Block<List<_i38.Banner>>? bannerBlock;
 
   @override
   String toString() {
@@ -579,7 +553,7 @@ class OrderedSuccessfullyScreen
     extends _i34.PageRouteInfo<OrderedSuccessfullyScreenArgs> {
   OrderedSuccessfullyScreen({
     _i35.Key? key,
-    required _i40.Order order,
+    required _i39.Order order,
     String? pun,
     List<_i34.PageRouteInfo>? children,
   }) : super(
@@ -612,7 +586,7 @@ class OrderedSuccessfullyScreenArgs {
 
   final _i35.Key? key;
 
-  final _i40.Order order;
+  final _i39.Order order;
 
   final String? pun;
 
@@ -737,7 +711,7 @@ class SalesOrderDetailsScreen
     extends _i34.PageRouteInfo<SalesOrderDetailsScreenArgs> {
   SalesOrderDetailsScreen({
     _i35.Key? key,
-    required _i41.SalesOrder salesOrder,
+    required _i40.SalesOrder salesOrder,
     required List<String> statuses,
     List<_i34.PageRouteInfo>? children,
   }) : super(
@@ -774,7 +748,7 @@ class SalesOrderDetailsScreenArgs {
 
   final _i35.Key? key;
 
-  final _i41.SalesOrder salesOrder;
+  final _i40.SalesOrder salesOrder;
 
   final List<String> statuses;
 
@@ -893,7 +867,7 @@ class TermsConditionsAndPrivacyPolicyScreenArgs {
 class TrackMapScreen extends _i34.PageRouteInfo<TrackMapScreenArgs> {
   TrackMapScreen({
     _i35.Key? key,
-    required _i41.SalesOrder salesOrder,
+    required _i40.SalesOrder salesOrder,
     List<_i34.PageRouteInfo>? children,
   }) : super(
          TrackMapScreen.name,
@@ -917,7 +891,7 @@ class TrackMapScreenArgs {
 
   final _i35.Key? key;
 
-  final _i41.SalesOrder salesOrder;
+  final _i40.SalesOrder salesOrder;
 
   @override
   String toString() {

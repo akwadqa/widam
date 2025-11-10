@@ -27,7 +27,7 @@ class RegisterController extends _$RegisterController {
           lastName: lastName,
           email: email);
       ref.read(userDataProvider.notifier).setUserData(
-          token: userData.token, id: userData.id, fullName: userData.fullName);
+          token: userData.token, id: userData.id, fullName: userData.fullName,customerId: userData.id);
       state = AsyncValue.data(userData);
     } catch (e, stack) {
       state = AsyncValue.error(e, stack);

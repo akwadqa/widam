@@ -17,7 +17,7 @@ import 'package:image_picker/image_picker.dart';
 part 'mubadara_fields.g.dart';
 
 @Riverpod(keepAlive: true)
-GlobalKey<FormState> mubadaraFormKey(MubadaraFormKeyRef ref) =>
+GlobalKey<FormState> mubadaraFormKey(Ref ref) =>
     GlobalKey<FormState>();
 
 class MubadaraFields extends ConsumerWidget {

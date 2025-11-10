@@ -9,7 +9,7 @@ part 'time_slot_group.g.dart';
 class TimeSlotGroup with _$TimeSlotGroup {
   factory TimeSlotGroup({
     required String timeSlotGroupId,
-    required num maxSalesOrder,
+    required num? maxSalesOrder,
     required List<Date> dates,
   }) = _TimeSlotGroup;
 

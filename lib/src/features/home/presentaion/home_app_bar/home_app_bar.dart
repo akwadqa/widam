@@ -186,23 +186,24 @@ class _LanguageSwitcherState extends State<LanguageSwitcher>
     widget.onLanguageChanged(currentLanguage);
   }
 
-  Widget _buildSaudiFlag() {
+  Widget _buildQatarFlag() {
     return ClipOval(
       child: Container(
         width: 24,
         height: 24,
         decoration: BoxDecoration(
-          color:const Color(0xFF006C35), 
+          color:const Color.fromARGB(255, 112, 55, 72), 
           shape: BoxShape.circle,
         ),
         child:
+          Assets.icons.download.image(),
         
         
-         Text(
-          "🇸🇦",
-          style: TextStyle(fontSize: 20),
+        //  Text(
+        //   "🇶🇦",
+        //   style: TextStyle(fontSize: 20),
           
-        )
+        // )
       ),
     );
   }
@@ -266,7 +267,7 @@ class _LanguageSwitcherState extends State<LanguageSwitcher>
                 // ),
                 child: Center(
                   child: currentLanguage == 'en'
-                      ? _buildSaudiFlag()
+                      ? _buildQatarFlag()
                       : _buildBritishFlag(),
                 ),
               ),

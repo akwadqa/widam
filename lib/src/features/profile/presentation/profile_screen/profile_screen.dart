@@ -85,9 +85,9 @@ class _ProfileButton extends ConsumerWidget {
               : S.of(context).loginOrRegister,
           onPressed: () {
             if (userToken != null) {
-              if (userDetails != null) {
-                context.pushRoute(EditProfileScreen(userDetails: userDetails));
-              }
+              // if (userDetails != null) {
+                context.pushRoute(EditProfileScreen());
+              // }
             } else {
               context.pushRoute(const LoginScreen());
             }

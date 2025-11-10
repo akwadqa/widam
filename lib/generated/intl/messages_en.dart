@@ -62,7 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "all": MessageLookupByLibrary.simpleMessage("All"),
     "allProducts": MessageLookupByLibrary.simpleMessage("All Products"),
     "allRightsReserved": MessageLookupByLibrary.simpleMessage(
-      "2023 - Widam - all right reserved",
+      "2026 - Widam - all right reserved",
     ),
     "apartment": MessageLookupByLibrary.simpleMessage("Apartment"),
     "appTitle": MessageLookupByLibrary.simpleMessage("Widam"),
@@ -144,6 +144,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "continueShopping": MessageLookupByLibrary.simpleMessage(
       "Continue Shopping",
     ),
+    "corporateVideo": MessageLookupByLibrary.simpleMessage("Corporate Video"),
     "country": MessageLookupByLibrary.simpleMessage("Country"),
     "couponDetails": MessageLookupByLibrary.simpleMessage("Coupon Details"),
     "couponItems": MessageLookupByLibrary.simpleMessage("Coupon Items"),
@@ -388,6 +389,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Hello Again!\nLet\'s verify your number.",
     ),
     "otpMinLength": MessageLookupByLibrary.simpleMessage("Should be 6 digits"),
+    "ourService": MessageLookupByLibrary.simpleMessage("Our service"),
     "outOfStock": MessageLookupByLibrary.simpleMessage("Out of Stock"),
     "packageIsLoaded": MessageLookupByLibrary.simpleMessage(
       "Package is Loaded",

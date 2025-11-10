@@ -35,7 +35,9 @@ class UpdateCart extends _$UpdateCart {
       String? pickupPointId,
       String? itemWarehouseId,
       bool? express,
-      bool? expressPickup}) async {
+      bool? expressPickup,
+      List<Map<String, String>>? productOptions
+      }) async {
     state = const AsyncLoading();
     final cartRepository = ref.watch(cartRepositoryProvider);
     try {
@@ -60,6 +62,7 @@ class UpdateCart extends _$UpdateCart {
           warehouseId: warehouseId,
           express: express,
           expressPickup: expressPickup,
+          productOptions: productOptions,
           itemWarehouseId: itemWarehouseId);
       ref.read(cartControllerProvider.notifier).updateCart(cart);
       state = const AsyncData(null);

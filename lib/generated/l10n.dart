@@ -1119,15 +1119,30 @@ class S {
     return Intl.message('Contact Us', name: 'contactUs', desc: '', args: []);
   }
 
+  /// `Our service`
+  String get ourService {
+    return Intl.message('Our service', name: 'ourService', desc: '', args: []);
+  }
+
+  /// `Corporate Video`
+  String get corporateVideo {
+    return Intl.message(
+      'Corporate Video',
+      name: 'corporateVideo',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Complaints`
   String get complaints {
     return Intl.message('Complaints', name: 'complaints', desc: '', args: []);
   }
 
-  /// `2023 - Widam - all right reserved`
+  /// `2026 - Widam - all right reserved`
   String get allRightsReserved {
     return Intl.message(
-      '2023 - Widam - all right reserved',
+      '2026 - Widam - all right reserved',
       name: 'allRightsReserved',
       desc: '',
       args: [],
