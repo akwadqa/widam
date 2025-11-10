@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widam/src/features/profile/data/profile_repository.dart';
 import 'package:widam/src/theme/app_theme.dart';
 import 'package:widam/src/utils/utils.dart';
 import '../../../../common_widgets/banner/app_banner_dialog.dart';
@@ -22,8 +23,8 @@ import 'edit_profile_controller.dart';
 
 @RoutePage()
 class EditProfileScreen extends ConsumerStatefulWidget {
-  const EditProfileScreen({super.key, required this.userDetails});
-  final UserDetails userDetails;
+  const EditProfileScreen({super.key,});
+  // final UserDetails userDetails;
   @override
   ConsumerState<EditProfileScreen> createState() => _EditProfileScreenState();
 }
@@ -37,6 +38,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userDetails = ref.watch(profileDetailsProvider).asData?.value;
+
     return Scaffold(
       body: SafeArea(
         left: false,
@@ -60,26 +63,26 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                           title: S.of(context).editProfile,
                           subtitle: S.of(context).editProfileDesc),
                       const SizedBox(height: 8),
-                      Text(widget.userDetails.mobileNo,
+                      Text(userDetails?.mobileNo??"",
                           style: const TextStyle(
                               fontWeight: FontWeight.w600,
                               color: AppColors.gray)),
                       const SizedBox(height: 16),
                       TitleRadiosFormField(
                           onSaved: (value) => _title = value,
-                          initialValue: widget.userDetails.salutation,
+                          initialValue: userDetails?.salutation,
                           context: context),
                       const SizedBox(height: 30),
                       FirstNameFormField(
-                          initialValue: widget.userDetails.firstName,
+                          initialValue: userDetails?.firstName,
                           onSaved: (value) => _firstName = value),
                       const SizedBox(height: 20),
                       LastNameFormField(
-                          initialValue: widget.userDetails.lastName,
+                          initialValue: userDetails?.lastName,
                           onSaved: (value) => _lastName = value),
                       const SizedBox(height: 20),
                       EmailFormField(
-                          initialValue: widget.userDetails.email,
+                          initialValue: userDetails?.email,
                           onSaved: (value) => _email = value),
                       const SizedBox(height: 30),
                       Text(S.of(context).accountDeletion,
