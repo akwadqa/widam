@@ -83,7 +83,10 @@ class _ProfileButton extends ConsumerWidget {
           text: userToken != null
               ? S.of(context).editYourProfile
               : S.of(context).loginOrRegister,
-          onPressed: () {
+              backgroundColor:userToken != null&& userDetails==null?AppColors.screamingGrey:null,
+          onPressed: 
+        userToken != null&&   userDetails==null?null:
+          () {
             if (userToken != null) {
               // if (userDetails != null) {
                 context.pushRoute(EditProfileScreen());

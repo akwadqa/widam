@@ -39,6 +39,13 @@ class ReachOutUs extends ConsumerWidget {
             );
           },
         ),
+        ListTile(
+          title: Text( S.of(context).termsAndConditions),
+          trailing: const Icon(Icons.arrow_forward_ios),
+          onTap: () async {
+            context.pushRoute(TermsConditionsAndPrivacyPolicyScreen());
+          },
+        ),
        
         if (ref.watch(userDataProvider) != null) ...[
           const Divider(),
