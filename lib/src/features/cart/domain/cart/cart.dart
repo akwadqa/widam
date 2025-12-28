@@ -24,6 +24,7 @@ class Cart with _$Cart {
     required PaymentMethod? paymentMethod,
     required SavedCard? savedCard,
     required int pickup,
+    required int express,
     required Address? shippingAddressDetails,
     required String? couponCode,
     required double? totalDiscountAmount,

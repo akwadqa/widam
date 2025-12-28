@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../common_models/response/app_response.dart';
@@ -11,7 +12,7 @@ import '../domain/user_details/user_details.dart';
 part 'profile_repository.g.dart';
 
 @riverpod
-ProfileRepository profileRepository(ProfileRepositoryRef ref) =>
+ProfileRepository profileRepository(Ref ref) =>
     ProfileRepository(ref.watch(networkServiceProvider()));
 
 class ProfileRepository {

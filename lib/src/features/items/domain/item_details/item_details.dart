@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:widam/src/features/items/domain/item_details/product_option.dart';
 import '../../../addresses/domain/address/warehouse.dart';
 import '../../../tags/domain/tag/tag.dart';
 import '../additional_image/additional_image.dart';
@@ -46,7 +47,9 @@ class ItemDetails with _$ItemDetails {
       required String? customerQid,
       required PickupPointsDetails? pickupPoints,
       required int? isUdhiyaItem,
-      required Warehouse warehouse
+      required Warehouse warehouse,
+       @JsonKey(name: 'product_options')   required List<ProductOption>? productOptions,
+
       }) = _ItemDetails;
 
   factory ItemDetails.fromJson(Map<String, dynamic> json) =>

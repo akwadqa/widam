@@ -79,6 +79,10 @@ class $AssetsIconsGen {
   SvgGenImage get discountIcon =>
       const SvgGenImage('assets/icons/discount_icon.svg');
 
+  /// File path: assets/icons/download.jpeg
+  AssetGenImage get download =>
+      const AssetGenImage('assets/icons/download.jpeg');
+
   /// File path: assets/icons/driver_marker_icon.svg
   SvgGenImage get driverMarkerIcon =>
       const SvgGenImage('assets/icons/driver_marker_icon.svg');
@@ -220,6 +224,7 @@ class $AssetsIconsGen {
     deleteIcon,
     deliveryIcon,
     discountIcon,
+    download,
     driverMarkerIcon,
     editIcon,
     emptyFileIcon,

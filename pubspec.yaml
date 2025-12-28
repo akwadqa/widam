@@ -3,7 +3,7 @@ description: Browse our products with ease and choose your favorite meat cut and
 
 publish_to: 'none'
 
-version: 20.1.3+2
+version: 20.1.7+9
 
 environment:
   sdk: '>=3.5.4 <4.0.0'
@@ -76,6 +76,8 @@ dependencies:
     path: local_packages/flutter_vibrate-master
   mobile_scanner: ^7.0.0
   pretty_dio_logger: ^1.4.0
+  video_player: ^2.10.0
+  chewie: ^1.13.0
 
 dependency_overrides:
   web: ^1.0.0
@@ -106,7 +108,10 @@ flutter_gen:
     flutter_svg: true
 
 flutter:
-
+  generate: true
+  
+  # Optional: configure where ARB files live
+  # (default is lib/l10n)
   uses-material-design: true
   assets:
     - assets/icons/

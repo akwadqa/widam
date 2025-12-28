@@ -46,6 +46,19 @@ class AddressesRepository {
     final response = await _networkService.put(EndPoints.addresses,data:  formData);
     return _handelResponse(response);
   }
+  Future<void> selectAddress(String addressId) async {
+    // AddressConverter addressConverter = const AddressConverter();
+    // final FormData formData =
+    //     FormData.fromMap(addressConverter.toJson(address, true));
+    final response = await _networkService.put(EndPoints.addresses,
+    // data:  formData
+        queryParameters: {
+          "address_id":addressId,
+          "is_shipping_address":1
+        }
+    );
+    // return _handelResponse(response);
+  }
 
   Address _handelResponse(response) {
     final AppResponse<Address> appResponse =

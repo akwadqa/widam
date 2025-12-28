@@ -119,12 +119,15 @@ class _NonEmptyCart extends ConsumerWidget {
         showAppBannerDialog(context, next.error.toString(), next.stackTrace);
       }
     });
-    final expressDelivery =
-        cart.pickup != 1 ? cart.cartContent.expressDelivery : null;
+
     final normalDelivery =
-        cart.pickup != 1 ? cart.cartContent.normalDelivery : null;
+        (cart.pickup != 1) ? cart.cartContent.normalDelivery : null;
     final pickupDelivery =
-        cart.pickup != 1 ? cart.cartContent.pickupDelivery : null;
+        (cart.pickup != 1) ? cart.cartContent.pickupDelivery : null;
+
+    final expressDelivery =
+        (cart.pickup != 1) ? cart.cartContent.expressDelivery : null;
+
     final hasNormal = normalDelivery != null;
     final hasExpress = expressDelivery != null;
     final hasPickup = pickupDelivery != null;
@@ -137,10 +140,10 @@ class _NonEmptyCart extends ConsumerWidget {
 
 // Option B (if your model already exposes a count):
 // final normalItemCount = normalDelivery?.itemsCount ?? 0;
-final mergedOnce = ref.watch(mergedOnceProvider);
+    final mergedOnce = ref.watch(mergedOnceProvider);
 // count items if you also want to require > 1:
-final normalItemCount =
-    hasNormal ? (normalDelivery!.websiteItems as List).length : 0;
+    final normalItemCount =
+        hasNormal ? (normalDelivery!.websiteItems as List).length : 0;
 
     return Stack(
       children: [
@@ -174,17 +177,26 @@ final normalItemCount =
                   ),
                 )),
                 const SliverToBoxAdapter(child: SizedBox(height: 12.0))
-              ] else if (hasNormal && !isSplit && normalItemCount > 1 && mergedOnce) ...[
+              ] else if (hasNormal && !isSplit && mergedOnce) ...[
                 SliverToBoxAdapter(
                     child: AppStackedLoadingIndicator(
                   isLoading: ref.watch(updateCartProvider).isLoading,
                   child: SwitchContainer(
-                    title: S.of(context).split,
-                    description: S.of(context).splitDescription,
-                    onPressed: () => ref
-                        .read(updateCartProvider.notifier)
-                        .updateCart(express: true, expressPickup: true),
-                  ),
+                      title: S.of(context).split,
+                      description: S.of(context).splitDescription,
+                      onPressed: () async {
+                        final ok = await ref
+                            .read(updateCartProvider.notifier)
+                            .updateCart(express:true , expressPickup: true);
+                        if (ok) {
+                          ref.invalidate(
+                              cartControllerProvider); // refresh cart data
+                        }
+                      }
+                      //  ref
+                      //     .read(updateCartProvider.notifier)
+                      //     .updateCart(express: true, expressPickup: true),
+                      ),
                 )),
                 const SliverToBoxAdapter(child: SizedBox(height: 12.0))
               ],
@@ -204,7 +216,7 @@ final normalItemCount =
                         currency: cart.currency,
                         total: normalDelivery.subTotal),
                   const SizedBox(height: 20.0),
-                  if (expressDelivery != null)
+                  if (hasExpress)
                     CustomDeliveryContainer(
                         header: AppStackedLoadingIndicator(
                           isLoading: ref.watch(updateCartProvider).isLoading,
@@ -231,7 +243,7 @@ final normalItemCount =
                           ],
                         ),
                         currency: cart.currency),
-                  if (pickupDelivery != null)
+                  if (hasPickup)
                     CustomDeliveryContainer(
                         header: AppStackedLoadingIndicator(
                           isLoading: ref.watch(updateCartProvider).isLoading,
@@ -292,7 +304,7 @@ final normalItemCount =
                       const SizedBox(height: 16),
                     ],
                     ForwardSubmitButton(
-                        onPressed: cart.orderTotal.remainderAmount > 0
+                        onPressed: cart.orderTotal.remainderAmount > 0 
                             ? null
                             : () {
                                 // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SplashScreen()));

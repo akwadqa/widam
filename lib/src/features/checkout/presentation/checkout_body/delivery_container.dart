@@ -27,6 +27,7 @@ class DeliveryContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("ISPICKUP$isPickup");
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.brightGray, width: 0.5),
@@ -115,7 +116,7 @@ class DeliveryContainer extends StatelessWidget {
             Consumer(
               builder: (context, ref, child) {
                 return TextButton(
-                  onPressed: isExpress == true ||  isPickup == true && deliveryType.websiteItems.first.isUdhiyaItem!=1
+                  onPressed: isExpress == true 
                       ? null
                       : () {
                           showAdaptiveModalBottomSheet<

@@ -1,13 +1,17 @@
+import 'dart:convert';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:widam/src/common_widgets/banner/app_banner_dialog.dart';
+import 'package:widam/src/features/addresses/presentation/maps/address_selector_button/address_selector_button_controller.dart';
 import 'package:widam/src/features/cart/presentation/cart_item_added_dialog/go_to_cart_controller.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/mubadara_fields/qid_attachment_controller.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/pickup_points_form_field/pickup_points_form_field.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/slotter_fees_form_field/slotter_fees_controller.dart';
 import 'package:widam/src/features/items/presentation/item_details/item_details_body/slotter_fees_form_field/slotter_fees_form_field.dart';
+import 'package:widam/src/features/items/presentation/item_details/product_option_section.dart';
 import 'package:widam/src/features/recommendations/presentation/frequently_bought_together/frequently_bought_together_controller.dart';
 import 'package:widam/src/features/recommendations/presentation/recently_viewd/recently_viewd_controller.dart';
 import 'package:widam/src/features/recommendations/presentation/similar_items/similar_items_controller.dart';
@@ -17,6 +21,7 @@ import 'package:widam/src/utils/utils.dart';
 import '../../../../auth/application/user_data_provider.dart';
 import '../../../../../routing/app_router.gr.dart';
 import '../../../../../common_widgets/fade_circle_loading_indicator.dart';
+import '../product_options_form_key_provider.dart';
 import 'mubadara_fields/mubadara_fields.dart';
 import 'mubadara_fields/qid_number_controller.dart';
 import 'pickup_points_form_field/selected_pickup_point_controller.dart';
@@ -26,7 +31,7 @@ import '../../../../../common_widgets/submit_button.dart';
 import '../../../../cart/application/cart_service.dart';
 import '../item_details_controller.dart';
 
-enum FormType { variants, options, slotterFees, pickupPoint }
+enum FormType { variants, options, slotterFees, pickupPoint,product }
 
 class AddToCartWidget extends StatelessWidget {
   const AddToCartWidget(
@@ -126,26 +131,42 @@ class AddToCartWidget extends StatelessWidget {
     if (!_validateForms(ref)) return;
 
     ref.read(mubadaraFormKeyProvider).currentState?.save();
+    final productOptions =
+        ref.read(productOptionsControllerProvider); // ✅ read entered options
+    final productOptionsList = productOptions.entries
+        .map((e) => {
+              "product_option_name": e.key,
+              "product_option_value": e.value,
+            })
+        .toList();
+
+    debugPrint("🧾 Sending Product Options:");
+    debugPrint(jsonEncode(productOptionsList));
+
     final isUdhiyaItem = ref
         .watch(itemDetailsControllerProvider)
         .value
         ?.itemDetails
         .isUdhiyaItem;
     debugPrint("isUdhiyaItem IN ADD to cart : ${isUdhiyaItem}");
-    final udhiyaExpress=isUdhiyaItem==1?false:true;
+    final udhiyaExpress = isUdhiyaItem == 1 ? false : true;
+    final selectedAddress = ref.watch(addressSelectorButtonControllerProvider);
 
     ref.read(updateCartProvider.notifier).updateCart(
-        itemId: itemId,
-        quantity: ref.read(quantityProvider),
-        pickupPointId: ref.read(selectedPickupPointControllerProvider),
-        qid: ref.read(qidNumberControllerProvider).isEmpty
-            ? null
-            : ref.read(qidNumberControllerProvider),
-        file: ref.read(qidAttachmentControllerProvider),
-        attributionToken: attributionToken,
-        isPriceModifier: ref.read(slotterFeesControllerProvider),
-        express:udhiyaExpress,
-        itemWarehouseId: itemWarehouseId);
+          itemId: itemId,
+          quantity: ref.read(quantityProvider),
+          // shippingAddressId:selectedAddress.value. ,
+          pickupPointId: ref.read(selectedPickupPointControllerProvider),
+          qid: ref.read(qidNumberControllerProvider).isEmpty
+              ? null
+              : ref.read(qidNumberControllerProvider),
+          file: ref.read(qidAttachmentControllerProvider),
+          attributionToken: attributionToken,
+          isPriceModifier: ref.read(slotterFeesControllerProvider),
+          express: udhiyaExpress,
+          itemWarehouseId: itemWarehouseId,
+          productOptions: productOptionsList,
+        );
 
     _invalidateRecommendationProviders(ref);
   }
@@ -155,6 +176,8 @@ class AddToCartWidget extends StatelessWidget {
       _validateForm(ref, slotterFeesFormKeyProvider, FormType.slotterFees),
       _validateForm(ref, pickupPointsFormKeyProvider, FormType.pickupPoint),
       _validateForm(ref, mubadaraFormKeyProvider, FormType.options),
+      _validateForm(
+          ref, productOptionsFormKeyProvider, FormType.product), // ✅ added
     ];
 
     return validators.every((result) => result);

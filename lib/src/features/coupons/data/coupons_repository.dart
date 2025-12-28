@@ -1,4 +1,6 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:widam/src/features/auth/application/user_data_provider.dart';
 import '../../../constants/end_points.dart';
 import 'package:widam/src/network/exception/dio_exceptions.dart';
 import 'package:widam/src/network/services/dio_client.dart';
@@ -10,7 +12,7 @@ import '../domain/coupon/coupon.dart';
 part 'coupons_repository.g.dart';
 
 @riverpod
-CouponsRepository couponsRepository(CouponsRepositoryRef ref) {
+CouponsRepository couponsRepository(Ref ref) {
   return CouponsRepository(ref.watch(networkServiceProvider()));
 }
 
@@ -19,10 +21,15 @@ class CouponsRepository {
 
   CouponsRepository(this._networkService);
 
-  Future<List<Coupon>> getCoupons([String? couponCode]) async {
-    final response = await _networkService.get(EndPoints.coupons,
-        queryParameters:
-            couponCode != null ? {'coupon_code_id': couponCode} : null);
+  Future<List<Coupon>> getCoupons(
+      {String? couponCode, String? customer}) async {
+    final response = await _networkService.get(
+      EndPoints.coupons,
+      queryParameters: {
+        if (couponCode != null) 'coupon_code_id': couponCode,
+        if (customer != null) "customer": customer,
+      },
+    );
     final couponsResponse =
         AppResponse<List<Coupon>>.fromJson(response.data, (json) {
       return (json as List).map((e) => Coupon.fromJson(e)).toList();
@@ -37,6 +44,9 @@ class CouponsRepository {
 }
 
 @riverpod
-FutureOr<List<Coupon>> coupons(CouponsRef ref) {
-  return ref.watch(couponsRepositoryProvider).getCoupons();
+FutureOr<List<Coupon>> coupons(Ref ref) {
+  final userData = ref.watch(userDataProvider);
+  return ref
+      .watch(couponsRepositoryProvider)
+      .getCoupons(customer: userData?.customerId);
 }
