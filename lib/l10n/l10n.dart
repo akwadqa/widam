@@ -2264,6 +2264,12 @@ abstract class AppLocalizations {
   /// **'Test'**
   String get test;
 
+  /// No description provided for @no_content_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No content available'**
+  String get no_content_available;
+
   /// No description provided for @firstEidDay.
   ///
   /// In en, this message translates to:

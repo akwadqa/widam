@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:widam/src/theme/app_colors.dart';
 
 class AppCachedNetworkImage extends StatelessWidget {
   const AppCachedNetworkImage({
@@ -29,6 +30,9 @@ class AppCachedNetworkImage extends StatelessWidget {
             fadeInDuration: Duration.zero,
             fadeOutDuration: Duration.zero,
             placeholderFadeInDuration: Duration.zero,
+            errorWidget: (context, url, error) {
+              return Container(color: AppColors.screamingGrey,);
+            },
           );
   }
 }

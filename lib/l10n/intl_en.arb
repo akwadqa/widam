@@ -360,6 +360,7 @@
   "expressDescription" : "Get express delivery for these items.",
   "pickup" : "Pickup",
   "test" : "Test",
+  "no_content_available": "No content available",
   "firstEidDay": "First Day of Eid",
   "secondEidDay": "Second Day of Eid",
   "thirdEidDay": "Third Day of Eid",

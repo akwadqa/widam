@@ -355,6 +355,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "noTransactionHistory": MessageLookupByLibrary.simpleMessage(
       "No Transaction History",
     ),
+    "no_content_available": MessageLookupByLibrary.simpleMessage(
+      "No content available",
+    ),
     "notFound": MessageLookupByLibrary.simpleMessage("Not Found"),
     "notNow": MessageLookupByLibrary.simpleMessage("NOT NOW"),
     "notification": MessageLookupByLibrary.simpleMessage("Notification"),

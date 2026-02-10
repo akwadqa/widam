@@ -37,7 +37,7 @@ class SubscriptionItemCard extends StatelessWidget {
                   children: [
                     Expanded(
                         child: AppCachedNetworkImage(
-                            imageUrl: item.websiteItemImage)),
+                            imageUrl: item.websiteItemImage??"")),
                     const SizedBox(width: 20),
                     Expanded(
                       flex: 3,

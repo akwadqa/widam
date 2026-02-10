@@ -1119,6 +1119,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get test => 'Test';
 
   @override
+  String get no_content_available => 'No content available';
+
+  @override
   String get firstEidDay => 'First Day of Eid';
 
   @override

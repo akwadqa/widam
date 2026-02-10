@@ -1116,6 +1116,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get test => 'اختبار';
 
   @override
+  String get no_content_available => 'لا يوجد محتوى متاح';
+
+  @override
   String get firstEidDay => 'أول أيام العيد';
 
   @override

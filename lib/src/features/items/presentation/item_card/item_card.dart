@@ -39,7 +39,7 @@ class ItemCard extends StatelessWidget {
               children: [
                 Positioned.fill(
                     child: AppCachedNetworkImage(
-                        fit: BoxFit.cover, imageUrl: item.websiteItemImage)),
+                        fit: BoxFit.cover, imageUrl: item.websiteItemImage??"")),
                 if (item.tags
                         .where((element) => element.productLabel == 1)
                         .isNotEmpty &&

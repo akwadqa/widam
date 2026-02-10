@@ -1,144 +1,286 @@
-import 'package:chewie/chewie.dart';
-import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
-import 'package:widam/src/common_widgets/fade_circle_loading_indicator.dart';
-import 'package:widam/src/theme/app_colors.dart';
+// import 'package:chewie/chewie.dart';
+// import 'package:flutter/material.dart';
+// import 'package:video_player/video_player.dart';
+// import 'package:widam/src/common_widgets/app_cached_network_image.dart';
+// import 'package:widam/src/common_widgets/app_close_button.dart';
+// import 'package:widam/src/common_widgets/fade_circle_loading_indicator.dart';
+// import 'package:widam/src/features/home/presentaion/home_banner_dialog/home_banner_dialog.dart';
+// import 'package:widam/src/theme/app_colors.dart';
 
-Future<void> showAdVideoDialog(
-  BuildContext context, {
-  required String videoSD,
-  required String videoHD,
-}) async {
-  await showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (ctx) {
-      return _AdVideoDialog(
-        videoSD: videoSD,
-        videoHD: videoHD,
-      );
-    },
-  );
-}
+// import 'media_ad/media_extension.dart';
 
-class _AdVideoDialog extends StatefulWidget {
-  final String videoSD;
-  final String videoHD;
+// Future<void> showAdVideoDialog(
+//   BuildContext context, {
 
-  const _AdVideoDialog({required this.videoSD, required this.videoHD});
+//   required String adUrl,
+// }) async {
+//   await showDialog(
+//     context: context,
+//     barrierDismissible: false,
+//     builder: (ctx) {
+//       return
+//        _AdVideoDialog(
+//         videoSD: adUrl,
+//         videoHD: adUrl,
+//       );
+//     },
+//   );
+// }
 
-  @override
-  State<_AdVideoDialog> createState() => _AdVideoDialogState();
-}
 
-class _AdVideoDialogState extends State<_AdVideoDialog> {
-  VideoPlayerController? _videoController;
-  ChewieController? _chewieController;
-  bool _isLoading = true;
+// class _AdVideoDialog extends StatefulWidget {
+//   final String videoSD;
+//   final String videoHD;
 
-  @override
-  void initState() {
-    super.initState();
-    _initialize(widget.videoHD);
-  }
+//   const _AdVideoDialog({required this.videoSD, required this.videoHD});
 
-  Future<void> _initialize(String url) async {
-    setState(() => _isLoading = true);
+//   @override
+//   State<_AdVideoDialog> createState() => _AdVideoDialogState();
+// }
 
-    // dispose old ones
-     _chewieController?.dispose();
-    await _videoController?.dispose();
+// class _AdVideoDialogState extends State<_AdVideoDialog> {
+//   VideoPlayerController? _videoController;
+//   ChewieController? _chewieController;
+//   bool _isLoading = true;
 
-    _videoController = VideoPlayerController.networkUrl(Uri.parse(url));
-    await _videoController!.initialize();
+//   @override
+//   void initState() {
+//     super.initState();
+//     _initialize(widget.videoHD);
+//   }
 
-    _chewieController = ChewieController(
-      videoPlayerController: _videoController!,
-      autoPlay: true,
-      looping: false,
-      showControls: false,
-      allowFullScreen: true,
-    );
+//   Future<void> _initialize(String url) async {
+//     setState(() => _isLoading = true);
 
-    // Close dialog automatically when finished
-    _videoController!.addListener(() {
-      if (_videoController!.value.position >=
-          _videoController!.value.duration) {
-        if (mounted) Navigator.of(context).pop();
-      }
-    });
+//     // dispose old ones
+//      _chewieController?.dispose();
+//     await _videoController?.dispose();
 
-    setState(() => _isLoading = false);
-  }
+//     _videoController = VideoPlayerController.networkUrl(Uri.parse(url));
+//     await _videoController!.initialize();
 
-  @override
-  void dispose() {
-    _chewieController?.dispose();
-    _videoController?.dispose();
-    super.dispose();
-  }
+//     _chewieController = ChewieController(
+//       videoPlayerController: _videoController!,
+//       autoPlay: true,
+//       looping: false,
+//       showControls: false,
+//       allowFullScreen: true,
+//     );
 
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      insetPadding: const EdgeInsets.all(12),
-      backgroundColor: Colors.transparent,
-      // clipBehavior: Clip.antiAliasWithSaveLayer,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.8,
-          width: MediaQuery.of(context).size.width,
-          child: Stack(
-            children: [
-              Container(color: AppColors.ghostWhite,),
-              Positioned.fill(
-                child: _isLoading
-                    ? const Center(child: FadeCircleLoadingIndicator())
-                    : FittedBox(
-                        fit: BoxFit.cover,
-                        child: SizedBox(
-                          width: _chewieController!.videoPlayerController.value.size.width,
-                          height: _chewieController!.videoPlayerController.value.size.height,
-                          child: Chewie(controller: _chewieController!),
-                        ),
-                      ),
-              ),
+//     // Close dialog automatically when finished
+//     _videoController!.addListener(() {
+//       if (_videoController!.value.position >=
+//           _videoController!.value.duration) {
+//         if (mounted) Navigator.of(context).pop();
+//       }
+//     });
 
-              // Close button
-              Positioned(
-                top: 8,
-                left: 8,
-                child: IconButton(
-                  icon: const Icon(Icons.close,
-                      color: Colors.blueAccent, size: 28),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ),
+//     setState(() => _isLoading = false);
+//   }
 
-              // Quality switch
-              // Positioned(
-              //   top: 8,
-              //   right: 8,
-              //   child: PopupMenuButton<String>(
-              //     icon: const Icon(Icons.hd, color: Colors.white),
-              //     onSelected: (quality) async {
-              //       final url = (quality == "HD")
-              //           ? widget.videoHD
-              //           : widget.videoSD;
-              //       await _initialize(url);
-              //     },
-              //     itemBuilder: (context) => const [
-              //       PopupMenuItem(value: "SD", child: Text("SD Quality")),
-              //       PopupMenuItem(value: "HD", child: Text("HD Quality")),
-              //     ],
-              //   ),
-              // ),
+//   @override
+//   void dispose() {
+//     _chewieController?.dispose();
+//     _videoController?.dispose();
+//     super.dispose();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Dialog(
+//       insetPadding: const EdgeInsets.all(12),
+//       backgroundColor: Colors.transparent,
+//       // clipBehavior: Clip.antiAliasWithSaveLayer,
+//       child: ClipRRect(
+//         borderRadius: BorderRadius.circular(20),
+//         child: SizedBox(
+//           height: MediaQuery.of(context).size.height * 0.8,
+//           width: MediaQuery.of(context).size.width,
+//           child: Stack(
+//             children: [
+//               Container(color: AppColors.ghostWhite,),
+//               Positioned.fill(
+//                 child: _isLoading
+//                     ? const Center(child: FadeCircleLoadingIndicator())
+//                     : FittedBox(
+//                         fit: BoxFit.cover,
+//                         child: SizedBox(
+//                           width: _chewieController!.videoPlayerController.value.size.width,
+//                           height: _chewieController!.videoPlayerController.value.size.height,
+//                           child: Chewie(controller: _chewieController!),
+//                         ),
+//                       ),
+//               ),
+
+//               // Close button
+//               Positioned(
+//                 top: 8,
+//                 left: 8,
+//                 child:  Align(
+//                 alignment: AlignmentDirectional.topEnd,
+//                 child: Padding(
+//                   padding: EdgeInsets.all(8.0),
+//                   child: AppCloseButton(),
+//                 ))
+//               ),
+
+//               // Quality switch
+//               // Positioned(
+//               //   top: 8,
+//               //   right: 8,
+//               //   child: PopupMenuButton<String>(
+//               //     icon: const Icon(Icons.hd, color: Colors.white),
+//               //     onSelected: (quality) async {
+//               //       final url = (quality == "HD")
+//               //           ? widget.videoHD
+//               //           : widget.videoSD;
+//               //       await _initialize(url);
+//               //     },
+//               //     itemBuilder: (context) => const [
+//               //       PopupMenuItem(value: "SD", child: Text("SD Quality")),
+//               //       PopupMenuItem(value: "HD", child: Text("HD Quality")),
+//               //     ],
+//               //   ),
+//               // ),
          
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+
+// class _MediaAdDialog extends StatelessWidget {
+//   final String mediaUrl;
+
+//   final VoidCallback? onTap;
+
+//   const _MediaAdDialog({
+//     required this.mediaUrl,
+
+//     this.onTap,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Dialog(
+//       insetPadding: const EdgeInsets.all(12),
+//       backgroundColor: Colors.transparent,
+//       child: ClipRRect(
+//         borderRadius: BorderRadius.circular(20),
+//         child: SizedBox(
+//           height: MediaQuery.of(context).size.height * 0.8,
+//           width: MediaQuery.of(context).size.width,
+//           child: Stack(
+//             children: [
+//               Container(color: Colors.white),
+
+//               /// MEDIA
+//               Positioned.fill(
+//                 child: mediaUrl.isVideo
+//                     ? _AdVideoPlayer(
+//                         videoHD:  mediaUrl,
+//                         videoSD:  mediaUrl,
+//                       )
+//                     : InkWell(
+//                         onTap: () {
+//                           Navigator.of(context).pop();
+//                           onTap?.call();
+//                         },
+//                         child: AppCachedNetworkImage(
+//                           imageUrl: mediaUrl,
+//                           fit: BoxFit.cover,
+//                         ),
+//                       ),
+//               ),
+
+//               /// CLOSE
+//               const Positioned(
+//                 top: 8,
+//                 right: 8,
+//                 child: AppCloseButton(),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+// class _AdVideoPlayer extends StatefulWidget {
+//   final String videoHD;
+//   final String videoSD;
+
+//   const _AdVideoPlayer({
+//     required this.videoHD,
+//     required this.videoSD,
+//   });
+
+//   @override
+//   State<_AdVideoPlayer> createState() => _AdVideoPlayerState();
+// }
+
+// class _AdVideoPlayerState extends State<_AdVideoPlayer> {
+//   VideoPlayerController? _videoController;
+//   ChewieController? _chewieController;
+//   bool _loading = true;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _init(widget.videoHD);
+//   }
+
+//   Future<void> _init(String url) async {
+//     _loading = true;
+//     setState(() {});
+
+//     await _videoController?.dispose();
+
+//     _videoController = VideoPlayerController.networkUrl(Uri.parse(url));
+//     await _videoController!.initialize();
+
+//     _chewieController = ChewieController(
+//       videoPlayerController: _videoController!,
+//       autoPlay: true,
+//       looping: false,
+//       showControls: true,
+//     );
+
+//     _videoController!.addListener(() {
+//       if (_videoController!.value.position >=
+//           _videoController!.value.duration) {
+//         if (mounted) Navigator.of(context).pop();
+//       }
+//     });
+
+//     _loading = false;
+//     setState(() {});
+//   }
+
+//   @override
+//   void dispose() {
+//     _chewieController?.dispose();
+//     _videoController?.dispose();
+//     super.dispose();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     if (_loading) {
+//       return const Center(child: FadeCircleLoadingIndicator());
+//     }
+
+//     return FittedBox(
+//       fit: BoxFit.cover,
+//       child: SizedBox(
+//         width: _videoController!.value.size.width,
+//         height: _videoController!.value.size.height,
+//         child: Chewie(controller: _chewieController!),
+//       ),
+//     );
+//   }
+// }

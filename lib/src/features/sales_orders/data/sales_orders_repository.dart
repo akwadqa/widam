@@ -24,7 +24,7 @@ class SalesOrdersRepository {
   Future<AppResponse<OrdersResponse>> getPastOrders(int pageNo) async {
     final response =
         await _networkService.get(EndPoints.salesOrders, queryParameters: {
-      'past_orders': 1,
+      // 'past_orders': 1,
       'page_no': pageNo,
     });
 
@@ -41,7 +41,7 @@ class SalesOrdersRepository {
   Future<OrdersResponse> getOpenOrders() async {
     final response =
         await _networkService.get(EndPoints.salesOrders, queryParameters: {
-      'open_orders': 1,
+      // 'open_orders': 1,
     });
 
     AppResponse<OrdersResponse> appResponse = AppResponse.fromJson(

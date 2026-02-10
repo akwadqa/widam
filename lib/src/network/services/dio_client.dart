@@ -12,13 +12,13 @@ part 'dio_client.g.dart';
 
 @Riverpod(keepAlive: true)
 Dio dio(Ref ref) {
-  const timeout = Duration(seconds: 120);
+  // const timeout = Duration(seconds: 120);
 
   final dio = Dio(BaseOptions(
     baseUrl: ServicesUrls.baseUrl,
-    connectTimeout: timeout,
-    receiveTimeout: timeout,
-    sendTimeout: timeout,
+    // connectTimeout: timeout,
+    // receiveTimeout: timeout,
+    // sendTimeout: timeout,
   ));
   // dio.interceptors.add(RemoteInterceptor(ref));
   dio.interceptors.addAll([

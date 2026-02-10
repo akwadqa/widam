@@ -31,7 +31,7 @@ class DealsItem extends StatelessWidget {
                         ? Stack(
                             children: [
                               AppCachedNetworkImage(
-                                  imageUrl: item.websiteItemImage,
+                                  imageUrl: item.websiteItemImage??"",
                                   fit: BoxFit.fitWidth),
                               PositionedDirectional(
                                   top: 0,
@@ -41,7 +41,7 @@ class DealsItem extends StatelessWidget {
                             ],
                           )
                         : AppCachedNetworkImage(
-                            imageUrl: item.websiteItemImage)),
+                            imageUrl: item.websiteItemImage??"")),
                 Padding(
                   padding: const EdgeInsets.all(6.0),
                   child: Column(

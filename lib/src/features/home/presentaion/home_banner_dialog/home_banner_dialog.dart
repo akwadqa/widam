@@ -35,7 +35,10 @@ class HomeBannerDialog extends StatelessWidget {
                         mubadaraId: banner.mubadaraId,
                         isMubadara: 1));
               },
-              child: AppCachedNetworkImage(
+              child:
+              
+              
+               AppCachedNetworkImage(
                 fit: BoxFit.fill,
                 imageUrl: banner.bannerImage,
               ),

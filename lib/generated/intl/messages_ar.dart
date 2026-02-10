@@ -327,6 +327,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "noTransactionHistory": MessageLookupByLibrary.simpleMessage(
       "لا توجد معاملات",
     ),
+    "no_content_available": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد محتوى متاح",
+    ),
     "notFound": MessageLookupByLibrary.simpleMessage("غير موجود"),
     "notNow": MessageLookupByLibrary.simpleMessage("ليس الآن"),
     "notification": MessageLookupByLibrary.simpleMessage("إشعار"),

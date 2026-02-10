@@ -59,7 +59,7 @@ class _DealsRow extends StatelessWidget {
         Expanded(
           flex: 4,
           child: AppCachedNetworkImage(
-              imageUrl: item.websiteItemImage, fit: BoxFit.fitWidth),
+              imageUrl: item.websiteItemImage??"", fit: BoxFit.fitWidth),
         ),
         const Spacer(),
         Expanded(

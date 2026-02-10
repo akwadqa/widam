@@ -225,7 +225,7 @@ class ItemsCircleHorizontalGrid extends ConsumerWidget {
                     backgroundColor: AppColors.hexToColor(backgroundColor),
                     child: ClipOval(
                       child: AppCachedNetworkImage(
-                        imageUrl: item.websiteItemImage,
+                        imageUrl: item.websiteItemImage??"",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -277,7 +277,7 @@ class ItemGridItem extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final Widget content = isAllCategory
         ? const Center(child: Icon(Icons.grid_view, size: 40))
-        : AppCachedNetworkImage(imageUrl: item!.websiteItemImage);
+        : AppCachedNetworkImage(imageUrl: item!.websiteItemImage??"");
 
     return Column(
       children: [
@@ -380,7 +380,7 @@ class ItemsHorizontalListItem extends ConsumerWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 image: DecorationImage(
-                  image: CachedNetworkImageProvider(item.websiteItemImage),
+                  image: CachedNetworkImageProvider(item.websiteItemImage??""),
                   fit: BoxFit.fill,
                 ),
               ),

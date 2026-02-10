@@ -2999,6 +2999,16 @@ class S {
     return Intl.message('Test', name: 'test', desc: '', args: []);
   }
 
+  /// `No content available`
+  String get no_content_available {
+    return Intl.message(
+      'No content available',
+      name: 'no_content_available',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `First Day of Eid`
   String get firstEidDay {
     return Intl.message(

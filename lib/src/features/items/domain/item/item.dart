@@ -18,7 +18,7 @@ class Item with _$Item {
     required num maxQty,
     required num minQty,
     required String stockUom,
-    required String websiteItemImage,
+    required String? websiteItemImage,
     required String? itemGroup,
     required int isExpressItem,
     required Price price,
@@ -35,7 +35,7 @@ extension ItemAsGroupExtension on Item {
   BasicItemGroup toBasicItemGroup() {
     return BasicItemGroup(
       itemGroupId: websiteItemId,
-      itemGroupImage: websiteItemImage,
+      itemGroupImage: websiteItemImage??"",
       itemGroupName: websiteItemName,
       parameters: ""
     );

@@ -359,6 +359,8 @@
   "expressDescription": "احصل على توصيل سريع لهذه العناصر.",
   "pickup" : "التقاط",
   "test" : "اختبار",
+  
+  "no_content_available": "لا يوجد محتوى متاح",
   "firstEidDay": "أول أيام العيد",
   "secondEidDay": "ثاني أيام العيد",
   "thirdEidDay": "ثالث أيام العيد",

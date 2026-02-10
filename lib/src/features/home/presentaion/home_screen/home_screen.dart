@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart' hide Banner;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widam/src/common_widgets/media_ad/show_media_ad_dialog.dart';
 import 'package:widam/src/common_widgets/video_ads_dialog_widget.dart';
 import 'package:widam/src/constants/services_urls.dart';
+import 'package:widam/src/features/app_data/application/app_data_controller.dart';
 import 'package:widam/src/features/auth/application/user_data_provider.dart';
 import 'package:widam/src/features/home/presentaion/home_banner_dialog/home_banner_dialog.dart';
 import 'package:widam/src/features/layouts/domain/block.dart';
@@ -23,7 +25,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-   @override
+  @override
   void initState() {
     super.initState();
     _checkAndShowVideoAd();
@@ -31,17 +33,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Future<void> _checkAndShowVideoAd() async {
     final prefs = ref.read(userDataProvider.notifier);
-    final hasSeenAd = prefs.hasSeenAd() ;
-
-    if (!hasSeenAd) {
+    final appUtility = ref.read(appDataControllerProvider).value;
+    final hasSeenAd = prefs.hasSeenAd();
+    final adVaialable=appUtility?.corporateVideo!=null||appUtility?.showVideoOncePerSession!=null;
+    final showAd =adVaialable && ((!hasSeenAd && appUtility?.showVideoOncePerSession == 1) ||
+        appUtility?.showVideoOncePerSession == 0);
+// if(appUtility?.corporateVideo!=null||appUtility?.showVideoOncePerSession!=null){
+    if (showAd) {
       // Show video ad once
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         await Future.delayed(Duration(seconds: 4));
-        await showAdVideoDialog(
+        await showMediaAdDialog(
           context,
-          videoSD:"${ServicesUrls.domain}/files/Video-Widam.mp4",
-          videoHD: "${ServicesUrls.domain}/files/Video-Widam%202.mp4",
+          mediaUrl: ServicesUrls.domain + (appUtility?.corporateVideo??""),
         );
+
 
         // Mark as seen
         await prefs.markAdAsSeen();
@@ -59,7 +65,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           });
         }
       });
-    } else {
+     }else {
       // Already seen ad, just show banner if available
       if (widget.bannerBlock != null) {
         final bannerBlock = widget.bannerBlock!.data.first;
@@ -74,8 +80,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       }
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {

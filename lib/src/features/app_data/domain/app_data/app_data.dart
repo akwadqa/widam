@@ -20,6 +20,8 @@ class AppData with _$AppData {
     required String androidApiVersion,
     required String iosApiVersion,
     required String appUpdateMessage,
+    required String? corporateVideo,
+    required int? showVideoOncePerSession,
     required dynamic walletBalance,
   }) = _AppData;
 
