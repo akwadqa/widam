@@ -50,21 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC9LFvxQObhrvDgIYWCAA0uR68fz7rLqdA',
-    appId: '1:227142787549:android:fdc46575b308e1478f5634',
-    messagingSenderId: '227142787549',
-    projectId: 'widam-home-delivery',
-    storageBucket: 'widam-home-delivery.appspot.com',
+    apiKey: 'AIzaSyAlWfoDrZCAVI60osRM8iHqFnO9fsd6le0',
+    appId: '1:506009177185:android:bea2a7ab57083553bfae20',
+    messagingSenderId: '506009177185',
+    projectId: 'widam-dev-app',
+    storageBucket: 'widam-dev-app.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBGMNpAhMOfDcxS10KgXBw-QSn5zmyG5WQ',
-    appId: '1:227142787549:ios:66a6e1e5de71bdd08f5634',
-    messagingSenderId: '227142787549',
-    projectId: 'widam-home-delivery',
-    storageBucket: 'widam-home-delivery.appspot.com',
-    iosClientId:
-        '227142787549-380p8o1cutnojqqhe2kagffnkguef1o1.apps.googleusercontent.com',
+    apiKey: 'AIzaSyA3f9RSgDe4Y1ZFlKgXS3tzp_9qU9Ek2Hc',
+    appId: '1:506009177185:ios:5acc64de478da43ebfae20',
+    messagingSenderId: '506009177185',
+    projectId: 'widam-dev-app',
+    storageBucket: 'widam-dev-app.firebasestorage.app',
     iosBundleId: 'net.ays.PROD489402',
   );
+
 }

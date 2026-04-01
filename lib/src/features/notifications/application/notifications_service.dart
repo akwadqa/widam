@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:fcm_config/fcm_config.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,6 +35,8 @@ class NotificationsService {
     final userId = _sharedPreferences.getString(Keys.userId);
     if (userId != null) {
       FCMConfig.instance.messaging.onTokenRefresh.listen((deviceToken) {
+      debugPrint("FCM IS => .  $deviceToken");
+
         _ref
             .read(deviceTokenControllerProvider.notifier)
             .sendFCMToken(deviceToken, userId);
@@ -66,6 +69,7 @@ class NotificationsService {
   void sendDeviceToken(String userId) async {
     final deviceToken = await FCMConfig.instance.messaging.getToken();
     if (deviceToken != null) {
+      debugPrint("FCM IS => .  $deviceToken");
       await _ref
           .read(deviceTokenControllerProvider.notifier)
           .sendFCMToken(deviceToken, userId);
