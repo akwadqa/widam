@@ -74,25 +74,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(height: 20),
                       EmailFormField(onSaved: (value) => _email = value),
                       const SizedBox(height: 20),
-                      Row(
-                        children: [
-                          _CheckBoxFormField(
-                              validator: (value) => value == false
-                                  ? S.of(context).required
-                                  : null),
-                          Text(S.of(context).termAndConditionsPrefix,
-                              style: const TextStyle(
-                                  fontSize: 12, color: Colors.grey)),
-                          TextButton(
-                              onPressed: () => context.pushRoute(
-                                  TermsConditionsAndPrivacyPolicyScreen()),
-                              child: Text(S.of(context).termsAndConditions,
-                                  style: const TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      fontSize: 14,
-                                      color: AppColors.darkBlue,
-                                      fontWeight: FontWeight.w500))),
-                        ],
+                      FittedBox(
+                        child: Row(
+                          children: [
+                            _CheckBoxFormField(
+                                validator: (value) => value == false
+                                    ? S.of(context).required
+                                    : null),
+                            Text(S.of(context).termAndConditionsPrefix,
+                                style: const TextStyle(
+                                    fontSize: 12, color: Colors.grey)),
+                            TextButton(
+                                onPressed: () => context.pushRoute(
+                                    TermsConditionsAndPrivacyPolicyScreen()),
+                                child: Text(S.of(context).termsAndConditions,
+                                    style: const TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        fontSize: 14,
+                                        color: AppColors.darkBlue,
+                                        fontWeight: FontWeight.w500))),
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 100),
                     ],

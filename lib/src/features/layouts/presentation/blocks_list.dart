@@ -7,7 +7,7 @@ import '../data/layouts_repository.dart';
 import 'block_item.dart';
 
 class BlocksList extends ConsumerWidget {
-  const BlocksList({super.key, required this.layoutType});
+  const  BlocksList({super.key, required this.layoutType});
   final LayoutType layoutType;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

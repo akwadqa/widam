@@ -18,11 +18,18 @@ class AppDataController extends _$AppDataController {
   Future<AppData> _getAppData() async {
     final AppDataRepository appDataRepository =
         ref.watch(appDataRepositoryProvider);
-    final AppData appData = await appDataRepository.getAppData(
-        ref.read(userDataProvider) != null
-            ? ref.read(localGeofenceIdProvider)!
-            : ref.watch(localGeofenceIdProvider)!);
-    return appData;
+        final geofenceId = ref.watch(localGeofenceIdProvider);
+
+  if (geofenceId == null) {
+    return Future.error("Missing geofenceId");
+  }
+
+  return appDataRepository.getAppData(geofenceId);
+    // final AppData appData = await appDataRepository.getAppData(
+    //     ref.read(userDataProvider) != null
+    //         ? ref.read(localGeofenceIdProvider)!
+    //         : ref.watch(localGeofenceIdProvider)!);
+    // return appData;
   }
 
   void updateGeofence(Geofence geofence) {

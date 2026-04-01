@@ -41,7 +41,7 @@ class ItemGroupsBody extends ConsumerWidget {
         error: (error, stack) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Column(
-                children: [
+                children: [ 
                   AppBanner(message: error.toString(), stackTrace: stack),
                 ],
               ),

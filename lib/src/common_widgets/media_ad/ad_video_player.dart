@@ -37,7 +37,7 @@ class _AdVideoPlayerState extends State<AdVideoPlayer> {
       videoPlayerController: _videoController!,
       autoPlay: true,
       looping: false,
-      showControls: true,
+      showControls: false,
     );
 
     _videoController!.addListener(() {

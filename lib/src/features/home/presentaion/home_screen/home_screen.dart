@@ -65,7 +65,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           });
         }
       });
-     }else {
+     }
+     else {
       // Already seen ad, just show banner if available
       if (widget.bannerBlock != null) {
         final bannerBlock = widget.bannerBlock!.data.first;

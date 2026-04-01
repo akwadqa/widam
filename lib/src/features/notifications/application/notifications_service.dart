@@ -104,7 +104,7 @@ NotificationsService notificationsService(NotificationsServiceRef ref) {
   return NotificationsService(ref);
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class DeviceTokenController extends _$DeviceTokenController {
   @override
   FutureOr<void> build() {
@@ -117,6 +117,7 @@ class DeviceTokenController extends _$DeviceTokenController {
         ref.watch(notificationsRepositoryProvider);
     try {
       await notificationsRepository.sendFCMToken(token, userId);
+      
       state = const AsyncValue.data(null);
     } catch (error, stackTrace) {
       state = AsyncValue.error(error, stackTrace);
