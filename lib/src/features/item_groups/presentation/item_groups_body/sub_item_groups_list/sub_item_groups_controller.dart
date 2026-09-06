@@ -14,6 +14,9 @@ class SubItemGroupsController extends _$SubItemGroupsController {
   void set(List<ItemGroup> value) {
     state = value;
   }
+    void clear() {
+    state = [];
+  }
 }
 
 @riverpod
@@ -25,6 +28,9 @@ class SelectedSubItemGroupController extends _$SelectedSubItemGroupController {
 
   void set(String? value) {
     state = value;
-    ref.read(itemGroupItemsControllerProvider.notifier).getItems();
+    // ref.read(itemGroupItemsControllerProvider.notifier).getItems();
+  }
+    void reset() {
+    state = null;
   }
 }

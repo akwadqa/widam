@@ -41,7 +41,7 @@ class ItemGroupsBody extends ConsumerWidget {
         error: (error, stack) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Column(
-                children: [ 
+                children: [
                   AppBanner(message: error.toString(), stackTrace: stack),
                 ],
               ),
@@ -98,8 +98,9 @@ class _BodyState extends State<_Body> {
                     borderRadius: BorderRadius.circular(2),
                   ),
                   child: ItemGroupList(
-                      itemGroups: widget.itemGroups,
-                      focusNode: widget.focusNodes?.last)),
+                    itemGroups: widget.itemGroups,
+                    focusNode: widget.focusNodes?.last,
+                  )),
             ),
             const Expanded(
                 flex: 4, child: ItemGroupItemsGrid(childAspectRatio: 0.49)),

@@ -11,6 +11,12 @@ class SubItemGroupsList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final subItemGroups = ref.watch(subItemGroupsControllerProvider);
+    final selectedSubGroupId =
+        ref.watch(selectedSubItemGroupControllerProvider);
+
+    if (subItemGroups.isEmpty) {
+      return const SizedBox.shrink();
+    }
     return subItemGroups.isEmpty
         ? const SizedBox.shrink()
         : SizedBox(
@@ -19,9 +25,10 @@ class SubItemGroupsList extends ConsumerWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: subItemGroups.length,
                 itemBuilder: (context, index) {
-                  final isSelected =
-                      ref.watch(selectedSubItemGroupControllerProvider) ==
-                          subItemGroups[index].itemGroupId;
+                  final subGroup = subItemGroups[index];
+
+                  final isSelected = selectedSubGroupId == subGroup.itemGroupId;
+
                   return Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: AppFilterChip(

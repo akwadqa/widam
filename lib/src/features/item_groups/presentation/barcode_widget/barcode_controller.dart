@@ -12,6 +12,7 @@ class BarcodeController extends _$BarcodeController {
 
   void set(String? value) {
     state = value;
-    ref.read(itemGroupItemsControllerProvider.notifier).getItems();
+  }  void reset() {
+    state = null;
   }
 }

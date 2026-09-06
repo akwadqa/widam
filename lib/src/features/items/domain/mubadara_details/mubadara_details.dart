@@ -11,11 +11,11 @@ class MubadaraDetails with _$MubadaraDetails {
     required double qtyPerQid,
     required double qtyPerUser,
     required int minAge,
-    required String qidFieldLabel,
-    required String qidFieldPlaceholder,
-    required String qidCopyLabel,
-    required String qidCopyPlaceholder,
-    required String buttonLabel,
+    required String? qidFieldLabel,
+    required String? qidFieldPlaceholder,
+    required String? qidCopyLabel,
+    required String? qidCopyPlaceholder,
+    required String? buttonLabel,
   }) = _MubadaraDetails;
 
   factory MubadaraDetails.fromJson(Map<String, dynamic> json) =>

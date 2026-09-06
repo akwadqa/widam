@@ -30,11 +30,11 @@ class MubadaraFields extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          OptionLabel(label: mubadaraDetails.qidFieldLabel),
+          OptionLabel(label: mubadaraDetails.qidFieldLabel??""),
           const SizedBox(height: 8.0),
           QIDTextFormField(mubadaraDetails: mubadaraDetails),
           const SizedBox(height: 30.0),
-          OptionLabel(label: mubadaraDetails.qidCopyLabel),
+          OptionLabel(label: mubadaraDetails.qidCopyLabel??""),
           const SizedBox(height: 8.0),
           _QIDAttachmentFormField(
               context: context, mubadaraDetails: mubadaraDetails, ref: ref),
@@ -196,7 +196,7 @@ class _QIDAttachmentFormField extends FormField<XFile?> {
           children: [
             Text(
                 state.value == null
-                    ? mubadaraDetails.qidCopyPlaceholder
+                    ? mubadaraDetails.qidCopyPlaceholder??""
                     : S.of(context).qidAttached,
                 style: TextStyle(
                     color: state.value == null

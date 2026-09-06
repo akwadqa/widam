@@ -42,6 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "addAddress": MessageLookupByLibrary.simpleMessage("إضافة عنوان"),
     "addComplaint": MessageLookupByLibrary.simpleMessage("إضافة شكوى"),
+    "addImage": MessageLookupByLibrary.simpleMessage("اضافه صوره"),
+    "addMore": MessageLookupByLibrary.simpleMessage("اضافه المزيد"),
     "addNewAddress": MessageLookupByLibrary.simpleMessage("إضافة عنوان جديد"),
     "addNewCard": MessageLookupByLibrary.simpleMessage("إضافة بطاقة جديدة"),
     "addNewComplaint": MessageLookupByLibrary.simpleMessage("إضافة شكوى جديدة"),
@@ -71,6 +73,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "asSoonAsPossible": MessageLookupByLibrary.simpleMessage(
       "في أقرب وقت ممكن خلال ساعتين",
     ),
+    "attachedImage": MessageLookupByLibrary.simpleMessage("الصورة المرفقة"),
+    "attachedImages": MessageLookupByLibrary.simpleMessage("الصور المرفقه"),
+    "attachment": MessageLookupByLibrary.simpleMessage("المرفق"),
     "attemptsLeft": MessageLookupByLibrary.simpleMessage("محاولات متبقية"),
     "autoOrder": MessageLookupByLibrary.simpleMessage("طلب تلقائي"),
     "availableSoon": MessageLookupByLibrary.simpleMessage("سيتوفر قريباً"),
@@ -106,6 +111,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "تغيير طريقة الدفع",
     ),
     "checkout": MessageLookupByLibrary.simpleMessage("الدفع"),
+    "chooseImageSource": MessageLookupByLibrary.simpleMessage(
+      "اختر طريقة إضافة الصورة",
+    ),
     "chooseYourLocation": MessageLookupByLibrary.simpleMessage("اختر موقعك"),
     "chooseYourSchedule": MessageLookupByLibrary.simpleMessage("اختر جدولك"),
     "chooseYourScheduleDescription": MessageLookupByLibrary.simpleMessage(
@@ -121,6 +129,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "التعليقات والملاحظات",
     ),
     "complaint": MessageLookupByLibrary.simpleMessage("شكوى"),
+    "complaintSubtitle": MessageLookupByLibrary.simpleMessage(
+      "نحن هنا للمساعدة. يرجى وصف مشكلتك.",
+    ),
+    "complaintType": MessageLookupByLibrary.simpleMessage("نوع الشكوى"),
     "complaints": MessageLookupByLibrary.simpleMessage("الشكاوى"),
     "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
     "confirmLocation": MessageLookupByLibrary.simpleMessage("تأكيد الموقع"),
@@ -330,6 +342,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "no_content_available": MessageLookupByLibrary.simpleMessage(
       "لا يوجد محتوى متاح",
     ),
+    "no_more_data": MessageLookupByLibrary.simpleMessage(
+      "لايوجد المزيد من العناصر",
+    ),
     "notFound": MessageLookupByLibrary.simpleMessage("غير موجود"),
     "notNow": MessageLookupByLibrary.simpleMessage("ليس الآن"),
     "notification": MessageLookupByLibrary.simpleMessage("إشعار"),
@@ -342,6 +357,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "onlineChat": MessageLookupByLibrary.simpleMessage("محادثة فورية"),
     "openOrders": MessageLookupByLibrary.simpleMessage("الطلبات المفتوحة"),
     "openingHoures": MessageLookupByLibrary.simpleMessage("ساعات العمل"),
+    "optional": MessageLookupByLibrary.simpleMessage("اختياري"),
     "order": MessageLookupByLibrary.simpleMessage("طلب"),
     "orderAgain": MessageLookupByLibrary.simpleMessage("اطلب مرة أخرى"),
     "orderAmount": MessageLookupByLibrary.simpleMessage("مبلغ الطلب"),
@@ -453,6 +469,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "redeemYourPoints": MessageLookupByLibrary.simpleMessage("استبدل نقاطك"),
     "refineYourSearch": MessageLookupByLibrary.simpleMessage("حدد بحثك"),
     "reorder": MessageLookupByLibrary.simpleMessage("إعادة طلب"),
+    "replace": MessageLookupByLibrary.simpleMessage("استبدال"),
     "requestError": MessageLookupByLibrary.simpleMessage("خطأ في الطلب"),
     "required": MessageLookupByLibrary.simpleMessage("مطلوب"),
     "resendMyCode": MessageLookupByLibrary.simpleMessage("إعادة إرسال الرمز"),

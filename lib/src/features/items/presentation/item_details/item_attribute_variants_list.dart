@@ -119,7 +119,7 @@ class _AttributeValueItem extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   AppCachedNetworkImage(
-                      imageUrl: attributeValue.icon!,
+                      imageUrl: attributeValue.icon??"",
                       fit: BoxFit.fitHeight,
                       width: 60,
                       height: 60),

@@ -1116,6 +1116,39 @@ class AppLocalizationsAr extends AppLocalizations {
   String get test => 'اختبار';
 
   @override
+  String get no_more_data => 'لايوجد المزيد من العناصر';
+
+  @override
+  String get addImage => 'اضافه صوره';
+
+  @override
+  String get attachedImages => 'الصور المرفقه';
+
+  @override
+  String get addMore => 'اضافه المزيد';
+
+  @override
+  String get attachedImage => 'الصورة المرفقة';
+
+  @override
+  String get replace => 'استبدال';
+
+  @override
+  String get complaintSubtitle => 'نحن هنا للمساعدة. يرجى وصف مشكلتك.';
+
+  @override
+  String get complaintType => 'نوع الشكوى';
+
+  @override
+  String get attachment => 'المرفق';
+
+  @override
+  String get optional => 'اختياري';
+
+  @override
+  String get chooseImageSource => 'اختر طريقة إضافة الصورة';
+
+  @override
   String get no_content_available => 'لا يوجد محتوى متاح';
 
   @override

@@ -48,6 +48,22 @@ class UserData extends _$UserData {
     ref.read(notificationsServiceProvider).sendDeviceToken(id);
   }
 
+  Future<void> setUserTestData(
+      {required String token,
+      // required String id,
+      // required String fullName,
+      // required String customerId,
+      
+      }) async {
+    // _notificationsServiceProvider.subscribeOrdersTopic();
+    _sharedPreferences.setString(Keys.userAccessToken, "token da3827abb4d3330:5d3cb765b1dff42");
+    // _sharedPreferences.setString(Keys.userId, id);
+    // _sharedPreferences.setString(Keys.userFullName, fullName);
+    // _sharedPreferences.setString(Keys.customerId, customerId);
+    // state = (token: token, id: id, fullName: fullName,customerId:customerId);
+    // ref.read(notificationsServiceProvider).sendDeviceToken(id);
+  }
+
   Future<void> removeUserData() async {
     await _sharedPreferences.remove(Keys.userAccessToken);
     await _sharedPreferences.remove(Keys.userId);

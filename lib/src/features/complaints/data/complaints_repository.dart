@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:widam/src/common_models/response/app_response.dart';
@@ -22,13 +24,23 @@ class ComplaintsRepository {
   Future<Complaint> sendComplaint(
       {required String complaintType,
       required String description,
-      required String subject}) async {
+      required String subject,
+      required File? image,
+
+      }) async {
     final data = FormData.fromMap({
       'issue_type': complaintType,
       'description': description,
       'subject': subject,
+     if(image!=null) 'image': MultipartFile.fromFileSync(
+          image.path,
+          filename: image.path.split('/').last,
+        ),
+      
     });
-    final response = await _networkService.post(EndPoints.complaints,data:  data);
+    final response = await _networkService.post(EndPoints.complaints,headers: {
+        'Content-Type': 'multipart/form-data',
+      },data:  data);
     final AppResponse<Complaint> appDataResponse =
         AppResponse.fromJson(response.data, (json) => Complaint.fromJson(json));
     if (appDataResponse.error == 1) {

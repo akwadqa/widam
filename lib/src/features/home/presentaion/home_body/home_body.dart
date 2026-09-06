@@ -44,8 +44,14 @@ class HomeBody extends ConsumerWidget {
       }
     });
     return RefreshIndicator.adaptive(
+      //       color: Theme.of(context).colorScheme.secondary,
+      // backgroundColor: Colors.white,
+
       onRefresh: () async => ref.invalidate(layoutProvider(LayoutType.home)),
       child: CustomScrollView(
+        //  physics: const AlwaysScrollableScrollPhysics(
+        //   parent: ClampingScrollPhysics(),
+        // ),
         slivers: [
           if (ref
                   .watch(processingOrderProvider)
@@ -61,6 +67,7 @@ class HomeBody extends ConsumerWidget {
           const BlocksList(layoutType: LayoutType.home),
         ],
       ),
+      
     );
   }
 

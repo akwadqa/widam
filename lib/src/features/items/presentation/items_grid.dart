@@ -3,7 +3,7 @@ import 'package:widam/src/features/items/domain/item/item.dart';
 import 'package:widam/src/features/items/presentation/item_card/item_card.dart';
 
 class ItemsGrid extends StatelessWidget {
-  const ItemsGrid({
+  const   ItemsGrid({
     super.key,
     required this.items,
     this.childAspectRatio = 0.67,
@@ -15,6 +15,9 @@ class ItemsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      shrinkWrap: true,
+        // primary: false, // ✅ IMPORTANT/s
+  physics: const NeverScrollableScrollPhysics(), // ✅ IMPORTANT
       itemCount: items.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,

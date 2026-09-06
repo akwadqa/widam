@@ -5,6 +5,7 @@ import 'package:status_bar_control/status_bar_control.dart';
 import 'package:widam/src/features/notifications/application/notifications_service.dart';
 import 'package:widam/src/routing/app_router_provider.dart';
 import '../../../../routing/app_router.gr.dart';
+import '../../../cart/presentation/cart_body/cart_controller.dart';
 import 'app_bottom_navigation_bar.dart';
 
 @RoutePage()
@@ -45,6 +46,9 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                 ? StatusBarStyle.LIGHT_CONTENT
                 : StatusBarStyle.DARK_CONTENT);
             tabsRouter.setActiveIndex(index);
+            if (index == 3) {
+              ref.invalidate(cartControllerProvider);
+            }
           },
         );
       },

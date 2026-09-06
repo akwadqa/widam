@@ -144,135 +144,143 @@ class _NonEmptyCart extends ConsumerWidget {
 // count items if you also want to require > 1:
     final normalItemCount =
         hasNormal ? (normalDelivery!.websiteItems as List).length : 0;
+        
+    Future<void> refreshCart(WidgetRef ref) async {
+      ref.invalidate(cartControllerProvider);
+      await ref.read(cartControllerProvider.future);
+    }
 
     return Stack(
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: CustomScrollView(
-            slivers: [
-              const SliverToBoxAdapter(child: SizedBox(height: 70.0)),
-              if (cart.mubadara != 1) ...[
-                SliverToBoxAdapter(
-                  child: SimiliarItems(quotationId: cart.quotationId),
-                ),
-                const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
-              ],
-              if (hasNormal && isSplit) ...[
-                SliverToBoxAdapter(
-                    child: AppStackedLoadingIndicator(
-                  isLoading: ref.watch(updateCartProvider).isLoading,
-                  child: SwitchContainer(
-                    description: S.of(context).mergeDescription,
-                    title: S.of(context).merge,
-                    onPressed: () async {
-                      final ok = await ref
-                          .read(updateCartProvider.notifier)
-                          .updateCart(express: false, expressPickup: false);
-                      if (ok) {
-                        // after merging (now normal-only), allow showing Split
-                        ref.read(mergedOnceProvider.notifier).state = true;
-                      }
-                    },
+          child: RefreshIndicator(
+            onRefresh: () => refreshCart(ref),
+            child: CustomScrollView(
+              slivers: [
+                const SliverToBoxAdapter(child: SizedBox(height: 70.0)),
+                if (cart.mubadara != 1) ...[
+                  SliverToBoxAdapter(
+                    child: SimiliarItems(quotationId: cart.quotationId),
                   ),
-                )),
-                const SliverToBoxAdapter(child: SizedBox(height: 12.0))
-              ] else if (hasNormal && !isSplit && mergedOnce) ...[
-                SliverToBoxAdapter(
-                    child: AppStackedLoadingIndicator(
-                  isLoading: ref.watch(updateCartProvider).isLoading,
-                  child: SwitchContainer(
-                      title: S.of(context).split,
-                      description: S.of(context).splitDescription,
+                  const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
+                ],
+                if (hasNormal && isSplit) ...[
+                  SliverToBoxAdapter(
+                      child: AppStackedLoadingIndicator(
+                    isLoading: ref.watch(updateCartProvider).isLoading,
+                    child: SwitchContainer(
+                      description: S.of(context).mergeDescription,
+                      title: S.of(context).merge,
                       onPressed: () async {
                         final ok = await ref
                             .read(updateCartProvider.notifier)
-                            .updateCart(express:true , expressPickup: true);
+                            .updateCart(express: false, expressPickup: false);
                         if (ok) {
-                          ref.invalidate(
-                              cartControllerProvider); // refresh cart data
+                          // after merging (now normal-only), allow showing Split
+                          ref.read(mergedOnceProvider.notifier).state = true;
                         }
-                      }
-                      //  ref
-                      //     .read(updateCartProvider.notifier)
-                      //     .updateCart(express: true, expressPickup: true),
-                      ),
-                )),
-                const SliverToBoxAdapter(child: SizedBox(height: 12.0))
-              ],
-              SliverToBoxAdapter(
-                  child: Text(S.of(context).yourCartDetails,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16.0))),
-              const SliverToBoxAdapter(child: SizedBox(height: 12.0)),
-              if (cart.pickup == 1)
-                PickupList(cart: cart)
-              else
-                SliverList(
-                    delegate: SliverChildListDelegate.fixed([
-                  if (normalDelivery != null)
-                    CustomDeliveryContainer(
-                        deliveryType: normalDelivery,
-                        currency: cart.currency,
-                        total: normalDelivery.subTotal),
-                  const SizedBox(height: 20.0),
-                  if (hasExpress)
-                    CustomDeliveryContainer(
-                        header: AppStackedLoadingIndicator(
-                          isLoading: ref.watch(updateCartProvider).isLoading,
-                          child: SwitchContainer(
-                            title: S.of(context).pickup,
-                            description: S.of(context).pickupDescription,
-                            onPressed: () => ref
-                                .read(updateCartProvider.notifier)
-                                .updateCart(
-                                    express: false, expressPickup: true),
-                          ),
+                      },
+                    ),
+                  )),
+                  const SliverToBoxAdapter(child: SizedBox(height: 12.0))
+                ] else if (hasNormal && !isSplit && mergedOnce) ...[
+                  SliverToBoxAdapter(
+                      child: AppStackedLoadingIndicator(
+                    isLoading: ref.watch(updateCartProvider).isLoading,
+                    child: SwitchContainer(
+                        title: S.of(context).split,
+                        description: S.of(context).splitDescription,
+                        onPressed: () async {
+                          final ok = await ref
+                              .read(updateCartProvider.notifier)
+                              .updateCart(express: true, expressPickup: true);
+                          if (ok) {
+                            ref.invalidate(
+                                cartControllerProvider); // refresh cart data
+                          }
+                        }
+                        //  ref
+                        //     .read(updateCartProvider.notifier)
+                        //     .updateCart(express: true, expressPickup: true),
                         ),
-                        deliveryType: expressDelivery,
-                        total: expressDelivery.subTotal,
-                        timeSlotWidget: Row(
-                          children: [
-                            Assets.icons.truckTimeIcon.svg(),
-                            const SizedBox(width: 5.0),
-                            Text(S.of(context).asSoonAsPossible,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 9.0,
-                                    color: Colors.black))
-                          ],
-                        ),
-                        currency: cart.currency),
-                  if (hasPickup)
-                    CustomDeliveryContainer(
-                        header: AppStackedLoadingIndicator(
-                          isLoading: ref.watch(updateCartProvider).isLoading,
-                          child: SwitchContainer(
-                            title: S.of(context).express,
-                            description: S.of(context).expressDescription,
-                            onPressed: () => ref
-                                .read(updateCartProvider.notifier)
-                                .updateCart(
-                                    express: true, expressPickup: false),
-                          ),
-                        ),
-                        title: pickupDelivery
-                            .websiteItems.first.warehouse.warehouseName,
-                        deliveryType: pickupDelivery,
-                        total: pickupDelivery.subTotal,
-                        currency: cart.currency,
-                        timeSlotWidget: PickupMapImage(
-                          latitude: pickupDelivery.coordinates.latitude,
-                          longitude: pickupDelivery.coordinates.longitude,
-                        )),
-                ])),
-              if (cart.mubadara != 1) ...[
-                const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
+                  )),
+                  const SliverToBoxAdapter(child: SizedBox(height: 12.0))
+                ],
                 SliverToBoxAdapter(
-                    child: RecentlyViewd(quotationId: cart.quotationId)),
+                    child: Text(S.of(context).yourCartDetails,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16.0))),
+                const SliverToBoxAdapter(child: SizedBox(height: 12.0)),
+                if (cart.pickup == 1)
+                  PickupList(cart: cart)
+                else
+                  SliverList(
+                      delegate: SliverChildListDelegate.fixed([
+                    if (normalDelivery != null)
+                      CustomDeliveryContainer(
+                          deliveryType: normalDelivery,
+                          currency: cart.currency,
+                          total: normalDelivery.subTotal),
+                    const SizedBox(height: 20.0),
+                    if (hasExpress)
+                      CustomDeliveryContainer(
+                          header: AppStackedLoadingIndicator(
+                            isLoading: ref.watch(updateCartProvider).isLoading,
+                            child: SwitchContainer(
+                              title: S.of(context).pickup,
+                              description: S.of(context).pickupDescription,
+                              onPressed: () => ref
+                                  .read(updateCartProvider.notifier)
+                                  .updateCart(
+                                      express: false, expressPickup: true),
+                            ),
+                          ),
+                          deliveryType: expressDelivery,
+                          total: expressDelivery.subTotal,
+                          timeSlotWidget: Row(
+                            children: [
+                              Assets.icons.truckTimeIcon.svg(),
+                              const SizedBox(width: 5.0),
+                              Text(S.of(context).asSoonAsPossible,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 9.0,
+                                      color: Colors.black))
+                            ],
+                          ),
+                          currency: cart.currency),
+                    if (hasPickup)
+                      CustomDeliveryContainer(
+                          header: AppStackedLoadingIndicator(
+                            isLoading: ref.watch(updateCartProvider).isLoading,
+                            child: SwitchContainer(
+                              title: S.of(context).express,
+                              description: S.of(context).expressDescription,
+                              onPressed: () => ref
+                                  .read(updateCartProvider.notifier)
+                                  .updateCart(
+                                      express: true, expressPickup: false),
+                            ),
+                          ),
+                          title: pickupDelivery
+                              .websiteItems.first.warehouse.warehouseName,
+                          deliveryType: pickupDelivery,
+                          total: pickupDelivery.subTotal,
+                          currency: cart.currency,
+                          timeSlotWidget: PickupMapImage(
+                            latitude: pickupDelivery.coordinates.latitude,
+                            longitude: pickupDelivery.coordinates.longitude,
+                          )),
+                  ])),
+                if (cart.mubadara != 1) ...[
+                  const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
+                  SliverToBoxAdapter(
+                      child: RecentlyViewd(quotationId: cart.quotationId)),
+                ],
+                const SliverToBoxAdapter(child: SizedBox(height: 180.0)),
               ],
-              const SliverToBoxAdapter(child: SizedBox(height: 180.0)),
-            ],
+            ),
           ),
         ),
         Positioned(
@@ -304,7 +312,7 @@ class _NonEmptyCart extends ConsumerWidget {
                       const SizedBox(height: 16),
                     ],
                     ForwardSubmitButton(
-                        onPressed: cart.orderTotal.remainderAmount > 0 
+                        onPressed: cart.orderTotal.remainderAmount > 0
                             ? null
                             : () {
                                 // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SplashScreen()));

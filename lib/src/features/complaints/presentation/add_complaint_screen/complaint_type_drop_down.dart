@@ -35,7 +35,7 @@ class _ComplaintTypeDropDownState extends State<ComplaintTypeDropDown> {
         widget.onSaved?.call(_complaintType);
       },
       decoration: InputDecoration(
-          label: Text(S.of(context).selectComplaintType),
+          // label: Text(S.of(context).selectComplaintType),
           suffixIcon: const Icon(Icons.arrow_drop_down)),
       onTap: () {
         showAdaptiveModalBottomSheet(

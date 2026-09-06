@@ -13,7 +13,7 @@ class SelectedFilterController extends _$SelectedFilterController {
 
   void set(String? value) {
     state = value;
-    ref.read(itemGroupItemsControllerProvider.notifier).getItems();
+    // ref.read(itemGroupItemsControllerProvider.notifier).getItems();
   }
 }
 

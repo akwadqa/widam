@@ -12,6 +12,6 @@ class ItemGroupsSearchController extends _$ItemGroupsSearchController {
 
   void set(String? value) {
     state = value;
-    ref.read(itemGroupItemsControllerProvider.notifier).getItems();
+    // ref.read(itemGroupItemsControllerProvider.notifier).getItems();
   }
 }

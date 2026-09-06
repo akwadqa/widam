@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/constants/strings.dart';
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_list/selected_item_group_controller.dart';
+import 'package:widam/src/features/item_groups/presentation/item_groups_body/sub_item_groups_list/sub_item_groups_controller.dart';
+import 'package:widam/src/features/items/application/item_group_items_controller.dart';
 
 import '../../../../../../gen/assets.gen.dart';
 import '../../../../../common_widgets/app_cached_network_image.dart';
@@ -35,11 +37,21 @@ class _ItemGroup extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedId = ref.watch(selectedItemGroupControllerProvider);
+    final itemCategory = ref.watch(itemGroupItemsControllerProvider);
     final isSelected = selectedId == itemGroup.itemGroupId;
     return InkWell(
-      onTap: () => ref
+      onTap: () {
+               if (selectedId == itemGroup.itemGroupId) return; 
+        // if(!itemCategory.isLoading){
+        // 1. Reset any previous sub-item selection
+        ref.read(subItemGroupsControllerProvider.notifier).set([]);
+        ref.read(selectedSubItemGroupControllerProvider.notifier).reset(); // or null
+
+        // 2. Select the new Category
+                 ref
           .read(selectedItemGroupControllerProvider.notifier)
-          .onCategorySelected(itemGroup.itemGroupId),
+          .onCategorySelected(itemGroup.itemGroupId);},
+          // },
       child: Focus(
         focusNode: focusNode,
         child: Stack(

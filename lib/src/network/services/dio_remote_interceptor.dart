@@ -25,6 +25,7 @@ class RemoteInterceptor extends Interceptor {
 
   if (options.baseUrl != ServicesUrls.googleMapsBaseUrl) {
       if (token != null) {
+        // options.headers['Authorization'] = 'token da3827abb4d3330:5d3cb765b1dff42';
         options.headers['Authorization'] = 'token $token';
       }
       options.headers['Accept-Language'] = languageCode;

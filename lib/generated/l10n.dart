@@ -2999,6 +2999,91 @@ class S {
     return Intl.message('Test', name: 'test', desc: '', args: []);
   }
 
+  /// `No more data`
+  String get no_more_data {
+    return Intl.message(
+      'No more data',
+      name: 'no_more_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Image`
+  String get addImage {
+    return Intl.message('Add Image', name: 'addImage', desc: '', args: []);
+  }
+
+  /// `Attached Images`
+  String get attachedImages {
+    return Intl.message(
+      'Attached Images',
+      name: 'attachedImages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add More`
+  String get addMore {
+    return Intl.message('Add More', name: 'addMore', desc: '', args: []);
+  }
+
+  /// `Attached Image`
+  String get attachedImage {
+    return Intl.message(
+      'Attached Image',
+      name: 'attachedImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Replace`
+  String get replace {
+    return Intl.message('Replace', name: 'replace', desc: '', args: []);
+  }
+
+  /// `We are here to help. Please describe your issue.`
+  String get complaintSubtitle {
+    return Intl.message(
+      'We are here to help. Please describe your issue.',
+      name: 'complaintSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complaint Type`
+  String get complaintType {
+    return Intl.message(
+      'Complaint Type',
+      name: 'complaintType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Attachment`
+  String get attachment {
+    return Intl.message('Attachment', name: 'attachment', desc: '', args: []);
+  }
+
+  /// `Optional`
+  String get optional {
+    return Intl.message('Optional', name: 'optional', desc: '', args: []);
+  }
+
+  /// `Choose how to add your image`
+  String get chooseImageSource {
+    return Intl.message(
+      'Choose how to add your image',
+      name: 'chooseImageSource',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No content available`
   String get no_content_available {
     return Intl.message(

@@ -1119,6 +1119,40 @@ class AppLocalizationsEn extends AppLocalizations {
   String get test => 'Test';
 
   @override
+  String get no_more_data => 'No more data';
+
+  @override
+  String get addImage => 'Add Image';
+
+  @override
+  String get attachedImages => 'Attached Images';
+
+  @override
+  String get addMore => 'Add More';
+
+  @override
+  String get attachedImage => 'Attached Image';
+
+  @override
+  String get replace => 'Replace';
+
+  @override
+  String get complaintSubtitle =>
+      'We are here to help. Please describe your issue.';
+
+  @override
+  String get complaintType => 'Complaint Type';
+
+  @override
+  String get attachment => 'Attachment';
+
+  @override
+  String get optional => 'Optional';
+
+  @override
+  String get chooseImageSource => 'Choose how to add your image';
+
+  @override
   String get no_content_available => 'No content available';
 
   @override

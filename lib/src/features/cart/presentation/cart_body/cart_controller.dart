@@ -10,6 +10,7 @@ part 'cart_controller.g.dart';
 class CartController extends _$CartController {
   @override
   FutureOr<Cart?> build() {
+    
        final user = ref.watch(userDataProvider);
     if (user == null) return null;
     return _getCart();
@@ -20,7 +21,13 @@ class CartController extends _$CartController {
     final String? warehouseId = ref.watch(localLocationInfoProvider).warehouseId;
     return cartRepository.getCart(warehouseId);
   }
+Future<void> refresh() async {
+  state = const AsyncLoading();
 
+  state = await AsyncValue.guard(() async {
+    return _getCart();
+  });
+}
   void updateCart(Cart? cart) {
     state = AsyncData(cart);
   }

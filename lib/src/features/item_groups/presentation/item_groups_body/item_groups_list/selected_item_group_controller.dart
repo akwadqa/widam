@@ -12,10 +12,14 @@ class SelectedItemGroupController extends _$SelectedItemGroupController {
     return Strings.allItemGroup;
   }
 
-  void onCategorySelected(String categoryId) {
-    state = categoryId;
-    ref.read(selectedSubItemGroupControllerProvider.notifier).set(null);
-    ref.read(subItemGroupsControllerProvider.notifier).set([]);
-    ref.read(itemGroupItemsControllerProvider.notifier).getItems();
+  void onCategorySelected(String? id) {
+    if (state == id) return;
+
+    // 1. Immediately wipe out old subcategories and selected subcategory (0ms delay)
+    ref.read(selectedSubItemGroupControllerProvider.notifier).reset();
+    ref.read(subItemGroupsControllerProvider.notifier).clear();
+
+    // 2. Set the new category
+    state = id!;
   }
 }

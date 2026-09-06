@@ -42,6 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "addAddress": MessageLookupByLibrary.simpleMessage("Add Address"),
     "addComplaint": MessageLookupByLibrary.simpleMessage("Add Complaint"),
+    "addImage": MessageLookupByLibrary.simpleMessage("Add Image"),
+    "addMore": MessageLookupByLibrary.simpleMessage("Add More"),
     "addNewAddress": MessageLookupByLibrary.simpleMessage("Add new address"),
     "addNewCard": MessageLookupByLibrary.simpleMessage("Add New Card"),
     "addNewComplaint": MessageLookupByLibrary.simpleMessage(
@@ -79,6 +81,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "asSoonAsPossible": MessageLookupByLibrary.simpleMessage(
       "As soon as possible within 2 hours",
     ),
+    "attachedImage": MessageLookupByLibrary.simpleMessage("Attached Image"),
+    "attachedImages": MessageLookupByLibrary.simpleMessage("Attached Images"),
+    "attachment": MessageLookupByLibrary.simpleMessage("Attachment"),
     "attemptsLeft": MessageLookupByLibrary.simpleMessage("attempts left"),
     "autoOrder": MessageLookupByLibrary.simpleMessage("Auto-Order"),
     "availableSoon": MessageLookupByLibrary.simpleMessage("Available Soon"),
@@ -112,6 +117,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Change Your Payment Method",
     ),
     "checkout": MessageLookupByLibrary.simpleMessage("Checkout"),
+    "chooseImageSource": MessageLookupByLibrary.simpleMessage(
+      "Choose how to add your image",
+    ),
     "chooseYourLocation": MessageLookupByLibrary.simpleMessage(
       "Choose your location",
     ),
@@ -131,6 +139,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Comments and Feedback",
     ),
     "complaint": MessageLookupByLibrary.simpleMessage("Complaint"),
+    "complaintSubtitle": MessageLookupByLibrary.simpleMessage(
+      "We are here to help. Please describe your issue.",
+    ),
+    "complaintType": MessageLookupByLibrary.simpleMessage("Complaint Type"),
     "complaints": MessageLookupByLibrary.simpleMessage("Complaints"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmLocation": MessageLookupByLibrary.simpleMessage("CONFIRM LOCATION"),
@@ -358,6 +370,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "no_content_available": MessageLookupByLibrary.simpleMessage(
       "No content available",
     ),
+    "no_more_data": MessageLookupByLibrary.simpleMessage("No more data"),
     "notFound": MessageLookupByLibrary.simpleMessage("Not Found"),
     "notNow": MessageLookupByLibrary.simpleMessage("NOT NOW"),
     "notification": MessageLookupByLibrary.simpleMessage("Notification"),
@@ -370,6 +383,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "onlineChat": MessageLookupByLibrary.simpleMessage("Online Chat"),
     "openOrders": MessageLookupByLibrary.simpleMessage("Open Orders"),
     "openingHoures": MessageLookupByLibrary.simpleMessage("Opening Hours"),
+    "optional": MessageLookupByLibrary.simpleMessage("Optional"),
     "order": MessageLookupByLibrary.simpleMessage("Order"),
     "orderAgain": MessageLookupByLibrary.simpleMessage("Order Again"),
     "orderAmount": MessageLookupByLibrary.simpleMessage("Order Amount"),
@@ -486,6 +500,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Refine your search",
     ),
     "reorder": MessageLookupByLibrary.simpleMessage("Reorder"),
+    "replace": MessageLookupByLibrary.simpleMessage("Replace"),
     "requestError": MessageLookupByLibrary.simpleMessage("Request Error"),
     "required": MessageLookupByLibrary.simpleMessage("Required"),
     "resendMyCode": MessageLookupByLibrary.simpleMessage("Resend my code"),

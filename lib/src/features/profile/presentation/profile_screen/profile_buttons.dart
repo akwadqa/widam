@@ -13,7 +13,7 @@ class ProfileButtons extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userToken = ref.watch(userDataProvider);
-    if (userToken != null) {
+    // if (userToken != null) {
       return Container(
         color: AppColors.cultured,
         padding: const EdgeInsets.only(top: 8.0),
@@ -51,8 +51,8 @@ class ProfileButtons extends ConsumerWidget {
         ),
       );
     }
-    return const SizedBox.shrink();
-  }
+    // return const SizedBox.shrink();
+  // }
 }
 
 class _Button extends StatelessWidget {

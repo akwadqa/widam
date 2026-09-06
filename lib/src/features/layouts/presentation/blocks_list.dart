@@ -17,6 +17,7 @@ class BlocksList extends ConsumerWidget {
           final blocks =
               layout.data.where((element) => element.popups != 1).toList();
           return SliverList(
+            
               delegate: SliverChildBuilderDelegate((context, index) {
             final block = blocks[index];
             return BlockItem(block: block);

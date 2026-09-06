@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:widam/src/features/complaints/data/complaints_repository.dart';
 import 'package:widam/src/features/complaints/domain/complaint/complaint.dart';
@@ -12,12 +14,17 @@ class SendComplaintController extends _$SendComplaintController {
   Future<void> sendComplaint(
       {required String complaintType,
       required String description,
-      required String subject}) async {
+      required String subject,
+      required File? image,
+      }) async {
     state = const AsyncLoading();
     final complaintsRepository = ref.watch(complaintsRepositoryProvider);
     state = await AsyncValue.guard(() => complaintsRepository.sendComplaint(
         complaintType: complaintType,
         description: description,
-        subject: subject));
+        subject: subject,
+        image: image,
+        
+        ));
   }
 }

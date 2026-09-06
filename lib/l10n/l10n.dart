@@ -2264,6 +2264,72 @@ abstract class AppLocalizations {
   /// **'Test'**
   String get test;
 
+  /// No description provided for @no_more_data.
+  ///
+  /// In en, this message translates to:
+  /// **'No more data'**
+  String get no_more_data;
+
+  /// No description provided for @addImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Image'**
+  String get addImage;
+
+  /// No description provided for @attachedImages.
+  ///
+  /// In en, this message translates to:
+  /// **'Attached Images'**
+  String get attachedImages;
+
+  /// No description provided for @addMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Add More'**
+  String get addMore;
+
+  /// No description provided for @attachedImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Attached Image'**
+  String get attachedImage;
+
+  /// No description provided for @replace.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace'**
+  String get replace;
+
+  /// No description provided for @complaintSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We are here to help. Please describe your issue.'**
+  String get complaintSubtitle;
+
+  /// No description provided for @complaintType.
+  ///
+  /// In en, this message translates to:
+  /// **'Complaint Type'**
+  String get complaintType;
+
+  /// No description provided for @attachment.
+  ///
+  /// In en, this message translates to:
+  /// **'Attachment'**
+  String get attachment;
+
+  /// No description provided for @optional.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional'**
+  String get optional;
+
+  /// No description provided for @chooseImageSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose how to add your image'**
+  String get chooseImageSource;
+
   /// No description provided for @no_content_available.
   ///
   /// In en, this message translates to:
