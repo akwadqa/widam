@@ -122,6 +122,8 @@ class _NonEmptyCart extends ConsumerWidget {
 
     final normalDelivery =
         (cart.pickup != 1) ? cart.cartContent.normalDelivery : null;
+    final preOrderDelivery =
+        (cart.pickup != 1) ? cart.cartContent.preOrderDelivery : null;
     final pickupDelivery =
         (cart.pickup != 1) ? cart.cartContent.pickupDelivery : null;
 
@@ -129,6 +131,7 @@ class _NonEmptyCart extends ConsumerWidget {
         (cart.pickup != 1) ? cart.cartContent.expressDelivery : null;
 
     final hasNormal = normalDelivery != null;
+    final hasPreOrder = preOrderDelivery != null;
     final hasExpress = expressDelivery != null;
     final hasPickup = pickupDelivery != null;
     final isSplit = hasExpress || hasPickup;
@@ -165,7 +168,8 @@ class _NonEmptyCart extends ConsumerWidget {
                   ),
                   const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
                 ],
-                if (hasNormal && isSplit) ...[
+            
+               if ((hasNormal ||hasPreOrder)&& isSplit) ...[
                   SliverToBoxAdapter(
                       child: AppStackedLoadingIndicator(
                     isLoading: ref.watch(updateCartProvider).isLoading,
@@ -184,7 +188,9 @@ class _NonEmptyCart extends ConsumerWidget {
                     ),
                   )),
                   const SliverToBoxAdapter(child: SizedBox(height: 12.0))
-                ] else if (hasNormal && !isSplit && mergedOnce) ...[
+                ] 
+                else
+                 if ((hasNormal ||hasPreOrder) && !isSplit && mergedOnce) ...[
                   SliverToBoxAdapter(
                       child: AppStackedLoadingIndicator(
                     isLoading: ref.watch(updateCartProvider).isLoading,
@@ -222,6 +228,13 @@ class _NonEmptyCart extends ConsumerWidget {
                           deliveryType: normalDelivery,
                           currency: cart.currency,
                           total: normalDelivery.subTotal),
+                    const SizedBox(height: 20.0),
+
+                    if (preOrderDelivery != null)
+                      CustomDeliveryContainer(
+                          deliveryType: preOrderDelivery,
+                          currency: cart.currency,
+                          total: preOrderDelivery.subTotal),
                     const SizedBox(height: 20.0),
                     if (hasExpress)
                       CustomDeliveryContainer(

@@ -31,7 +31,8 @@ class AppCachedNetworkImage extends StatelessWidget {
             fadeOutDuration: Duration.zero,
             placeholderFadeInDuration: Duration.zero,
             errorWidget: (context, url, error) {
-              return Container(color: AppColors.screamingGrey,);
+              return Container(color: AppColors.spanishGray, width: width,
+            height: height??width,child: Icon(Icons.image),);
             },
           );
   }

@@ -27,7 +27,7 @@ class CartItem extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: AppCachedNetworkImage(
-                imageUrl: itemDetails.additionalImages.first.image, width: 80),
+                imageUrl: itemDetails.additionalImages.isNotEmpty? itemDetails.additionalImages.first.image:"", width: 80),
           ),
         ),
         Expanded(

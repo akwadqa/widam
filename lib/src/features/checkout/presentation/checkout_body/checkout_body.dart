@@ -47,9 +47,9 @@ class _CheckoutBodyState extends ConsumerState<CheckoutBody> {
     Future(() async {
       final cart = ref.read(cartControllerProvider).asData?.value;
       final deliveryTypes = getAllDeliveryTypes(cart?.cartContent);
-final isExpress=deliveryTypes.any( (d)=>d.deliveryMethodTitle.toLowerCase()
-                                .contains('express') );
-      if (deliveryTypes != null && deliveryTypes.isNotEmpty&& !isExpress  ) {
+      final isExpress = deliveryTypes
+          .any((d) => d.deliveryMethodTitle.toLowerCase().contains('express'));
+      if (deliveryTypes != null && deliveryTypes.isNotEmpty && !isExpress) {
         // Show time selector ONCE, based on the first deliveryType
         final result =
             await _showTimeSlotsSelector(context, deliveryTypes.first);
@@ -60,8 +60,9 @@ final isExpress=deliveryTypes.any( (d)=>d.deliveryMethodTitle.toLowerCase()
             final isPickup = deliveryType.deliveryMethodTitle
                 .toLowerCase()
                 .contains('pickup');
-            final isUdhiya = deliveryType.websiteItems.first.isUdhiyaItem == 1;
-
+            // final isUdhiya = deliveryType.websiteItems.first.isUdhiyaItem == 1;
+            final isUdhiya = deliveryType.websiteItems.isNotEmpty &&
+                deliveryType.websiteItems.first.isUdhiyaItem == 1;
             await ref.read(updateCartProvider.notifier).updateCart(
                   pickupPointId: (isPickup || isUdhiya)
                       ? deliveryType.pickupPointId
@@ -122,7 +123,13 @@ final isExpress=deliveryTypes.any( (d)=>d.deliveryMethodTitle.toLowerCase()
 
     return cartAsync.when(
       data: (cart) {
-        final deliveryTypes = getAllDeliveryTypes(cart!.cartContent);
+        if (cart == null) {
+          return const Center(
+            child: Text('Cart is empty'),
+          );
+        }
+
+        final deliveryTypes = getAllDeliveryTypes(cart.cartContent);
 
         return Stack(
           children: [

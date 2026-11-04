@@ -25,7 +25,7 @@ class AppDropDownBottomSheet<T> extends StatelessWidget {
             ListView.separated(
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(title(items[index]),
+                    title: Text( title(items[index]),
                         style: const TextStyle(fontWeight: FontWeight.w600)),
                     onTap: () {
                       onTap(items[index]);

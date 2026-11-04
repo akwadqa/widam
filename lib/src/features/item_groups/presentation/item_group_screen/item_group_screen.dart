@@ -6,12 +6,14 @@ import 'package:widam/src/features/addresses/presentation/addresses/adaptive_bac
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/filters_drop_down/filters_drop_down_button_form_field.dart';
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_list/selected_item_group_controller.dart';
 import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_search_field/item_groups_search_field.dart';
+import 'package:widam/src/features/items/application/item_group_items_controller.dart';
 import 'package:widam/src/features/main/presentation/main_screen/app_bottom_navigation_bar.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
 import '../../../../common_widgets/address_and_delivery_widget.dart';
 import '../../../../utils/utils.dart';
 import '../../../items/presentation/item_group_items_grid.dart';
 import '../../../main/presentation/item_details_sheet_controller.dart';
+import '../item_groups_body/sub_item_groups_list/sub_item_groups_controller.dart';
 import '../item_groups_body/sub_item_groups_list/sub_item_groups_list.dart';
 
 @RoutePage()
@@ -26,17 +28,43 @@ class ItemGroupScreen extends ConsumerStatefulWidget {
 }
 
 class _ItemGroupScreenState extends ConsumerState<ItemGroupScreen> {
-  @override
-  void initState() {
-    Future(() {
-      ref
-          .read(selectedItemGroupControllerProvider.notifier)
-          .onCategorySelected(widget.itemGroupId);
-    });
-    StatusBarControl.setStyle(StatusBarStyle.DARK_CONTENT);
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   Future(() {
+  //     ref
+  //         .read(selectedItemGroupControllerProvider.notifier)
+  //         .onCategorySelected(widget.itemGroupId);
+  //   });
+  //   StatusBarControl.setStyle(StatusBarStyle.DARK_CONTENT);
+  //   super.initState();
+  // }
+@override
+void initState() {
+  super.initState();
 
+  StatusBarControl.setStyle(StatusBarStyle.DARK_CONTENT);
+
+  Future.microtask(() {
+    ref
+        .read(selectedSubItemGroupControllerProvider.notifier)
+        .reset();
+
+    ref
+        .read(subItemGroupsControllerProvider.notifier)
+        .clear();
+
+    ref
+        .read(selectedItemGroupControllerProvider.notifier)
+        .onCategorySelected(widget.itemGroupId);
+
+    ref.invalidate(itemGroupItemsControllerProvider);
+  });
+}
+  @override
+  void dispose() {
+    StatusBarControl.setStyle(StatusBarStyle.LIGHT_CONTENT);
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     final topPadding =
@@ -68,11 +96,7 @@ class _ItemGroupScreenState extends ConsumerState<ItemGroupScreen> {
     );
   }
 
-  @override
-  void dispose() {
-    StatusBarControl.setStyle(StatusBarStyle.LIGHT_CONTENT);
-    super.dispose();
-  }
+
 }
 
 class _ItemGroupsBody extends ConsumerStatefulWidget {

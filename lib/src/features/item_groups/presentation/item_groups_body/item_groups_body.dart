@@ -84,7 +84,7 @@ class _BodyState extends State<_Body> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),  
           child: FiltersBar(focusNode: widget.focusNodes?.first),
         ),
         const SizedBox(height: 10),

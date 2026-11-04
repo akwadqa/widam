@@ -13,13 +13,15 @@ class SubItemGroupsList extends ConsumerWidget {
     final subItemGroups = ref.watch(subItemGroupsControllerProvider);
     final selectedSubGroupId =
         ref.watch(selectedSubItemGroupControllerProvider);
-
-    if (subItemGroups.isEmpty) {
-      return const SizedBox.shrink();
-    }
-    return subItemGroups.isEmpty
+debugPrint("***********subsoba${subItemGroups.length}");
+    // if (subItemGroups.isEmpty) {
+    //   return const SizedBox.shrink();
+    // }
+    return
+     subItemGroups.isEmpty
         ? const SizedBox.shrink()
-        : SizedBox(
+        : 
+        SizedBox(
             height: 40,
             child: ListView.separated(
                 scrollDirection: Axis.horizontal,

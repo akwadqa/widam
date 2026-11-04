@@ -20,7 +20,9 @@ class OpenOrders extends ConsumerWidget {
           }
           return ListView.separated(
               itemBuilder: (context, index) {
-                return SalesOrderItem(
+                return
+                
+                 SalesOrderItem(
                     salesOrderType: SalesOrderType.open,
                     salesOrder: openOrders[index],
                     statuses: openOrdersResponse.ordersStatuses);

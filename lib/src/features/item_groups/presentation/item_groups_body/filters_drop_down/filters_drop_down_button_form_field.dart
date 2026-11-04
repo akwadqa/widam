@@ -44,12 +44,29 @@ class _FiltersDropdownButtonFormFieldState
             showAdaptiveModalBottomSheet(
                 context: context,
                 builder: (context) {
-                  return AppDropDownBottomSheet<String>(
-                    title: (item) => item,
-                    items: filters,
-                    onTap: (item) => ref
-                        .read(selectedFilterControllerProvider.notifier)
-                        .set(item),
+                  return AppDropDownBottomSheet<FilterType>(
+               items: filters,
+  onTap: (filter) {
+    ref
+        .read(selectedFilterControllerProvider.notifier)
+        .set(filter);
+  },
+  title: (filter) {
+    switch (filter) {
+      case FilterType.priceHighToLow:
+        return S.of(context).priceHighToLow;
+
+      case FilterType.priceLowToHigh:
+        return S.of(context).priceLowToHigh;
+
+      case FilterType.nameAtoZ:
+        return S.of(context).nameAtoZ;
+
+      case FilterType.nameZtoA:
+        return S.of(context).nameZtoA;
+    }
+  },
+  // title: S.of(context).selectFilter,
                   );
                 });
           },

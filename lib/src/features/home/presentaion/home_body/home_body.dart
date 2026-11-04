@@ -57,7 +57,7 @@ class HomeBody extends ConsumerWidget {
                   .watch(processingOrderProvider)
                   .asData
                   ?.value
-                  .hasProcessingOrders ==
+                  ?.hasProcessingOrders ==
               true)
             const SliverToBoxAdapter(
                 child: Padding(

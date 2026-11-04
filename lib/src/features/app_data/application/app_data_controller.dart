@@ -14,34 +14,98 @@ class AppDataController extends _$AppDataController {
   FutureOr<AppData> build() {
     return _getAppData();
   }
+   Future<AppData> _getAppData() async {
+    final appDataRepository = ref.read(appDataRepositoryProvider);
 
-  Future<AppData> _getAppData() async {
-    final AppDataRepository appDataRepository =
-        ref.watch(appDataRepositoryProvider);
-        final geofenceId = ref.watch(localGeofenceIdProvider);
+    final geofenceId = ref.read(localGeofenceIdProvider);
 
-  if (geofenceId == null) {
-    return Future.error("Missing geofenceId");
+    // if (geofenceId == null) {
+    //   Error.throwWithStackTrace(
+    //     StateError('FATAL: geofenceId is required to load AppData'),
+    //     StackTrace.current,
+    //   );
+    // }
+
+    return appDataRepository.getAppData(geofenceId??"");
   }
+  // Future<AppData> _getAppData() async {
+  //   final appDataRepository = ref.read(appDataRepositoryProvider);
 
-  return appDataRepository.getAppData(geofenceId);
-    // final AppData appData = await appDataRepository.getAppData(
-    //     ref.read(userDataProvider) != null
-    //         ? ref.read(localGeofenceIdProvider)!
-    //         : ref.watch(localGeofenceIdProvider)!);
-    // return appData;
-  }
+  //   final geofenceId = ref.read(localGeofenceIdProvider);
 
-  void updateGeofence(Geofence geofence) {
-    state = AsyncData(state.asData!.value.copyWith(geofence: geofence));
+  //   if (geofenceId == null) {
+  //     throw Exception('Missing geofenceId');
+  //   }
+
+  //   // final userData = ref.read(userDataProvider);
+
+  //   // if (userData == null) {
+  //   //   throw Exception('User is not authenticated');
+  //   // }
+
+  //   return appDataRepository.getAppData(geofenceId);
+  // }
+    void updateGeofence(Geofence geofence) {
+    final current = state.valueOrNull;
+
+    if (current == null) return;
+
+    state = AsyncData(
+      current.copyWith(geofence: geofence),
+    );
   }
 
   Future<void> updateAddress(Address address) async {
-    await ref.read(localLocationInfoProvider.notifier).setLocalLocationInfo(
-        address.latitude, address.longitude, address.warehouse?.warehouseId);
+    await ref
+        .read(localLocationInfoProvider.notifier)
+        .setLocalLocationInfo(
+          address.latitude,
+          address.longitude,
+          address.warehouse?.warehouseId,
+        );
+
     await ref
         .read(localGeofenceIdProvider.notifier)
-        .setLocalGeofenceId(address.geofence!.geofenceId);
-    state = AsyncData(state.asData!.value.copyWith(address: address));
+        .setLocalGeofenceId(
+          address.geofence!.geofenceId,
+        );
+
+    final current = state.valueOrNull;
+
+    if (current != null) {
+      state = AsyncData(
+        current.copyWith(address: address),
+      );
+    }
   }
+
+  // Future<AppData> _getAppData() async {
+  //   final AppDataRepository appDataRepository =
+  //       ref.watch(appDataRepositoryProvider);
+  //       final geofenceId = ref.watch(localGeofenceIdProvider);
+
+  // if (geofenceId == null) {
+  //   return Future.error("Missing geofenceId");
+  // }
+
+  // return appDataRepository.getAppData(geofenceId);
+  //   // final AppData appData = await appDataRepository.getAppData(
+  //   //     ref.read(userDataProvider) != null
+  //   //         ? ref.read(localGeofenceIdProvider)!
+  //   //         : ref.watch(localGeofenceIdProvider)!);
+  //   // return appData;
+  // }
+
+  // void updateGeofence(Geofence geofence) {
+  //   state = AsyncData(state.asData!.value.copyWith(geofence: geofence));
+  // }
+
+  // Future<void> updateAddress(Address address) async {
+  //   await ref.read(localLocationInfoProvider.notifier).setLocalLocationInfo(
+  //       address.latitude, address.longitude, address.warehouse?.warehouseId);
+  //   await ref
+  //       .read(localGeofenceIdProvider.notifier)
+  //       .setLocalGeofenceId(address.geofence!.geofenceId);
+  //   state = AsyncData(state.asData!.value.copyWith(address: address));
+  // }
 }

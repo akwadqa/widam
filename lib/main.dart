@@ -28,4 +28,5 @@ Future<void> main() async {
   analytics.setAnalyticsCollectionEnabled(true);
   runApp(UncontrolledProviderScope(
       container: container, child: App(analytics: analytics)));
+      
 }

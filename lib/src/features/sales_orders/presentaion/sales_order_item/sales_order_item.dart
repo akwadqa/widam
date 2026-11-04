@@ -93,21 +93,26 @@ class SalesOrderItem extends StatelessWidget {
                       )),
                 ],
               ),
+            
               Container(
                 decoration: BoxDecoration(
                   color: AppColors.cultured,
                   borderRadius: BorderRadius.circular(2),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                child: Text(_getTranslatedStatus(salesOrder.status, context),
+                child: Text(salesOrder.status,
                     style: const TextStyle(
                       color: AppColors.darkGray,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     )),
               )
+         
             ],
           ),
+
+
+          
           const SizedBox(height: 18),
           if (salesOrderType == SalesOrderType.open) ...[
             Stepper(
@@ -150,6 +155,7 @@ class SalesOrderItem extends StatelessWidget {
                           child: const _StepperIcon(),
                         ),
             ),
+           
             const SizedBox(height: 12),
           ],
           SizedBox(
@@ -181,6 +187,7 @@ class SalesOrderItem extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       )),
                   const SizedBox(height: 4),
+                   if(salesOrder. deliveryCharges.isNotEmpty)
                   Row(
                     children: [
                       Assets.icons.clockIcon.svg(
@@ -189,7 +196,7 @@ class SalesOrderItem extends StatelessWidget {
                           height: 20),
                       const SizedBox(width: 4),
                       Text(
-                          salesOrder.deliveryCharges.first.deliveryMethodTitle!,
+                        salesOrder.deliveryCharges.first.deliveryMethodTitle??"",
                           style: const TextStyle(
                             color: AppColors.gray,
                             fontSize: 12,
@@ -206,6 +213,7 @@ class SalesOrderItem extends StatelessWidget {
                 ], child: ReorderButton(salesOrderId: salesOrder.salesOrderId))
             ],
           )
+       
         ]),
       ),
     );
@@ -215,7 +223,7 @@ class SalesOrderItem extends StatelessWidget {
       String status, SalesOrder salesOrder, BuildContext context) {
     return switch (status) {
       'Submitted' => _step(
-          title: Text(_getTranslatedStatus(status, context)),
+          title: Text(status),
           subtitle: Text('${S.of(context).on} ${salesOrder.salesOrderDate}'),
           content: const SizedBox.shrink(),
           status: status),
@@ -284,7 +292,13 @@ class SalesOrderItem extends StatelessWidget {
           content: const SizedBox.shrink(),
           status: status,
         ),
-      _ => throw const FormatException('Invalid')
+      _ => _step(
+          title: Text(status),
+          subtitle: Text(
+              '${S.of(context).on} ${salesOrder.deliveryDate.dateFormatted}  ${salesOrder.time}'),
+          content: const SizedBox.shrink(),
+          status: status,
+        ),
     };
   }
 

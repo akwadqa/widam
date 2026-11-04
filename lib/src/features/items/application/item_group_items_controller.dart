@@ -223,8 +223,10 @@ class ItemGroupItemsController extends _$ItemGroupItemsController {
         (mainGroupId == Strings.allItemGroup ? null : mainGroupId);
 
     final selectedFilter = ref.watch(selectedFilterControllerProvider);
-    final sortBy = _setSortValues(selectedFilter)?['sortBy'];
-    final sortOrder = _setSortValues(selectedFilter)?['sortOrder'];
+    final sortValues = _setSortValues(selectedFilter);
+
+    final sortBy = sortValues?['sortBy'];
+    final sortOrder = sortValues?['sortOrder'];
 
     final barcode = ref.watch(barcodeControllerProvider);
     final searchQuery = ref.watch(itemGroupsSearchControllerProvider);
@@ -253,7 +255,9 @@ class ItemGroupItemsController extends _$ItemGroupItemsController {
           : <ItemGroup>[];
 
       Future.microtask(() {
-        ref.read(subItemGroupsControllerProvider.notifier).set(newSubCategories);
+        ref
+            .read(subItemGroupsControllerProvider.notifier)
+            .set(newSubCategories);
       });
     }
 
@@ -283,8 +287,10 @@ class ItemGroupItemsController extends _$ItemGroupItemsController {
           (mainGroupId == Strings.allItemGroup ? null : mainGroupId);
 
       final selectedFilter = ref.read(selectedFilterControllerProvider);
-      final sortBy = _setSortValues(selectedFilter)?['sortBy'];
-      final sortOrder = _setSortValues(selectedFilter)?['sortOrder'];
+      final sortValues = _setSortValues(selectedFilter);
+
+      final sortBy = sortValues?['sortBy'];
+      final sortOrder = sortValues?['sortOrder'];
       final barcode = ref.read(barcodeControllerProvider);
       final searchQuery = ref.read(itemGroupsSearchControllerProvider);
       final params = ref.read(paramsControllerProvider);
@@ -323,22 +329,30 @@ class ItemGroupItemsController extends _$ItemGroupItemsController {
     return true;
   }
 
-  Map<String, String>? _setSortValues(String? sortValue) {
-    final sortValuesMap = {
-      S.current.priceHighToLow: {
-        'sortBy': 'website_item_price',
-        'sortOrder': 'desc'
-      },
-      S.current.priceLowToHigh: {
-        'sortBy': 'website_item_price',
-        'sortOrder': 'asc'
-      },
-      S.current.nameZtoA: {
-        'sortBy': 'website_item_name',
-        'sortOrder': 'desc'
-      },
-    };
-    return sortValuesMap[sortValue];
+  Map<String, String>? _setSortValues(FilterType? filter) {
+    switch (filter) {
+      case FilterType.priceHighToLow:
+        return {
+          'sortBy': 'website_item_price',
+          'sortOrder': 'desc',
+        };
+
+      case FilterType.priceLowToHigh:
+        return {
+          'sortBy': 'website_item_price',
+          'sortOrder': 'asc',
+        };
+
+      case FilterType.nameZtoA:
+        return {
+          'sortBy': 'website_item_name',
+          'sortOrder': 'desc',
+        };
+
+      case FilterType.nameAtoZ:
+      case null:
+        return null;
+    }
   }
 }
 

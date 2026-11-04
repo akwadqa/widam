@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widam/src/constants/strings.dart';
 import 'package:widam/src/features/app_data/presentation/splash_screen/splash_screen.dart';
+import 'package:widam/src/features/item_groups/data/item_groups_repository.dart';
 import 'package:widam/src/features/item_groups/presentation/barcode_widget/barcode_widget.dart';
+import 'package:widam/src/features/item_groups/presentation/item_groups_body/filters_drop_down/filters_controller.dart';
+import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_list/selected_item_group_controller.dart';
+import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_search_field/item_groups_search_controller.dart';
+import 'package:widam/src/features/item_groups/presentation/item_groups_body/sub_item_groups_list/sub_item_groups_controller.dart';
+import 'package:widam/src/features/items/application/item_group_items_controller.dart';
 import 'package:widam/src/features/layouts/data/layouts_repository.dart';
 import 'package:widam/src/features/user_language/application/current_language.dart';
 import 'package:widam/src/global_providers/global_providers.dart';
@@ -22,7 +28,7 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final topPadding =
         ref.watch(topPaddingProvider(MediaQuery.paddingOf(context).top));
-        
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
@@ -45,8 +51,9 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
             children: [
               Flexible(child: AddressSelector(foregroundColor: Colors.white)),
               // Spacer(),
-               FittedBox(
-                    fit: BoxFit.scaleDown,child: AppTimeSlot(foregroundColor: Colors.white)),
+              FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: AppTimeSlot(foregroundColor: Colors.white)),
             ],
           ),
           _SearchWidget(),
@@ -65,7 +72,7 @@ class _SearchWidget extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-        final currentLanguage = ref.watch(currentLanguageProvider);
+    final currentLanguage = ref.watch(currentLanguageProvider);
     final currentLanguageNotifier = ref.read(currentLanguageProvider.notifier);
     final String myLanguage = currentLanguage == 'en' ? 'en' : 'عربي';
     return Row(
@@ -80,42 +87,56 @@ class _SearchWidget extends ConsumerWidget implements PreferredSizeWidget {
                 context: context,
                 autoFocus: true,
                 itemGroupId: Strings.allItemGroup),
-            suffixIcon:  BarcodeWidget(),
+            suffixIcon: BarcodeWidget(),
             fillColor: Colors.white,
             hintText: S.of(context).searchForAnyProduct,
           ),
         ),
         const SizedBox(width: 10),
-       LanguageSwitcher(
-        initialLanguage: myLanguage
-        
-        ,
-        onLanguageChanged: (p0) {
-             currentLanguageNotifier.changeLanguage(
-                        // context,isArabicLanguage
-                      );
-                      
-          ref.invalidate(layoutProvider(LayoutType.home));
-          ref.invalidate(layoutProvider(LayoutType.featured));
-       },)
-          // GestureDetector(
-          //           onTap: () {
-          //             currentLanguageNotifier.changeLanguage(
-          //               // context,isArabicLanguage
-          //             );
-                      
-          // ref.invalidate(layoutProvider(LayoutType.home));
-          // ref.invalidate(layoutProvider(LayoutType.featured));
-          //   },
-          //           child:Text(myLanguage.toUpperCase(),
-                    
-          //              style: Theme.of(context).textTheme.displaySmall!.copyWith(
-          //         fontSize: 15,
-          //         color:  AppColors.aliceBlue,
-                  
-          //         fontWeight: FontWeight.bold,
-          //       ),
-          //           )),
+        LanguageSwitcher(
+          initialLanguage: myLanguage,
+          onLanguageChanged: (p0) {
+            currentLanguageNotifier.changeLanguage(
+                // context,isArabicLanguage
+                );
+
+            ref.invalidate(layoutProvider(LayoutType.home));
+            ref.invalidate(layoutProvider(LayoutType.featured));
+            ref.invalidate(getAllItemGroupsProvider);
+            ref.invalidate(itemGroupItemsControllerProvider);
+            ref.invalidate(selectedItemGroupControllerProvider);
+            ref.invalidate(selectedSubItemGroupControllerProvider);
+            ref.invalidate(itemGroupsSearchControllerProvider);
+            //  ! For category main filter
+            ref.invalidate(selectedFilterControllerProvider);
+
+            //           final state = ref.watch(itemGroupItemsControllerProvider);
+            // // Dynamic key to reset pagination whenever category/filter/search changes
+            // final mainGroupId = ref.watch(selectedItemGroupControllerProvider);
+            // final subGroupId = ref.watch(selectedSubItemGroupControllerProvider);
+            // final filter = ref.watch(selectedFilterControllerProvider);
+            // final search = ref.watch(itemGroupsSearchControllerProvider);
+            // final barcode = ref.watch(barcodeControllerProvider);
+          },
+        )
+        // GestureDetector(
+        //           onTap: () {
+        //             currentLanguageNotifier.changeLanguage(
+        //               // context,isArabicLanguage
+        //             );
+
+        // ref.invalidate(layoutProvider(LayoutType.home));
+        // ref.invalidate(layoutProvider(LayoutType.featured));
+        //   },
+        //           child:Text(myLanguage.toUpperCase(),
+
+        //              style: Theme.of(context).textTheme.displaySmall!.copyWith(
+        //         fontSize: 15,
+        //         color:  AppColors.aliceBlue,
+
+        //         fontWeight: FontWeight.bold,
+        //       ),
+        //           )),
       ],
     );
   }
@@ -192,17 +213,15 @@ class _LanguageSwitcherState extends State<LanguageSwitcher>
         width: 24,
         height: 24,
         decoration: BoxDecoration(
-          color:const Color.fromARGB(255, 112, 55, 72), 
+          color: const Color.fromARGB(255, 112, 55, 72),
           shape: BoxShape.circle,
         ),
-        child:
-          Assets.icons.download.image(),
-        
-        
+        child: Assets.icons.download.image(),
+
         //  Text(
         //   "🇶🇦",
         //   style: TextStyle(fontSize: 20),
-          
+
         // )
       ),
     );
@@ -211,21 +230,16 @@ class _LanguageSwitcherState extends State<LanguageSwitcher>
   Widget _buildBritishFlag() {
     return ClipOval(
       child: Container(
-        width: 24,
-        height: 24,
-        decoration: BoxDecoration(
-          color: const Color(0xFF012169),
-          shape: BoxShape.circle,
-        ),
-        child:
-        
-        
-         Text(
-          "🇬🇧",
-          style: TextStyle(fontSize: 20),
-          
-        )
-      ),
+          width: 24,
+          height: 24,
+          decoration: BoxDecoration(
+            color: const Color(0xFF012169),
+            shape: BoxShape.circle,
+          ),
+          child: Text(
+            "🇬🇧",
+            style: TextStyle(fontSize: 20),
+          )),
     );
   }
 
@@ -240,7 +254,7 @@ class _LanguageSwitcherState extends State<LanguageSwitcher>
           color: Colors.grey[300],
           elevation: 4,
           shape: OutlineInputBorder(
-            borderSide: BorderSide(color:Colors.white ),
+            borderSide: BorderSide(color: Colors.white),
             borderRadius: BorderRadius.circular(20),
           ),
           // decoration: BoxDecoration(
@@ -275,7 +289,7 @@ class _LanguageSwitcherState extends State<LanguageSwitcher>
               Expanded(
                 child: Center(
                   child: Text(
-                    currentLanguage == 'en' ?   'عربي':'EN',
+                    currentLanguage == 'en' ? 'عربي' : 'EN',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,

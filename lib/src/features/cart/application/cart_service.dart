@@ -126,6 +126,7 @@ List<DeliveryType> getAllDeliveryTypes(dynamic cartContent) {
       //     cartContent.expressDelivery ??
       //     cartContent.pickupDelivery??
       if (cartContent.normalDelivery != null) cartContent.normalDelivery!,
+      if (cartContent.preOrderDelivery != null) cartContent.preOrderDelivery!,
       if (cartContent.expressDelivery != null) cartContent.expressDelivery!,
       if (cartContent.pickupDelivery != null) cartContent.pickupDelivery!,
     ];
@@ -155,6 +156,13 @@ bool isInCart(Ref ref, String itemId) {
             final normalDeliveryItems = content.normalDelivery?.websiteItems;
             if (normalDeliveryItems != null &&
                 normalDeliveryItems
+                    .any((item) => item.websiteItemId == itemId)) {
+              return true;
+            }
+        
+            final preOrderDeliveryItems = content.preOrderDelivery?.websiteItems;
+            if (preOrderDeliveryItems != null &&
+                preOrderDeliveryItems
                     .any((item) => item.websiteItemId == itemId)) {
               return true;
             }
@@ -219,6 +227,9 @@ int _getItemQuantityInCart(Cart cart, String itemId) {
 
   if (cart.cartContent.normalDelivery != null) {
     addItemQuantity(cart.cartContent.normalDelivery!.websiteItems);
+  }
+  if (cart.cartContent.preOrderDelivery != null) {
+    addItemQuantity(cart.cartContent.preOrderDelivery!.websiteItems);
   }
   if (cart.cartContent.expressDelivery != null) {
     addItemQuantity(cart.cartContent.expressDelivery!.websiteItems);

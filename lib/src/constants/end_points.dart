@@ -22,8 +22,8 @@ abstract class EndPoints {
   static const String checkoutPlaceOrder = '.checkout.place_order';
   static const String salesOrders = '.sales_order.sales_orders';
   static const String reOrder = '.reorder.reorder';
-  static const String sendFcmToken = '/fcm_frappe.api.device_token';
-  // static const String sendFcmToken = '/api/method/fcm_frappe.api.device_token';
+  // static const String sendFcmToken = '/fcm_frappe.api.device_token';
+  static const String sendFcmToken = '/api/method/fcm_frappe.api.device_token';
   
   static const String getSubscriptions = '.subscription.get_subscriptions';
   static const String tags = '.tag.tags';

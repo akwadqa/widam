@@ -10,6 +10,7 @@ class CartContent with _$CartContent {
   factory CartContent({
     required DeliveryType? normalDelivery,
     required DeliveryType? expressDelivery,
+    required DeliveryType? preOrderDelivery,
     required DeliveryType? pickupDelivery,
   }) = _CartContent;
 

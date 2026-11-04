@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:widam/src/common_models/response/app_response.dart';
+import 'package:widam/src/features/auth/application/user_data_provider.dart';
 import 'package:widam/src/features/sales_orders/domain/orders_response/orders_response.dart';
 import 'package:widam/src/network/exception/dio_exceptions.dart';
 import 'package:widam/src/network/services/dio_client.dart';
@@ -79,8 +80,22 @@ class SalesOrdersRepository {
 }
 
 @riverpod
-FutureOr<ProcessingOrder> processingOrder(ProcessingOrderRef ref) {
-  return ref.watch(salesOrderRepositoryProvider).getProcessingOrder();
+FutureOr<ProcessingOrder?> processingOrder(
+  ProcessingOrderRef ref,
+) async {
+  try {
+    final isLoggedIn = ref.watch(userDataProvider);
+
+  if (isLoggedIn== null) {
+    return null;
+  }
+
+  return ref
+      .watch(salesOrderRepositoryProvider)
+      .getProcessingOrder();
+  } catch (e) {
+    return null;
+  }
 }
 
 @riverpod
