@@ -10,7 +10,7 @@ part 'mubadara_items_repository.g.dart';
 
 @Riverpod(keepAlive: true)
 MubadaraItemsRepository mubadaraItemsRepository(
-        MubadaraItemsRepositoryRef ref) =>
+        Ref ref) =>
     MubadaraItemsRepository(ref.watch(networkServiceProvider()));
 
 class MubadaraItemsRepository {
@@ -36,7 +36,7 @@ class MubadaraItemsRepository {
 }
 
 @riverpod
-FutureOr<List<Item>> mubadaraItems(MubadaraItemsRef ref, String mubadaraId) =>
+FutureOr<List<Item>> mubadaraItems(Ref ref, String mubadaraId) =>
     ref
         .watch(mubadaraItemsRepositoryProvider)
         .getMubadraItems(mubadaraId: mubadaraId);

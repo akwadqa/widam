@@ -4,7 +4,7 @@ part 'delivery_center.freezed.dart';
 part 'delivery_center.g.dart';
 
 @freezed
-class DeliveryCenter with _$DeliveryCenter {
+abstract class DeliveryCenter with _$DeliveryCenter {
   const factory DeliveryCenter({
     required String deliveryCenterId,
     required String deliveryCenterTitle,

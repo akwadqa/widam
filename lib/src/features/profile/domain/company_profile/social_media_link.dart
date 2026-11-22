@@ -4,7 +4,7 @@ part 'social_media_link.freezed.dart';
 part 'social_media_link.g.dart';
 
 @freezed
-class SocialMediaLink with _$SocialMediaLink {
+abstract class SocialMediaLink with _$SocialMediaLink {
   factory SocialMediaLink({
     required String link,
     required String icon,

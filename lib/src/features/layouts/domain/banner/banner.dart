@@ -5,7 +5,7 @@ part 'banner.freezed.dart';
 part 'banner.g.dart';
 
 @freezed
-class Banner with _$Banner implements BlockData {
+abstract class Banner with _$Banner implements BlockData {
   const factory Banner({
     required String bannerType,
     required String? bannerLink,

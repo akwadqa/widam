@@ -10,7 +10,7 @@ import 'package:widam/src/network/services/network_service.dart';
 part 'checkout_repository.g.dart';
 
 @riverpod
-CheckoutRepository checkoutRepository(CheckoutRepositoryRef ref) =>
+CheckoutRepository checkoutRepository(Ref ref) =>
     CheckoutRepository(ref.watch(networkServiceProvider()));
 
 class CheckoutRepository {

@@ -5,7 +5,7 @@ part 'area.freezed.dart';
 part 'area.g.dart';
 
 @freezed
-class Area with _$Area {
+abstract class Area with _$Area {
   factory Area({
     required String areaId,
     required String areaName,

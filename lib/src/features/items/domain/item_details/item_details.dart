@@ -13,7 +13,7 @@ part 'item_details.freezed.dart';
 part 'item_details.g.dart';
 
 @freezed
-class ItemDetails with _$ItemDetails {
+abstract class ItemDetails with _$ItemDetails {
   const factory ItemDetails(
       {required String websiteItemId,
       required String stockUom,

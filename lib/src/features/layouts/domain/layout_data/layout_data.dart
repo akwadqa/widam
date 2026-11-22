@@ -5,7 +5,7 @@ part 'layout_data.freezed.dart';
 part 'layout_data.g.dart';
 
 @freezed
-class LayoutData with _$LayoutData implements BlockData {
+abstract class LayoutData with _$LayoutData implements BlockData {
   const factory LayoutData({
     required String layoutId,
     required String layoutTitle,

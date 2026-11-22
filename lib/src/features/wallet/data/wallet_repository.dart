@@ -10,7 +10,7 @@ import '../../../constants/end_points.dart';
 part 'wallet_repository.g.dart';
 
 @riverpod
-WalletRepository walletRepository(WalletRepositoryRef ref) {
+WalletRepository walletRepository(Ref ref) {
   return WalletRepository(ref.watch(networkServiceProvider()));
 }
 

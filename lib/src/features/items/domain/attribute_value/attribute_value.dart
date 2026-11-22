@@ -4,7 +4,7 @@ part 'attribute_value.freezed.dart';
 part 'attribute_value.g.dart';
 
 @freezed
-class AttributeValue with _$AttributeValue {
+abstract class AttributeValue with _$AttributeValue {
   const factory AttributeValue({
     required String valueId,
     required String valueTitle,

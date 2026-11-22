@@ -8,7 +8,7 @@ import 'package:widam/src/network/services/network_service.dart';
 part 'user_language_repository.g.dart';
 
 @riverpod
-UserLangaugeRepository userLangaugeRepository(UserLangaugeRepositoryRef ref) =>
+UserLangaugeRepository userLangaugeRepository(Ref ref) =>
     UserLangaugeRepository(ref.watch(networkServiceProvider()));
 
 class UserLangaugeRepository {

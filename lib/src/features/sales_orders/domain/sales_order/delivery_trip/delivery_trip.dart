@@ -5,7 +5,7 @@ part 'delivery_trip.freezed.dart';
 part 'delivery_trip.g.dart';
 
 @freezed
-class DeliveryTrip with _$DeliveryTrip {
+abstract class DeliveryTrip with _$DeliveryTrip {
   factory DeliveryTrip({
     required String status,
     required String driverName,

@@ -7,7 +7,7 @@ part 'udhiya_coupon_details.freezed.dart';
 part 'udhiya_coupon_details.g.dart';
 
 @freezed
-class UdhiyaCouponDetails with _$UdhiyaCouponDetails {
+abstract class UdhiyaCouponDetails with _$UdhiyaCouponDetails {
   factory UdhiyaCouponDetails({
     required String couponId,
     required String status,

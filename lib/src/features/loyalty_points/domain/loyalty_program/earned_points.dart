@@ -4,7 +4,7 @@ part 'earned_points.freezed.dart';
 part 'earned_points.g.dart';
 
 @freezed
-class EarnedPoints with _$EarnedPoints {
+abstract class EarnedPoints with _$EarnedPoints {
   factory EarnedPoints(
       {required double pointsBalance,
       required double totalEarned,

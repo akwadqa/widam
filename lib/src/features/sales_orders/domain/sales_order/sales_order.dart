@@ -10,7 +10,7 @@ part 'sales_order.freezed.dart';
 part 'sales_order.g.dart';
 
 @freezed
-class SalesOrder with _$SalesOrder {
+abstract class SalesOrder with _$SalesOrder {
   factory SalesOrder(
       {required String salesOrderId,
       required String salesOrderDate,

@@ -4,7 +4,7 @@ part 'coupon_item.freezed.dart';
 part 'coupon_item.g.dart';
 
 @freezed
-class CouponItem with _$CouponItem {
+abstract class CouponItem with _$CouponItem {
   factory CouponItem({
     required String itemName,
     required num qty,

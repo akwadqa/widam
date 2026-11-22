@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:widam/src/constants/strings.dart';
 import 'package:widam/src/features/subscriptions/presentation/subscription_screen/subscription_body/select_your_product/selected_subscription_items/selected_subscription_items_controller.dart';
 import 'package:widam/src/utils/utils.dart';

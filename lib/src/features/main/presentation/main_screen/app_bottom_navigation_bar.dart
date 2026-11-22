@@ -28,70 +28,75 @@ class AppBottomNavigationBar extends StatelessWidget {
         ],
       ),
       padding: EdgeInsets.only(bottom: 20 + getBottomPadding(context), top: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          _NavItem(
-            icon: icons.homeIcon.svg(),
-            selectedIcon: icons.selectedHomeIcon.svg(),
-            label: S.of(context).home,
-            isSelected: currentIndex == 0,
-            onPressed: () {
-              onTap!(0);
-            },
-          ),
-          _NavItem(
-            icon: icons.categoriesIcon.svg(),
-            selectedIcon: icons.selectedCategoriesIcon.svg(),
-            label: S.of(context).category,
-            isSelected: currentIndex == 1,
-            onPressed: () {
-              onTap!(1);
-            },
-          ),
-          _NavItem(
-            icon: icons.dealsIcon.svg(),
-            selectedIcon: icons.selectedDealsIcon.svg(),
-            label: S.of(context).deals,
-            isSelected: currentIndex == 2,
-            onPressed: () {
-              onTap!(2);
-            },
-          ),
-          Consumer(
-            builder: (context, ref, child) {
-              final int cartCount = ref.watch(cartCountProvider);
-              final bool isBudgeVisible = cartCount > 0;
-              return _NavItem(
-                icon: isBudgeVisible
-                    ? _CartBudge(
-                        cartCount: cartCount.toString(),
-                        child: icons.cartIcon.svg())
-                    : icons.cartIcon.svg(),
-                selectedIcon: isBudgeVisible
-                    ? _CartBudge(
-                        cartCount: cartCount.toString(),
-                        child: icons.selectedCartIcon.svg())
-                    : icons.selectedCartIcon.svg(),
-                label: S.of(context).cart,
-                isSelected: currentIndex == 3,
-                onPressed: () {
-                  onTap!(3);
-                },
-              );
-            },
-          ),
-          _NavItem(
-            icon: icons.profileIcon.svg(),
-            selectedIcon: icons.selectedProfileIcon.svg(),
-            label: S.of(context).account,
-            isSelected: currentIndex == 4,
-            onPressed: () {
-              onTap!(4);
-            },
-          ),
-        ],
+      // Scaffold.bottomNavigationBar has no Material ancestor, which
+      // IconButton requires since Flutter 3.50.
+      child: Material(
+        type: MaterialType.transparency,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            _NavItem(
+              icon: icons.homeIcon.svg(),
+              selectedIcon: icons.selectedHomeIcon.svg(),
+              label: S.of(context).home,
+              isSelected: currentIndex == 0,
+              onPressed: () {
+                onTap!(0);
+              },
+            ),
+            _NavItem(
+              icon: icons.categoriesIcon.svg(),
+              selectedIcon: icons.selectedCategoriesIcon.svg(),
+              label: S.of(context).category,
+              isSelected: currentIndex == 1,
+              onPressed: () {
+                onTap!(1);
+              },
+            ),
+            _NavItem(
+              icon: icons.dealsIcon.svg(),
+              selectedIcon: icons.selectedDealsIcon.svg(),
+              label: S.of(context).deals,
+              isSelected: currentIndex == 2,
+              onPressed: () {
+                onTap!(2);
+              },
+            ),
+            Consumer(
+              builder: (context, ref, child) {
+                final int cartCount = ref.watch(cartCountProvider);
+                final bool isBudgeVisible = cartCount > 0;
+                return _NavItem(
+                  icon: isBudgeVisible
+                      ? _CartBudge(
+                          cartCount: cartCount.toString(),
+                          child: icons.cartIcon.svg())
+                      : icons.cartIcon.svg(),
+                  selectedIcon: isBudgeVisible
+                      ? _CartBudge(
+                          cartCount: cartCount.toString(),
+                          child: icons.selectedCartIcon.svg())
+                      : icons.selectedCartIcon.svg(),
+                  label: S.of(context).cart,
+                  isSelected: currentIndex == 3,
+                  onPressed: () {
+                    onTap!(3);
+                  },
+                );
+              },
+            ),
+            _NavItem(
+              icon: icons.profileIcon.svg(),
+              selectedIcon: icons.selectedProfileIcon.svg(),
+              label: S.of(context).account,
+              isSelected: currentIndex == 4,
+              onPressed: () {
+                onTap!(4);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

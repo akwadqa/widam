@@ -9,7 +9,7 @@ import 'package:widam/src/network/services/network_service.dart';
 part 'order_review_repository.g.dart';
 
 @riverpod
-OrderReviewRepository orderReviewRepository(OrderReviewRepositoryRef ref) {
+OrderReviewRepository orderReviewRepository(Ref ref) {
   return OrderReviewRepository(ref.watch(networkServiceProvider()));
 }
 

@@ -2,6 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../../gen/assets.gen.dart';
@@ -14,14 +15,14 @@ part 'subscription_screen.g.dart';
 final stepIndexProvider = StateProvider.autoDispose<int>((ref) => 0);
 
 @riverpod
-List<String> titles(TitlesRef ref) => [
+List<String> titles(Ref ref) => [
       S.current.selectYourProducts,
       S.current.setYourSchedule,
       S.current.confirmation
     ];
 
 @riverpod
-List<SvgGenImage> icons(IconsRef ref) =>
+List<SvgGenImage> icons(Ref ref) =>
     [Assets.icons.newCart, Assets.icons.calenderIcon, Assets.icons.thumbIcon];
 
 @RoutePage()

@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:widam/src/constants/strings.dart';
 import '../../../../../addresses/application/local_location_info.dart';
 import '../../../../data/subscriptions_repository.dart';
@@ -14,8 +15,7 @@ class SubscriptionsItemsNotifier
     _init();
   }
 
-  final AutoDisposeStateNotifierProviderRef<SubscriptionsItemsNotifier,
-      SubscriptionsItemsState> _ref;
+  final Ref _ref;
 
   String _itemGroupId = Strings.allItemGroup;
   late SubscriptionsRepository _subscriptionsRepository;

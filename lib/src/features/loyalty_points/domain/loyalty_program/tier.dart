@@ -4,7 +4,7 @@ part 'tier.freezed.dart';
 part 'tier.g.dart';
 
 @freezed
-class Tier with _$Tier {
+abstract class Tier with _$Tier {
   factory Tier({
     required String tierName,
     required String tierColor,

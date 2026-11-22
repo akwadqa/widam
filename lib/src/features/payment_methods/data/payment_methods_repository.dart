@@ -11,7 +11,7 @@ part 'payment_methods_repository.g.dart';
 
 @riverpod
 PaymentMethodRepository paymentMethodRepository(
-        PaymentMethodRepositoryRef ref) =>
+        Ref ref) =>
     PaymentMethodRepository(ref.watch(networkServiceProvider()));
 
 class PaymentMethodRepository {
@@ -34,6 +34,6 @@ class PaymentMethodRepository {
 }
 
 @riverpod
-FutureOr<List<PaymentMethod>> paymentMethods(PaymentMethodsRef ref) {
+FutureOr<List<PaymentMethod>> paymentMethods(Ref ref) {
   return ref.watch(paymentMethodRepositoryProvider).getPaymentMethods();
 }

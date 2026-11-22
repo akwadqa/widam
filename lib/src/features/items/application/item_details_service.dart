@@ -48,7 +48,7 @@ class ItemDetailsService {
 }
 
 @Riverpod(keepAlive: true)
-ItemDetailsService itemDetailsService(ItemDetailsServiceRef ref) =>
+ItemDetailsService itemDetailsService(Ref ref) =>
     ItemDetailsService(ref.watch(itemDetailsRepositoryProvider));
 
 class ItemDetailsData {

@@ -9,7 +9,7 @@ import 'package:widam/src/network/services/network_service.dart';
 part 'time_slots_repository.g.dart';
 
 @riverpod
-TimeSlotsRepository timeSlotsRepository(TimeSlotsRepositoryRef ref) =>
+TimeSlotsRepository timeSlotsRepository(Ref ref) =>
     TimeSlotsRepository(ref.watch(networkServiceProvider()));
 
 class TimeSlotsRepository {
@@ -27,6 +27,6 @@ class TimeSlotsRepository {
 }
 
 @riverpod
-Future<GeofenceDetails> geofenceDetails(GeofenceDetailsRef ref) => ref
+Future<GeofenceDetails> geofenceDetails(Ref ref) => ref
     .watch(timeSlotsRepositoryProvider)
     .getGeofenceDetails(ref.watch(localGeofenceIdProvider)!);

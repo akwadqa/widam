@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:widam/generated/l10n.dart';
 import 'package:widam/src/features/items/domain/item_details/product_option.dart';
 import 'package:widam/src/features/items/presentation/item_details/product_options_form_key_provider.dart';

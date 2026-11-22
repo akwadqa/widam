@@ -8,7 +8,7 @@ part 'loyalty_program.freezed.dart';
 part 'loyalty_program.g.dart';
 
 @freezed
-class LoyaltyProgram with _$LoyaltyProgram {
+abstract class LoyaltyProgram with _$LoyaltyProgram {
   factory LoyaltyProgram({
     required String loyaltyProgramName,
     required double conversionFactor,

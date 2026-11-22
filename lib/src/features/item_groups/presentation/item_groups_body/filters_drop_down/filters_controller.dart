@@ -23,7 +23,7 @@ class SelectedFilterController extends _$SelectedFilterController {
 }
 
 @riverpod
-List<FilterType> filters(FiltersRef ref) {
+List<FilterType> filters(Ref ref) {
   ref.watch(currentLanguageProvider);
 
   return [

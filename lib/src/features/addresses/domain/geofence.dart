@@ -4,7 +4,7 @@ part 'geofence.freezed.dart';
 part 'geofence.g.dart';
 
 @freezed
-class Geofence with _$Geofence {
+abstract class Geofence with _$Geofence {
   factory Geofence({
     required String geofenceId,
     required String geofenceName,

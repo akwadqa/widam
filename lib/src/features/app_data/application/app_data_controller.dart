@@ -46,7 +46,7 @@ class AppDataController extends _$AppDataController {
   //   return appDataRepository.getAppData(geofenceId);
   // }
     void updateGeofence(Geofence geofence) {
-    final current = state.valueOrNull;
+    final current = state.value;
 
     if (current == null) return;
 
@@ -70,7 +70,7 @@ class AppDataController extends _$AppDataController {
           address.geofence!.geofenceId,
         );
 
-    final current = state.valueOrNull;
+    final current = state.value;
 
     if (current != null) {
       state = AsyncData(

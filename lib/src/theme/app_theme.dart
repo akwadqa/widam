@@ -114,11 +114,11 @@ abstract class AppTheme {
 }
 
 @Riverpod(keepAlive: true)
-ThemeData themeData(ThemeDataRef ref) =>
+ThemeData themeData(Ref ref) =>
     AppTheme.lightTheme(ref.watch(fontFamilyProvider));
 
 @Riverpod(keepAlive: true)
-String fontFamily(FontFamilyRef ref) =>
+String fontFamily(Ref ref) =>
     (ref.watch(currentLanguageProvider) == 'en'
         ? FontFamily.montserrat
         : FontFamily.qatar);

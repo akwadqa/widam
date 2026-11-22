@@ -4,7 +4,7 @@ part 'wallet_transaction.freezed.dart';
 part 'wallet_transaction.g.dart';
 
 @freezed
-class WalletTransaction with _$WalletTransaction {
+abstract class WalletTransaction with _$WalletTransaction {
   factory WalletTransaction({
     required String id,
     required String customer,

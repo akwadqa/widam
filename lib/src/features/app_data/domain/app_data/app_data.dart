@@ -8,7 +8,7 @@ part 'app_data.freezed.dart';
 part 'app_data.g.dart';
 
 @freezed
-class AppData with _$AppData {
+abstract class AppData with _$AppData {
   factory AppData({
     required Geofence geofence,
     required TimeSlot timeSlot,

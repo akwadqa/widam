@@ -4,7 +4,7 @@ part 'loyalty_points_log.freezed.dart';
 part 'loyalty_points_log.g.dart';
 
 @freezed
-class LoyaltyPointsLog with _$LoyaltyPointsLog {
+abstract class LoyaltyPointsLog with _$LoyaltyPointsLog {
   factory LoyaltyPointsLog({
     required String invoiceType,
     required String invoice,

@@ -8,7 +8,7 @@ import 'package:widam/src/features/items/presentation/item_details/item_details_
 part 'pickup_points_form_field.g.dart';
 
 @Riverpod(keepAlive: true)
-GlobalKey<FormState> pickupPointsFormKey(PickupPointsFormKeyRef ref) =>
+GlobalKey<FormState> pickupPointsFormKey(Ref ref) =>
     GlobalKey<FormState>();
 
 class PickupPointsFormField extends FormField<String?> {

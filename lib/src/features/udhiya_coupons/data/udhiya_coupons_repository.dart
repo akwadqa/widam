@@ -12,7 +12,7 @@ part 'udhiya_coupons_repository.g.dart';
 
 @riverpod
 UdhiyaCouponsRepository udhiyaCouponsRepository(
-    UdhiyaCouponsRepositoryRef ref) {
+    Ref ref) {
   return UdhiyaCouponsRepository(ref.watch(networkServiceProvider()));
 }
 
@@ -49,13 +49,13 @@ class UdhiyaCouponsRepository {
 }
 
 @riverpod
-FutureOr<List<UdhiyaCoupon>> udhiyaCoupons(UdhiyaCouponsRef ref) {
+FutureOr<List<UdhiyaCoupon>> udhiyaCoupons(Ref ref) {
   return ref.watch(udhiyaCouponsRepositoryProvider).getUdhiyaCoupons();
 }
 
 @riverpod
 FutureOr<UdhiyaCouponDetails> udhiyaCouponDetails(
-    UdhiyaCouponDetailsRef ref, String couponId) {
+    Ref ref, String couponId) {
   return ref
       .watch(udhiyaCouponsRepositoryProvider)
       .getUdhiyaCouponDetails(couponId);

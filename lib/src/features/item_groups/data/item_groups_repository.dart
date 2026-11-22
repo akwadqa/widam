@@ -10,7 +10,7 @@ import '../domain/item_group_details/item_group_details.dart';
 part 'item_groups_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-ItemGroupsRepository itemGroupsRepository(ItemGroupsRepositoryRef ref) =>
+ItemGroupsRepository itemGroupsRepository(Ref ref) =>
     ItemGroupsRepository(ref.watch(networkServiceProvider()));
 
 class ItemGroupsRepository {
@@ -74,7 +74,7 @@ class ItemGroupsRepository {
 
 @riverpod
 Future<AppResponse<ItemGroupDetails>> getAllItemGroups(
-    GetAllItemGroupsRef ref) async {
+    Ref ref) async {
   final warehouseId = ref.watch(localLocationInfoProvider).warehouseId;
   return ref
       .watch(itemGroupsRepositoryProvider)

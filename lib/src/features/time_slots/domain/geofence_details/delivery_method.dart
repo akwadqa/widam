@@ -6,7 +6,7 @@ part 'delivery_method.freezed.dart';
 part 'delivery_method.g.dart';
 
 @freezed
-class DeliveryMethod with _$DeliveryMethod {
+abstract class DeliveryMethod with _$DeliveryMethod {
   factory DeliveryMethod({
     required String deliveryMethodId,
     required String type,

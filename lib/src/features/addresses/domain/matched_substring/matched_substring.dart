@@ -4,7 +4,7 @@ part 'matched_substring.freezed.dart';
 part 'matched_substring.g.dart';
 
 @freezed
-class MatchedSubstring with _$MatchedSubstring {
+abstract class MatchedSubstring with _$MatchedSubstring {
   const factory MatchedSubstring({
     required int length,
     required int offset,

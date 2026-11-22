@@ -4,7 +4,7 @@ part 'processing_order.freezed.dart';
 part 'processing_order.g.dart';
 
 @freezed
-class ProcessingOrder with _$ProcessingOrder {
+abstract class ProcessingOrder with _$ProcessingOrder {
   factory ProcessingOrder({
     bool? hasProcessingOrders,
     String? reviewingOrders,

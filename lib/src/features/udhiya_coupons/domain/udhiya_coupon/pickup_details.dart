@@ -8,7 +8,7 @@ part 'pickup_details.freezed.dart';
 part 'pickup_details.g.dart';
 
 @freezed
-class PickupDetails with _$PickupDetails {
+abstract class PickupDetails with _$PickupDetails {
   factory PickupDetails({
     required String pickupPoint,
     required Date pickupDate,

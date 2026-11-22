@@ -34,7 +34,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   void initState() {
-    smsRetrieverImpl = SmsRetrieverImpl(SmartAuth());
+    smsRetrieverImpl = SmsRetrieverImpl(SmartAuth.instance);
     super.initState();
   }
 
@@ -237,17 +237,14 @@ class SmsRetrieverImpl implements SmsRetriever {
   final SmartAuth smartAuth;
 
   @override
-  Future<void> dispose() {
-    return smartAuth.removeSmsListener();
+  Future<void> dispose() async {
+    await smartAuth.removeSmsRetrieverApiListener();
   }
 
   @override
   Future<String?> getSmsCode() async {
-    final res = await smartAuth.getSmsCode();
-    if (res.succeed && res.codeFound) {
-      return res.code!;
-    }
-    return null;
+    final res = await smartAuth.getSmsWithRetrieverApi();
+    return res.hasData ? res.requireData.code : null;
   }
 
   @override

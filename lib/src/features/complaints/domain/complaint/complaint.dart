@@ -4,7 +4,7 @@ part 'complaint.freezed.dart';
 part 'complaint.g.dart';
 
 @freezed
-class Complaint with _$Complaint {
+abstract class Complaint with _$Complaint {
   factory Complaint({
     required String issueId,
     required String raisedBy,

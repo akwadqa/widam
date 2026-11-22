@@ -4,7 +4,7 @@ part 'delivery_date.freezed.dart';
 part 'delivery_date.g.dart';
 
 @freezed
-class DeliveryDate with _$DeliveryDate {
+abstract class DeliveryDate with _$DeliveryDate {
   factory DeliveryDate({
     required String date,
     required String dateFormatted,

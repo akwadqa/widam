@@ -13,7 +13,7 @@ import '../domain/processing_order/processing_order.dart';
 part 'sales_orders_repository.g.dart';
 
 @riverpod
-SalesOrdersRepository salesOrderRepository(SalesOrderRepositoryRef ref) {
+SalesOrdersRepository salesOrderRepository(Ref ref) {
   return SalesOrdersRepository(ref.watch(networkServiceProvider()));
 }
 
@@ -81,7 +81,7 @@ class SalesOrdersRepository {
 
 @riverpod
 FutureOr<ProcessingOrder?> processingOrder(
-  ProcessingOrderRef ref,
+  Ref ref,
 ) async {
   try {
     final isLoggedIn = ref.watch(userDataProvider);
@@ -99,6 +99,6 @@ FutureOr<ProcessingOrder?> processingOrder(
 }
 
 @riverpod
-FutureOr<OrdersResponse> openOrders(OpenOrdersRef ref) {
+FutureOr<OrdersResponse> openOrders(Ref ref) {
   return ref.watch(salesOrderRepositoryProvider).getOpenOrders();
 }

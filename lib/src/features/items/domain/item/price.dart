@@ -4,7 +4,7 @@ part 'price.freezed.dart';
 part 'price.g.dart';
 
 @freezed
-class Price with _$Price {
+abstract class Price with _$Price {
   factory Price({
     required double websiteItemPrice,
     required String? discountTitle,

@@ -5,4 +5,4 @@ import 'app_router.dart';
 part 'app_router_provider.g.dart';
 
 @riverpod
-AppRouter appRouter(AppRouterRef ref) => AppRouter();
+AppRouter appRouter(Ref ref) => AppRouter();

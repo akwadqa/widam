@@ -4,7 +4,7 @@ version '1.0-SNAPSHOT'
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -15,7 +15,7 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
@@ -24,14 +24,13 @@ apply plugin: 'com.android.library'
 android {
     namespace 'com.foo.statusbarcontrol'
 
-
-    compileSdkVersion 31
+    compileSdk 36
 
     defaultConfig {
         minSdkVersion 16
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
-    lintOptions {
+    lint {
         disable 'InvalidPackage'
     }
 

@@ -5,7 +5,7 @@ part 'payment_result.freezed.dart';
 part 'payment_result.g.dart';
 
 @freezed
-class PaymentResult with _$PaymentResult {
+abstract class PaymentResult with _$PaymentResult {
   factory PaymentResult(
       {required String message,
       required dynamic statusCode,

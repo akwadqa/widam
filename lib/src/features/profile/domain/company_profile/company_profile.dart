@@ -6,7 +6,7 @@ part 'company_profile.freezed.dart';
 part 'company_profile.g.dart';
 
 @freezed
-class CompanyProfile with _$CompanyProfile {
+abstract class CompanyProfile with _$CompanyProfile {
   factory CompanyProfile({
     required String contactNumber,
     required String termsAndConditions,

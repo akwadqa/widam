@@ -14,7 +14,7 @@ import 'package:widam/src/network/services/network_service.dart';
 part 'cart_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-CartRepository cartRepository(CartRepositoryRef ref) =>
+CartRepository cartRepository(Ref ref) =>
     CartRepository(ref.watch(networkServiceProvider()));
 
 class CartRepository {

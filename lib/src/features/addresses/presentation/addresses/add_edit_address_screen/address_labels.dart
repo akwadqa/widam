@@ -8,14 +8,14 @@ import '../../../../../theme/app_colors.dart';
 part 'address_labels.g.dart';
 
 @riverpod
-List<({String title, String value})> addressLabels(AddressLabelsRef ref) => [
+List<({String title, String value})> addressLabels(Ref ref) => [
       (title: S.current.villa, value: 'Permanent'),
       (title: S.current.office, value: 'Office'),
       (title: S.current.apartment, value: 'Shipping'),
     ];
 
 @riverpod
-List<SvgGenImage> icons(IconsRef ref) => [
+List<SvgGenImage> icons(Ref ref) => [
       Assets.icons.villaIcon,
       Assets.icons.officeIcon,
       Assets.icons.apartmentIcon,

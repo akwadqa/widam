@@ -11,7 +11,7 @@ part 'validate_coordinates_repository.g.dart';
 
 @riverpod
 ValidateCoordinatesRepository validateCoordinatesRepository(
-        ValidateCoordinatesRepositoryRef ref) =>
+        Ref ref) =>
     ValidateCoordinatesRepository(ref.watch(networkServiceProvider()));
 
 class ValidateCoordinatesRepository {

@@ -4,7 +4,7 @@ part 'point.freezed.dart';
 part 'point.g.dart';
 
 @freezed
-class Point with _$Point {
+abstract class Point with _$Point {
   factory Point({
     required String pickupPointId,
     required String pickupPointName,

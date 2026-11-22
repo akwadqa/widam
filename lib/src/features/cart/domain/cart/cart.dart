@@ -12,7 +12,7 @@ part 'cart.freezed.dart';
 part 'cart.g.dart';
 
 @freezed
-class Cart with _$Cart {
+abstract class Cart with _$Cart {
   factory Cart({
     required String quotationId,
     required String date,

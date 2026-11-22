@@ -12,7 +12,12 @@ import 'src/app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final container = ProviderContainer(observers: [RiverpodObserver()]);
+  // Riverpod 3 retries failed providers automatically; keep the old
+  // behaviour so API errors surface immediately instead of being retried.
+  final container = ProviderContainer(
+    observers: [RiverpodObserver()],
+    retry: (retryCount, error) => null,
+  );
   await container.read(sharedPreferencesProvider.future);
   await container.read(canVibrateProvider.future);
   await container.read(packageInfoProvider.future);
@@ -28,5 +33,4 @@ Future<void> main() async {
   analytics.setAnalyticsCollectionEnabled(true);
   runApp(UncontrolledProviderScope(
       container: container, child: App(analytics: analytics)));
-      
 }

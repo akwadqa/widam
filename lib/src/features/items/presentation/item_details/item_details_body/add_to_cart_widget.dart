@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:widam/src/common_widgets/banner/app_banner_dialog.dart';
 import 'package:widam/src/features/addresses/presentation/maps/address_selector_button/address_selector_button_controller.dart';
@@ -184,7 +185,7 @@ class AddToCartWidget extends StatelessWidget {
   }
 
   bool _validateForm(WidgetRef ref,
-      Provider<GlobalKey<FormState>> formKeyProvider, FormType formType) {
+      ProviderListenable<GlobalKey<FormState>> formKeyProvider, FormType formType) {
     final formKey = ref.read(formKeyProvider);
     if (formKey.currentState != null && !formKey.currentState!.validate()) {
       onInvalidForm(formType);

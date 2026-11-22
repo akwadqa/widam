@@ -4,7 +4,7 @@ part 'item.freezed.dart';
 part 'item.g.dart';
 
 @freezed
-class Item with _$Item {
+abstract class Item with _$Item {
   factory Item({
     required String websiteItemId,
     required String websiteItemName,

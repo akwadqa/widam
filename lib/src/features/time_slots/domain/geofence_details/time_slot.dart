@@ -4,7 +4,7 @@ part 'time_slot.freezed.dart';
 part 'time_slot.g.dart';
 
 @freezed
-class TimeSlot with _$TimeSlot {
+abstract class TimeSlot with _$TimeSlot {
   factory TimeSlot({
     required String? timeSlotId,
     required String timeFormatted,

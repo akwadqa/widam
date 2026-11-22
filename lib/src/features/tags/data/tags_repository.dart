@@ -10,7 +10,7 @@ import '../domain/tag/tag.dart';
 part 'tags_repository.g.dart';
 
 @riverpod
-TagsRepository tagsRepository(TagsRepositoryRef ref) =>
+TagsRepository tagsRepository(Ref ref) =>
     TagsRepository(ref.watch(networkServiceProvider()));
 
 class TagsRepository {
@@ -30,6 +30,6 @@ class TagsRepository {
 }
 
 @riverpod
-FutureOr<List<Tag>> tags(TagsRef ref) {
+FutureOr<List<Tag>> tags(Ref ref) {
   return ref.watch(tagsRepositoryProvider).getTags();
 }

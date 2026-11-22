@@ -7,7 +7,7 @@ part 'item_group_details.freezed.dart';
 part 'item_group_details.g.dart';
 
 @freezed
-class ItemGroupDetails with _$ItemGroupDetails {
+abstract class ItemGroupDetails with _$ItemGroupDetails {
   const factory ItemGroupDetails({
     required String itemGroupId,
     required String itemGroupName,

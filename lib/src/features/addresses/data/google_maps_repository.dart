@@ -12,7 +12,7 @@ import '../domain/place/place.dart';
 part 'google_maps_repository.g.dart';
 
 @riverpod
-GoogleMapsRepository googleMapsRepository(GoogleMapsRepositoryRef ref) {
+GoogleMapsRepository googleMapsRepository(Ref ref) {
   final dio = ref.watch(dioProvider);
   final newDio =
       Dio(dio.options.copyWith(baseUrl: ServicesUrls.googleMapsBaseUrl));
@@ -49,7 +49,7 @@ class GoogleMapsRepository {
 
 @riverpod
 Future<List<Place>> autoComplete(
-    AutoCompleteRef ref, String input, String sessionToken) async {
+    Ref ref, String input, String sessionToken) async {
   final repository = ref.watch(googleMapsRepositoryProvider);
   return repository.autoComplete(input, sessionToken);
 }

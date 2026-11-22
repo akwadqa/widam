@@ -4,7 +4,7 @@ part 'expiring_points.freezed.dart';
 part 'expiring_points.g.dart';
 
 @freezed
-class ExpiringPoints with _$ExpiringPoints {
+abstract class ExpiringPoints with _$ExpiringPoints {
   factory ExpiringPoints({
     required double expiringPointsTotal,
     required String window,

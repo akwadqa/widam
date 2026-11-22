@@ -10,7 +10,7 @@ import '../../profile/domain/user_details/user_details.dart';
 part 'account_repository.g.dart';
 
 @riverpod
-AccountRepository accountRepository(AccountRepositoryRef ref) =>
+AccountRepository accountRepository(Ref ref) =>
     AccountRepository(ref.watch(networkServiceProvider()));
 
 class AccountRepository {

@@ -8,7 +8,7 @@ import 'package:widam/src/features/items/presentation/item_details/item_details_
 part 'slotter_fees_form_field.g.dart';
 
 @Riverpod(keepAlive: true)
-GlobalKey<FormState> slotterFeesFormKey(SlotterFeesFormKeyRef ref) =>
+GlobalKey<FormState> slotterFeesFormKey(Ref ref) =>
     GlobalKey<FormState>();
 
 class SlotterFeesFormField extends FormField<bool> {

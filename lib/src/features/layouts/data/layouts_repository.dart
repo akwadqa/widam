@@ -14,7 +14,7 @@ part 'layouts_repository.g.dart';
 enum LayoutType { home, featured }
 
 @Riverpod(keepAlive: true)
-LayoutsRepository layoutsRepository(LayoutsRepositoryRef ref) =>
+LayoutsRepository layoutsRepository(Ref ref) =>
     LayoutsRepository(ref.watch(networkServiceProvider()));
 
 class LayoutsRepository {
@@ -66,7 +66,7 @@ class LayoutsRepository {
 }
 
 @Riverpod(keepAlive: true)
-Future<Layout> layout(LayoutRef ref, LayoutType type,
+Future<Layout> layout(Ref ref, LayoutType type,
     {String? sortBy, String? sortOrder}) async {
   final repository = ref.watch(layoutsRepositoryProvider);
   final appData = await ref.watch(appDataControllerProvider.future);
@@ -80,7 +80,7 @@ Future<Layout> layout(LayoutRef ref, LayoutType type,
 }
 
 @Riverpod(keepAlive: true)
-Future<Block<List<Item>>> block(BlockRef ref, {required String blockId}) async {
+Future<Block<List<Item>>> block(Ref ref, {required String blockId}) async {
   final repository = ref.watch(layoutsRepositoryProvider);
   final warehouseId = ref.watch(localLocationInfoProvider).warehouseId;
   return repository.getBlock(blockId: blockId, warehouseId: warehouseId);

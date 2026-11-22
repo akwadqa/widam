@@ -8,7 +8,7 @@ part 'default_address.freezed.dart';
 part 'default_address.g.dart';
 
 @freezed
-class DefaultAddress with _$DefaultAddress {
+abstract class DefaultAddress with _$DefaultAddress {
   factory DefaultAddress({
     required String latitude,
     required String longitude,

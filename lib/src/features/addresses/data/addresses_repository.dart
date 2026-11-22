@@ -11,7 +11,7 @@ import '../domain/address/address.dart';
 part 'addresses_repository.g.dart';
 
 @riverpod
-AddressesRepository addressesRepository(AddressesRepositoryRef ref) =>
+AddressesRepository addressesRepository(Ref ref) =>
     AddressesRepository(ref.watch(networkServiceProvider()));
 
 class AddressesRepository {

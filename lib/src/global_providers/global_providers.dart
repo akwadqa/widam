@@ -5,17 +5,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'global_providers.g.dart';
 
 @Riverpod(keepAlive: true)
-Future<SharedPreferences> sharedPreferences(SharedPreferencesRef ref) async =>
+Future<SharedPreferences> sharedPreferences(Ref ref) async =>
     await SharedPreferences.getInstance();
 
 @Riverpod(keepAlive: true)
-Future<bool> canVibrate(CanVibrateRef ref) async => await Vibrate.canVibrate;
+Future<bool> canVibrate(Ref ref) async => await Vibrate.canVibrate;
 
 @Riverpod(keepAlive: true)
-Future<PackageInfo> packageInfo(PackageInfoRef ref) async =>
+Future<PackageInfo> packageInfo(Ref ref) async =>
     await PackageInfo.fromPlatform();
 
 @riverpod
-double topPadding(TopPaddingRef ref, double mediaQueryTopPadding) {
+double topPadding(Ref ref, double mediaQueryTopPadding) {
   return mediaQueryTopPadding > 30 ? 40 : 30;
 }

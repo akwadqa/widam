@@ -12,7 +12,7 @@ part 'loyalty_points_repository.g.dart';
 
 @riverpod
 LoyaltyPointsRepository loyaltyPointsRepository(
-    LoyaltyPointsRepositoryRef ref) {
+    Ref ref) {
   return LoyaltyPointsRepository(ref.watch(networkServiceProvider()));
 }
 

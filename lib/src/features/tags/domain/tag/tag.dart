@@ -4,7 +4,7 @@ part 'tag.freezed.dart';
 part 'tag.g.dart';
 
 @freezed
-class Tag with _$Tag {
+abstract class Tag with _$Tag {
   factory Tag({
     required String id,
     required String title,

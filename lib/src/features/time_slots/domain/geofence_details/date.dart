@@ -6,7 +6,7 @@ part 'date.freezed.dart';
 part 'date.g.dart';
 
 @freezed
-class Date with _$Date {
+abstract class Date with _$Date {
   factory Date({
     required String date,
     required String dateFormatted,

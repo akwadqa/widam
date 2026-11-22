@@ -4,7 +4,7 @@ part 'mubadara_details.freezed.dart';
 part 'mubadara_details.g.dart';
 
 @freezed
-class MubadaraDetails with _$MubadaraDetails {
+abstract class MubadaraDetails with _$MubadaraDetails {
   const factory MubadaraDetails({
     required String mubadaraId,
     required String mubadaraName,

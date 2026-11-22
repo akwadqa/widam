@@ -6,7 +6,7 @@ part 'cart_content.freezed.dart';
 part 'cart_content.g.dart';
 
 @freezed
-class CartContent with _$CartContent {
+abstract class CartContent with _$CartContent {
   factory CartContent({
     required DeliveryType? normalDelivery,
     required DeliveryType? expressDelivery,

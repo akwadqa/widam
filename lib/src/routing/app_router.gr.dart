@@ -9,7 +9,9 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:auto_route/auto_route.dart' as _i34;
+import 'package:collection/collection.dart' as _i41;
 import 'package:flutter/material.dart' as _i35;
 import 'package:widam/src/features/account/presentation/edit_profile_screen/edit_profile_screen.dart'
     as _i10;
@@ -89,7 +91,7 @@ import 'package:widam/src/features/wallet/presentation/widam_wallet_screen/widam
 /// [_i1.ActiveSubscriptionsScreen]
 class ActiveSubscriptionsScreen extends _i34.PageRouteInfo<void> {
   const ActiveSubscriptionsScreen({List<_i34.PageRouteInfo>? children})
-    : super(ActiveSubscriptionsScreen.name, initialChildren: children);
+      : super(ActiveSubscriptionsScreen.name, initialChildren: children);
 
   static const String name = 'ActiveSubscriptionsScreen';
 
@@ -105,7 +107,7 @@ class ActiveSubscriptionsScreen extends _i34.PageRouteInfo<void> {
 /// [_i2.AddComplaintScreen]
 class AddComplaintScreen extends _i34.PageRouteInfo<void> {
   const AddComplaintScreen({List<_i34.PageRouteInfo>? children})
-    : super(AddComplaintScreen.name, initialChildren: children);
+      : super(AddComplaintScreen.name, initialChildren: children);
 
   static const String name = 'AddComplaintScreen';
 
@@ -129,16 +131,16 @@ class AddEditAddressScreen
     required String geofenceId,
     List<_i34.PageRouteInfo>? children,
   }) : super(
-         AddEditAddressScreen.name,
-         args: AddEditAddressScreenArgs(
-           key: key,
-           address: address,
-           latitude: latitude,
-           longitude: longitude,
-           geofenceId: geofenceId,
-         ),
-         initialChildren: children,
-       );
+          AddEditAddressScreen.name,
+          args: AddEditAddressScreenArgs(
+            key: key,
+            address: address,
+            latitude: latitude,
+            longitude: longitude,
+            geofenceId: geofenceId,
+          ),
+          initialChildren: children,
+        );
 
   static const String name = 'AddEditAddressScreen';
 
@@ -180,13 +182,32 @@ class AddEditAddressScreenArgs {
   String toString() {
     return 'AddEditAddressScreenArgs{key: $key, address: $address, latitude: $latitude, longitude: $longitude, geofenceId: $geofenceId}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! AddEditAddressScreenArgs) return false;
+    return key == other.key &&
+        address == other.address &&
+        latitude == other.latitude &&
+        longitude == other.longitude &&
+        geofenceId == other.geofenceId;
+  }
+
+  @override
+  int get hashCode =>
+      key.hashCode ^
+      address.hashCode ^
+      latitude.hashCode ^
+      longitude.hashCode ^
+      geofenceId.hashCode;
 }
 
 /// generated route for
 /// [_i4.AddressesScreen]
 class AddressesScreen extends _i34.PageRouteInfo<void> {
   const AddressesScreen({List<_i34.PageRouteInfo>? children})
-    : super(AddressesScreen.name, initialChildren: children);
+      : super(AddressesScreen.name, initialChildren: children);
 
   static const String name = 'AddressesScreen';
 
@@ -202,7 +223,7 @@ class AddressesScreen extends _i34.PageRouteInfo<void> {
 /// [_i5.AppInitialScreen]
 class AppInitialScreen extends _i34.PageRouteInfo<void> {
   const AppInitialScreen({List<_i34.PageRouteInfo>? children})
-    : super(AppInitialScreen.name, initialChildren: children);
+      : super(AppInitialScreen.name, initialChildren: children);
 
   static const String name = 'AppInitialScreen';
 
@@ -218,7 +239,7 @@ class AppInitialScreen extends _i34.PageRouteInfo<void> {
 /// [_i6.CartScreen]
 class CartScreen extends _i34.PageRouteInfo<void> {
   const CartScreen({List<_i34.PageRouteInfo>? children})
-    : super(CartScreen.name, initialChildren: children);
+      : super(CartScreen.name, initialChildren: children);
 
   static const String name = 'CartScreen';
 
@@ -234,7 +255,7 @@ class CartScreen extends _i34.PageRouteInfo<void> {
 /// [_i7.CheckoutScreen]
 class CheckoutScreen extends _i34.PageRouteInfo<void> {
   const CheckoutScreen({List<_i34.PageRouteInfo>? children})
-    : super(CheckoutScreen.name, initialChildren: children);
+      : super(CheckoutScreen.name, initialChildren: children);
 
   static const String name = 'CheckoutScreen';
 
@@ -250,7 +271,7 @@ class CheckoutScreen extends _i34.PageRouteInfo<void> {
 /// [_i8.ComplaintsScreen]
 class ComplaintsScreen extends _i34.PageRouteInfo<void> {
   const ComplaintsScreen({List<_i34.PageRouteInfo>? children})
-    : super(ComplaintsScreen.name, initialChildren: children);
+      : super(ComplaintsScreen.name, initialChildren: children);
 
   static const String name = 'ComplaintsScreen';
 
@@ -266,7 +287,7 @@ class ComplaintsScreen extends _i34.PageRouteInfo<void> {
 /// [_i9.DealsScreen]
 class DealsScreen extends _i34.PageRouteInfo<void> {
   const DealsScreen({List<_i34.PageRouteInfo>? children})
-    : super(DealsScreen.name, initialChildren: children);
+      : super(DealsScreen.name, initialChildren: children);
 
   static const String name = 'DealsScreen';
 
@@ -282,7 +303,7 @@ class DealsScreen extends _i34.PageRouteInfo<void> {
 /// [_i10.EditProfileScreen]
 class EditProfileScreen extends _i34.PageRouteInfo<void> {
   const EditProfileScreen({List<_i34.PageRouteInfo>? children})
-    : super(EditProfileScreen.name, initialChildren: children);
+      : super(EditProfileScreen.name, initialChildren: children);
 
   static const String name = 'EditProfileScreen';
 
@@ -302,10 +323,10 @@ class HomeScreen extends _i34.PageRouteInfo<HomeScreenArgs> {
     _i37.Block<List<_i38.Banner>>? bannerBlock,
     List<_i34.PageRouteInfo>? children,
   }) : super(
-         HomeScreen.name,
-         args: HomeScreenArgs(key: key, bannerBlock: bannerBlock),
-         initialChildren: children,
-       );
+          HomeScreen.name,
+          args: HomeScreenArgs(key: key, bannerBlock: bannerBlock),
+          initialChildren: children,
+        );
 
   static const String name = 'HomeScreen';
 
@@ -331,6 +352,16 @@ class HomeScreenArgs {
   String toString() {
     return 'HomeScreenArgs{key: $key, bannerBlock: $bannerBlock}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! HomeScreenArgs) return false;
+    return key == other.key && bannerBlock == other.bannerBlock;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ bannerBlock.hashCode;
 }
 
 /// generated route for
@@ -343,15 +374,15 @@ class ItemDetailsScreen extends _i34.PageRouteInfo<ItemDetailsScreenArgs> {
     String? attributionToken,
     List<_i34.PageRouteInfo>? children,
   }) : super(
-         ItemDetailsScreen.name,
-         args: ItemDetailsScreenArgs(
-           key: key,
-           itemId: itemId,
-           mubadaraId: mubadaraId,
-           attributionToken: attributionToken,
-         ),
-         initialChildren: children,
-       );
+          ItemDetailsScreen.name,
+          args: ItemDetailsScreenArgs(
+            key: key,
+            itemId: itemId,
+            mubadaraId: mubadaraId,
+            attributionToken: attributionToken,
+          ),
+          initialChildren: children,
+        );
 
   static const String name = 'ItemDetailsScreen';
 
@@ -389,6 +420,23 @@ class ItemDetailsScreenArgs {
   String toString() {
     return 'ItemDetailsScreenArgs{key: $key, itemId: $itemId, mubadaraId: $mubadaraId, attributionToken: $attributionToken}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! ItemDetailsScreenArgs) return false;
+    return key == other.key &&
+        itemId == other.itemId &&
+        mubadaraId == other.mubadaraId &&
+        attributionToken == other.attributionToken;
+  }
+
+  @override
+  int get hashCode =>
+      key.hashCode ^
+      itemId.hashCode ^
+      mubadaraId.hashCode ^
+      attributionToken.hashCode;
 }
 
 /// generated route for
@@ -400,14 +448,14 @@ class ItemGroupScreen extends _i34.PageRouteInfo<ItemGroupScreenArgs> {
     required String itemGroupId,
     List<_i34.PageRouteInfo>? children,
   }) : super(
-         ItemGroupScreen.name,
-         args: ItemGroupScreenArgs(
-           key: key,
-           autoFocus: autoFocus,
-           itemGroupId: itemGroupId,
-         ),
-         initialChildren: children,
-       );
+          ItemGroupScreen.name,
+          args: ItemGroupScreenArgs(
+            key: key,
+            autoFocus: autoFocus,
+            itemGroupId: itemGroupId,
+          ),
+          initialChildren: children,
+        );
 
   static const String name = 'ItemGroupScreen';
 
@@ -441,13 +489,25 @@ class ItemGroupScreenArgs {
   String toString() {
     return 'ItemGroupScreenArgs{key: $key, autoFocus: $autoFocus, itemGroupId: $itemGroupId}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! ItemGroupScreenArgs) return false;
+    return key == other.key &&
+        autoFocus == other.autoFocus &&
+        itemGroupId == other.itemGroupId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ autoFocus.hashCode ^ itemGroupId.hashCode;
 }
 
 /// generated route for
 /// [_i14.ItemGroupsScreen]
 class ItemGroupsScreen extends _i34.PageRouteInfo<void> {
   const ItemGroupsScreen({List<_i34.PageRouteInfo>? children})
-    : super(ItemGroupsScreen.name, initialChildren: children);
+      : super(ItemGroupsScreen.name, initialChildren: children);
 
   static const String name = 'ItemGroupsScreen';
 
@@ -463,7 +523,7 @@ class ItemGroupsScreen extends _i34.PageRouteInfo<void> {
 /// [_i15.LoginScreen]
 class LoginScreen extends _i34.PageRouteInfo<void> {
   const LoginScreen({List<_i34.PageRouteInfo>? children})
-    : super(LoginScreen.name, initialChildren: children);
+      : super(LoginScreen.name, initialChildren: children);
 
   static const String name = 'LoginScreen';
 
@@ -479,7 +539,7 @@ class LoginScreen extends _i34.PageRouteInfo<void> {
 /// [_i16.MainScreen]
 class MainScreen extends _i34.PageRouteInfo<void> {
   const MainScreen({List<_i34.PageRouteInfo>? children})
-    : super(MainScreen.name, initialChildren: children);
+      : super(MainScreen.name, initialChildren: children);
 
   static const String name = 'MainScreen';
 
@@ -499,10 +559,10 @@ class MubadaraItemsScreen extends _i34.PageRouteInfo<MubadaraItemsScreenArgs> {
     required String mubadaraId,
     List<_i34.PageRouteInfo>? children,
   }) : super(
-         MubadaraItemsScreen.name,
-         args: MubadaraItemsScreenArgs(key: key, mubadaraId: mubadaraId),
-         initialChildren: children,
-       );
+          MubadaraItemsScreen.name,
+          args: MubadaraItemsScreenArgs(key: key, mubadaraId: mubadaraId),
+          initialChildren: children,
+        );
 
   static const String name = 'MubadaraItemsScreen';
 
@@ -529,13 +589,23 @@ class MubadaraItemsScreenArgs {
   String toString() {
     return 'MubadaraItemsScreenArgs{key: $key, mubadaraId: $mubadaraId}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! MubadaraItemsScreenArgs) return false;
+    return key == other.key && mubadaraId == other.mubadaraId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ mubadaraId.hashCode;
 }
 
 /// generated route for
 /// [_i18.NotificationsSettingsScreen]
 class NotificationsSettingsScreen extends _i34.PageRouteInfo<void> {
   const NotificationsSettingsScreen({List<_i34.PageRouteInfo>? children})
-    : super(NotificationsSettingsScreen.name, initialChildren: children);
+      : super(NotificationsSettingsScreen.name, initialChildren: children);
 
   static const String name = 'NotificationsSettingsScreen';
 
@@ -557,10 +627,10 @@ class OrderedSuccessfullyScreen
     String? pun,
     List<_i34.PageRouteInfo>? children,
   }) : super(
-         OrderedSuccessfullyScreen.name,
-         args: OrderedSuccessfullyScreenArgs(key: key, order: order, pun: pun),
-         initialChildren: children,
-       );
+          OrderedSuccessfullyScreen.name,
+          args: OrderedSuccessfullyScreenArgs(key: key, order: order, pun: pun),
+          initialChildren: children,
+        );
 
   static const String name = 'OrderedSuccessfullyScreen';
 
@@ -594,6 +664,16 @@ class OrderedSuccessfullyScreenArgs {
   String toString() {
     return 'OrderedSuccessfullyScreenArgs{key: $key, order: $order, pun: $pun}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! OrderedSuccessfullyScreenArgs) return false;
+    return key == other.key && order == other.order && pun == other.pun;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ order.hashCode ^ pun.hashCode;
 }
 
 /// generated route for
@@ -604,10 +684,10 @@ class PaymentWebView extends _i34.PageRouteInfo<PaymentWebViewArgs> {
     required String redirectUrl,
     List<_i34.PageRouteInfo>? children,
   }) : super(
-         PaymentWebView.name,
-         args: PaymentWebViewArgs(key: key, redirectUrl: redirectUrl),
-         initialChildren: children,
-       );
+          PaymentWebView.name,
+          args: PaymentWebViewArgs(key: key, redirectUrl: redirectUrl),
+          initialChildren: children,
+        );
 
   static const String name = 'PaymentWebView';
 
@@ -631,13 +711,23 @@ class PaymentWebViewArgs {
   String toString() {
     return 'PaymentWebViewArgs{key: $key, redirectUrl: $redirectUrl}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! PaymentWebViewArgs) return false;
+    return key == other.key && redirectUrl == other.redirectUrl;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ redirectUrl.hashCode;
 }
 
 /// generated route for
 /// [_i21.PointsHistoryScreen]
 class PointsHistoryScreen extends _i34.PageRouteInfo<void> {
   const PointsHistoryScreen({List<_i34.PageRouteInfo>? children})
-    : super(PointsHistoryScreen.name, initialChildren: children);
+      : super(PointsHistoryScreen.name, initialChildren: children);
 
   static const String name = 'PointsHistoryScreen';
 
@@ -653,7 +743,7 @@ class PointsHistoryScreen extends _i34.PageRouteInfo<void> {
 /// [_i22.ProfileScreen]
 class ProfileScreen extends _i34.PageRouteInfo<void> {
   const ProfileScreen({List<_i34.PageRouteInfo>? children})
-    : super(ProfileScreen.name, initialChildren: children);
+      : super(ProfileScreen.name, initialChildren: children);
 
   static const String name = 'ProfileScreen';
 
@@ -673,10 +763,10 @@ class RegisterScreen extends _i34.PageRouteInfo<RegisterScreenArgs> {
     required String mobileNumber,
     List<_i34.PageRouteInfo>? children,
   }) : super(
-         RegisterScreen.name,
-         args: RegisterScreenArgs(key: key, mobileNumber: mobileNumber),
-         initialChildren: children,
-       );
+          RegisterScreen.name,
+          args: RegisterScreenArgs(key: key, mobileNumber: mobileNumber),
+          initialChildren: children,
+        );
 
   static const String name = 'RegisterScreen';
 
@@ -703,6 +793,16 @@ class RegisterScreenArgs {
   String toString() {
     return 'RegisterScreenArgs{key: $key, mobileNumber: $mobileNumber}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! RegisterScreenArgs) return false;
+    return key == other.key && mobileNumber == other.mobileNumber;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ mobileNumber.hashCode;
 }
 
 /// generated route for
@@ -715,14 +815,14 @@ class SalesOrderDetailsScreen
     required List<String> statuses,
     List<_i34.PageRouteInfo>? children,
   }) : super(
-         SalesOrderDetailsScreen.name,
-         args: SalesOrderDetailsScreenArgs(
-           key: key,
-           salesOrder: salesOrder,
-           statuses: statuses,
-         ),
-         initialChildren: children,
-       );
+          SalesOrderDetailsScreen.name,
+          args: SalesOrderDetailsScreenArgs(
+            key: key,
+            salesOrder: salesOrder,
+            statuses: statuses,
+          ),
+          initialChildren: children,
+        );
 
   static const String name = 'SalesOrderDetailsScreen';
 
@@ -756,6 +856,21 @@ class SalesOrderDetailsScreenArgs {
   String toString() {
     return 'SalesOrderDetailsScreenArgs{key: $key, salesOrder: $salesOrder, statuses: $statuses}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! SalesOrderDetailsScreenArgs) return false;
+    return key == other.key &&
+        salesOrder == other.salesOrder &&
+        const _i41.ListEquality<String>().equals(statuses, other.statuses);
+  }
+
+  @override
+  int get hashCode =>
+      key.hashCode ^
+      salesOrder.hashCode ^
+      const _i41.ListEquality<String>().hash(statuses);
 }
 
 /// generated route for
@@ -766,10 +881,10 @@ class SalesOrdersScreen extends _i34.PageRouteInfo<SalesOrdersScreenArgs> {
     int initialIndex = 0,
     List<_i34.PageRouteInfo>? children,
   }) : super(
-         SalesOrdersScreen.name,
-         args: SalesOrdersScreenArgs(key: key, initialIndex: initialIndex),
-         initialChildren: children,
-       );
+          SalesOrdersScreen.name,
+          args: SalesOrdersScreenArgs(key: key, initialIndex: initialIndex),
+          initialChildren: children,
+        );
 
   static const String name = 'SalesOrdersScreen';
 
@@ -798,13 +913,23 @@ class SalesOrdersScreenArgs {
   String toString() {
     return 'SalesOrdersScreenArgs{key: $key, initialIndex: $initialIndex}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! SalesOrdersScreenArgs) return false;
+    return key == other.key && initialIndex == other.initialIndex;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ initialIndex.hashCode;
 }
 
 /// generated route for
 /// [_i26.SubscriptionScreen]
 class SubscriptionScreen extends _i34.PageRouteInfo<void> {
   const SubscriptionScreen({List<_i34.PageRouteInfo>? children})
-    : super(SubscriptionScreen.name, initialChildren: children);
+      : super(SubscriptionScreen.name, initialChildren: children);
 
   static const String name = 'SubscriptionScreen';
 
@@ -825,13 +950,13 @@ class TermsConditionsAndPrivacyPolicyScreen
     String? title,
     List<_i34.PageRouteInfo>? children,
   }) : super(
-         TermsConditionsAndPrivacyPolicyScreen.name,
-         args: TermsConditionsAndPrivacyPolicyScreenArgs(
-           key: key,
-           title: title,
-         ),
-         initialChildren: children,
-       );
+          TermsConditionsAndPrivacyPolicyScreen.name,
+          args: TermsConditionsAndPrivacyPolicyScreenArgs(
+            key: key,
+            title: title,
+          ),
+          initialChildren: children,
+        );
 
   static const String name = 'TermsConditionsAndPrivacyPolicyScreen';
 
@@ -860,6 +985,16 @@ class TermsConditionsAndPrivacyPolicyScreenArgs {
   String toString() {
     return 'TermsConditionsAndPrivacyPolicyScreenArgs{key: $key, title: $title}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! TermsConditionsAndPrivacyPolicyScreenArgs) return false;
+    return key == other.key && title == other.title;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ title.hashCode;
 }
 
 /// generated route for
@@ -870,10 +1005,10 @@ class TrackMapScreen extends _i34.PageRouteInfo<TrackMapScreenArgs> {
     required _i40.SalesOrder salesOrder,
     List<_i34.PageRouteInfo>? children,
   }) : super(
-         TrackMapScreen.name,
-         args: TrackMapScreenArgs(key: key, salesOrder: salesOrder),
-         initialChildren: children,
-       );
+          TrackMapScreen.name,
+          args: TrackMapScreenArgs(key: key, salesOrder: salesOrder),
+          initialChildren: children,
+        );
 
   static const String name = 'TrackMapScreen';
 
@@ -897,13 +1032,23 @@ class TrackMapScreenArgs {
   String toString() {
     return 'TrackMapScreenArgs{key: $key, salesOrder: $salesOrder}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! TrackMapScreenArgs) return false;
+    return key == other.key && salesOrder == other.salesOrder;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ salesOrder.hashCode;
 }
 
 /// generated route for
 /// [_i29.TransactionHistoryScreen]
 class TransactionHistoryScreen extends _i34.PageRouteInfo<void> {
   const TransactionHistoryScreen({List<_i34.PageRouteInfo>? children})
-    : super(TransactionHistoryScreen.name, initialChildren: children);
+      : super(TransactionHistoryScreen.name, initialChildren: children);
 
   static const String name = 'TransactionHistoryScreen';
 
@@ -924,10 +1069,10 @@ class UdhiyaCouponDetailsScreen
     required String couponId,
     List<_i34.PageRouteInfo>? children,
   }) : super(
-         UdhiyaCouponDetailsScreen.name,
-         args: UdhiyaCouponDetailsScreenArgs(key: key, couponId: couponId),
-         initialChildren: children,
-       );
+          UdhiyaCouponDetailsScreen.name,
+          args: UdhiyaCouponDetailsScreenArgs(key: key, couponId: couponId),
+          initialChildren: children,
+        );
 
   static const String name = 'UdhiyaCouponDetailsScreen';
 
@@ -954,13 +1099,23 @@ class UdhiyaCouponDetailsScreenArgs {
   String toString() {
     return 'UdhiyaCouponDetailsScreenArgs{key: $key, couponId: $couponId}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! UdhiyaCouponDetailsScreenArgs) return false;
+    return key == other.key && couponId == other.couponId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ couponId.hashCode;
 }
 
 /// generated route for
 /// [_i31.UdhiyaCouponsScreen]
 class UdhiyaCouponsScreen extends _i34.PageRouteInfo<void> {
   const UdhiyaCouponsScreen({List<_i34.PageRouteInfo>? children})
-    : super(UdhiyaCouponsScreen.name, initialChildren: children);
+      : super(UdhiyaCouponsScreen.name, initialChildren: children);
 
   static const String name = 'UdhiyaCouponsScreen';
 
@@ -976,7 +1131,7 @@ class UdhiyaCouponsScreen extends _i34.PageRouteInfo<void> {
 /// [_i32.WidamLoyaltyProgramScreen]
 class WidamLoyaltyProgramScreen extends _i34.PageRouteInfo<void> {
   const WidamLoyaltyProgramScreen({List<_i34.PageRouteInfo>? children})
-    : super(WidamLoyaltyProgramScreen.name, initialChildren: children);
+      : super(WidamLoyaltyProgramScreen.name, initialChildren: children);
 
   static const String name = 'WidamLoyaltyProgramScreen';
 
@@ -992,7 +1147,7 @@ class WidamLoyaltyProgramScreen extends _i34.PageRouteInfo<void> {
 /// [_i33.WidamWalletScreen]
 class WidamWalletScreen extends _i34.PageRouteInfo<void> {
   const WidamWalletScreen({List<_i34.PageRouteInfo>? children})
-    : super(WidamWalletScreen.name, initialChildren: children);
+      : super(WidamWalletScreen.name, initialChildren: children);
 
   static const String name = 'WidamWalletScreen';
 

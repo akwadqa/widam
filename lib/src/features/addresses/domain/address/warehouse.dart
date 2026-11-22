@@ -4,7 +4,7 @@ part 'warehouse.freezed.dart';
 part 'warehouse.g.dart';
 
 @freezed
-class Warehouse with _$Warehouse {
+abstract class Warehouse with _$Warehouse {
   factory Warehouse({
     required String warehouseId,
     required String warehouseName,

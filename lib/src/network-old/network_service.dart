@@ -24,7 +24,7 @@
 // }
 
 // @Riverpod(keepAlive: true)
-// Dio dio(DioRef ref) {
+// Dio dio(Ref ref) {
 //   const duration = Duration(milliseconds: 120000);
 //   final Dio dio = Dio(BaseOptions(
 //     baseUrl: ServicesUrls.baseUrl,
@@ -51,7 +51,7 @@
 // }
 
 // @Riverpod(keepAlive: true)
-// NetworkService networkService(NetworkServiceRef ref, [Dio? dio]) =>
+// NetworkService networkService(Ref ref, [Dio? dio]) =>
 //     DioNetworkService(dio ?? ref.watch(dioProvider));
 
 // class DioNetworkService implements NetworkService<Response> {

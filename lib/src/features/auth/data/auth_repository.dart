@@ -11,7 +11,7 @@ import '../domain/login_response.dart';
 part 'auth_repository.g.dart';
 
 @riverpod
-AuthRepository authRepository(AuthRepositoryRef ref) =>
+AuthRepository authRepository(Ref ref) =>
     AuthRepository(ref.watch(networkServiceProvider()));
 
 class AuthRepository {

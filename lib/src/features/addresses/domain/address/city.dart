@@ -5,7 +5,7 @@ part 'city.freezed.dart';
 part 'city.g.dart';
 
 @freezed
-class City with _$City {
+abstract class City with _$City {
   factory City(
       {required String cityId,
       required String cityName,

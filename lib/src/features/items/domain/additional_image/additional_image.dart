@@ -4,7 +4,7 @@ part 'additional_image.freezed.dart';
 part 'additional_image.g.dart';
 
 @freezed
-class AdditionalImage with _$AdditionalImage {
+abstract class AdditionalImage with _$AdditionalImage {
   const factory AdditionalImage({
     required String image,
     String? description,

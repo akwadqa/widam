@@ -12,7 +12,7 @@ part 'recommendations_repository.g.dart';
 
 @riverpod
 RecommendationsRespository recommendationsRespository(
-        RecommendationsRespositoryRef ref) =>
+        Ref ref) =>
     RecommendationsRespository(ref.watch(networkServiceProvider()));
 
 class RecommendationsRespository {
@@ -54,7 +54,7 @@ class RecommendationsRespository {
 
 @riverpod
 FutureOr<RecommendationResponse> recommendations(
-    RecommendationsRef ref, String quotationId) {
+    Ref ref, String quotationId) {
   return ref.watch(recommendationsRespositoryProvider).getRecommendations(
       servingConfigs: 'recommendations', quotationId: quotationId);
 }

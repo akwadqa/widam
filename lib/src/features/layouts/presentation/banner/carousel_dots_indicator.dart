@@ -1,6 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import '../../../../theme/app_colors.dart';
 
 final carouselPageIndexProvider = StateProvider.autoDispose<int>((ref) => 0);

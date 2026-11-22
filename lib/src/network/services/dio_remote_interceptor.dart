@@ -80,6 +80,7 @@ class RemoteInterceptor extends Interceptor {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
+      case DioExceptionType.transformTimeout:
         throw DeadlineExceededException(err.requestOptions, message);
       case DioExceptionType.badResponse:
         switch (err.response?.statusCode) {

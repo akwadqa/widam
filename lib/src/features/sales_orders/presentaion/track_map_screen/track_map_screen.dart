@@ -22,7 +22,7 @@ import '../../../../theme/app_colors.dart';
 part 'track_map_screen.g.dart';
 
 @Riverpod(keepAlive: true)
-FutureOr<String?> firebaseUid(FirebaseUidRef ref) async {
+FutureOr<String?> firebaseUid(Ref ref) async {
   final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
     email: Strings.firebaseUserEmail,
     password: Strings.firebaseUserPassword,

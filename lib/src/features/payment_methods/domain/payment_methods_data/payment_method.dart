@@ -5,7 +5,7 @@ part 'payment_method.freezed.dart';
 part 'payment_method.g.dart';
 
 @freezed
-class PaymentMethod with _$PaymentMethod {
+abstract class PaymentMethod with _$PaymentMethod {
   factory PaymentMethod({
     required String paymentMethodId,
     required int enabled,

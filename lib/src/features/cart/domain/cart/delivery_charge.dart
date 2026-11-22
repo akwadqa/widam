@@ -4,7 +4,7 @@ part 'delivery_charge.freezed.dart';
 part 'delivery_charge.g.dart';
 
 @freezed
-class DeliveryCharge with _$DeliveryCharge {
+abstract class DeliveryCharge with _$DeliveryCharge {
   factory DeliveryCharge({
     required String deliveryMethodId,
     required String? deliveryMethodTitle,

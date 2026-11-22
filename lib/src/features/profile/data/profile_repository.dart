@@ -54,6 +54,6 @@ class ProfileDetails extends _$ProfileDetails {
 }
 
 @riverpod
-FutureOr<CompanyProfile> companyProfile(CompanyProfileRef ref) {
+FutureOr<CompanyProfile> companyProfile(Ref ref) {
   return ref.watch(profileRepositoryProvider).getCompanyProfile();
 }

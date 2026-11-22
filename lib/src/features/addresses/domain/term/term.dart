@@ -4,7 +4,7 @@ part 'term.freezed.dart';
 part 'term.g.dart';
 
 @freezed
-class Term with _$Term {
+abstract class Term with _$Term {
   const factory Term({
     required int offset,
     required String value,

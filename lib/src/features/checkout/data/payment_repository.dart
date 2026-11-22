@@ -9,7 +9,7 @@ import '../domain/payment_result/payment_result.dart';
 part 'payment_repository.g.dart';
 
 @riverpod
-PaymentRepository paymentRepository(PaymentRepositoryRef ref) {
+PaymentRepository paymentRepository(Ref ref) {
   final dio = ref.watch(dioProvider);
   final newDio = Dio(dio.options.copyWith(baseUrl: ''));
   newDio.interceptors.addAll(dio.interceptors);

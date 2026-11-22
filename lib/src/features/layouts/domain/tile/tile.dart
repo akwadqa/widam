@@ -5,7 +5,7 @@ part 'tile.freezed.dart';
 part 'tile.g.dart';
 
 @freezed
-class Tile with _$Tile implements BlockData {
+abstract class Tile with _$Tile implements BlockData {
   const factory Tile(
       {required String tileType,
       required String tileLink,

@@ -10,7 +10,7 @@ import '../domain/app_data/app_data.dart';
 part 'app_data_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-AppDataRepository appDataRepository(AppDataRepositoryRef ref) =>
+AppDataRepository appDataRepository(Ref ref) =>
     AppDataRepository(ref.watch(networkServiceProvider()));
 
 class AppDataRepository {

@@ -100,7 +100,7 @@ class CartItem extends StatelessWidget {
                   child: ProviderScope(
                     overrides: [
                       updateCartProvider.overrideWith(() => UpdateCart()),
-                      quantityControllerProvider.overriddenFamily
+                      quantityControllerProvider
                     ],
                     child: 
                     // Container(),

@@ -4,7 +4,7 @@ part 'zone.freezed.dart';
 part 'zone.g.dart';
 
 @freezed
-class Zone with _$Zone {
+abstract class Zone with _$Zone {
   factory Zone({
     required String zoneId,
     required String zoneNumber,

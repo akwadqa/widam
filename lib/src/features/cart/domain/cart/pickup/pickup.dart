@@ -9,7 +9,7 @@ part 'pickup.freezed.dart';
 part 'pickup.g.dart';
 
 @freezed
-class Pickup with _$Pickup {
+abstract class Pickup with _$Pickup {
   const Pickup._();
 
   factory Pickup({

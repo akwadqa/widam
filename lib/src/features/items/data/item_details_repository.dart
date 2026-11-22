@@ -10,7 +10,7 @@ import '../domain/item_details/item_details.dart';
 part 'item_details_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-ItemDetailsRepository itemDetailsRepository(ItemDetailsRepositoryRef ref) =>
+ItemDetailsRepository itemDetailsRepository(Ref ref) =>
     ItemDetailsRepository(ref.watch(networkServiceProvider()));
 
 class ItemDetailsRepository {

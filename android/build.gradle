@@ -1,3 +1,9 @@
+buildscript {
+    // Keep in sync with the plugin versions in settings.gradle.
+    ext.agp_version = '9.3.1'
+    ext.kotlin_version = '2.4.20'
+}
+
 allprojects {
     repositories {
         google()
@@ -5,14 +11,73 @@ allprojects {
     }
 }
 
-rootProject.buildDir = '../build'
-subprojects {
-    project.buildDir = "${rootProject.buildDir}/${project.name}"
+// Local copies: inside subproject closures, `agp_version`/`kotlin_version`
+// would resolve to the plugin's own `ext` values instead of ours.
+def projectAgpVersion = agp_version
+def projectKotlinVersion = kotlin_version
+// Minimum compileSdk for plugins; matches flutter.compileSdkVersion (Flutter 3.50).
+def projectCompileSdk = 36
+
+def newBuildDir = rootProject.layout.projectDirectory.dir('../build')
+rootProject.layout.buildDirectory.value(newBuildDir)
+
+subprojects { project ->
+    project.layout.buildDirectory.value(newBuildDir.dir(project.name))
+
+    // Some plugins pin old AGP/Kotlin versions in their own `buildscript`
+    // blocks. Redirect them to the project's versions so Gradle does not
+    // download outdated toolchains just to resolve them.
+    project.buildscript.configurations.configureEach {
+        resolutionStrategy.eachDependency { details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.tools.build' && requested.name == 'gradle') {
+                details.useVersion(projectAgpVersion)
+            } else if (requested.group == 'org.jetbrains.kotlin' &&
+                    requested.name.startsWith('kotlin-gradle-plugin')) {
+                details.useVersion(projectKotlinVersion)
+            }
+        }
+    }
+
+    // Kotlin 2 fails when a module's Kotlin `jvmTarget` differs from its Java
+    // `targetCompatibility`. Align every module's Kotlin target to its Java one.
+    def alignJvmTarget = {
+        def android = project.extensions.findByName('android')
+        if (android == null) return
+        project.tasks.matching { it.class.name.contains('KotlinCompile') && it.hasProperty('compilerOptions') }
+                .configureEach { task ->
+                    // Read lazily: AGP 9 finalizes compileOptions after evaluation.
+                    def javaTarget = android.compileOptions.targetCompatibility.toString()
+                    def jvmTarget = task.compilerOptions.jvmTarget
+                    jvmTarget.set(jvmTarget.get().getClass().fromTarget(javaTarget))
+                }
+    }
+    // Old plugins (e.g. flutter_keyboard_visibility) still compile against
+    // android-31, but current androidx dependencies require 34+. Raise any
+    // plugin below the project's compileSdk without touching the pub cache.
+    def raiseCompileSdk = {
+        def android = project.extensions.findByName('android')
+        if (android == null || project.name == 'app') return
+        def current = (android.compileSdkVersion ?: '').toString().replaceAll('[^0-9]', '')
+        if (current.isEmpty() || current.toInteger() < projectCompileSdk) {
+            android.compileSdkVersion(projectCompileSdk)
+        }
+    }
+
+    if (project.state.executed) {
+        alignJvmTarget()
+    } else {
+        project.afterEvaluate {
+            raiseCompileSdk()
+            alignJvmTarget()
+        }
+    }
 }
+
 subprojects {
     project.evaluationDependsOn(':app')
 }
 
-tasks.register("clean", Delete) {
-    delete rootProject.buildDir
+tasks.register('clean', Delete) {
+    delete rootProject.layout.buildDirectory
 }

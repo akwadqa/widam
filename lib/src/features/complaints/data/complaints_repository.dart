@@ -12,7 +12,7 @@ import 'package:widam/src/network/services/network_service.dart';
 part 'complaints_repository.g.dart';
 
 @riverpod
-ComplaintsRepository complaintsRepository(ComplaintsRepositoryRef ref) {
+ComplaintsRepository complaintsRepository(Ref ref) {
   return ComplaintsRepository(ref.watch(networkServiceProvider()));
 }
 

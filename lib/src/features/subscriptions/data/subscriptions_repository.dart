@@ -12,7 +12,7 @@ part 'subscriptions_repository.g.dart';
 
 @riverpod
 SubscriptionsRepository subscriptionsRepository(
-        SubscriptionsRepositoryRef ref) =>
+        Ref ref) =>
     SubscriptionsRepository(ref.watch(networkServiceProvider()));
 
 class SubscriptionsRepository {
@@ -93,7 +93,7 @@ class SubscriptionsRepository {
 
 @riverpod
 Future<AppResponse<ItemGroupDetails>> getAllItemGroupsSubscriptions(
-    GetAllItemGroupsSubscriptionsRef ref) async {
+    Ref ref) async {
   final warehouseId = ref.watch(localLocationInfoProvider).warehouseId;
   return ref
       .read(subscriptionsRepositoryProvider)
@@ -102,6 +102,6 @@ Future<AppResponse<ItemGroupDetails>> getAllItemGroupsSubscriptions(
 
 @riverpod
 Future<List<Subscription>> activeSubscriptions(
-    ActiveSubscriptionsRef ref) async {
+    Ref ref) async {
   return ref.watch(subscriptionsRepositoryProvider).getActiveSubscriptions();
 }

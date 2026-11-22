@@ -4,7 +4,7 @@ part 'item_specification.freezed.dart';
 part 'item_specification.g.dart';
 
 @freezed
-class ItemSpecification with _$ItemSpecification {
+abstract class ItemSpecification with _$ItemSpecification {
   const factory ItemSpecification({
     required String label,
     required String description,

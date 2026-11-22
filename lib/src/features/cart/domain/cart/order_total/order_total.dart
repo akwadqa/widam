@@ -4,7 +4,7 @@ part 'order_total.freezed.dart';
 part 'order_total.g.dart';
 
 @freezed
-class OrderTotal with _$OrderTotal {
+abstract class OrderTotal with _$OrderTotal {
   factory OrderTotal({
     required double minimumOrderAmount,
     required double remainderAmount,

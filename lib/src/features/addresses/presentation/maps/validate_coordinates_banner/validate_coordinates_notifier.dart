@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 import '../../../data/validate_coordinates_repository.dart';
 import '../../../domain/location/location.dart';
@@ -8,8 +9,7 @@ class ValidateCoordinatesNotifier
   ValidateCoordinatesNotifier(this._ref)
       : super(const ValidateCoordinatesInitial());
 
-  final AutoDisposeStateNotifierProviderRef<ValidateCoordinatesNotifier,
-      ValidateCoordinatesState> _ref;
+  final Ref _ref;
 
   Future<void> validateCoordinates(
       {double? latitude,

@@ -5,7 +5,7 @@ part 'order.freezed.dart';
 part 'order.g.dart';
 
 @freezed
-class Order with _$Order {
+abstract class Order with _$Order {
   factory Order({
     required String orderId,
     required List<ItemDetails> websiteItems,

@@ -4,7 +4,7 @@ part 'coordinates.freezed.dart';
 part 'coordinates.g.dart';
 
 @freezed
-class Coordinates with _$Coordinates {
+abstract class Coordinates with _$Coordinates {
   factory Coordinates({
     required String latitude,
     required String longitude,

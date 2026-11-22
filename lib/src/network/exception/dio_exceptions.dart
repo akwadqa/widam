@@ -10,6 +10,7 @@ abstract class DioExceptionHandler {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
+      case DioExceptionType.transformTimeout:
         throw DeadlineExceededException(e.requestOptions, message);
       case DioExceptionType.badResponse:
         switch (e.response?.statusCode) {

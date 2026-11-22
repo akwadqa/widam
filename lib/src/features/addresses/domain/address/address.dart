@@ -9,7 +9,7 @@ part 'address.g.dart';
 
 @AddressConverter()
 @freezed
-class Address with _$Address {
+abstract class Address with _$Address {
   factory Address(
       {required String addressId,
       required String addressTitle,

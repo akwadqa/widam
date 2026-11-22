@@ -4,7 +4,7 @@ part 'payment.freezed.dart';
 part 'payment.g.dart';
 
 @freezed
-class Payment with _$Payment {
+abstract class Payment with _$Payment {
   factory Payment({
     required String? postUrl,
     required String? redirectUrl,

@@ -4,7 +4,7 @@ part 'saved_card.freezed.dart';
 part 'saved_card.g.dart';
 
 @freezed
-class SavedCard with _$SavedCard {
+abstract class SavedCard with _$SavedCard {
   factory SavedCard({
     required String paymentTokenId,
     required String cardNumber,

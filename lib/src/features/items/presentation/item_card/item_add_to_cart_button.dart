@@ -36,7 +36,7 @@ class ItemAddToCartButton extends StatelessWidget {
                   return ProviderScope(
                     overrides: [
                       updateCartProvider.overrideWith(() => UpdateCart()),
-                      quantityControllerProvider.overriddenFamily
+                      quantityControllerProvider
                     ],
                     child: AddToCartButton(
                       itemId: item.websiteItemId,

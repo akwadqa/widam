@@ -275,7 +275,7 @@ class ItemGroupItemsController extends _$ItemGroupItemsController {
 
   /// Handle pagination (Page 2, 3, etc.)
   Future<bool> onLoading(int page) async {
-    final currentState = state.valueOrNull;
+    final currentState = state.value;
     if (currentState == null || page > currentState.pagination.totalPages) {
       return false;
     }

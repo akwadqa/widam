@@ -5,7 +5,7 @@ part 'structured_formatting.freezed.dart';
 part 'structured_formatting.g.dart';
 
 @freezed
-class StructuredFormatting with _$StructuredFormatting {
+abstract class StructuredFormatting with _$StructuredFormatting {
   const factory StructuredFormatting({
     required String mainText,
     required List<MatchedSubstring> mainTextMatchedSubstrings,

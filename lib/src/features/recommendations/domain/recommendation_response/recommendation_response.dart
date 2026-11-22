@@ -5,7 +5,7 @@ part 'recommendation_response.freezed.dart';
 part 'recommendation_response.g.dart';
 
 @freezed
-class RecommendationResponse with _$RecommendationResponse {
+abstract class RecommendationResponse with _$RecommendationResponse {
   factory RecommendationResponse({
     required String attributionToken,
     required List<ItemDetails> websiteItems,

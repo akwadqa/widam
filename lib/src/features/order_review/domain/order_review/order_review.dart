@@ -4,7 +4,7 @@ part 'order_review.freezed.dart';
 part 'order_review.g.dart';
 
 @Freezed(toJson: true)
-class OrderReview with _$OrderReview {
+abstract class OrderReview with _$OrderReview {
   factory OrderReview({
     String? customerReviewId,
     required String orderId,
