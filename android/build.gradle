@@ -17,6 +17,7 @@ def projectAgpVersion = agp_version
 def projectKotlinVersion = kotlin_version
 // Minimum compileSdk for plugins; matches flutter.compileSdkVersion (Flutter 3.50).
 def projectCompileSdk = 36
+def projectDatastoreVersion = '1.2.1'
 
 def newBuildDir = rootProject.layout.projectDirectory.dir('../build')
 rootProject.layout.buildDirectory.value(newBuildDir)
@@ -35,6 +36,16 @@ subprojects { project ->
             } else if (requested.group == 'org.jetbrains.kotlin' &&
                     requested.name.startsWith('kotlin-gradle-plugin')) {
                 details.useVersion(projectKotlinVersion)
+            }
+        }
+    }
+
+    // firebase_crashlytics pulls androidx.datastore 1.1.3, whose JVM jars fail
+    // to resolve. Align every module on the version already cached locally.
+    project.configurations.configureEach {
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group == 'androidx.datastore') {
+                details.useVersion(projectDatastoreVersion)
             }
         }
     }

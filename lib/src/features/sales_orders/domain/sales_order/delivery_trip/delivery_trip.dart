@@ -9,7 +9,7 @@ abstract class DeliveryTrip with _$DeliveryTrip {
   factory DeliveryTrip({
     required String status,
     required String driverName,
-    required String driverCellNumber,
+    required String? driverCellNumber,
     required Address driverAddress,
   }) = _DeliveryTrip;
 

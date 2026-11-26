@@ -3163,6 +3163,71 @@ class S {
       args: [],
     );
   }
+
+  /// `Earliest delivery`
+  String get homeEarliestDelivery {
+    return Intl.message('Earliest delivery', name: 'homeEarliestDelivery', desc: '', args: []);
+  }
+
+  /// `Deliver to`
+  String get homeDeliverTo {
+    return Intl.message('Deliver to', name: 'homeDeliverTo', desc: '', args: []);
+  }
+
+  /// `عربي`
+  String get homeSwitchLanguage {
+    return Intl.message('عربي', name: 'homeSwitchLanguage', desc: '', args: []);
+  }
+
+  /// `Track`
+  String get homeTrack {
+    return Intl.message('Track', name: 'homeTrack', desc: '', args: []);
+  }
+
+  /// `Arrives`
+  String get homeOrderArrives {
+    return Intl.message('Arrives', name: 'homeOrderArrives', desc: '', args: []);
+  }
+
+  /// `Ordered`
+  String get homeOrderStepPlaced {
+    return Intl.message('Ordered', name: 'homeOrderStepPlaced', desc: '', args: []);
+  }
+
+  /// `Preparing`
+  String get homeOrderStepPreparing {
+    return Intl.message('Preparing', name: 'homeOrderStepPreparing', desc: '', args: []);
+  }
+
+  /// `On the way`
+  String get homeOrderStepOnTheWay {
+    return Intl.message('On the way', name: 'homeOrderStepOnTheWay', desc: '', args: []);
+  }
+
+  /// `Delivered`
+  String get homeOrderStepDelivered {
+    return Intl.message('Delivered', name: 'homeOrderStepDelivered', desc: '', args: []);
+  }
+
+  /// `We received your order`
+  String get homeOrderTitlePlaced {
+    return Intl.message('We received your order', name: 'homeOrderTitlePlaced', desc: '', args: []);
+  }
+
+  /// `Your order is being prepared`
+  String get homeOrderTitlePreparing {
+    return Intl.message('Your order is being prepared', name: 'homeOrderTitlePreparing', desc: '', args: []);
+  }
+
+  /// `Your order is on the way`
+  String get homeOrderTitleOnTheWay {
+    return Intl.message('Your order is on the way', name: 'homeOrderTitleOnTheWay', desc: '', args: []);
+  }
+
+  /// `Your order has been delivered`
+  String get homeOrderTitleDelivered {
+    return Intl.message('Your order has been delivered', name: 'homeOrderTitleDelivered', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

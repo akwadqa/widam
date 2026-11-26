@@ -1,150 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:widam/src/constants/strings.dart';
-import 'package:widam/src/features/app_data/presentation/splash_screen/splash_screen.dart';
-import 'package:widam/src/features/item_groups/data/item_groups_repository.dart';
-import 'package:widam/src/features/item_groups/presentation/barcode_widget/barcode_widget.dart';
-import 'package:widam/src/features/item_groups/presentation/item_groups_body/filters_drop_down/filters_controller.dart';
-import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_list/selected_item_group_controller.dart';
-import 'package:widam/src/features/item_groups/presentation/item_groups_body/item_groups_search_field/item_groups_search_controller.dart';
-import 'package:widam/src/features/item_groups/presentation/item_groups_body/sub_item_groups_list/sub_item_groups_controller.dart';
-import 'package:widam/src/features/items/application/item_group_items_controller.dart';
-import 'package:widam/src/features/layouts/data/layouts_repository.dart';
-import 'package:widam/src/features/user_language/application/current_language.dart';
-import 'package:widam/src/global_providers/global_providers.dart';
-import 'package:widam/src/utils/utils.dart';
-import '../../../../common_widgets/search_field.dart';
-import '../../../../theme/app_colors.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../../gen/assets.gen.dart';
-import '../../../../../generated/l10n.dart';
-import '../../../addresses/presentation/maps/address_selector_button/address_selector_button.dart';
-import '../../../time_slots/presentation/app_time_slot.dart';
+import 'widgets/home_app_bar_delivery_card.dart';
+import 'widgets/home_app_bar_search_row.dart';
 
-class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
+/// Home header: delivery slot + address card, then logo, search and language
+/// switch. Its gradient is `HomeAppBarBackground`, painted by `HomeScreen`
+/// behind the header and the top of the page.
+class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final topPadding =
-        ref.watch(topPaddingProvider(MediaQuery.paddingOf(context).top));
-
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          )
-        ],
-        color: AppColors.primary,
-      ),
-      padding: EdgeInsetsDirectional.only(
-          start: 16, end: 16, bottom: 8, top: topPadding),
-      child: const Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(child: AddressSelector(foregroundColor: Colors.white)),
-              // Spacer(),
-              FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: AppTimeSlot(foregroundColor: Colors.white)),
-            ],
-          ),
-          _SearchWidget(),
-        ],
-      ),
-    );
-  }
+  static const double _horizontalPadding = 16;
+  static const double _topPadding = 16;
+  static const double _bottomPadding = 6;
+  static const double _rowSpacing = 12;
 
   @override
-  Size get preferredSize =>
-      const Size.fromHeight(kToolbarHeight + kTextTabBarHeight);
-}
-
-class _SearchWidget extends ConsumerWidget implements PreferredSizeWidget {
-  const _SearchWidget();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final currentLanguage = ref.watch(currentLanguageProvider);
-    final currentLanguageNotifier = ref.read(currentLanguageProvider.notifier);
-    final String myLanguage = currentLanguage == 'en' ? 'en' : 'عربي';
-    return Row(
-      children: [
-        Assets.splash.logo.image(height: 40),
-        const SizedBox(width: 10),
-        Expanded(
-          child: SearchField(
-            height: 35,
-            readOnly: true,
-            onTap: () => pushItemGroupScreen(
-                context: context,
-                autoFocus: true,
-                itemGroupId: Strings.allItemGroup),
-            suffixIcon: BarcodeWidget(),
-            fillColor: Colors.white,
-            hintText: S.of(context).searchForAnyProduct,
-          ),
+  Widget build(BuildContext context) {
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.dark,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+          _horizontalPadding,
+          MediaQuery.paddingOf(context).top + _topPadding,
+          _horizontalPadding,
+          _bottomPadding,
         ),
-        const SizedBox(width: 10),
-        LanguageSwitcher(
-          initialLanguage: myLanguage,
-          onLanguageChanged: (p0) {
-            currentLanguageNotifier.changeLanguage(
-                // context,isArabicLanguage
-                );
-
-            ref.invalidate(layoutProvider(LayoutType.home));
-            ref.invalidate(layoutProvider(LayoutType.featured));
-            ref.invalidate(getAllItemGroupsProvider);
-            ref.invalidate(itemGroupItemsControllerProvider);
-            ref.invalidate(selectedItemGroupControllerProvider);
-            ref.invalidate(selectedSubItemGroupControllerProvider);
-            ref.invalidate(itemGroupsSearchControllerProvider);
-            //  ! For category main filter
-            ref.invalidate(selectedFilterControllerProvider);
-
-            //           final state = ref.watch(itemGroupItemsControllerProvider);
-            // // Dynamic key to reset pagination whenever category/filter/search changes
-            // final mainGroupId = ref.watch(selectedItemGroupControllerProvider);
-            // final subGroupId = ref.watch(selectedSubItemGroupControllerProvider);
-            // final filter = ref.watch(selectedFilterControllerProvider);
-            // final search = ref.watch(itemGroupsSearchControllerProvider);
-            // final barcode = ref.watch(barcodeControllerProvider);
-          },
-        )
-        // GestureDetector(
-        //           onTap: () {
-        //             currentLanguageNotifier.changeLanguage(
-        //               // context,isArabicLanguage
-        //             );
-
-        // ref.invalidate(layoutProvider(LayoutType.home));
-        // ref.invalidate(layoutProvider(LayoutType.featured));
-        //   },
-        //           child:Text(myLanguage.toUpperCase(),
-
-        //              style: Theme.of(context).textTheme.displaySmall!.copyWith(
-        //         fontSize: 15,
-        //         color:  AppColors.aliceBlue,
-
-        //         fontWeight: FontWeight.bold,
-        //       ),
-        //           )),
-      ],
+        child: const Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            HomeAppBarDeliveryCard(),
+            SizedBox(height: _rowSpacing),
+            HomeAppBarSearchRow(),
+          ],
+        ),
+      ),
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(20);
 }
 
+/// Old pill-shaped language switch, replaced by `HomeAppBarLanguageButton`.
+/// Kept until its deletion is approved.
 class LanguageSwitcher extends StatefulWidget {
   final Function(String) onLanguageChanged;
   final String initialLanguage;
@@ -218,11 +115,6 @@ class _LanguageSwitcherState extends State<LanguageSwitcher>
         ),
         child: Assets.icons.download.image(),
 
-        //  Text(
-        //   "🇶🇦",
-        //   style: TextStyle(fontSize: 20),
-
-        // )
       ),
     );
   }
@@ -257,35 +149,17 @@ class _LanguageSwitcherState extends State<LanguageSwitcher>
             borderSide: BorderSide(color: Colors.white),
             borderRadius: BorderRadius.circular(20),
           ),
-          // decoration: BoxDecoration(
-          //   color: Colors.grey[300],
-          //   borderRadius: BorderRadius.circular(20),
-          // ),
           child: Row(
             children: [
-              // Circular flag icon
               Container(
                 width: 36,
                 height: 36,
-                // margin: const EdgeInsets.all(2),
-                // decoration: BoxDecoration(
-                //   color: Colors.white,
-                //   shape: BoxShape.circle,
-                //   boxShadow: [
-                //     BoxShadow(
-                //       color: Colors.black.withOpacity(0.15),
-                //       blurRadius: 4,
-                //       offset: const Offset(0, 2),
-                //     ),
-                //   ],
-                // ),
                 child: Center(
                   child: currentLanguage == 'en'
                       ? _buildQatarFlag()
                       : _buildBritishFlag(),
                 ),
               ),
-              // Language text
               Expanded(
                 child: Center(
                   child: Text(
@@ -305,3 +179,4 @@ class _LanguageSwitcherState extends State<LanguageSwitcher>
     );
   }
 }
+

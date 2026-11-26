@@ -377,5 +377,18 @@
   "fourthEidDay": "رابع أيام العيد",
   "fifthEidDay": "خامس أيام العيد",
   "sixthEidDay": "سادس أيام العيد",
-  "seventhEidDay": "سابع أيام العيد"
+  "seventhEidDay": "سابع أيام العيد",
+  "homeEarliestDelivery": "أقرب توصيل",
+  "homeDeliverTo": "التوصيل إلى",
+  "homeSwitchLanguage": "EN",
+  "homeTrack": "تتبع",
+  "homeOrderArrives": "يصل",
+  "homeOrderStepPlaced": "تم الطلب",
+  "homeOrderStepPreparing": "التجهيز",
+  "homeOrderStepOnTheWay": "في الطريق",
+  "homeOrderStepDelivered": "تم التوصيل",
+  "homeOrderTitlePlaced": "تم استلام طلبك",
+  "homeOrderTitlePreparing": "طلبك قيد التجهيز",
+  "homeOrderTitleOnTheWay": "طلبك في الطريق",
+  "homeOrderTitleDelivered": "تم توصيل طلبك"
 }

@@ -22,6 +22,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "homeEarliestDelivery": MessageLookupByLibrary.simpleMessage("Earliest delivery"),
+    "homeDeliverTo": MessageLookupByLibrary.simpleMessage("Deliver to"),
+    "homeSwitchLanguage": MessageLookupByLibrary.simpleMessage("عربي"),
+    "homeTrack": MessageLookupByLibrary.simpleMessage("Track"),
+    "homeOrderArrives": MessageLookupByLibrary.simpleMessage("Arrives"),
+    "homeOrderStepPlaced": MessageLookupByLibrary.simpleMessage("Ordered"),
+    "homeOrderStepPreparing": MessageLookupByLibrary.simpleMessage("Preparing"),
+    "homeOrderStepOnTheWay": MessageLookupByLibrary.simpleMessage("On the way"),
+    "homeOrderStepDelivered": MessageLookupByLibrary.simpleMessage("Delivered"),
+    "homeOrderTitlePlaced": MessageLookupByLibrary.simpleMessage("We received your order"),
+    "homeOrderTitlePreparing": MessageLookupByLibrary.simpleMessage("Your order is being prepared"),
+    "homeOrderTitleOnTheWay": MessageLookupByLibrary.simpleMessage("Your order is on the way"),
+    "homeOrderTitleDelivered": MessageLookupByLibrary.simpleMessage("Your order has been delivered"),
     "accessForbidden": MessageLookupByLibrary.simpleMessage("Access Forbidden"),
     "account": MessageLookupByLibrary.simpleMessage("Account"),
     "accountDeletion": MessageLookupByLibrary.simpleMessage("Account Deletion"),

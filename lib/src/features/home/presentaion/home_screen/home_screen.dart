@@ -12,6 +12,7 @@ import 'package:widam/src/features/main/presentation/item_details_sheet_controll
 
 import '../../../layouts/domain/banner/banner.dart';
 import '../home_app_bar/home_app_bar.dart';
+import '../home_app_bar/widgets/home_app_bar_background.dart';
 import '../home_body/home_body.dart';
 
 @RoutePage()
@@ -38,7 +39,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final adVaialable=appUtility?.corporateVideo!=null||appUtility?.showVideoOncePerSession!=null;
     final showAd =adVaialable && ((!hasSeenAd && appUtility?.showVideoOncePerSession == 1) ||
         appUtility?.showVideoOncePerSession == 0);
-// if(appUtility?.corporateVideo!=null||appUtility?.showVideoOncePerSession!=null){
     if (showAd) {
       // Show video ad once
       WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -85,12 +85,33 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const HomeAppBar(),
-      body: ProviderScope(overrides: [
-        // ignore: scoped_providers_should_specify_dependencies
-        itemDetailsSheetControllerProvider
-            .overrideWith(() => ItemDetailsSheetController())
-      ], child: const HomeBody()),
+      body: Stack(
+        children: [
+          PositionedDirectional(
+            top: 0,
+            start: 0,
+            end: 0,
+            child: HomeAppBarBackground(
+                topInset: MediaQuery.paddingOf(context).top),
+          ),
+          Column(
+            children: [
+              const HomeAppBar(),
+              Expanded(
+                child: MediaQuery.removePadding(
+                  context: context,
+                  removeTop: true,
+                  child: ProviderScope(overrides: [
+                    // ignore: scoped_providers_should_specify_dependencies
+                    itemDetailsSheetControllerProvider
+                        .overrideWith(() => ItemDetailsSheetController())
+                  ], child: const HomeBody()),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

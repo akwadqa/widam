@@ -6,14 +6,29 @@ import 'package:widam/src/features/items/application/item_group_items_controller
 import 'package:widam/src/features/layouts/data/layouts_repository.dart';
 import 'package:widam/src/features/order_review/presentation/order_review_bottom_sheet/order_review_bottom_sheet.dart';
 import 'package:widam/src/features/sales_orders/data/sales_orders_repository.dart';
-import 'package:widam/src/features/sales_orders/presentaion/pending_order_card/pending_order_card.dart';
 
 import '../../../../utils/utils.dart';
 import '../../../cart/presentation/cart_item_added_dialog/cart_item_added_dialog.dart';
 import '../../../layouts/presentation/blocks_list.dart';
+import 'widgets/home_body_order_tracking_card.dart';
 
 class HomeBody extends ConsumerWidget {
   const HomeBody({super.key});
+
+  /// Content fades out over this height under the header while scrolling.
+  static const double _topFadeHeight = 14;
+
+  static Shader _topFadeShader(Rect bounds) {
+    final fadeEnd = bounds.height == 0
+        ? 0.0
+        : (_topFadeHeight / bounds.height).clamp(0.0, 1.0);
+    return LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: const [Colors.transparent, Colors.white],
+      stops: [0, fadeEnd],
+    ).createShader(bounds);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,30 +59,19 @@ class HomeBody extends ConsumerWidget {
       }
     });
     return RefreshIndicator.adaptive(
-      //       color: Theme.of(context).colorScheme.secondary,
-      // backgroundColor: Colors.white,
-
       onRefresh: () async => ref.invalidate(layoutProvider(LayoutType.home)),
-      child: CustomScrollView(
-        //  physics: const AlwaysScrollableScrollPhysics(
-        //   parent: ClampingScrollPhysics(),
-        // ),
-        slivers: [
-          if (ref
-                  .watch(processingOrderProvider)
-                  .asData
-                  ?.value
-                  ?.hasProcessingOrders ==
-              true)
-            const SliverToBoxAdapter(
-                child: Padding(
-              padding: EdgeInsets.all(10),
-              child: PendingOrderCard(),
-            )),
-          const BlocksList(layoutType: LayoutType.home),
-        ],
+      child: ShaderMask(
+        blendMode: BlendMode.dstIn,
+        shaderCallback: _topFadeShader,
+        child: const CustomScrollView(
+          slivers: [
+            // Keeps the first item clear of the fade while not scrolled.
+            SliverToBoxAdapter(child: SizedBox(height: _topFadeHeight)),
+            SliverToBoxAdapter(child: HomeBodyOrderTrackingCard()),
+            BlocksList(layoutType: LayoutType.home),
+          ],
+        ),
       ),
-      
     );
   }
 

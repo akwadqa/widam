@@ -1175,4 +1175,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get seventhEidDay => 'Seventh Day of Eid';
+
+  @override
+  String get homeEarliestDelivery => 'Earliest delivery';
+
+  @override
+  String get homeDeliverTo => 'Deliver to';
+
+  @override
+  String get homeSwitchLanguage => 'عربي';
+
+  @override
+  String get homeTrack => 'Track';
+
+  @override
+  String get homeOrderArrives => 'Arrives';
+
+  @override
+  String get homeOrderStepPlaced => 'Ordered';
+
+  @override
+  String get homeOrderStepPreparing => 'Preparing';
+
+  @override
+  String get homeOrderStepOnTheWay => 'On the way';
+
+  @override
+  String get homeOrderStepDelivered => 'Delivered';
+
+  @override
+  String get homeOrderTitlePlaced => 'We received your order';
+
+  @override
+  String get homeOrderTitlePreparing => 'Your order is being prepared';
+
+  @override
+  String get homeOrderTitleOnTheWay => 'Your order is on the way';
+
+  @override
+  String get homeOrderTitleDelivered => 'Your order has been delivered';
 }

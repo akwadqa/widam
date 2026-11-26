@@ -378,5 +378,18 @@
   "fourthEidDay": "Fourth Day of Eid",
   "fifthEidDay": "Fifth Day of Eid",
   "sixthEidDay": "Sixth Day of Eid",
-  "seventhEidDay": "Seventh Day of Eid"
+  "seventhEidDay": "Seventh Day of Eid",
+  "homeEarliestDelivery": "Earliest delivery",
+  "homeDeliverTo": "Deliver to",
+  "homeSwitchLanguage": "عربي",
+  "homeTrack": "Track",
+  "homeOrderArrives": "Arrives",
+  "homeOrderStepPlaced": "Ordered",
+  "homeOrderStepPreparing": "Preparing",
+  "homeOrderStepOnTheWay": "On the way",
+  "homeOrderStepDelivered": "Delivered",
+  "homeOrderTitlePlaced": "We received your order",
+  "homeOrderTitlePreparing": "Your order is being prepared",
+  "homeOrderTitleOnTheWay": "Your order is on the way",
+  "homeOrderTitleDelivered": "Your order has been delivered"
 }

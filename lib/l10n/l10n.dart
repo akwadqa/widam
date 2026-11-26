@@ -2377,6 +2377,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Seventh Day of Eid'**
   String get seventhEidDay;
+
+  /// No description provided for @homeEarliestDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Earliest delivery'**
+  String get homeEarliestDelivery;
+
+  /// No description provided for @homeDeliverTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Deliver to'**
+  String get homeDeliverTo;
+
+  /// No description provided for @homeSwitchLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'عربي'**
+  String get homeSwitchLanguage;
+
+  /// No description provided for @homeTrack.
+  ///
+  /// In en, this message translates to:
+  /// **'Track'**
+  String get homeTrack;
+
+  /// No description provided for @homeOrderArrives.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrives'**
+  String get homeOrderArrives;
+
+  /// No description provided for @homeOrderStepPlaced.
+  ///
+  /// In en, this message translates to:
+  /// **'Ordered'**
+  String get homeOrderStepPlaced;
+
+  /// No description provided for @homeOrderStepPreparing.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing'**
+  String get homeOrderStepPreparing;
+
+  /// No description provided for @homeOrderStepOnTheWay.
+  ///
+  /// In en, this message translates to:
+  /// **'On the way'**
+  String get homeOrderStepOnTheWay;
+
+  /// No description provided for @homeOrderStepDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get homeOrderStepDelivered;
+
+  /// No description provided for @homeOrderTitlePlaced.
+  ///
+  /// In en, this message translates to:
+  /// **'We received your order'**
+  String get homeOrderTitlePlaced;
+
+  /// No description provided for @homeOrderTitlePreparing.
+  ///
+  /// In en, this message translates to:
+  /// **'Your order is being prepared'**
+  String get homeOrderTitlePreparing;
+
+  /// No description provided for @homeOrderTitleOnTheWay.
+  ///
+  /// In en, this message translates to:
+  /// **'Your order is on the way'**
+  String get homeOrderTitleOnTheWay;
+
+  /// No description provided for @homeOrderTitleDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Your order has been delivered'**
+  String get homeOrderTitleDelivered;
 }
 
 class _AppLocalizationsDelegate

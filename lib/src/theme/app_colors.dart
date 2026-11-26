@@ -50,6 +50,15 @@ abstract class AppColors {
   static const Color customBlue = Color(0xFFCEEAFD);
   static const Color lightgrayishBlue = Color(0xFFE7F2F9);
   static const Color pattensBlue2 = Color(0xFFCCECF6);
+  static const Color navyBlue = Color(0xFF03428E);
+  static const Color iceBlue = Color(0xFFE0F4FD);
+  static const Color paleSkyBlue = Color(0xFFCDEBFA);
+  static const Color solitudeBlue = Color(0xFFE3F1FA);
+  static const Color linkWater = Color(0xFFE3EBF3);
+  static const Color slateGray = Color(0xFF6B7F99);
+  static const Color poloBlue = Color(0xFF9DB9DF);
+  static const Color skyBlue = Color(0xFF8FD3F5);
+  static const Color paleCyanBlue = Color(0xFFBDE8FA);
 
   static Color hexToColor(String hexColor) {
     hexColor = hexColor.replaceAll("#", "");

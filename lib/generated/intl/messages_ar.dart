@@ -22,6 +22,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "homeEarliestDelivery": MessageLookupByLibrary.simpleMessage("أقرب توصيل"),
+    "homeDeliverTo": MessageLookupByLibrary.simpleMessage("التوصيل إلى"),
+    "homeSwitchLanguage": MessageLookupByLibrary.simpleMessage("EN"),
+    "homeTrack": MessageLookupByLibrary.simpleMessage("تتبع"),
+    "homeOrderArrives": MessageLookupByLibrary.simpleMessage("يصل"),
+    "homeOrderStepPlaced": MessageLookupByLibrary.simpleMessage("تم الطلب"),
+    "homeOrderStepPreparing": MessageLookupByLibrary.simpleMessage("التجهيز"),
+    "homeOrderStepOnTheWay": MessageLookupByLibrary.simpleMessage("في الطريق"),
+    "homeOrderStepDelivered": MessageLookupByLibrary.simpleMessage("تم التوصيل"),
+    "homeOrderTitlePlaced": MessageLookupByLibrary.simpleMessage("تم استلام طلبك"),
+    "homeOrderTitlePreparing": MessageLookupByLibrary.simpleMessage("طلبك قيد التجهيز"),
+    "homeOrderTitleOnTheWay": MessageLookupByLibrary.simpleMessage("طلبك في الطريق"),
+    "homeOrderTitleDelivered": MessageLookupByLibrary.simpleMessage("تم توصيل طلبك"),
     "accessForbidden": MessageLookupByLibrary.simpleMessage("غير مصرح بالوصول"),
     "account": MessageLookupByLibrary.simpleMessage("الحساب"),
     "accountDeletion": MessageLookupByLibrary.simpleMessage("حذف الحساب"),

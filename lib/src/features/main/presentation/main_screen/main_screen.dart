@@ -23,7 +23,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       ref
           .read(notificationsServiceProvider)
           .setupInteractedMessage(ref.read(appRouterProvider));
-      StatusBarControl.setStyle(StatusBarStyle.LIGHT_CONTENT);
+      StatusBarControl.setStyle(StatusBarStyle.DARK_CONTENT);
     });
     super.initState();
   }
@@ -42,9 +42,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
         return AppBottomNavigationBar(
           currentIndex: tabsRouter.activeIndex,
           onTap: (int index) async {
-            await StatusBarControl.setStyle(index == 0
-                ? StatusBarStyle.LIGHT_CONTENT
-                : StatusBarStyle.DARK_CONTENT);
+            await StatusBarControl.setStyle(StatusBarStyle.DARK_CONTENT);
             tabsRouter.setActiveIndex(index);
             if (index == 3) {
               ref.invalidate(cartControllerProvider);

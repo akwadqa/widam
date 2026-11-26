@@ -1171,4 +1171,43 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get seventhEidDay => 'سابع أيام العيد';
+
+  @override
+  String get homeEarliestDelivery => 'أقرب توصيل';
+
+  @override
+  String get homeDeliverTo => 'التوصيل إلى';
+
+  @override
+  String get homeSwitchLanguage => 'EN';
+
+  @override
+  String get homeTrack => 'تتبع';
+
+  @override
+  String get homeOrderArrives => 'يصل';
+
+  @override
+  String get homeOrderStepPlaced => 'تم الطلب';
+
+  @override
+  String get homeOrderStepPreparing => 'التجهيز';
+
+  @override
+  String get homeOrderStepOnTheWay => 'في الطريق';
+
+  @override
+  String get homeOrderStepDelivered => 'تم التوصيل';
+
+  @override
+  String get homeOrderTitlePlaced => 'تم استلام طلبك';
+
+  @override
+  String get homeOrderTitlePreparing => 'طلبك قيد التجهيز';
+
+  @override
+  String get homeOrderTitleOnTheWay => 'طلبك في الطريق';
+
+  @override
+  String get homeOrderTitleDelivered => 'تم توصيل طلبك';
 }
